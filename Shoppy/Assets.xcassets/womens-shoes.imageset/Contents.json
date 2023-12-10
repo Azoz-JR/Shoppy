@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "beige_elegant_fashion_fashionable_footwear_high_heels_leather_shoes-1065220.jpg!d.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
