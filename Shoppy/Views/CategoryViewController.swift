@@ -62,8 +62,8 @@ class CategoryViewController: UIViewController {
     
     func configureCollectionView() {
         myCollectionView = MyCollectionView()
-        myCollectionView.select = { [weak self] vc in
-            self?.present(vc, animated: true)
+        myCollectionView.select = { [weak self] product in
+            self?.select(product: product)
         }
         
         let layout = UICollectionViewFlowLayout()

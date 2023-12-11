@@ -10,64 +10,96 @@ import UIKit
 
 class ProductCell: UICollectionViewCell {
     
+    var liked: Bool = false
+    
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let overlayView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .lightGray.withAlphaComponent(0.98)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let activityIndicator: UIActivityIndicatorView = {
+        let spinnerView = UIActivityIndicatorView(style: .medium)
+        spinnerView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        spinnerView.color = .systemGray
+        spinnerView.startAnimating()
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return spinnerView
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = .black
         label.textAlignment = .left
-        label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 18, weight: .heavy)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .light)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var addButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
-        button.layer.cornerRadius = button.frame.width / 2
-        button.backgroundColor = .label
+        let button = UIButton(frame: CGRect(x: 25, y: 25, width: 50, height: 50))
+        button.setImage(UIImage(systemName: "cart"), for: .normal)
+        button.imageView?.tintColor = .black
+        button.backgroundColor = .myGreen
+        button.contentMode = .center
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        let plusLabel = UILabel(frame: button.bounds)
-        plusLabel.text = "+"
-        plusLabel.textColor = .systemBackground
-        plusLabel.textAlignment = .center
-        plusLabel.font = UIFont.systemFont(ofSize: 24)
-        button.addSubview(plusLabel)
+        // Create a custom path with rounded corners for the top leading and bottom trailing
+        button.roundedCorners(corners: [.topLeft, .bottomRight], cornerRadius: 20)
         
         return button
     }()
     
+    private var likeButton: UIButton = {
+        let likeButton = UIButton(frame: CGRect(x: 12, y: 12, width: 24, height: 24))
+        likeButton.tintColor = .black
+        likeButton.setImage(UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return likeButton
+    }()
+    
+    private var ratingView: UIStackView = {
+        let ratingView = UIStackView()
+        ratingView.distribution = .equalSpacing
+        ratingView.alignment = .center
+        ratingView.spacing = 2
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        ratingView.axis = .horizontal
+        return ratingView
+    }()
+    
+    private var ratingLabel: UILabel = {
+       let label = UILabel()
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .systemOrange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
+        backgroundColor = .myBackground
         layer.cornerRadius = 20
+        layer.borderWidth = 0.2
+        layer.borderColor = UIColor.lightGray.cgColor
         
         configureUI()
     }
@@ -78,47 +110,81 @@ class ProductCell: UICollectionViewCell {
     
     private func configureUI() {
         addSubview(productImageView)
-        addSubview(overlayView)
         addSubview(addButton)
-        overlayView.addSubview(nameLabel)
-        overlayView.addSubview(priceLabel)
+        addSubview(likeButton)
+        addSubview(activityIndicator)
+        addSubview(nameLabel)
+        addSubview(priceLabel)
+        addSubview(ratingView)
+        
+        setUpRatingView()
+        
+        productImageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height * 0.7)
+        productImageView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 20)
         
         NSLayoutConstraint.activate([
             // Product Image View Constraints
             productImageView.topAnchor.constraint(equalTo: topAnchor),
-            productImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            productImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            productImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            productImageView.widthAnchor.constraint(equalTo: widthAnchor),
+            productImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7),
             
-            // Overlay View Constraints
-            overlayView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            overlayView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            overlayView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            overlayView.heightAnchor.constraint(equalToConstant: 60),
+            likeButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            likeButton.widthAnchor.constraint(equalToConstant: 24),
+            likeButton.heightAnchor.constraint(equalToConstant: 24),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 50),
             
             // Name Label Constraints
-            nameLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -8),
-            nameLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: 8),
+            nameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            nameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -5),
+            nameLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -16),
             
             // Price Label Constraints
-            priceLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),
-            priceLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -8),
-            priceLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
-            priceLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -8),
+            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            priceLabel.centerYAnchor.constraint(equalTo: addButton.centerYAnchor),
+            priceLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
             
-            addButton.topAnchor.constraint(equalTo: productImageView.topAnchor, constant: 10),
-            addButton.trailingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: -10),
-            addButton.widthAnchor.constraint(equalToConstant: 40),
-            addButton.heightAnchor.constraint(equalToConstant: 40)
+            ratingView.centerYAnchor.constraint(equalTo: addButton.centerYAnchor),
+            ratingView.trailingAnchor.constraint(equalTo: addButton.leadingAnchor, constant: -5),
+            ratingView.widthAnchor.constraint(equalToConstant: 40),
+            ratingView.heightAnchor.constraint(equalToConstant: 20),
+            
+            addButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            addButton.widthAnchor.constraint(equalToConstant: 50),
+            addButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
     }
     
     func configure(with product: Product) {
         let url = URL(string: product.thumbnail)
-        productImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "me"))
+        productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+            self?.activityIndicator.removeFromSuperview()
+        }
         nameLabel.text = product.title
         priceLabel.text = "$\(product.price)"
+        ratingLabel.text = "\(product.rating)"
+    }
+    
+    func setUpRatingView() {
+        let imageView = UIImageView(image: UIImage(systemName: "star.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 12)))
+        imageView.tintColor = .systemOrange
+        imageView.contentMode = .scaleToFill
+        ratingView.addArrangedSubview(imageView)
+        ratingView.addArrangedSubview(ratingLabel)
+    }
+    
+    @objc func likeButtonTapped() {
+        liked.toggle()
+        likeButton.tintColor = liked ? .myGreen : .black
+        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
     }
     
 }

@@ -57,7 +57,6 @@ class ProductViewController: UIViewController {
         view.addSubview(dismissButton)
         
         likeButton = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
-        likeButton.layer.cornerRadius = dismissButton.frame.width / 2
         likeButton.tintColor = .label
         likeButton.setImage(UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
@@ -142,8 +141,8 @@ class ProductViewController: UIViewController {
             imageView.widthAnchor.constraint(equalTo: view.widthAnchor),
             imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             
-            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            dismissButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            dismissButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             dismissButton.widthAnchor.constraint(equalToConstant: 40),
             dismissButton.heightAnchor.constraint(equalToConstant: 40),
             
@@ -160,11 +159,11 @@ class ProductViewController: UIViewController {
             productLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             productLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             productLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.65),
-            productLabel.heightAnchor.constraint(equalToConstant: 40),
+            productLabel.heightAnchor.constraint(equalToConstant: 50),
             
             ratingView.centerYAnchor.constraint(equalTo: productLabel.centerYAnchor),
             ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            ratingView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35),
+            ratingView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
             ratingView.heightAnchor.constraint(equalToConstant: 40),
             
             colorsLabel.topAnchor.constraint(equalTo: productLabel.bottomAnchor, constant: 5),
@@ -221,7 +220,7 @@ class ProductViewController: UIViewController {
             let starButton = UIButton()
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
             starButton.setImage(UIImage(systemName: "star.fill"), for: .selected)
-            starButton.tintColor = .systemYellow
+            starButton.tintColor = .systemOrange
             starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
             starButton.tag = index
             ratingView.addArrangedSubview(starButton)
@@ -289,13 +288,13 @@ class ProductViewController: UIViewController {
         // Add cart image
         let cartImage = UIImage(systemName: "cart")
         let cartImageView = UIImageView(image: cartImage)
-        cartImageView.tintColor = .label
+        cartImageView.tintColor = .black
         cartImageView.contentMode = .scaleAspectFit
         
         // Add "Add to Cart" label
         let label = UILabel()
         label.text = "Add to cart"
-        label.textColor = .label
+        label.textColor = .black
         
         // Add image and label to the button
         addToCartButton.addSubview(cartImageView)

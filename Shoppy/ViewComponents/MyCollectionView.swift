@@ -10,7 +10,7 @@ import UIKit
 class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var data: [Product] = []
-    var select: ((ProductViewController) -> Void)?
+    var select: ((Product) -> Void)?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -26,11 +26,8 @@ class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ProductViewController()
-        vc.product = data[indexPath.row]
-        vc.modalPresentationStyle = .fullScreen
-        
-        select?(vc)
+        let product = data[indexPath.row]
+        select?(product)
     }
 
 }

@@ -22,7 +22,6 @@
 		9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIProductsServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9758BA0D2B24ABBB00F4E8F4 /* ProductsAPIProductsServiceAdapter.swift */; };
 		9758BA102B24BE8100F4E8F4 /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9758BA0F2B24BE8100F4E8F4 /* MyCollectionView.swift */; };
 		9758BA132B24CA7C00F4E8F4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9758BA122B24CA7C00F4E8F4 /* SDWebImage */; };
-		9758BA152B24CA7C00F4E8F4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9758BA142B24CA7C00F4E8F4 /* SDWebImageMapKit */; };
 		9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9758BA1B2B251EB200F4E8F4 /* ProductViewController.swift */; };
 		97B38FFD2B1F845900EB90EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFC2B1F845900EB90EA /* AppDelegate.swift */; };
 		97B38FFF2B1F845900EB90EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */; };
@@ -65,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9758BA152B24CA7C00F4E8F4 /* SDWebImageMapKit in Frameworks */,
 				9758BA132B24CA7C00F4E8F4 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +175,6 @@
 			name = Shoppy;
 			packageProductDependencies = (
 				9758BA122B24CA7C00F4E8F4 /* SDWebImage */,
-				9758BA142B24CA7C00F4E8F4 /* SDWebImageMapKit */,
 			);
 			productName = Shoppy;
 			productReference = 97B38FF92B1F845900EB90EA /* Shoppy.app */;
@@ -499,11 +496,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9758BA112B24CA7C00F4E8F4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
-		};
-		9758BA142B24CA7C00F4E8F4 /* SDWebImageMapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9758BA112B24CA7C00F4E8F4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

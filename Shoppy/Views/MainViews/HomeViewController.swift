@@ -52,10 +52,13 @@ class HomeViewController: UIViewController {
     
     func configureCollectionView() {
         myCollectionView = MyCollectionView()
+        myCollectionView.select = { [weak self] product in
+            self?.select(product: product)
+        }
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 180, height: 240)
+        layout.itemSize = CGSize(width: 180, height: 320)
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
