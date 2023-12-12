@@ -96,11 +96,6 @@ class ProductCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .myBackground
-        layer.cornerRadius = 20
-        layer.borderWidth = 0.2
-        layer.borderColor = UIColor.lightGray.cgColor
-        
         configureUI()
     }
     
@@ -109,6 +104,11 @@ class ProductCell: UICollectionViewCell {
     }
     
     private func configureUI() {
+        backgroundColor = .myBackground
+        layer.cornerRadius = 20
+        layer.borderWidth = 0.2
+        layer.borderColor = UIColor.lightGray.cgColor
+        
         addSubview(productImageView)
         addSubview(addButton)
         addSubview(likeButton)
@@ -121,6 +121,8 @@ class ProductCell: UICollectionViewCell {
         
         productImageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height * 0.7)
         productImageView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 20)
+        
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             // Product Image View Constraints
@@ -138,13 +140,11 @@ class ProductCell: UICollectionViewCell {
             activityIndicator.widthAnchor.constraint(equalToConstant: 50),
             activityIndicator.heightAnchor.constraint(equalToConstant: 50),
             
-            // Name Label Constraints
             nameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             nameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -5),
             nameLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -16),
             
-            // Price Label Constraints
             priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             priceLabel.centerYAnchor.constraint(equalTo: addButton.centerYAnchor),
             priceLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
@@ -160,7 +160,7 @@ class ProductCell: UICollectionViewCell {
             addButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        
     }
     
     func configure(with product: Product) {

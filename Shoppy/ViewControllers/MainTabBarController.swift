@@ -13,7 +13,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         let homeVC = makeHomeView()
-        let categoriesVC = CategoriesViewController()
+        let categoriesVC = makeCategoriesView()
         let cartVC = CartViewController()
         let profileVC = ProfileViewController()
         
@@ -48,6 +48,13 @@ class MainTabBarController: UITabBarController {
         homeVC.service = api
         
         return homeVC
+    }
+    
+    func makeCategoriesView() -> CategoriesViewController {
+        let categoryVC = CategoriesViewController()
+        categoryVC.title = "Categories"
+        categoryVC.view.backgroundColor = .systemOrange
+        return categoryVC
     }
     
 }

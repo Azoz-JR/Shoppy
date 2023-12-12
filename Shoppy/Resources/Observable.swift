@@ -10,7 +10,9 @@ import Foundation
 class Observable<T> {
     var value: T? {
         didSet {
-            listener?(value)
+            DispatchQueue.mainAsyncIfNeeded {
+                self.listener?(self.value)
+            }
         }
     }
     

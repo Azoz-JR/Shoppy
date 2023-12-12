@@ -39,9 +39,6 @@ class CategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
-        layer.cornerRadius = 20
-        
         configureUI()
     }
     
@@ -49,10 +46,13 @@ class CategoryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         addSubview(productImageView)
         addSubview(overlayView)
         overlayView.addSubview(nameLabel)
+        
+        backgroundColor = .systemBackground
+        layer.cornerRadius = 20
         
         NSLayoutConstraint.activate([
             // Product Image View Constraints
