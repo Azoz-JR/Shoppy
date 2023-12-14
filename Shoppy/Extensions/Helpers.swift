@@ -29,6 +29,16 @@ extension UIView {
         maskLayer.path = roundedPath.cgPath
         self.layer.mask = maskLayer
     }
+    
+    func round( _ radius: CGFloat = 10) {
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+    }
+    
+    func addBorder(color: UIColor, width: CGFloat) {
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
+    }
 }
 
 

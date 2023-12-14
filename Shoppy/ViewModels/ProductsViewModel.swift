@@ -7,22 +7,41 @@
 
 import Foundation
 
-class ProductsViewModel {
-    var productsService: ProductsService?
-    var products: Observable<[Product]> = Observable([])
+struct ProductViewModel: Codable, Hashable, Equatable {
+    let id: Int
+    let title: String
+    let price: Double
+    let discountPercentage: Double
+    let category: String
+    let thumbnail: String
+
+    var count = 1
     
-    
-    
-    func loadProducts() {
-        productsService?.loadProducts(completion: handleAPIResults)
+    init(product: Product, count: Int = 1) {
+        self.id = product.id
+        self.title = product.title
+        self.price = product.price
+        self.discountPercentage = product.discountPercentage
+        self.category = product.category
+        self.thumbnail = product.thumbnail
+        self.count = count
     }
     
-    func handleAPIResults(_ result: Result<[Product], Error>) {
-        switch result {
-        case .success(let products):
-            self.products.value = products
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
+    var imageURL: URL? {
+        URL(string: thumbnail)
+    }
+    
+    mutating func increaseCount() {
+        count += 1
+    }
+    
+    mutating func decreaseCount() {
+        count -= 1
+    }
+    
+    static let example = ProductViewModel(product: Product.example)
+    
+    static func ==(lhs: ProductViewModel, rhs: ProductViewModel) -> Bool {
+        lhs.id == rhs.id
     }
 }

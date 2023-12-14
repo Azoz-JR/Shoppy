@@ -8,13 +8,17 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    let cartViewModel = CartViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        tabBar.backgroundColor = .systemBackground
+        
         
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
-        let cartVC = CartViewController()
+        let cartVC = makeCartView()
         let profileVC = ProfileViewController()
         
         viewControllers = [
@@ -43,6 +47,7 @@ class MainTabBarController: UITabBarController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
         homeVC.navigationItem.largeTitleDisplayMode = .always
+        homeVC.view.backgroundColor = .secondBackground
         
         let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: .skincare)
         homeVC.service = api
@@ -53,8 +58,17 @@ class MainTabBarController: UITabBarController {
     func makeCategoriesView() -> CategoriesViewController {
         let categoryVC = CategoriesViewController()
         categoryVC.title = "Categories"
-        categoryVC.view.backgroundColor = .systemOrange
+        categoryVC.view.backgroundColor = .secondBackground
+        categoryVC.navigationItem.largeTitleDisplayMode = .always
         return categoryVC
+    }
+    
+    func makeCartView() -> CartViewController {
+        let cartVC = CartViewController(viewModel: cartViewModel)
+        cartVC.title = "My Cart"
+        cartVC.view.backgroundColor = .secondBackground
+        
+        return cartVC
     }
     
 }
