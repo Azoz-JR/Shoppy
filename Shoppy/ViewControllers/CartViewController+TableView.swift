@@ -24,7 +24,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        uniqueProducts.count
+        cartProducts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -33,47 +33,27 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: CartCellView.identifier, for: indexPath) as? CartCellView {
-            let product = uniqueProducts[indexPath.row]
+            let product = cartProducts[indexPath.row]
             cell.setUpCell(with: product)
             
             cell.increaseButtonHandler = { [weak self] in
-                self?.increaseProduct(at: indexPath)
+                self?.viewModel.increaseProduct(at: indexPath)
                 self?.updateUI()
             }
             
             cell.decreaseButtonHandler = { [weak self] in
-                self?.decreseProduct(at: indexPath)
+                self?.viewModel.decreseProduct(at: indexPath)
                 self?.updateUI()
             }
             
             cell.removeButtonHandler = { [weak self] in
-                self?.removeProduct(at: indexPath)
+                self?.viewModel.removeProduct(at: indexPath)
                 self?.updateUI()
             }
             
             return cell
         }
         fatalError("Unable to dequeue CartCellView")
-    }
-    
-    func increaseProduct(at index: IndexPath) {
-        uniqueProducts[index.row].increaseCount()
-        tableView.reloadRows(at: [index], with: .automatic)
-    }
-    
-    func decreseProduct(at index: IndexPath) {
-        guard uniqueProducts[index.row].count > 1 else {
-            removeProduct(at: index)
-            return
-        }
-        
-        uniqueProducts[index.row].decreaseCount()
-        tableView.reloadRows(at: [index], with: .automatic)
-    }
-    
-    func removeProduct(at index: IndexPath) {
-        uniqueProducts.remove(at: index.row)
-        tableView.reloadData()
     }
     
 }

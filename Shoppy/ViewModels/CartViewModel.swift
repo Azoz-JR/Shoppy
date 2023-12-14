@@ -17,7 +17,7 @@ class CartViewModel {
         
         var total = 0.0
         products.forEach { product in
-            total += product.price
+            total += product.price * Double(product.count)
         }
         
         return total
@@ -41,22 +41,21 @@ class CartViewModel {
         }
     }
     
-    func addPorduct(product: ProductViewModel) {
-        //product.increaseCount()
+    func increaseProduct(at index: IndexPath) {
+        cartProducts.value?[index.row].increaseCount()
     }
     
-    func removeProduct(product: ProductViewModel) {
-//        guard product.count > 1 else {
-//            cartProducts.value?.removeAll(where: { $0 == product})
-//        }
-//        
-//        if let index = cartProducts.value?.firstIndex(where: {$0 == product}) {
-//            cartProducts.value?.remove(at: index)
-//        }
+    func decreseProduct(at index: IndexPath) {
+        guard let count = cartProducts.value?[index.row].count, count > 1 else {
+            removeProduct(at: index)
+            return
+        }
+        
+        cartProducts.value?[index.row].decreaseCount()
     }
     
-    func removeAllItems(of product: ProductViewModel) {
-        cartProducts.value?.removeAll(where: { $0 == product })
+    func removeProduct(at index: IndexPath) {
+        cartProducts.value?.remove(at: index.row)
     }
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var checkoutContainer: UIView!
     @IBOutlet var couponContainer: UIView!
@@ -18,7 +18,8 @@ class CartViewController: UIViewController {
     @IBOutlet var checkoutButton: UIButton!
     
     var viewModel: CartViewModel
-    var uniqueProducts: [ProductViewModel] = []
+    var cartProducts: [ProductViewModel] = []
+    var couponText: String = ""
     
     init(viewModel: CartViewModel) {
         self.viewModel = viewModel
@@ -39,6 +40,8 @@ class CartViewController: UIViewController {
     }
     
     func configView() {
+        couponTextField.delegate = self
+        applyButton.isEnabled = false
         checkoutContainer.round(20)
         couponContainer.round(20)
         checkoutButton.round(20)
@@ -49,6 +52,8 @@ class CartViewController: UIViewController {
     func updateUI() {
         subtotalLabel.text = "\(viewModel.total)$"
         totalLabel.text = "\(viewModel.total)$"
+        checkoutButton.isEnabled = !cartProducts.isEmpty
+        reloadTableView()
     }
     
     func bindViewModel() {
@@ -56,12 +61,7 @@ class CartViewController: UIViewController {
             guard let self = self, let products = products else {
                 return
             }
-            
-            var uniqueSet = Set<ProductViewModel>()
-            
-            self.uniqueProducts = products.filter({ product in
-                uniqueSet.insert(product).inserted
-            })
+            self.cartProducts = products
             self.updateUI()
         }
     }
@@ -71,5 +71,17 @@ class CartViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-
+    
+    // MARK: TextField Method
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Handle text changes here
+        if let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
+            couponText = newText
+            applyButton.isEnabled = !couponText.isEmpty
+            print("New text: \(newText)")
+        }
+        
+        return true
+    }
+    
 }
