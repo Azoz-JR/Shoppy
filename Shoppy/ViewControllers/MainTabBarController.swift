@@ -10,11 +10,17 @@ import UIKit
 class MainTabBarController: UITabBarController {
     let cartViewModel = CartViewModel()
     
+    var cartCount: Int = 0 {
+        didSet {
+            updateCartTabBarBadge()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        tabBar.backgroundColor = .systemBackground
         
+        bindToCartViewModel()
         
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
@@ -22,11 +28,30 @@ class MainTabBarController: UITabBarController {
         let profileVC = ProfileViewController()
         
         viewControllers = [
-            makeNav(for: homeVC, title: "Home", icon: "house", tag: 0),
-            makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2", tag: 1),
-            makeNav(for: cartVC, title: "Cart", icon: "cart", tag: 2),
-            makeNav(for: profileVC, title: "Profile", icon: "person", tag: 3)
+            makeNav(for: homeVC, title: "Home", icon: "house.fill", tag: 0),
+            makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2.fill", tag: 1),
+            makeNav(for: cartVC, title: "Cart", icon: "cart.fill", tag: 2),
+            makeNav(for: profileVC, title: "Profile", icon: "person.fill", tag: 3)
         ]
+    }
+    
+    func updateCartTabBarBadge() {
+        let cartTabBar = tabBar.items?[2]
+        
+        guard cartCount > 0 else {
+            cartTabBar?.badgeValue = nil
+            return
+        }
+        cartTabBar?.badgeValue = "\(cartCount)"
+    }
+    
+    func bindToCartViewModel() {
+        cartViewModel.cartCount.bind { [weak self] count in
+            guard let self = self, let count = count else {
+                return
+            }
+            self.cartCount = count
+        }
     }
     
     private func makeNav(for vc: UIViewController, title: String, icon: String, tag: Int) -> UIViewController {
@@ -39,7 +64,9 @@ class MainTabBarController: UITabBarController {
         )
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
+        nav.tabBarItem.badgeColor = .red
         nav.navigationBar.prefersLargeTitles = true
+        nav.navigationItem.largeTitleDisplayMode = .always
         return nav
     }
     
@@ -47,10 +74,12 @@ class MainTabBarController: UITabBarController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
         homeVC.navigationItem.largeTitleDisplayMode = .always
-        homeVC.view.backgroundColor = .secondBackground
+        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
-        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: .skincare)
+        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: .lighting)
         homeVC.service = api
+        
+        homeVC.cartViewModel = cartViewModel
         
         return homeVC
     }
@@ -60,6 +89,7 @@ class MainTabBarController: UITabBarController {
         categoryVC.title = "Categories"
         categoryVC.view.backgroundColor = .secondBackground
         categoryVC.navigationItem.largeTitleDisplayMode = .always
+        categoryVC.cartViewModel = cartViewModel
         return categoryVC
     }
     
@@ -69,6 +99,11 @@ class MainTabBarController: UITabBarController {
         cartVC.view.backgroundColor = .secondBackground
         
         return cartVC
+    }
+    
+    func makeProfileView() -> ProfileViewController {
+        let profileVC = ProfileViewController()
+        return profileVC
     }
     
 }

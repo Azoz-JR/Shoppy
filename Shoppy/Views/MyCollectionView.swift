@@ -11,15 +11,27 @@ class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollecti
     
     var data: [Product] = []
     var select: ((Product) -> Void)?
+    var cartViewModel: CartViewModel?
+    var showSuccessAlert: (() -> Void)?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return data.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell {
-            cell.configure(with: data[indexPath.row])
+            
+            let product = data[indexPath.row]
+            cell.configure(with: product)
+            
+            cell.addToCartHandler = { [weak self] in
+                guard let cartViewModel = self?.cartViewModel else {
+                    return
+                }
+                cartViewModel.addProduct(product: product.toProductViewModel())
+                self?.showSuccessAlert?()
+            }
+            
             return cell
         }
         fatalError("Unable to dequeue ProductCell")
@@ -29,5 +41,5 @@ class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollecti
         let product = data[indexPath.row]
         select?(product)
     }
-
+    
 }

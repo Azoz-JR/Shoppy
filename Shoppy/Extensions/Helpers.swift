@@ -14,9 +14,14 @@ extension UIViewController {
         showDetailViewController(alert, sender: self)
     }
     
-    func select(product: Product) {
-        let vc = ProductViewController()
-        vc.product = product
+    func showAddedSuccessfulyAlert() {
+        let alert = UIAlertController(title: "Success", message: "Product added to cart successfully!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func select(product: Product, cartViewModel: CartViewModel) {
+        let vc = ProductViewController(product: product, cartViewModel: cartViewModel)
         vc.modalPresentationStyle = .pageSheet
         present(vc, animated: true)
     }

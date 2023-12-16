@@ -9,6 +9,7 @@ import Foundation
 
 class CartViewModel {
     var cartProducts: Observable<[ProductViewModel]> = Observable([])
+    var cartCount: Observable<Int> = Observable(0)
     
     var total: Double {
         guard let products = cartProducts.value, !products.isEmpty else {
@@ -22,40 +23,67 @@ class CartViewModel {
         
         return total
     }
-    
-    func loadProducts() {
-        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: .homeDecoration)
-        api.loadProducts(completion: handleAPIResults)
-    }
-    
-    func handleAPIResults(_ result: Result<[Product], Error>) {
-        switch result {
-        case .success(let products):
-            let cartProducts = products.map { item in
-                item.toProductViewModel()
-            }
-            
-            self.cartProducts.value = cartProducts
-        case .failure(let error):
-            print(error.localizedDescription)
+        
+    func addProduct(product: ProductViewModel) {
+        guard let products = cartProducts.value else {
+            return
         }
+        
+        guard products.contains(product) else {
+            cartProducts.value?.insert(product, at: 0)
+            updateCount()
+            return
+        }
+        
+        if let index = products.firstIndex(of: product) {
+            increaseProduct(at: index)
+        }
+        
     }
     
-    func increaseProduct(at index: IndexPath) {
-        cartProducts.value?[index.row].increaseCount()
-    }
-    
-    func decreseProduct(at index: IndexPath) {
-        guard let count = cartProducts.value?[index.row].count, count > 1 else {
+    func removeProduct(product: ProductViewModel) {
+        guard let index = cartProducts.value?.firstIndex(of: product) else {
+            return
+        }
+        
+        guard let count = cartProducts.value?[index].count, count > 1 else {
             removeProduct(at: index)
             return
         }
         
-        cartProducts.value?[index.row].decreaseCount()
+        cartProducts.value?[index].decreaseCount()
+        updateCount()
     }
     
-    func removeProduct(at index: IndexPath) {
-        cartProducts.value?.remove(at: index.row)
+    private func increaseProduct(at index: Int) {
+        cartProducts.value?[index].increaseCount()
+        updateCount()
+    }
+    
+    func removeProduct(at index: Int) {
+        cartProducts.value?.remove(at: index)
+        updateCount()
+    }
+    
+    func contains(product: ProductViewModel) -> Bool {
+        guard let products = cartProducts.value, products.contains(product) else {
+            return false
+        }
+        
+        return true
+    }
+    
+    func updateCount() {
+        guard let products = cartProducts.value else {
+            return
+        }
+        var count = 0
+        
+        products.forEach { item in
+            count += item.count
+        }
+        
+        cartCount.value = count
     }
     
 }

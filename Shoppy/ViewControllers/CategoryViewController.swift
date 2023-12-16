@@ -8,11 +8,14 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
+    let searchController = UISearchController()
     var collectionView: UICollectionView!
     var myCollectionView: MyCollectionView!
+    var cartViewModel: CartViewModel!
     
     var service: ProductsService?
     var category: Category? = nil
+    var products: [Product] = []
     
     override func loadView() {
         super.loadView()
@@ -31,6 +34,8 @@ class CategoryViewController: UIViewController {
         title = category.rawValue
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        configureSearchBar()
             
         refresh()
     }
@@ -42,6 +47,7 @@ class CategoryViewController: UIViewController {
     func handleAPIResults(_ result: Result<[Product], Error>) {
         switch result {
         case .success(let products):
+            self.products = products
             myCollectionView.data = products
             collectionView.reloadData()
         case .failure(let error):
@@ -52,8 +58,15 @@ class CategoryViewController: UIViewController {
     
     func configureCollectionView() {
         myCollectionView = MyCollectionView()
+        myCollectionView.cartViewModel = cartViewModel
         myCollectionView.select = { [weak self] product in
-            self?.select(product: product)
+            guard let self = self else {
+                return
+            }
+            self.select(product: product, cartViewModel: self.cartViewModel)
+        }
+        myCollectionView.showSuccessAlert = { [weak self] in
+            self?.showAddedSuccessfulyAlert()
         }
         
         let layout = UICollectionViewFlowLayout()
@@ -61,7 +74,7 @@ class CategoryViewController: UIViewController {
         layout.itemSize = CGSize(width: 180, height: 240)
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-        collectionView.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
+        collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.delegate = myCollectionView
         collectionView.dataSource = myCollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,5 +85,33 @@ class CategoryViewController: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 
+}
+
+extension CategoryViewController: UISearchResultsUpdating {
+    
+    func configureSearchBar() {
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
+            myCollectionView.data = products
+            reloadCollectionView()
+            return
+        }
+        
+        myCollectionView.data = products.filter { product in
+            product.title.uppercased().contains(text.uppercased())
+        }
+        reloadCollectionView()
+    }
+    
 }

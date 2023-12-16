@@ -23,7 +23,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     
     init(viewModel: CartViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "MyCartView", bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +34,6 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        viewModel.loadProducts()
         setUpTableView()
         configView()
     }
@@ -78,7 +77,6 @@ class CartViewController: UIViewController, UITextFieldDelegate {
         if let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
             couponText = newText
             applyButton.isEnabled = !couponText.isEmpty
-            print("New text: \(newText)")
         }
         
         return true

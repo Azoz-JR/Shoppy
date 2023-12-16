@@ -8,19 +8,20 @@
 import UIKit
 
 class CategoriesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+    var cartViewModel: CartViewModel!
     private let categories: [Category] = Category.allCases
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 180, height: 200)
+        layout.itemSize = CGSize(width: view.frame.width, height: 200)
+        layout.minimumLineSpacing = 20
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-        // Customize the collection view appearance if needed
+        collectionView.register(CategoryCell.register(), forCellWithReuseIdentifier: CategoryCell.identifier)
+        
         return collectionView
     }()
     
@@ -44,7 +45,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell {
             cell.configure(with: categories[indexPath.row])
             return cell
         }
@@ -54,6 +55,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CategoryViewController()
+        vc.cartViewModel = cartViewModel
         let category = categories[indexPath.row]
         vc.category = category
         

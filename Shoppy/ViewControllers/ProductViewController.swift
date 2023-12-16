@@ -10,7 +10,19 @@ import UIKit
 
 class ProductViewController: UIViewController {
     var product: Product? = nil
+    var cartViewModel: CartViewModel
     var productView = ProductDetailView()
+    
+    init(product: Product? = nil, cartViewModel: CartViewModel) {
+        self.product = product
+        self.cartViewModel = cartViewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var liked = false
     
@@ -97,7 +109,11 @@ class ProductViewController: UIViewController {
     }
     
     @objc func addToCartButtonTapped() {
-        
+        guard let productViewModel = product?.toProductViewModel() else {
+            return
+        }
+        cartViewModel.addProduct(product: productViewModel)
+        showAddedSuccessfulyAlert()
     }
     
     

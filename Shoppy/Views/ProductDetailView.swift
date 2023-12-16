@@ -125,7 +125,7 @@ class ProductDetailView: UIView {
         
         ratingView.centerYAnchor.constraint(equalTo: productLabel.centerYAnchor).isActive = true
         ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        ratingView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3).isActive = true
+        ratingView.leadingAnchor.constraint(equalTo: productLabel.trailingAnchor, constant: 10).isActive = true
         ratingView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // Create five star buttons

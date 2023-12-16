@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="qSU-XN-ljq" customClass="CategoryCell" customModule="Shoppy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="403" height="263"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="sgw-kj-6eE">
+                <rect key="frame" x="0.0" y="0.0" width="403" height="263"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="z5G-uy-Ws7">
+                        <rect key="frame" x="0.0" y="0.0" width="403" height="263"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smartphones" translatesAutoresizingMaskIntoConstraints="NO" id="zrg-eO-NWT">
+                                <rect key="frame" x="0.0" y="0.0" width="403" height="263"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smartphones" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UiO-cu-o2b">
+                                <rect key="frame" x="10" y="204.33333333333334" width="163.66666666666666" height="38.666666666666657"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zrg-eO-NWT" firstAttribute="leading" secondItem="z5G-uy-Ws7" secondAttribute="leading" id="6as-GJ-gqK"/>
+                            <constraint firstAttribute="bottom" secondItem="UiO-cu-o2b" secondAttribute="bottom" constant="20" id="L1Q-jh-Alk"/>
+                            <constraint firstAttribute="bottom" secondItem="zrg-eO-NWT" secondAttribute="bottom" id="MJl-bQ-8Rh"/>
+                            <constraint firstItem="UiO-cu-o2b" firstAttribute="leading" secondItem="z5G-uy-Ws7" secondAttribute="leading" constant="10" id="j67-x1-Tgs"/>
+                            <constraint firstItem="zrg-eO-NWT" firstAttribute="top" secondItem="z5G-uy-Ws7" secondAttribute="top" id="jpZ-uc-45p"/>
+                            <constraint firstAttribute="trailing" secondItem="zrg-eO-NWT" secondAttribute="trailing" id="tNZ-Ea-pql"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="z5G-uy-Ws7" secondAttribute="bottom" id="3Xg-wg-Pqu"/>
+                    <constraint firstAttribute="trailing" secondItem="z5G-uy-Ws7" secondAttribute="trailing" id="6xK-rW-YFP"/>
+                    <constraint firstItem="z5G-uy-Ws7" firstAttribute="leading" secondItem="sgw-kj-6eE" secondAttribute="leading" id="n5d-VV-STD"/>
+                    <constraint firstItem="z5G-uy-Ws7" firstAttribute="top" secondItem="sgw-kj-6eE" secondAttribute="top" id="ojH-PF-Efr"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="403" height="263"/>
+            <connections>
+                <outlet property="content" destination="sgw-kj-6eE" id="2JV-FM-jo5"/>
+                <outlet property="nameLabel" destination="UiO-cu-o2b" id="hNc-nq-UaA"/>
+                <outlet property="productImageView" destination="zrg-eO-NWT" id="l3J-2X-Ndr"/>
+            </connections>
+            <point key="canvasLocation" x="179.38931297709922" y="-132.74647887323945"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="smartphones" width="2048" height="1325"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
