@@ -10,17 +10,21 @@ import UIKit
 class HomeViewController: UIViewController {
     let searchController = UISearchController()
     var collectionView: UICollectionView!
+    var categoriesCollectionView: UICollectionView!
     
     var myCollectionView: MyCollectionView!
     var cartViewModel: CartViewModel!
     
+    let categories = Category.allCases
     var service: ProductsService?
     var products: [Product] = []
+    var selectedIndex: IndexPath?
     
     override func loadView() {
         super.loadView()
 
         configureCollectionView()
+        configureCategoriesCollection()
     }
     
     override func viewDidLoad() {
@@ -67,6 +71,7 @@ class HomeViewController: UIViewController {
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.delegate = myCollectionView
         collectionView.dataSource = myCollectionView
+        collectionView.contentInset = UIEdgeInsets(top: 70, left: .zero, bottom: .zero, right: .zero)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         
@@ -81,6 +86,20 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+    }
+    
+    func filterProducts(category: Category?) {
+        guard let category = category else {
+            myCollectionView.data = products
+            reloadCollectionView()
+            return
+        }
+        
+        myCollectionView.data = products.filter { product in
+            product.category == category.rawValue
+        }
+        reloadCollectionView()
+        
     }
     
 }
@@ -104,6 +123,66 @@ extension HomeViewController: UISearchResultsUpdating {
             product.title.uppercased().contains(text.uppercased())
         }
         reloadCollectionView()
+    }
+    
+}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func configureCategoriesCollection() {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 120, height: 50)
+        layout.scrollDirection = .horizontal
+        
+        categoriesCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100), collectionViewLayout: layout)
+        categoriesCollectionView.delegate = self
+        categoriesCollectionView.dataSource = self
+        categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoriesCollectionView.showsHorizontalScrollIndicator = false
+        categoriesCollectionView.register(SmallCategoryCell.register(), forCellWithReuseIdentifier: SmallCategoryCell.identifier)
+        
+        collectionView.addSubview(categoriesCollectionView)
+        
+        categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
+        categoriesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        categoriesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        categoriesCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        categories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = categoriesCollectionView.dequeueReusableCell(withReuseIdentifier: SmallCategoryCell.identifier, for: indexPath) as? SmallCategoryCell {
+            cell.configure(with: categories[indexPath.row])
+            
+            return cell
+        }
+        fatalError("Unable to dequeue CategoryCell")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let selectedIndex = selectedIndex else {
+            selectedIndex = indexPath
+            filterProducts(category: categories[indexPath.row])
+            return
+        }
+        
+        if selectedIndex != indexPath {
+            collectionView.deselectItem(at: selectedIndex, animated: true)
+            self.selectedIndex = indexPath
+            filterProducts(category: categories[indexPath.row])
+            return
+        }
+        
+        // Selecting the currently selectedIndex condition
+        collectionView.deselectItem(at: selectedIndex, animated: true)
+        self.selectedIndex = nil
+        filterProducts(category: nil)
+        
+        
     }
     
 }

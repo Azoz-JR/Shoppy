@@ -14,12 +14,13 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: view.frame.width, height: 200)
+        layout.itemSize = CGSize(width: view.frame.width - 20, height: 200)
         layout.minimumLineSpacing = 20
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
         collectionView.register(CategoryCell.register(), forCellWithReuseIdentifier: CategoryCell.identifier)
         
         return collectionView
@@ -30,8 +31,8 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
         view.addSubview(collectionView)
         
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     

@@ -39,6 +39,8 @@
 		97B390132B1F92BB00EB90EA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B390122B1F92BB00EB90EA /* Observable.swift */; };
 		97EEFABE2B2BB5B300065A8A /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97EEFABD2B2BB5B300065A8A /* ProductCell.xib */; };
 		97EEFAC02B2C90AF00065A8A /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97EEFABF2B2C90AF00065A8A /* CategoryCell.xib */; };
+		97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EEFAEA2B2E71BD00065A8A /* SmallCategoryCell.swift */; };
+		97EEFAED2B2E71BD00065A8A /* SmallCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97EEFAEB2B2E71BD00065A8A /* SmallCategoryCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,8 @@
 		97B390122B1F92BB00EB90EA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		97EEFABD2B2BB5B300065A8A /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		97EEFABF2B2C90AF00065A8A /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
+		97EEFAEA2B2E71BD00065A8A /* SmallCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCategoryCell.swift; sourceTree = "<group>"; };
+		97EEFAEB2B2E71BD00065A8A /* SmallCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallCategoryCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 				97EEFABD2B2BB5B300065A8A /* ProductCell.xib */,
 				9758BA072B23E0E800F4E8F4 /* CategoryCell.swift */,
 				97EEFABF2B2C90AF00065A8A /* CategoryCell.xib */,
+				97EEFAEA2B2E71BD00065A8A /* SmallCategoryCell.swift */,
+				97EEFAEB2B2E71BD00065A8A /* SmallCategoryCell.xib */,
 				9758BA0F2B24BE8100F4E8F4 /* MyCollectionView.swift */,
 				973CEA4C2B27E48100E0487D /* ProductDetailView.swift */,
 				9737E73C2B29237000735A72 /* MyCartView.xib */,
@@ -269,6 +275,7 @@
 				97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */,
 				97EEFABE2B2BB5B300065A8A /* ProductCell.xib in Resources */,
 				973CEA532B28D1D900E0487D /* CartCellView.xib in Resources */,
+				97EEFAED2B2E71BD00065A8A /* SmallCategoryCell.xib in Resources */,
 				9737E73E2B29237000735A72 /* MyCartView.xib in Resources */,
 				97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */,
 			);
@@ -303,6 +310,7 @@
 				9758BA0C2B24AB3400F4E8F4 /* ProductsService.swift in Sources */,
 				9758B9F62B211BBD00F4E8F4 /* ProfileViewController.swift in Sources */,
 				9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */,
+				97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */,
 				973CEA4B2B27D44400E0487D /* ProductsViewModel.swift in Sources */,
 				9758B9F22B211B9500F4E8F4 /* HomeViewController.swift in Sources */,
 			);

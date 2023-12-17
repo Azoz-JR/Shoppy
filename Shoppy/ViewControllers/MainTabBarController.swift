@@ -76,7 +76,7 @@ class MainTabBarController: UITabBarController {
         homeVC.navigationItem.largeTitleDisplayMode = .always
         homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
-        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: .lighting)
+        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api
         
         homeVC.cartViewModel = cartViewModel

@@ -27,12 +27,10 @@ class CategoryCell: UICollectionViewCell {
     
     private func configureUI() {
         
-        content.layer.cornerRadius = 100
-        content.layer.maskedCorners = [.layerMaxXMaxYCorner]
-        content.layer.borderColor = UIColor.lightGray.cgColor
-        content.layer.borderWidth = 0.5
-        backgroundColor = .systemBackground
-        //productImageView.roundedCorners(corners: [.topRight, .bottomLeft], cornerRadius: 50)
+        layer.cornerRadius = 10
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 0.5
+        backgroundColor = .clear
         
     }
     
