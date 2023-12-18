@@ -65,12 +65,6 @@ class CartViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
     // MARK: TextField Method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Handle text changes here

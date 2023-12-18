@@ -64,8 +64,10 @@ class HomeViewController: UIViewController {
         }
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 180, height: 280)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        layout.itemSize = CGSize(width: (view.bounds.width / 2) - 20, height: 250)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 10
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
@@ -84,7 +86,9 @@ class HomeViewController: UIViewController {
     
     func reloadCollectionView() {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -131,7 +135,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func configureCategoriesCollection() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 120, height: 50)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.itemSize = CGSize(width: 125, height: 40)
         layout.scrollDirection = .horizontal
         
         categoriesCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100), collectionViewLayout: layout)
@@ -144,9 +149,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         collectionView.addSubview(categoriesCollectionView)
         
         categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
-        categoriesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        categoriesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         categoriesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        categoriesCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        categoriesCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

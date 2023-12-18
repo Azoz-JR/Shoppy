@@ -56,4 +56,12 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         fatalError("Unable to dequeue CartCellView")
     }
     
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 }
