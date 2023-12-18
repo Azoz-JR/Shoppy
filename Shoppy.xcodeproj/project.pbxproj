@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */; };
 		9737E73D2B29237000735A72 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737E73B2B29237000735A72 /* CartViewController.swift */; };
 		9737E73E2B29237000735A72 /* CartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9737E73C2B29237000735A72 /* CartView.xib */; };
 		9737E7402B292F4700735A72 /* CartViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
 		9737E73B2B29237000735A72 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		9737E73C2B29237000735A72 /* CartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartView.xib; sourceTree = "<group>"; };
 		9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				97EEFAEB2B2E71BD00065A8A /* SmallCategoryCell.xib */,
 				9758BA0F2B24BE8100F4E8F4 /* MyCollectionView.swift */,
 				973CEA4C2B27E48100E0487D /* ProductDetailView.swift */,
+				970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */,
 				9737E73C2B29237000735A72 /* CartView.xib */,
 				973CEA502B28D1D900E0487D /* CartCellView.swift */,
 				973CEA512B28D1D900E0487D /* CartCellView.xib */,
@@ -273,6 +276,7 @@
 				973CEA482B2796BD00E0487D /* Main.storyboard in Resources */,
 				97EEFAC02B2C90AF00065A8A /* CategoryCell.xib in Resources */,
 				97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */,
+				970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */,
 				97EEFABE2B2BB5B300065A8A /* ProductCell.xib in Resources */,
 				973CEA532B28D1D900E0487D /* CartCellView.xib in Resources */,
 				97EEFAED2B2E71BD00065A8A /* SmallCategoryCell.xib in Resources */,

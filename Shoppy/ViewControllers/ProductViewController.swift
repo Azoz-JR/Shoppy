@@ -79,7 +79,7 @@ class ProductViewController: UIViewController {
     @objc func likeButtonTapped() {
         liked.toggle()
         productView.likeButton.tintColor = liked ? .myGreen : .label
-        productView.likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
+        productView.likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)), for: .normal)
     }
     
     @objc private func starButtonTapped(_ sender: UIButton) {
