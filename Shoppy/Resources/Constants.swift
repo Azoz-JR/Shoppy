@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Constants {
-    static let allProductsURL = "https://dummyjson.com/products?limit=100&skip=0"
+    static let allProductsURL = "https://dummyjson.com/products?limit=50&skip=0"
     static let categoryProducts = "https://dummyjson.com/products/category/"
 }
 

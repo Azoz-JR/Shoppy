@@ -23,7 +23,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     
     init(viewModel: CartViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: "MyCartView", bundle: nil)
+        super.init(nibName: "CartView", bundle: nil)
     }
     
     required init?(coder: NSCoder) {

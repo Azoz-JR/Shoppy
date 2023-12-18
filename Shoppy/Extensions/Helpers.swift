@@ -22,7 +22,7 @@ extension UIViewController {
     
     func select(product: Product, cartViewModel: CartViewModel) {
         let vc = ProductViewController(product: product, cartViewModel: cartViewModel)
-        vc.modalPresentationStyle = .pageSheet
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
 }

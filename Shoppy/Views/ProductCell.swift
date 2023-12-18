@@ -42,7 +42,8 @@ class ProductCell: UICollectionViewCell {
         addToCartButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         addToCartButton.roundedCorners(corners: [.topLeft, .bottomRight], cornerRadius: 20)
         
-        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
+        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
+        likeButton.sizeToFit()
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         activityIndicator.startAnimating()
@@ -61,7 +62,7 @@ class ProductCell: UICollectionViewCell {
     @objc func likeButtonTapped() {
         liked.toggle()
         likeButton.tintColor = liked ? .myGreen : .black
-        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 24)), for: .normal)
+        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
     }
     
     @objc func addButtonTapped() {

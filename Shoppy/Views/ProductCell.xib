@@ -24,15 +24,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skincare" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-hu-G2s">
                                 <rect key="frame" x="0.0" y="0.0" width="180" height="224"/>
                             </imageView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lI5-1C-mQS" userLabel="likeButton">
-                                <rect key="frame" x="140" y="10" width="30" height="30"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lI5-1C-mQS" userLabel="likeButton">
+                                <rect key="frame" x="146" y="10" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="EOF-WB-erW"/>
-                                    <constraint firstAttribute="height" constant="30" id="thN-1O-kwB"/>
+                                    <constraint firstAttribute="height" constant="24" id="4KE-qw-oxQ"/>
+                                    <constraint firstAttribute="width" constant="24" id="nI7-8F-4jD"/>
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" imagePadding="0.0"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" imagePadding="0.0">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="18"/>
+                                </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In your darkest times, In your darkest" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XkG-Pl-mcV">
                                 <rect key="frame" x="10" y="234" width="149.66666666666666" height="33.666666666666686"/>
@@ -119,7 +121,7 @@
                 <outlet property="productLabel" destination="XkG-Pl-mcV" id="T3j-ob-XbR"/>
                 <outlet property="ratingLabel" destination="zQ9-Od-oEt" id="44L-sh-cKp"/>
             </connections>
-            <point key="canvasLocation" x="213.74045801526717" y="-47.535211267605639"/>
+            <point key="canvasLocation" x="213.74045801526717" y="-47.887323943661976"/>
         </collectionViewCell>
     </objects>
     <resources>

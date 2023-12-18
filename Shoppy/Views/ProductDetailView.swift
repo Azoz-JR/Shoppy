@@ -16,6 +16,7 @@ class ProductDetailView: UIView {
     var likeButton: UIButton!
     var contentView: UIView!
     var productLabel: UILabel!
+    var ratingLabel: UILabel!
     var ratingView: UIStackView!
     var colorsLabel: UILabel!
     var colorsView: UIStackView!
@@ -33,13 +34,14 @@ class ProductDetailView: UIView {
         configureLikeButton()
         configureContentView()
         configureProductLabel()
+        configureRatingLabel()
         configureRatingView()
         configureColorsLabel()
         configureColorButtons()
+        configureCartButton()
         configurePriceLabel()
         configureDescriptionLabel()
         configureDescriptionText()
-        configureCartButton()
     }
     
     required init?(coder: NSCoder) {
@@ -69,23 +71,24 @@ class ProductDetailView: UIView {
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(dismissButton)
         
-        dismissButton.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
-        dismissButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
+        dismissButton.topAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
+        dismissButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25).isActive = true
         dismissButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         dismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     private func configureLikeButton() {
-        likeButton = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
+        likeButton = UIButton()
         likeButton.tintColor = .label
         likeButton.setImage(UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
+        likeButton.sizeToFit()
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(likeButton)
         
         likeButton.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
-        likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40).isActive = true
-        likeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        likeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25).isActive = true
+        likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func configureContentView() {
@@ -112,30 +115,44 @@ class ProductDetailView: UIView {
         
         productLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
         productLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
-        productLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.65).isActive = true
+        productLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6).isActive = true
         productLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    private func configureRatingLabel() {
+        ratingLabel = UILabel()
+        ratingLabel.text = "5.0"
+        ratingLabel.textAlignment = .right
+        ratingLabel.textColor = .systemOrange
+        ratingLabel.numberOfLines = 1
+        ratingLabel.font = .systemFont(ofSize: 14)
+        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ratingLabel)
+        
+        ratingLabel.centerYAnchor.constraint(equalTo: productLabel.centerYAnchor).isActive = true
+        ratingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
     }
     
     private func configureRatingView() {
         ratingView = UIStackView()
         ratingView.distribution = .fillEqually
-        ratingView.spacing = 8
+        ratingView.spacing = 0
+        ratingView.alignment = .center
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(ratingView)
         
-        ratingView.centerYAnchor.constraint(equalTo: productLabel.centerYAnchor).isActive = true
-        ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        ratingView.leadingAnchor.constraint(equalTo: productLabel.trailingAnchor, constant: 10).isActive = true
+        ratingView.centerYAnchor.constraint(equalTo: ratingLabel.centerYAnchor).isActive = true
+        ratingView.trailingAnchor.constraint(equalTo: ratingLabel.leadingAnchor, constant: -2).isActive = true
         ratingView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        // Create five star buttons
+        // Create five star images
         for index in 0..<5 {
-            let starButton = UIButton()
-            starButton.setImage(UIImage(systemName: "star"), for: .normal)
-            starButton.setImage(UIImage(systemName: "star.fill"), for: .selected)
-            starButton.tintColor = .systemOrange
-            starButton.tag = index
-            ratingView.addArrangedSubview(starButton)
+            let starImage = UIImageView()
+            starImage.image = UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+            starImage.tintColor = .systemOrange
+            starImage.tag = index
+            starImage.sizeToFit()
+            ratingView.addArrangedSubview(starImage)
         }
                 
     }
@@ -185,21 +202,6 @@ class ProductDetailView: UIView {
         }
     }
     
-    private func configurePriceLabel() {
-        priceLabel = UILabel()
-        priceLabel.font = .systemFont(ofSize: 24, weight: .semibold)
-        priceLabel.textColor = .label
-        priceLabel.numberOfLines = 1
-        priceLabel.textAlignment = .left
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(priceLabel)
-        
-        priceLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
-        priceLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.33).isActive = true
-        priceLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    }
-    
     private func configureDescriptionLabel() {
         descriptionLabel = UILabel()
         descriptionLabel.text = "Description"
@@ -239,12 +241,17 @@ class ProductDetailView: UIView {
         addToCartButton.layer.cornerRadius = 20
         contentView.addSubview(addToCartButton)
         
-        addToCartButton.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor).isActive = true
+        addToCartButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-        addToCartButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35).isActive = true
+        addToCartButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.45, constant: -15).isActive = true
         addToCartButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         // Add cart image
+        let contentView = UIView()
+        contentView.contentMode = .center
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        addToCartButton.addSubview(contentView)
+        
         let cartImage = UIImage(systemName: "cart")
         let cartImageView = UIImageView(image: cartImage)
         cartImageView.tintColor = .black
@@ -256,13 +263,20 @@ class ProductDetailView: UIView {
         label.textColor = .black
         
         // Add image and label to the button
-        addToCartButton.addSubview(cartImageView)
-        addToCartButton.addSubview(label)
+        contentView.addSubview(cartImageView)
+        contentView.addSubview(label)
+        
+        // Set constraints for the contentView
+        NSLayoutConstraint.activate([
+            contentView.centerYAnchor.constraint(equalTo: addToCartButton.centerYAnchor),
+            contentView.centerXAnchor.constraint(equalTo: addToCartButton.centerXAnchor)
+        ])
+        
         
         // Set constraints for the image
         cartImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cartImageView.leadingAnchor.constraint(equalTo: addToCartButton.leadingAnchor, constant: 8),
+            cartImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cartImageView.centerYAnchor.constraint(equalTo: addToCartButton.centerYAnchor),
             cartImageView.widthAnchor.constraint(equalToConstant: 24),
             cartImageView.heightAnchor.constraint(equalToConstant: 24),
@@ -272,9 +286,24 @@ class ProductDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: cartImageView.trailingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: addToCartButton.trailingAnchor, constant: -8),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             label.centerYAnchor.constraint(equalTo: addToCartButton.centerYAnchor),
         ])
+    }
+    
+    private func configurePriceLabel() {
+        priceLabel = UILabel()
+        priceLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+        priceLabel.textColor = .label
+        priceLabel.numberOfLines = 1
+        priceLabel.textAlignment = .left
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(priceLabel)
+        
+        priceLabel.centerYAnchor.constraint(equalTo: addToCartButton.centerYAnchor).isActive = true
+        priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        priceLabel.trailingAnchor.constraint(equalTo: addToCartButton.leadingAnchor, constant: -10).isActive = true
+        priceLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func configure(with product: Product) {
@@ -284,6 +313,20 @@ class ProductDetailView: UIView {
         productLabel.text = product.title
         descriptionText.text = product.description
         priceLabel.text = "\(product.price)$"
+        ratingLabel.text = "\(product.rating)"
+        setRating(rating: product.rating)
+    }
+    
+    func setRating(rating: Double) {
+        let rate = Int(rating.rounded())
+        
+        for (index, imageView) in ratingView.arrangedSubviews.enumerated() {
+            if let imageView = imageView as? UIImageView {
+                imageView.image = index < rate
+                ? UIImage(systemName: "star.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+                : UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+            }
+        }
     }
 
 }

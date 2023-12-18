@@ -32,7 +32,7 @@ class SmallCategoryCell: UICollectionViewCell {
     }
     
     func configure(with category: Category) {
-        categoryImageView.image = UIImage(named: category.rawValue ?? "")
+        categoryImageView.image = UIImage(named: category.rawValue)
         categoryLabel.text = category.rawValue.capitalized
     }
     
