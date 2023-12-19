@@ -16,7 +16,6 @@ class ProductsAPI {
         guard let url = URL(string: Constants.allProductsURL) else {
             return completion(.failure(URLError(.badURL)))
         }
-        
         loadData(url: url) { result in
             completion(result)
         }
@@ -49,11 +48,16 @@ class ProductsAPI {
         guard
             let data = data,
             let response = response as? HTTPURLResponse,
-            response.statusCode >= 200 && response.statusCode < 300 else { return .failure(URLError(.badServerResponse)) }
+            response.statusCode >= 200 && response.statusCode < 300 else {
+            return .failure(URLError(.badServerResponse))
+        }
         
         do {
-            let results = try JSONDecoder().decode(ResultProducts.self, from: data)
-            return .success(results.products)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let results = try decoder.decode(Products.self, from: data)
+            let products = results.products
+            return .success(products)
         } catch {
             print("ERROR DOWNLOADING PRODUCTS: \(error.localizedDescription)")
             return .failure(error)

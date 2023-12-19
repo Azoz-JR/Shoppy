@@ -15,7 +15,7 @@ class CategoryViewController: UIViewController {
     
     var service: ProductsService?
     var category: Category? = nil
-    var products: [Product] = []
+    var products: [ItemViewModel] = []
     
     override func loadView() {
         super.loadView()
@@ -44,7 +44,7 @@ class CategoryViewController: UIViewController {
         service?.loadProducts(completion: handleAPIResults)
     }
     
-    func handleAPIResults(_ result: Result<[Product], Error>) {
+    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
         switch result {
         case .success(let products):
             self.products = products

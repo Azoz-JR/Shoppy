@@ -9,11 +9,11 @@ import SDWebImage
 import UIKit
 
 class ProductViewController: UIViewController {
-    var product: Product? = nil
+    var product: ItemViewModel? = nil
     var cartViewModel: CartViewModel
     var productView = ProductDetailView()
     
-    init(product: Product? = nil, cartViewModel: CartViewModel) {
+    init(product: ItemViewModel? = nil, cartViewModel: CartViewModel) {
         self.product = product
         self.cartViewModel = cartViewModel
         
@@ -109,7 +109,7 @@ class ProductViewController: UIViewController {
     }
     
     @objc func addToCartButtonTapped() {
-        guard let productViewModel = product?.toProductViewModel() else {
+        guard let productViewModel = product else {
             return
         }
         cartViewModel.addProduct(product: productViewModel)

@@ -49,14 +49,15 @@ class ProductCell: UICollectionViewCell {
         activityIndicator.startAnimating()
     }
     
-    func configure(with product: Product) {
-        let url = URL(string: product.thumbnail)
+    func configure(with product: ItemViewModel) {
+        let url = product.image
         productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()
         }
         productLabel.text = product.title
         priceLabel.text = "$\(product.price)"
-        ratingLabel.text = "\(product.rating)"
+        //ratingLabel.text = "\(product.rating)"
+        ratingLabel.text = "5"
     }
     
     @objc func likeButtonTapped() {

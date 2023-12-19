@@ -20,7 +20,7 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    func select(product: Product, cartViewModel: CartViewModel) {
+    func select(product: ItemViewModel, cartViewModel: CartViewModel) {
         let vc = ProductViewController(product: product, cartViewModel: cartViewModel)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)

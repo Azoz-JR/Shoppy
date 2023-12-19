@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ProductsService {
-    func loadProducts(completion: @escaping (Result<[Product], Error>) -> Void)
+    func loadProducts(completion: @escaping (Result<[ItemViewModel], Error>) -> Void)
 }

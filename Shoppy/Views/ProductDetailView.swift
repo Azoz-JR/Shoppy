@@ -107,15 +107,18 @@ class ProductDetailView: UIView {
         priceLabel.textAlignment = .left
     }
     
-    func configure(with product: Product) {
-        let url = URL(string: product.thumbnail)
+    func configure(with product: ItemViewModel) {
+        let url = product.image
         imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "hourglass.bottomhalf.filled"))
         
         productLabel.text = product.title
-        descriptionText.text = product.description
+        //descriptionText.text = product.description
+        descriptionText.text = "AAA"
         priceLabel.text = "\(product.price)$"
-        ratingLabel.text = "\(product.rating)"
-        setRating(rating: product.rating)
+//        ratingLabel.text = "\(product.rating)"
+//        setRating(rating: product.rating)
+        ratingLabel.text = "5"
+        setRating(rating: 5)
     }
     
     func setRating(rating: Double) {

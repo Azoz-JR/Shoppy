@@ -8,7 +8,7 @@
 import Foundation
 
 class CartViewModel {
-    var cartProducts: Observable<[ProductViewModel]> = Observable([])
+    var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
     
     var total: Double {
@@ -24,7 +24,7 @@ class CartViewModel {
         return total
     }
         
-    func addProduct(product: ProductViewModel) {
+    func addProduct(product: ItemViewModel) {
         guard let products = cartProducts.value else {
             return
         }
@@ -41,7 +41,7 @@ class CartViewModel {
         
     }
     
-    func removeProduct(product: ProductViewModel) {
+    func removeProduct(product: ItemViewModel) {
         guard let index = cartProducts.value?.firstIndex(of: product) else {
             return
         }
@@ -65,7 +65,7 @@ class CartViewModel {
         updateCount()
     }
     
-    func contains(product: ProductViewModel) -> Bool {
+    func contains(product: ItemViewModel) -> Bool {
         guard let products = cartProducts.value, products.contains(product) else {
             return false
         }

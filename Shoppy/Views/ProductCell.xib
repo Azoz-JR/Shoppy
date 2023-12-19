@@ -23,6 +23,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skincare" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-hu-G2s">
                                 <rect key="frame" x="0.0" y="0.0" width="180" height="224"/>
+                                <color key="backgroundColor" name="myBackground"/>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lI5-1C-mQS" userLabel="likeButton">
                                 <rect key="frame" x="146" y="10" width="24" height="24"/>

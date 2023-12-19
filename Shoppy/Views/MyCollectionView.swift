@@ -9,8 +9,8 @@ import UIKit
 
 class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    var data: [Product] = []
-    var select: ((Product) -> Void)?
+    var data: [ItemViewModel] = []
+    var select: ((ItemViewModel) -> Void)?
     var cartViewModel: CartViewModel?
     var showSuccessAlert: (() -> Void)?
 
@@ -28,7 +28,7 @@ class MyCollectionView: UIViewController, UICollectionViewDataSource, UICollecti
                 guard let cartViewModel = self?.cartViewModel else {
                     return
                 }
-                cartViewModel.addProduct(product: product.toProductViewModel())
+                cartViewModel.addProduct(product: product)
                 self?.showSuccessAlert?()
             }
             

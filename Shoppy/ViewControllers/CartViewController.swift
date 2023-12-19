@@ -18,7 +18,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var checkoutButton: UIButton!
     
     var viewModel: CartViewModel
-    var cartProducts: [ProductViewModel] = []
+    var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
     
     init(viewModel: CartViewModel) {

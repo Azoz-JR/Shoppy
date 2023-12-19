@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     
     let categories = Category.allCases
     var service: ProductsService?
-    var products: [Product] = []
+    var products: [ItemViewModel] = []
     var selectedIndex: IndexPath?
     
     override func loadView() {
@@ -32,13 +32,14 @@ class HomeViewController: UIViewController {
         
         configureSearchBar()
         refresh()
+        
     }
     
     @objc func refresh() {
         service?.loadProducts(completion: handleAPIResults)
     }
     
-    func handleAPIResults(_ result: Result<[Product], Error>) {
+    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
         switch result {
         case .success(let products):
             self.products = products
@@ -100,7 +101,7 @@ class HomeViewController: UIViewController {
         }
         
         myCollectionView.data = products.filter { product in
-            product.category == category.rawValue
+            product.category == category
         }
         reloadCollectionView()
         

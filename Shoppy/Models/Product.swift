@@ -1,40 +1,76 @@
 //
-//  Product.swift
+//  Item.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 08/12/2023.
+//  Created by Azoz Salah on 19/12/2023.
 //
 
 import Foundation
 
-struct Product: Codable, Equatable, Hashable {
+struct Product: Codable {
     let id: Int
-    let title: String
-    let description: String
-    let price: Double
-    let discountPercentage: Double
-    let rating: Double
-    let stock: Int
-    let brand: String
-    let category: String
-    let thumbnail: String
-    let images: [String]
+    let title, vendor: String
+    let productType: Category
+    let createdAt: Date
+    let handle: String
+    let updatedAt, publishedAt: Date
+    let publishedScope: PublishedScope
+    let tags: String
+    let status: Status
+    let adminGraphqlAPIID: String
+    let variants: [Variant]
+    let options: [Option]
+    let images: [Image]
+    let image: Image
+
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case vendor
+        case productType = "product_type"
+        case createdAt = "created_at"
+        case handle
+        case updatedAt = "updated_at"
+        case publishedAt = "published_at"
+        case publishedScope = "published_scope"
+        case tags, status
+        case adminGraphqlAPIID = "admin_graphql_api_id"
+        case variants, options, images, image
+    }
+    
+    func toItemViewModel() -> ItemViewModel {
+        ItemViewModel(product: self)
+    }
     
     var imageURL: URL? {
-        URL(string: thumbnail)
+        URL(string: image.src)
     }
     
-    func toProductViewModel() -> ProductViewModel {
-        ProductViewModel(product: self)
+    var imagesURLs: [URL] {
+        return images.compactMap { image in
+            URL(string: image.src)
+        }
     }
-        
-    static let example = Product(id: 1, title: "Title", description: "Description", price: 10, discountPercentage: 15, rating: 4, stock: 50, brand: "Apple", category: "Smart Phone", thumbnail: "", images: [])
     
-    static func ==(lhs: Product, rhs: Product) -> Bool {
-        lhs.id == rhs.id
+    var prices: [Double] {
+        return variants.compactMap { product in
+            try? Double(product.price, format: .number)
+        }
     }
-}
-
-struct ResultProducts: Codable {
-    let products: [Product]
+    
+    var colors: [ColorOption] {
+        guard let colors = options.filter({ $0.name == .color }).first?.values else {
+            return []
+        }
+        return colors.compactMap { color in
+            ColorOption(rawValue: color)
+        }
+    }
+    
+    var sizes: [String] {
+        guard let sizes = options.filter({ $0.name == .size }).first?.values else {
+            return []
+        }
+        return sizes
+    }
+    
 }
