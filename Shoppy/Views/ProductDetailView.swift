@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailView: UIView {
+class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var contentView: UIView!
     @IBOutlet var addToCartButton: UIButton!
@@ -19,7 +19,11 @@ class ProductDetailView: UIView {
     @IBOutlet var descriptionText: UITextView!
     @IBOutlet var dismissButton: UIButton!
     @IBOutlet var likeButton: UIButton!
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var pageControl: UIPageControl!
     
+    var images: [URL?] = []
+        
     let availableColors: [UIColor] = [.myBackground, .myGreen, .systemBlue, .systemPink]
 
     override init(frame: CGRect) {
@@ -31,13 +35,13 @@ class ProductDetailView: UIView {
             addSubview(view)
         }
         
-        configureDismissButton()
         configureLikeButton()
         configureContentView()
         configureRatingView()
         configureColorButtons()
         configurePriceLabel()
         configureDescriptionText()
+        configureCollectionView()
     }
     
     required init?(coder: NSCoder) {
@@ -49,10 +53,12 @@ class ProductDetailView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
-    private func configureDismissButton() {
-        dismissButton.layer.cornerRadius = dismissButton.frame.width / 2
-        dismissButton.backgroundColor = .systemBackground
-        dismissButton.tintColor = .label
+    private func configureCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageCell.register(), forCellWithReuseIdentifier: ImageCell.identifier)
+        
+        pageControl.currentPage = 0
     }
     
     private func configureLikeButton() {
@@ -62,7 +68,6 @@ class ProductDetailView: UIView {
     
     private func configureContentView() {
         contentView.layer.cornerRadius = 30
-        addToCartButton.layer.cornerRadius = 20
     }
     
     private func configureRatingView() {
@@ -108,17 +113,16 @@ class ProductDetailView: UIView {
     }
     
     func configure(with product: ItemViewModel) {
-        let url = product.image
-        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "hourglass.bottomhalf.filled"))
-        
         productLabel.text = product.title
-        //descriptionText.text = product.description
         descriptionText.text = "AAA"
         priceLabel.text = "\(product.price)$"
 //        ratingLabel.text = "\(product.rating)"
 //        setRating(rating: product.rating)
         ratingLabel.text = "5"
         setRating(rating: 5)
+        
+        images = product.images
+        pageControl.numberOfPages = product.images.count
     }
     
     func setRating(rating: Double) {
@@ -132,5 +136,27 @@ class ProductDetailView: UIView {
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell {
+            cell.imageView.sd_setImage(with: images[indexPath.row])
+            return cell
+        }
+        fatalError("Unable to dequeue ImageCell")
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = (scrollView.contentOffset.x / scrollView.frame.width).rounded()
+        pageControl.currentPage = Int(pageIndex)
+    }
 
+
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
+        let index = sender.currentPage
+        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
 }

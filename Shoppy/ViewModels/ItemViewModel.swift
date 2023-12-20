@@ -18,9 +18,9 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     let sizes: [String]
     let colors: [ColorOption]
     
-    var count = 1
+    var count = 0
     
-    init(product: Product, count: Int = 1) {
+    init(product: Product, count: Int = 0) {
         self.id = product.id
         self.title = product.title
         self.price = product.prices.first ?? 0.0

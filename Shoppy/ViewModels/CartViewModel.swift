@@ -31,7 +31,7 @@ class CartViewModel {
         
         guard products.contains(product) else {
             cartProducts.value?.insert(product, at: 0)
-            updateCount()
+            increaseProduct(at: 0)
             return
         }
         

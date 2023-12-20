@@ -62,7 +62,7 @@ class ProductCell: UICollectionViewCell {
     
     @objc func likeButtonTapped() {
         liked.toggle()
-        likeButton.tintColor = liked ? .myGreen : .black
+        //likeButton.tintColor = liked ? .systemRed : .black
         likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
     }
     
