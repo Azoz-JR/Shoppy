@@ -1,23 +1,21 @@
 //
-//  MyCollectionView.swift
+//  CollectionDataSourceAndDelegate.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 09/12/2023.
+//  Created by Azoz Salah on 21/12/2023.
 //
 
 import UIKit
 
-class MyCollectionView: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     var data: [ItemViewModel] = []
-    var select: ((ItemViewModel) -> Void)?
     var cartViewModel: CartViewModel?
-    var showSuccessAlert: (() -> Void)?
-
+    var parentController: HomeProductsPresenter?
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        data.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell {
             
@@ -29,7 +27,7 @@ class MyCollectionView: NSObject, UICollectionViewDataSource, UICollectionViewDe
                     return
                 }
                 cartViewModel.addProduct(product: product)
-                self?.showSuccessAlert?()
+                self?.parentController?.showAlert()
             }
             
             return cell
@@ -38,8 +36,6 @@ class MyCollectionView: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let product = data[indexPath.row]
-        select?(product)
+        parentController?.itemSelected(at: indexPath)
     }
-    
 }
