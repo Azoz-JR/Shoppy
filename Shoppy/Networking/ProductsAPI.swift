@@ -21,8 +21,8 @@ class ProductsAPI {
         }
     }
     
-    func loadCategoryProducts(category: Category, completion: @escaping (Result<[Product], Error>) -> Void) {
-        guard let url = URL(string: Constants.categoryProducts + category.rawValue) else {
+    func loadCategoryProducts(category: String, completion: @escaping (Result<[Product], Error>) -> Void) {
+        guard let url = URL(string: Constants.collection + category) else {
             return completion(.failure(URLError(.badURL)))
         }
         

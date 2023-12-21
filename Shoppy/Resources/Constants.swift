@@ -5,7 +5,7 @@
 //  Created by Azoz Salah on 09/12/2023.
 //
 
-import Foundation
+import UIKit
 
 
 struct Constants {
@@ -13,6 +13,8 @@ struct Constants {
     
     static let allProductsURL = baseURL + "/products.json"
     static let categoryProducts = baseURL + "/products.json?product_type="
+    static let smartCollections = baseURL + "/smart_collections.json"
+    static let collection = baseURL + "/products.json?vendor="
 }
 
 enum Category: String, Codable, CaseIterable {
@@ -56,9 +58,32 @@ enum ColorOption: String, Codable {
     case beige
     case lightBrown = "light_brown"
     case burgandy
+    
+    var color: UIColor {
+        switch self {
+        case .blue:
+            UIColor.blue
+        case .black:
+            UIColor.black
+        case .white:
+            UIColor.white
+        case .red:
+            UIColor.systemRed
+        case .gray:
+            UIColor.systemGray
+        case .yellow:
+            UIColor.systemYellow
+        case .beige:
+            UIColor.beige
+        case .lightBrown:
+            UIColor.lightBrown
+        case .burgandy:
+            UIColor.burgundy
+        }
+    }
 }
 
-enum Vendor: String {
+enum Vendor: String, CaseIterable {
     case adidas = "ADIDAS"
     case asicsTiger = "ASICS TIGER"
     case converse = "CONVERSE"

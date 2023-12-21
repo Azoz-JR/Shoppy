@@ -12,25 +12,26 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     let title: String
     let price: Double
     let discountPercentage: Double
-    let category: Category
+    let category: Category?
     let image: URL?
     let images: [URL?]
     let sizes: [String]
     let colors: [ColorOption]
+    let description: String
     
     var count = 0
     
-    init(product: Product, count: Int = 0) {
-        self.id = product.id
-        self.title = product.title
-        self.price = product.prices.first ?? 0.0
-        self.discountPercentage = 0.0
-        self.category = product.productType
-        self.image = product.imageURL
-        self.images = product.imagesURLs
-        self.sizes = product.sizes
-        self.colors = product.colors
-        self.count = count
+    init(id: Int, title: String, price: Double, discountPercentage: Double, category: Category?, image: URL?, images: [URL?], sizes: [String], colors: [ColorOption], description: String) {
+        self.id = id
+        self.title = title
+        self.price = price
+        self.discountPercentage = discountPercentage
+        self.category = category
+        self.image = image
+        self.images = images
+        self.sizes = sizes
+        self.colors = colors
+        self.description = description
     }
     
     mutating func increaseCount() {

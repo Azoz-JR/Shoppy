@@ -9,7 +9,8 @@ import UIKit
 
 class CategoriesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var cartViewModel: CartViewModel!
-    private let categories: [Category] = Category.allCases
+    private var collections: [ItemViewModel] = []
+    var service: Service? = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -21,7 +22,7 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
-        collectionView.register(CategoryCell.register(), forCellWithReuseIdentifier: CategoryCell.identifier)
+        collectionView.register(CollectionCell.register(), forCellWithReuseIdentifier: CollectionCell.identifier)
         
         return collectionView
     }()
@@ -38,16 +39,32 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
+        refresh()
+    }
+    
+    func refresh() {
+        service?.loadProducts(completion: handleAPIResults)
+    }
+    
+    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
+        switch result {
+        case .success(let collections):
+            self.collections = collections
+            collectionView.reloadData()
+        case .failure(let error):
+            self.show(error: error)
+            print(error.localizedDescription)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categories.count
+        collections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell {
-            cell.configure(with: categories[indexPath.row])
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.identifier, for: indexPath) as? CollectionCell {
+            cell.configure(with: collections[indexPath.row])
             return cell
         }
         fatalError("Unable to dequeue CategoryCell")
@@ -57,10 +74,10 @@ class CategoriesViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CategoryViewController()
         vc.cartViewModel = cartViewModel
-        let category = categories[indexPath.row]
-        vc.category = category
+        let collection = collections[indexPath.row]
+        vc.category = collection.title
         
-        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared, category: category)
+        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared, category: collection.title)
         vc.service = api
         
         show(vc, sender: self)

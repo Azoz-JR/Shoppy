@@ -76,7 +76,7 @@ class MainTabBarController: UITabBarController {
         homeVC.navigationItem.largeTitleDisplayMode = .always
         homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
-        let api = ProductsAPIProductsServiceAdapter(api: ProductsAPI.shared)
+        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api
         
         homeVC.cartViewModel = cartViewModel
@@ -89,7 +89,12 @@ class MainTabBarController: UITabBarController {
         categoryVC.title = "Categories"
         categoryVC.view.backgroundColor = .secondBackground
         categoryVC.navigationItem.largeTitleDisplayMode = .always
+        
+        let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
+        categoryVC.service = api
+                
         categoryVC.cartViewModel = cartViewModel
+        
         return categoryVC
     }
     

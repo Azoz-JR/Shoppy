@@ -8,7 +8,6 @@
 import UIKit
 
 class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
-    @IBOutlet var imageView: UIImageView!
     @IBOutlet var contentView: UIView!
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var priceLabel: UILabel!
@@ -23,8 +22,7 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet var pageControl: UIPageControl!
     
     var images: [URL?] = []
-        
-    let availableColors: [UIColor] = [.myBackground, .myGreen, .systemBlue, .systemPink]
+    var availableColors: [UIColor] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +36,7 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         configureLikeButton()
         configureContentView()
         configureRatingView()
-        configureColorButtons()
+        //configureColorButtons()
         configurePriceLabel()
         configureDescriptionText()
         configureCollectionView()
@@ -77,8 +75,8 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     private func configureColorButtons() {
-        colorsView.distribution = .equalSpacing
-        colorsView.spacing = 8
+        let width = availableColors.count * 30 + (availableColors.count - 1) * 8
+        colorsView.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
         
         let selectedColor = availableColors.first
         
@@ -89,7 +87,7 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
             colorButton.backgroundColor = color
             colorButton.layer.cornerRadius = colorButton.frame.width / 2
             colorButton.layer.borderWidth = 2
-            colorButton.layer.borderColor = color == selectedColor ? UIColor.label.cgColor : UIColor.systemBackground.cgColor
+            colorButton.layer.borderColor = color == selectedColor ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
             
             // Set a tag to identify the color
             colorButton.tag = index
@@ -114,7 +112,7 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     
     func configure(with product: ItemViewModel) {
         productLabel.text = product.title
-        descriptionText.text = "AAA"
+        descriptionText.text = product.description
         priceLabel.text = "\(product.price)$"
 //        ratingLabel.text = "\(product.rating)"
 //        setRating(rating: product.rating)
@@ -123,6 +121,10 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         
         images = product.images
         pageControl.numberOfPages = product.images.count
+        
+        let colors = product.colors.map { $0.color }
+        availableColors = colors
+        configureColorButtons()
     }
     
     func setRating(rating: Double) {
@@ -143,7 +145,9 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell {
-            cell.imageView.sd_setImage(with: images[indexPath.row])
+            cell.imageView.sd_setImage(with: images[indexPath.row]) { _, _, _, _ in
+                cell.activityIndicator.stopAnimating()
+            }
             return cell
         }
         fatalError("Unable to dequeue ImageCell")

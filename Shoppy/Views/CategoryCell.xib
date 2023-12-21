@@ -52,7 +52,6 @@
             </collectionViewCellContentView>
             <size key="customSize" width="403" height="263"/>
             <connections>
-                <outlet property="content" destination="sgw-kj-6eE" id="2JV-FM-jo5"/>
                 <outlet property="nameLabel" destination="UiO-cu-o2b" id="hNc-nq-UaA"/>
                 <outlet property="productImageView" destination="zrg-eO-NWT" id="l3J-2X-Ndr"/>
             </connections>

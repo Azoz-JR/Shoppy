@@ -9,8 +9,6 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
     @IBOutlet var productImageView: UIImageView!
-    
-    @IBOutlet var content: UIView!
     @IBOutlet var nameLabel: UILabel!
     
     static let identifier = "CategoryCell"

@@ -9,15 +9,10 @@ import Foundation
 
 struct Product: Codable {
     let id: Int
-    let title, vendor: String
+    let title, vendor, bodyHtml: String
     let productType: Category
-    let createdAt: Date
-    let handle: String
-    let updatedAt, publishedAt: Date
-    let publishedScope: PublishedScope
     let tags: String
     let status: Status
-    let adminGraphqlAPIID: String
     let variants: [Variant]
     let options: [Option]
     let images: [Image]
@@ -26,19 +21,15 @@ struct Product: Codable {
     enum CodingKeys: String, CodingKey {
         case id, title
         case vendor
+        case bodyHtml = "body_html"
         case productType = "product_type"
-        case createdAt = "created_at"
-        case handle
-        case updatedAt = "updated_at"
-        case publishedAt = "published_at"
-        case publishedScope = "published_scope"
         case tags, status
-        case adminGraphqlAPIID = "admin_graphql_api_id"
         case variants, options, images, image
     }
     
     func toItemViewModel() -> ItemViewModel {
-        ItemViewModel(product: self)
+        ItemViewModel(id: id, title: title, price: prices.first ?? 0
+                      , discountPercentage: 0, category: productType, image: imageURL, images: imagesURLs, sizes: sizes, colors: colors, description: bodyHtml)
     }
     
     var imageURL: URL? {

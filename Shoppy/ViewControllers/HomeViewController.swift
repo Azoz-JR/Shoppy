@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     var cartViewModel: CartViewModel!
     
     let categories = Category.allCases
-    var service: ProductsService?
+    var service: Service?
     var products: [ItemViewModel] = []
     var selectedIndex: IndexPath?
     
@@ -32,7 +32,6 @@ class HomeViewController: UIViewController {
         
         configureSearchBar()
         refresh()
-        
     }
     
     @objc func refresh() {

@@ -104,7 +104,7 @@ class ProductViewController: UIViewController {
     private func updateColorSelection() {
         // Update the border color for all color buttons
         for case let button as UIButton in productView.colorsView.arrangedSubviews {
-            button.layer.borderColor = button.backgroundColor == selectedColor ? UIColor.label.cgColor : UIColor.systemBackground.cgColor
+            button.layer.borderColor = button.backgroundColor == selectedColor ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
         }
     }
     

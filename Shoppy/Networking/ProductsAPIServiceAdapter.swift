@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ProductsAPIProductsServiceAdapter: ProductsService {
+struct ProductsAPIServiceAdapter: Service {
     let api: ProductsAPI
-    let category: Category?
+    let category: String?
     
-    init(api: ProductsAPI, category: Category? = nil) {
+    init(api: ProductsAPI, category: String? = nil) {
         self.api = api
         self.category = category
     }

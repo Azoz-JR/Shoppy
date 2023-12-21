@@ -9,6 +9,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     static let identifier = "ImageCell"
     
@@ -16,7 +17,10 @@ class ImageCell: UICollectionViewCell {
         UINib(nibName: "ImageCell", bundle: nil)
     }
     
+    
     override func awakeFromNib() {
+        super.awakeFromNib()
         
+        activityIndicator.startAnimating()
     }
 }

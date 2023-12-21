@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ProductsService {
+protocol Service {
     func loadProducts(completion: @escaping (Result<[ItemViewModel], Error>) -> Void)
 }

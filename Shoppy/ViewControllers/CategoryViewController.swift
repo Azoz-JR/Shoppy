@@ -13,8 +13,8 @@ class CategoryViewController: UIViewController {
     var myCollectionView: MyCollectionView!
     var cartViewModel: CartViewModel!
     
-    var service: ProductsService?
-    var category: Category? = nil
+    var service: Service?
+    var category: String? = nil
     var products: [ItemViewModel] = []
     
     override func loadView() {
@@ -31,7 +31,7 @@ class CategoryViewController: UIViewController {
         }
 
         view.backgroundColor = .systemBackground
-        title = category.rawValue
+        title = category
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
         

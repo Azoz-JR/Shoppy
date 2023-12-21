@@ -46,7 +46,7 @@ class CartCellView: UITableViewCell {
     func setUpCell(with product: ItemViewModel) {
         productImage.sd_setImage(with: product.image)
         productLabel.text = product.title
-        categoryLabel.text = product.category.rawValue
+        categoryLabel.text = product.category?.rawValue
         priceLabel.text = "\(product.price)$"
         productCount.text = "\(product.count)"
     }
