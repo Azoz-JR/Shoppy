@@ -49,8 +49,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-
-    
     func reloadCollectionView() {
         DispatchQueue.main.async {
             UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {

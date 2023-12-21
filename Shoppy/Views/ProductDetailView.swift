@@ -33,10 +33,12 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
             addSubview(view)
         }
         
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.borderWidth = 0.4
+        
         configureLikeButton()
         configureContentView()
         configureRatingView()
-        //configureColorButtons()
         configurePriceLabel()
         configureDescriptionText()
         configureCollectionView()

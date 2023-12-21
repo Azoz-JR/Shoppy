@@ -20,6 +20,9 @@ class CollectionCell: UICollectionViewCell {
         super.awakeFromNib()
         
         activityIndicator.startAnimating()
+        layer.cornerRadius = 10
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 1
     }
     
     func configure(with collection: ItemViewModel) {
