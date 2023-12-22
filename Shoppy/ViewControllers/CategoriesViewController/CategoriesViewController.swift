@@ -61,4 +61,10 @@ class CategoriesViewController: UIViewController, CategoriesPresenter {
         show(vc, sender: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
 }
