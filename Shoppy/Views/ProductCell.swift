@@ -17,12 +17,18 @@ class ProductCell: UICollectionViewCell {
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    var liked: Bool = false
     var addToCartHandler: (() -> Void)?
+    var likeButtonHandler: (() -> Void)?
     
     static let identifier = "ProductCell"
     static func register() -> UINib {
         UINib(nibName: "ProductCell", bundle: nil)
+    }
+    
+    var liked = false {
+        didSet {
+            likeButton(value: liked)
+        }
     }
     
     
@@ -42,7 +48,6 @@ class ProductCell: UICollectionViewCell {
         addToCartButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         addToCartButton.roundedCorners(corners: [.topLeft, .bottomRight], cornerRadius: 20)
         
-        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
         likeButton.sizeToFit()
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
@@ -58,18 +63,21 @@ class ProductCell: UICollectionViewCell {
         priceLabel.text = "$\(product.price)"
         //ratingLabel.text = "\(product.rating)"
         ratingLabel.text = "5"
+        likeButton.setImage(UIImage(systemName: (product.liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
     }
     
     @objc func likeButtonTapped() {
+        likeButtonHandler?()
         liked.toggle()
-        //likeButton.tintColor = liked ? .systemRed : .black
-        likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
     }
     
     @objc func addButtonTapped() {
         addToCartHandler?()
     }
-
     
+    private func likeButton(value: Bool) {
+        likeButton.setImage(UIImage(systemName: (value ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
+    }
+
 }
 

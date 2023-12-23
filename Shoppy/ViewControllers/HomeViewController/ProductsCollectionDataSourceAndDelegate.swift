@@ -30,6 +30,14 @@ class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSou
                 self?.parentController?.showAlert()
             }
             
+            cell.likeButtonHandler = { [weak self] in
+                guard let cartViewModel = self?.cartViewModel else {
+                    return
+                }
+                
+                cartViewModel.likeProduct(product: product)
+            }
+            
             return cell
         }
         fatalError("Unable to dequeue ProductCell")

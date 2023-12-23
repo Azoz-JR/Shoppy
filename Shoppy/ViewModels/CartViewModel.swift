@@ -10,6 +10,7 @@ import Foundation
 class CartViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
+    var likedProducts: Observable<[ItemViewModel]> = Observable([])
     
     var total: Double {
         guard let products = cartProducts.value, !products.isEmpty else {
@@ -84,6 +85,26 @@ class CartViewModel {
         }
         
         cartCount.value = count
+    }
+    
+    func likeProduct(product: ItemViewModel) {
+        guard let products = likedProducts.value else {
+            return
+        }
+        
+        guard !products.contains(product) else {
+            unlikeProduct(product: product)
+            return
+        }
+        
+        likedProducts.value?.insert(product, at: 0)
+    }
+    
+    private func unlikeProduct(product: ItemViewModel) {
+        guard let index = likedProducts.value?.firstIndex(of: product) else {
+            return
+        }
+        likedProducts.value?.remove(at: index)
     }
     
 }
