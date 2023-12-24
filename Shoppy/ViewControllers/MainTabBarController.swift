@@ -25,13 +25,13 @@ class MainTabBarController: UITabBarController {
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
         let cartVC = makeCartView()
-        let profileVC = ProfileViewController()
+        let wishListVC = makeWishListView()
         
         viewControllers = [
             makeNav(for: homeVC, title: "Home", icon: "house.fill", tag: 0),
             makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2.fill", tag: 1),
             makeNav(for: cartVC, title: "Cart", icon: "cart.fill", tag: 2),
-            makeNav(for: profileVC, title: "Profile", icon: "person.fill", tag: 3)
+            makeNav(for: wishListVC, title: "Wish list", icon: "heart.fill", tag: 3)
         ]
     }
     
@@ -109,6 +109,13 @@ class MainTabBarController: UITabBarController {
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
         return profileVC
+    }
+    
+    func makeWishListView() -> WishListViewController {
+        let wishListVC = WishListViewController()
+        wishListVC.cartViewModel = cartViewModel
+        
+        return wishListVC
     }
     
 }

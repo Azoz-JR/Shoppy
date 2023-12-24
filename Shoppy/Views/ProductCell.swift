@@ -63,7 +63,6 @@ class ProductCell: UICollectionViewCell {
         priceLabel.text = "$\(product.price)"
         //ratingLabel.text = "\(product.rating)"
         ratingLabel.text = "5"
-        likeButton.setImage(UIImage(systemName: (product.liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 18)), for: .normal)
     }
     
     @objc func likeButtonTapped() {

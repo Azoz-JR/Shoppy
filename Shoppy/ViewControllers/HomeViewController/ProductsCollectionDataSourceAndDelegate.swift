@@ -21,6 +21,7 @@ class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSou
             
             let product = data[indexPath.row]
             cell.configure(with: product)
+            cell.liked = cartViewModel?.isLiked(product: product) ?? false
             
             cell.addToCartHandler = { [weak self] in
                 guard let cartViewModel = self?.cartViewModel else {

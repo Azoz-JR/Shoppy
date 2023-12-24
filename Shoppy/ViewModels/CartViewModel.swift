@@ -107,4 +107,12 @@ class CartViewModel {
         likedProducts.value?.remove(at: index)
     }
     
+    func isLiked(product: ItemViewModel) -> Bool {
+        guard let products = likedProducts.value, products.contains(product) else {
+            return false
+        }
+        
+        return true
+    }
+    
 }

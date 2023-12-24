@@ -24,7 +24,11 @@ class ProductViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var liked = false
+    var liked = false {
+        didSet {
+            updateLikeButton(value: liked)
+        }
+    }
     
     var rating: Int = 0 {
             didSet {
@@ -51,6 +55,7 @@ class ProductViewController: UIViewController {
             return
         }
         
+        liked = cartViewModel.likedProducts.value?.contains(product) ?? false
         productView.configure(with: product)
         configButtons()
     }
@@ -77,9 +82,13 @@ class ProductViewController: UIViewController {
     }
     
     @objc func likeButtonTapped() {
+        guard let product else {
+            return
+        }
+        
+        cartViewModel.likeProduct(product: product)
         liked.toggle()
-        productView.likeButton.tintColor = liked ? .myGreen : .label
-        productView.likeButton.setImage(UIImage(systemName: (liked ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)), for: .normal)
+        updateLikeButton(value: liked)
     }
     
     @objc private func starButtonTapped(_ sender: UIButton) {
@@ -114,6 +123,10 @@ class ProductViewController: UIViewController {
         }
         cartViewModel.addProduct(product: productViewModel)
         showAddedSuccessfulyAlert()
+    }
+    
+    func updateLikeButton(value: Bool) {
+        productView.likeButton.setImage(UIImage(systemName: (value ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)), for: .normal)
     }
     
     

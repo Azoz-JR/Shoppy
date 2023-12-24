@@ -20,7 +20,6 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     let description: String
     
     var count = 0
-    var liked = false
     
     init(id: Int, title: String, price: Double, discountPercentage: Double, category: Category?, image: URL?, images: [URL?], sizes: [String], colors: [ColorOption], description: String) {
         self.id = id
@@ -41,14 +40,6 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     
     mutating func decreaseCount() {
         count -= 1
-    }
-    
-    mutating func likeProduct() {
-        liked = true
-    }
-    
-    mutating func unLikeProduct() {
-        liked = false
     }
     
     //static let example = ProductViewModel(product: Product.example)

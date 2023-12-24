@@ -28,7 +28,7 @@ extension WishListViewController: HomeProductsPresenter {
     }
     
     func itemSelected(at index: IndexPath) {
-        let product = products[index.row]
+        let product = likedProducts[index.row]
         select(product: product, cartViewModel: cartViewModel)
     }
 }

@@ -61,4 +61,10 @@ class CategoryViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = bool
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadCollectionView()
+    }
+    
 }
