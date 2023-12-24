@@ -9,8 +9,8 @@ import UIKit
 
 class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     var data: [ItemViewModel] = []
-    var cartViewModel: CartViewModel?
-    var parentController: HomeProductsPresenter?
+    var productsViewModel: ProductsViewModel?
+    var parentController: ParentControllerPresenter?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count
@@ -21,22 +21,22 @@ class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSou
             
             let product = data[indexPath.row]
             cell.configure(with: product)
-            cell.liked = cartViewModel?.isLiked(product: product) ?? false
+            cell.liked = productsViewModel?.isLiked(product: product) ?? false
             
             cell.addToCartHandler = { [weak self] in
-                guard let cartViewModel = self?.cartViewModel else {
+                guard let productsViewModel = self?.productsViewModel else {
                     return
                 }
-                cartViewModel.addProduct(product: product)
+                productsViewModel.addProduct(product: product)
                 self?.parentController?.showAlert()
             }
             
             cell.likeButtonHandler = { [weak self] in
-                guard let cartViewModel = self?.cartViewModel else {
+                guard let productsViewModel = self?.productsViewModel else {
                     return
                 }
                 
-                cartViewModel.likeProduct(product: product)
+                productsViewModel.likeProduct(product: product)
             }
             
             return cell

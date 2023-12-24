@@ -13,7 +13,7 @@ class WishListViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
-    var cartViewModel: CartViewModel!
+    var productsViewModel: ProductsViewModel!
     var likedProducts: [ItemViewModel] = []
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class WishListViewController: UIViewController {
     }
     
     func bindToViewModel() {
-        cartViewModel.likedProducts.bind { [weak self] products in
+        productsViewModel.likedProducts.bind { [weak self] products in
             guard let self, let products else {
                 return
             }

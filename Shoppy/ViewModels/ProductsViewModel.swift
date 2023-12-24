@@ -1,5 +1,5 @@
 //
-//  CartViewModel.swift
+//  ProductsViewModel.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 12/12/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CartViewModel {
+class ProductsViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
     var likedProducts: Observable<[ItemViewModel]> = Observable([])

@@ -20,14 +20,23 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    func select(product: ItemViewModel, cartViewModel: CartViewModel) {
-        let vc = ProductViewController(product: product, cartViewModel: cartViewModel)
+    func select(product: ItemViewModel, productsViewModel: ProductsViewModel) {
+        let vc = ProductViewController(product: product, productsViewModel: productsViewModel)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
 }
 
 extension UIView {
+    func applyShadow(cornerRadius: CGFloat) {
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = false
+        layer.shadowRadius = 4
+        layer.shadowOpacity = 0.3
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 5)
+    }
+    
     func roundedCorners(corners: UIRectCorner, cornerRadius: CGFloat) {
         let roundedPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let maskLayer = CAShapeLayer()

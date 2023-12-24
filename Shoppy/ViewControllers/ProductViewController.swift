@@ -10,12 +10,12 @@ import UIKit
 
 class ProductViewController: UIViewController {
     var product: ItemViewModel? = nil
-    var cartViewModel: CartViewModel
+    var productsViewModel: ProductsViewModel
     var productView = ProductDetailView()
     
-    init(product: ItemViewModel? = nil, cartViewModel: CartViewModel) {
+    init(product: ItemViewModel? = nil, productsViewModel: ProductsViewModel) {
         self.product = product
-        self.cartViewModel = cartViewModel
+        self.productsViewModel = productsViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,12 +29,6 @@ class ProductViewController: UIViewController {
             updateLikeButton(value: liked)
         }
     }
-    
-    var rating: Int = 0 {
-            didSet {
-                updateRating()
-            }
-        }
     
     var selectedColor: UIColor? {
             didSet {
@@ -55,7 +49,7 @@ class ProductViewController: UIViewController {
             return
         }
         
-        liked = cartViewModel.likedProducts.value?.contains(product) ?? false
+        liked = productsViewModel.likedProducts.value?.contains(product) ?? false
         productView.configure(with: product)
         configButtons()
     }
@@ -66,10 +60,6 @@ class ProductViewController: UIViewController {
         productView.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         productView.addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
-        
-        for case let starButton as UIButton in productView.ratingView.arrangedSubviews {
-            starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
-        }
         
         for case let colorButton as UIButton in productView.colorsView.arrangedSubviews {
             colorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
@@ -86,24 +76,11 @@ class ProductViewController: UIViewController {
             return
         }
         
-        cartViewModel.likeProduct(product: product)
+        productsViewModel.likeProduct(product: product)
         liked.toggle()
         updateLikeButton(value: liked)
     }
     
-    @objc private func starButtonTapped(_ sender: UIButton) {
-        // Update the rating based on the tapped star button
-        rating = sender.tag + 1
-    }
-    
-    private func updateRating() {
-        // Set the selected state for star buttons based on the rating
-        for (index, starButton) in productView.ratingView.arrangedSubviews.enumerated() {
-            if let button = starButton as? UIButton {
-                button.isSelected = index < rating
-            }
-        }
-    }
     
     @objc private func colorButtonTapped(_ sender: UIButton) {
         // Update the selected color based on the tapped button
@@ -121,7 +98,7 @@ class ProductViewController: UIViewController {
         guard let productViewModel = product else {
             return
         }
-        cartViewModel.addProduct(product: productViewModel)
+        productsViewModel.addProduct(product: productViewModel)
         showAddedSuccessfulyAlert()
     }
     

@@ -1,5 +1,5 @@
 //
-//  HomePresenter.swift
+//  ParentControllerPresenter.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 21/12/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HomeProductsPresenter {
+protocol ParentControllerPresenter {
     func showAlert()
     func itemSelected(at index: IndexPath)
 }

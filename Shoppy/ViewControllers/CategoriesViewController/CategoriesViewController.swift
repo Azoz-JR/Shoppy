@@ -11,7 +11,7 @@ class CategoriesViewController: UIViewController, CategoriesPresenter {
     @IBOutlet var collectionView: UICollectionView!
     
     let collectionDataSourceAndDelegate = CategoriesCollectionDataSourceAndDelegate()
-    var cartViewModel: CartViewModel!
+    var productsViewModel: ProductsViewModel!
     private var collections: [ItemViewModel] = []
     var service: Service? = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
     
@@ -51,7 +51,7 @@ class CategoriesViewController: UIViewController, CategoriesPresenter {
 
     func categorySelected(at index: IndexPath) {
         let vc = CategoryViewController()
-        vc.cartViewModel = cartViewModel
+        vc.productsViewModel = productsViewModel
         let collection = collections[index.row]
         vc.category = collection.title
         

@@ -33,8 +33,8 @@ class CartCellView: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = .clear
-        containerView.backgroundColor = .systemBackground
-        containerView.round(20)
+        containerView.backgroundColor = .sectionBackground
+        containerView.applyShadow(cornerRadius: 30)
         productImage.round(20)
         productImage.addBorder(color: .lightGray, width: 1)
         

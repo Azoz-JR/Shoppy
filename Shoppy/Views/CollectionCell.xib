@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="237" height="191"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="motorcycle" translatesAutoresizingMaskIntoConstraints="NO" id="N19-gd-Pxw">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T-SHIRTS" translatesAutoresizingMaskIntoConstraints="NO" id="N19-gd-Pxw">
                         <rect key="frame" x="0.0" y="0.0" width="237" height="191"/>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LNy-aC-YJy">
@@ -43,6 +43,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="motorcycle" width="1920" height="1280"/>
+        <image name="T-SHIRTS" width="512" height="512"/>
     </resources>
 </document>

@@ -13,7 +13,7 @@ class CategoryViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
-    var cartViewModel: CartViewModel!
+    var productsViewModel: ProductsViewModel!
     var service: Service?
     var category: String? = nil
     var products: [ItemViewModel] = []

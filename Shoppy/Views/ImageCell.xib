@@ -16,8 +16,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="298" height="265"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lighting" translatesAutoresizingMaskIntoConstraints="NO" id="VaM-dF-rHd">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T-SHIRTS" translatesAutoresizingMaskIntoConstraints="NO" id="VaM-dF-rHd">
                         <rect key="frame" x="0.0" y="0.0" width="298" height="265"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="jH1-Bx-cGx">
                         <rect key="frame" x="130.66666666666666" y="114" width="37" height="37"/>
@@ -42,6 +43,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="lighting" width="2000" height="1333"/>
+        <image name="T-SHIRTS" width="512" height="512"/>
     </resources>
 </document>

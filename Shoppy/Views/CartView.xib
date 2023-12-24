@@ -111,7 +111,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="sectionBackground"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="kZr-lH-y89" secondAttribute="trailing" constant="10" id="5GL-zn-Vnn"/>
                         <constraint firstItem="MGP-lE-c9C" firstAttribute="leading" secondItem="Gq3-ZO-z7i" secondAttribute="leading" constant="10" id="66J-XQ-nhH"/>
@@ -147,6 +147,9 @@
     <resources>
         <namedColor name="myGreen">
             <color red="0.85098039215686272" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sectionBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

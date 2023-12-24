@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     let searchController = UISearchController()
     var categoriesCollectionView: UICollectionView!
     
-    var cartViewModel: CartViewModel!
+    var productsViewModel: ProductsViewModel!
     let categories = Category.allCases
     var service: Service?
     var products: [ItemViewModel] = []

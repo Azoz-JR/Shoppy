@@ -13,7 +13,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .secondBackground
         tableView.allowsSelection = false
         
         registerCell()

@@ -42,8 +42,6 @@ struct ItemViewModel: Codable, Hashable, Equatable {
         count -= 1
     }
     
-    //static let example = ProductViewModel(product: Product.example)
-    
     static func ==(lhs: ItemViewModel, rhs: ItemViewModel) -> Bool {
         lhs.id == rhs.id
     }

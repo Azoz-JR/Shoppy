@@ -7,9 +7,9 @@
 
 import UIKit
 
-extension WishListViewController: HomeProductsPresenter {
+extension WishListViewController: ParentControllerPresenter {
     func configureCollectionView() {
-        productsDataSourceAndDelegate.cartViewModel = cartViewModel
+        productsDataSourceAndDelegate.productsViewModel = productsViewModel
         productsDataSourceAndDelegate.parentController = self
         
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
@@ -29,6 +29,6 @@ extension WishListViewController: HomeProductsPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = likedProducts[index.row]
-        select(product: product, cartViewModel: cartViewModel)
+        select(product: product, productsViewModel: productsViewModel)
     }
 }

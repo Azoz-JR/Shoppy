@@ -17,11 +17,11 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var checkoutButton: UIButton!
     
-    var viewModel: CartViewModel
+    var viewModel: ProductsViewModel
     var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
     
-    init(viewModel: CartViewModel) {
+    init(viewModel: ProductsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "CartView", bundle: nil)
     }
@@ -33,6 +33,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         bindViewModel()
         setUpTableView()
         configView()

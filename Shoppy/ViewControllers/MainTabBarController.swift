@@ -8,7 +8,7 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    let cartViewModel = CartViewModel()
+    let productsViewModel = ProductsViewModel()
     
     var cartCount: Int = 0 {
         didSet {
@@ -20,7 +20,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        bindToCartViewModel()
+        bindToProductsViewModel()
         
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
@@ -45,8 +45,8 @@ class MainTabBarController: UITabBarController {
         cartTabBar?.badgeValue = "\(cartCount)"
     }
     
-    func bindToCartViewModel() {
-        cartViewModel.cartCount.bind { [weak self] count in
+    func bindToProductsViewModel() {
+        productsViewModel.cartCount.bind { [weak self] count in
             guard let self = self, let count = count else {
                 return
             }
@@ -79,7 +79,7 @@ class MainTabBarController: UITabBarController {
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api
         
-        homeVC.cartViewModel = cartViewModel
+        homeVC.productsViewModel = productsViewModel
         
         return homeVC
     }
@@ -87,21 +87,21 @@ class MainTabBarController: UITabBarController {
     func makeCategoriesView() -> CategoriesViewController {
         let categoryVC = CategoriesViewController()
         categoryVC.title = "Categories"
-        categoryVC.view.backgroundColor = .secondBackground
+        categoryVC.view.backgroundColor = .systemBackground
         categoryVC.navigationItem.largeTitleDisplayMode = .always
         
         let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
         categoryVC.service = api
                 
-        categoryVC.cartViewModel = cartViewModel
+        categoryVC.productsViewModel = productsViewModel
         
         return categoryVC
     }
     
     func makeCartView() -> CartViewController {
-        let cartVC = CartViewController(viewModel: cartViewModel)
+        let cartVC = CartViewController(viewModel: productsViewModel)
         cartVC.title = "My Cart"
-        cartVC.view.backgroundColor = .secondBackground
+        cartVC.view.backgroundColor = .systemBackground
         
         return cartVC
     }
@@ -113,7 +113,7 @@ class MainTabBarController: UITabBarController {
     
     func makeWishListView() -> WishListViewController {
         let wishListVC = WishListViewController()
-        wishListVC.cartViewModel = cartViewModel
+        wishListVC.productsViewModel = productsViewModel
         
         return wishListVC
     }

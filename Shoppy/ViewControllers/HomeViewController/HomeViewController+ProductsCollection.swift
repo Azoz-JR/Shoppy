@@ -7,13 +7,13 @@
 
 import UIKit
 
-extension HomeViewController: HomeProductsPresenter {
+extension HomeViewController: ParentControllerPresenter {
     
     func configureCollectionDelegateAndDataSource() {
         collectionView.delegate = productsCollectionDataSourceAndDelegate
         collectionView.dataSource = productsCollectionDataSourceAndDelegate
         
-        productsCollectionDataSourceAndDelegate.cartViewModel = cartViewModel
+        productsCollectionDataSourceAndDelegate.productsViewModel = productsViewModel
         productsCollectionDataSourceAndDelegate.parentController = self
     }
     
@@ -28,7 +28,7 @@ extension HomeViewController: HomeProductsPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
-        select(product: product, cartViewModel: cartViewModel)
+        select(product: product, productsViewModel: productsViewModel)
     }
     
 }
