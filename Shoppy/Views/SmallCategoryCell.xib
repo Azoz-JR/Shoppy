@@ -23,17 +23,16 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lighting" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-3U-2Ij">
                                 <rect key="frame" x="2" y="5" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="Kjs-F5-B61"/>
+                                    <constraint firstAttribute="width" secondItem="8pd-3U-2Ij" secondAttribute="height" multiplier="1:1" id="lQT-bq-Ccf"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home-Decoration" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2k-lG-oQ0">
                                 <rect key="frame" x="35" y="2" width="83" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="myBackground"/>
+                        <color key="backgroundColor" name="categoryBackground"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="8pd-3U-2Ij" secondAttribute="bottom" constant="5" id="7On-Fk-MfN"/>
                             <constraint firstItem="8pd-3U-2Ij" firstAttribute="leading" secondItem="dZ0-yX-WOI" secondAttribute="leading" constant="2" id="DcE-Z4-awg"/>
@@ -66,8 +65,8 @@
     </objects>
     <resources>
         <image name="lighting" width="2000" height="1333"/>
-        <namedColor name="myBackground">
-            <color red="0.96078431372549022" green="0.95294117647058818" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="categoryBackground">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

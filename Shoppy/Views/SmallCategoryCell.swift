@@ -11,9 +11,7 @@ class SmallCategoryCell: UICollectionViewCell {
     @IBOutlet var content: UIView!
     @IBOutlet var categoryImageView: UIImageView!
     @IBOutlet var categoryLabel: UILabel!
-    
-    var categoryButtonHandler: (() -> Void)?
-    
+        
     static let identifier = "SmallCategoryCell"
     static func register() -> UINib {
         UINib(nibName: "SmallCategoryCell", bundle: nil)
@@ -27,7 +25,7 @@ class SmallCategoryCell: UICollectionViewCell {
     
     private func configureUI() {
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = 15
         categoryImageView.layer.cornerRadius = 5
     }
     
@@ -38,9 +36,9 @@ class SmallCategoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            content.backgroundColor = isSelected ? .label : .myBackground
-            categoryLabel.textColor = isSelected ? .systemBackground : .black
+            print("isSelected: \(isSelected.description)")
+            content.backgroundColor = isSelected ? .label : .categoryBackground
+            categoryLabel.textColor = isSelected ? .systemBackground : .label
         }
     }
-
 }

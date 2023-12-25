@@ -43,7 +43,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
         couponTextField.delegate = self
         applyButton.isEnabled = false
         checkoutContainer.round(20)
-        couponContainer.round(20)
+        couponContainer.round(10)
         checkoutButton.round(20)
         
         updateUI()

@@ -39,6 +39,10 @@ class WishListViewController: UIViewController {
             self.likedProducts = products
             self.productsDataSourceAndDelegate.data = products
             reloadCollection()
+            
+            products.count < 5
+            ? isHidingSearchBarOnScrolling(false)
+            : isHidingSearchBarOnScrolling(true)
         }
     }
     

@@ -57,10 +57,6 @@ class CategoryViewController: UIViewController {
         }
     }
     
-    func isHidingSearchBarOnScrolling(_ bool: Bool) {
-        navigationItem.hidesSearchBarWhenScrolling = bool
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -12,7 +12,7 @@ extension HomeViewController: HomeCategoriesPresenter {
     func configureCategoriesCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        layout.itemSize = CGSize(width: 125, height: 40)
+        layout.itemSize = CGSize(width: 125, height: 30)
         layout.scrollDirection = .horizontal
         
         categoriesCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100), collectionViewLayout: layout)

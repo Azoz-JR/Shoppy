@@ -101,7 +101,7 @@ class MainTabBarController: UITabBarController {
     func makeCartView() -> CartViewController {
         let cartVC = CartViewController(viewModel: productsViewModel)
         cartVC.title = "My Cart"
-        cartVC.view.backgroundColor = .systemBackground
+        cartVC.view.backgroundColor = .secondBackground
         
         return cartVC
     }

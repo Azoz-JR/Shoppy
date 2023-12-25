@@ -25,6 +25,10 @@ extension UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+    
+    func isHidingSearchBarOnScrolling(_ bool: Bool) {
+        navigationItem.hidesSearchBarWhenScrolling = bool
+    }
 }
 
 extension UIView {
