@@ -21,7 +21,7 @@ class CollectionCell: UICollectionViewCell {
         
         activityIndicator.startAnimating()
         layer.cornerRadius = 10
-        layer.borderColor = UIColor.label.cgColor
+        layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         layer.borderWidth = 1
     }
     

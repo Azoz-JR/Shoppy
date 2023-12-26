@@ -60,14 +60,14 @@ extension HomeViewController: HomeCategoriesPresenter {
         }
         
         if selectedIndex != index {
-            collectionView.deselectItem(at: selectedIndex, animated: true)
+            categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
             self.selectedIndex = index
             filterProducts(category: categories[index.row])
             return
         }
         
         // Selecting the currently selectedIndex condition
-        collectionView.deselectItem(at: selectedIndex, animated: true)
+        categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
         self.selectedIndex = nil
         filterProducts(category: nil)
     }

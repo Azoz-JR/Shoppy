@@ -40,8 +40,8 @@ class ProductCell: UICollectionViewCell {
     private func configureUI() {
         backgroundColor = .myBackground
         layer.cornerRadius = 20
-        layer.borderWidth = 0.3
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         
         productImageView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 20)
         

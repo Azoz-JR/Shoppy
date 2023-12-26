@@ -14,6 +14,7 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet var productLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var colorsView: UIStackView!
+    @IBOutlet var sizesView: UIStackView!
     @IBOutlet var ratingView: UIStackView!
     @IBOutlet var descriptionText: UITextView!
     @IBOutlet var dismissButton: UIButton!
@@ -23,6 +24,8 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     
     var images: [URL?] = []
     var availableColors: [UIColor] = []
+    var availableSizes: [String] = []
+    var selectedSize: Int = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,6 +100,28 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
+    private func configureSizesButtons() {
+        let width = availableSizes.count * 30 + (availableSizes.count - 1) * 5
+        sizesView.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
+        
+        
+        // Create circle buttons for each available color
+        for (index, size) in availableSizes.enumerated() {
+            let sizeButton = UIButton(type: .system)
+            sizeButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            sizeButton.setTitle(size, for: .normal)
+            sizeButton.tintColor = .label
+            sizeButton.addTarget(self, action: #selector(sizeTapped), for: .touchUpInside)
+            sizeButton.layer.cornerRadius = sizeButton.frame.width / 2
+            sizeButton.layer.borderWidth = 1
+            sizeButton.layer.borderColor = index == selectedSize ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
+            
+            // Set a tag to identify the color
+            sizeButton.tag = index
+            sizesView.addArrangedSubview(sizeButton)
+        }
+    }
+    
     private func configureDescriptionText() {
         descriptionText.textContainerInset = UIEdgeInsets(top: .zero, left: .zero, bottom: .zero, right: .zero)
         descriptionText.textColor = .secondaryLabel
@@ -127,6 +152,9 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         let colors = product.colors.map { $0.color }
         availableColors = colors
         configureColorButtons()
+        availableSizes = product.sizes
+        print(availableSizes)
+        configureSizesButtons()
     }
     
     func setRating(rating: Double) {
@@ -158,6 +186,21 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = (scrollView.contentOffset.x / scrollView.frame.width).rounded()
         pageControl.currentPage = Int(pageIndex)
+    }
+    
+    @objc func sizeTapped(_ sender: UIButton) {
+        selectedSize = sender.tag
+        sizeSelected(at: selectedSize)
+    }
+    
+    private func sizeSelected(at index: Int) {
+        for case let button as UIButton in sizesView.arrangedSubviews {
+            if button.tag == index {
+                button.layer.borderColor = UIColor.lightGray.cgColor
+            } else {
+                button.layer.borderColor = UIColor.clear.cgColor
+            }
+        }
     }
 
 
