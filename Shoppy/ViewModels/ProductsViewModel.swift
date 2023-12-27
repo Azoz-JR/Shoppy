@@ -11,6 +11,7 @@ class ProductsViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
     var likedProducts: Observable<[ItemViewModel]> = Observable([])
+    var lists: Observable<[List]> = Observable([])
     
     var total: Double {
         guard let products = cartProducts.value, !products.isEmpty else {
@@ -24,7 +25,11 @@ class ProductsViewModel {
         
         return total
     }
-        
+    
+}
+
+// MARK: Cart Methods
+extension ProductsViewModel {
     func addProduct(product: ItemViewModel) {
         guard let products = cartProducts.value else {
             return
@@ -74,6 +79,12 @@ class ProductsViewModel {
         return true
     }
     
+    func clearCart() {
+        cartProducts.value?.removeAll()
+        
+        updateCount()
+    }
+    
     func updateCount() {
         guard let products = cartProducts.value else {
             return
@@ -87,6 +98,10 @@ class ProductsViewModel {
         cartCount.value = count
     }
     
+}
+
+// MARK: Wish list Methods
+extension ProductsViewModel {
     func likeProduct(product: ItemViewModel) {
         guard let products = likedProducts.value else {
             return
@@ -114,5 +129,4 @@ class ProductsViewModel {
         
         return true
     }
-    
 }

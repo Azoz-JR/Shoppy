@@ -9,6 +9,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     let productsViewModel = ProductsViewModel()
+    let ordersViewModel = OrdersViewModel()
     
     var cartCount: Int = 0 {
         didSet {
@@ -26,12 +27,14 @@ class MainTabBarController: UITabBarController {
         let categoriesVC = makeCategoriesView()
         let cartVC = makeCartView()
         let wishListVC = makeWishListView()
+        let profileVC = makeProfileView()
         
         viewControllers = [
             makeNav(for: homeVC, title: "Home", icon: "house.fill", tag: 0),
             makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2.fill", tag: 1),
             makeNav(for: cartVC, title: "Cart", icon: "cart.fill", tag: 2),
-            makeNav(for: wishListVC, title: "Wish list", icon: "heart.fill", tag: 3)
+            makeNav(for: wishListVC, title: "Wish list", icon: "heart.fill", tag: 3),
+            makeNav(for: profileVC, title: "You", icon: "person", tag: 4)
         ]
     }
     
@@ -99,7 +102,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func makeCartView() -> CartViewController {
-        let cartVC = CartViewController(viewModel: productsViewModel)
+        let cartVC = CartViewController(viewModel: productsViewModel, ordersViewModel: ordersViewModel)
         cartVC.title = "My Cart"
         cartVC.view.backgroundColor = .secondBackground
         
@@ -108,6 +111,7 @@ class MainTabBarController: UITabBarController {
     
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
+        profileVC.ordersViewModel = ordersViewModel
         return profileVC
     }
     

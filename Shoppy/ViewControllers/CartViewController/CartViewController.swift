@@ -18,11 +18,15 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var checkoutButton: UIButton!
     
     var viewModel: ProductsViewModel
+    var ordersViewModel: OrdersViewModel
+    
     var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
     
-    init(viewModel: ProductsViewModel) {
+    init(viewModel: ProductsViewModel, ordersViewModel: OrdersViewModel) {
         self.viewModel = viewModel
+        self.ordersViewModel = ordersViewModel
+        
         super.init(nibName: "CartView", bundle: nil)
     }
     
@@ -53,6 +57,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
         subtotalLabel.text = "\(viewModel.total)$"
         totalLabel.text = "\(viewModel.total)$"
         checkoutButton.isEnabled = !cartProducts.isEmpty
+        checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
         reloadTableView()
     }
     
@@ -75,6 +80,15 @@ class CartViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    @objc func checkoutTapped() {
+        let order = Order(id: UUID(), items: cartProducts, price: viewModel.total, date: Date.now)
+        ordersViewModel.placeOrder(order: order) { [weak self] _ in
+            self?.viewModel.clearCart()
+            
+            self?.showOrederConfirmationMessage()
+        }
     }
     
 }
