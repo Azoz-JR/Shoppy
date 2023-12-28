@@ -31,7 +31,7 @@ class WishListViewController: UIViewController {
     }
     
     func bindToViewModel() {
-        productsViewModel.likedProducts.bind { [weak self] products in
+        productsViewModel.likedProducts.addObserver { [weak self] products in
             guard let self, let products else {
                 return
             }

@@ -35,6 +35,43 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
     }
+    
+    func animateTabTransition(to index: Int) {
+        if let tabBarController = self.tabBarController,
+           let fromView = tabBarController.selectedViewController?.view,
+           let toView = tabBarController.viewControllers?[index].view,
+           index < tabBarController.viewControllers?.count ?? 0 {
+            
+            // Set the new view controller as the selected one
+            tabBarController.selectedIndex = index
+            
+            // Add the new view controller's view to the tab bar controller's view
+            fromView.superview?.addSubview(toView)
+            
+            // Set the initial position of the toView
+            toView.frame = CGRect(x: fromView.frame.origin.x + fromView.frame.size.width,
+                                  y: fromView.frame.origin.y,
+                                  width: fromView.frame.size.width,
+                                  height: fromView.frame.size.height)
+            
+            // Animate the transition
+            UIView.animate(withDuration: 0.3, animations: {
+                fromView.frame = CGRect(x: fromView.frame.origin.x - fromView.frame.size.width,
+                                        y: fromView.frame.origin.y,
+                                        width: fromView.frame.size.width,
+                                        height: fromView.frame.size.height)
+                
+                toView.frame = CGRect(x: toView.frame.origin.x - fromView.frame.size.width,
+                                      y: toView.frame.origin.y,
+                                      width: toView.frame.size.width,
+                                      height: toView.frame.size.height)
+            }) { (finished) in
+                // Remove the fromView from superview after the animation
+                fromView.removeFromSuperview()
+            }
+        }
+    }
+
 }
 
 extension UIView {

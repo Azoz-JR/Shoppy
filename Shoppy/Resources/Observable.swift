@@ -8,23 +8,30 @@
 import Foundation
 
 class Observable<T> {
+    typealias Observer = (T?) -> Void
+    var observers: [Observer] = []
+    
     var value: T? {
         didSet {
             DispatchQueue.mainAsyncIfNeeded {
-                self.listener?(self.value)
+                self.notifyObservers()
             }
         }
     }
-    
-    private var listener: ((T?) -> Void)?
-    
+        
     init(_ value: T?) {
         self.value = value
     }
     
-    func bind(_ listener: @escaping (T?) -> Void) {
-        listener(value)
-        self.listener = listener
+    func addObserver(_ observer: @escaping Observer) {
+        observers.append(observer)
+        observer(value)
+    }
+    
+    func notifyObservers() {
+        observers.forEach { observer in
+            observer(value)
+        }
     }
     
 }

@@ -62,7 +62,7 @@ class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func bindViewModel() {
-        viewModel.cartProducts.bind { [weak self] products in
+        viewModel.cartProducts.addObserver { [weak self] products in
             guard let self = self, let products = products else {
                 return
             }

@@ -49,7 +49,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func bindToProductsViewModel() {
-        productsViewModel.cartCount.bind { [weak self] count in
+        productsViewModel.cartCount.addObserver { [weak self] count in
             guard let self = self, let count = count else {
                 return
             }
@@ -112,6 +112,7 @@ class MainTabBarController: UITabBarController {
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
         profileVC.ordersViewModel = ordersViewModel
+        profileVC.productsViewModel = productsViewModel
         return profileVC
     }
     
