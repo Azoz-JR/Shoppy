@@ -8,15 +8,13 @@
 import UIKit
 
 final class ProfileView: UIView {
+    
     @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var orderContainer: UIView!
-    @IBOutlet var orderName: UILabel!
-    @IBOutlet var orderPrice: UILabel!
-    @IBOutlet var orderDate: UILabel!
-    @IBOutlet var orderImage: UIImageView!
     @IBOutlet var seeAllOrdersButton: UIButton!
     @IBOutlet var returnToHomeButton: UIButton!
     @IBOutlet var noOrdersLabel: UILabel!
+    @IBOutlet var ordersCollection: UICollectionView!
+    @IBOutlet var pageControl: UIPageControl!
     
     @IBOutlet var listContainer: UIView!
     @IBOutlet var listNameLabel: UILabel!
@@ -37,17 +35,9 @@ final class ProfileView: UIView {
             addSubview(view)
         }
         
-        orderContainer.layer.cornerRadius = 10
-        orderContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        orderContainer.layer.borderWidth = 1
-        
         listContainer.layer.cornerRadius = 10
         listContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         listContainer.layer.borderWidth = 1
-        
-        orderImage.layer.cornerRadius = 10
-        orderImage.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        orderImage.layer.borderWidth = 1
         
         returnToHomeButton.layer.cornerRadius = 10
         returnToHomeButton.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
@@ -72,16 +62,14 @@ final class ProfileView: UIView {
     }
     
     func configureOrder(with orders: [Order]) {
-        guard !orders.isEmpty, let order = orders.first else {
+        guard !orders.isEmpty else {
             noOrdersConfiguration(value: true)
+            pageControl.numberOfPages = 0
             return
         }
         noOrdersConfiguration(value: false)
+        pageControl.numberOfPages = orders.count
         
-        orderName.text = order.items.map {$0.title}.joined(separator: ",")
-        orderPrice.text = "\(order.price)$"
-        orderDate.text = order.date.formatted(date: .abbreviated, time: .shortened)
-        orderImage.sd_setImage(with: order.image)
     }
     
     func configureList(with lists: [List]) {
@@ -101,7 +89,7 @@ final class ProfileView: UIView {
     }
     
     func noOrdersConfiguration(value: Bool) {
-        orderContainer.isHidden = value
+        ordersCollection.isHidden = value
         seeAllOrdersButton.isHidden = value
         
         noOrdersLabel.isHidden = !value
@@ -124,4 +112,9 @@ final class ProfileView: UIView {
         seeAllOrdersHandler?()
     }
     
+    @IBAction func pageControlTapped(_ sender: UIPageControl) {
+        print("index: \(sender.currentPage)")
+        let index = sender.currentPage
+        ordersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
 }

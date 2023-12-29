@@ -202,7 +202,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         }
     }
 
-
     @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
         let index = sender.currentPage
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)

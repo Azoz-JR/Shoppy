@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OrderCollectionCell" id="uKm-xH-4WY" customClass="OrderCollectionCell" customModule="Shoppy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ELi-s9-LwZ">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmA-aa-ETM">
+                        <rect key="frame" x="20" y="10" width="353" height="100"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsi-hh-aUj">
+                                <rect key="frame" x="10" y="10.000000000000002" width="50" height="21.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="V9K-ZY-gFz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-wS-LJ5">
+                                <rect key="frame" x="10" y="41.666666666666664" width="50" height="21.666666666666664"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="gli-hX-dUv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created at:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfx-R2-IxZ">
+                                <rect key="frame" x="10" y="73.333333333333329" width="90" height="21.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="igV-pp-aTU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADIDAS | Classic BackPack | LEGEND" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-zD-vfT">
+                                <rect key="frame" x="65" y="11.333333333333334" width="278" height="19.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50.0$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4W-eY-cdO">
+                                <rect key="frame" x="65" y="43" width="42.333333333333343" height="19.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dec 27, 2023, 12:45 AM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeT-Yn-KHr">
+                                <rect key="frame" x="105.00000000000001" y="73.333333333333329" width="173.33333333333337" height="19.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YZF-zD-vfT" firstAttribute="centerY" secondItem="Rsi-hh-aUj" secondAttribute="centerY" id="648-2e-uoy"/>
+                            <constraint firstItem="Qnf-wS-LJ5" firstAttribute="leading" secondItem="QmA-aa-ETM" secondAttribute="leading" constant="10" id="6ES-vC-tE6"/>
+                            <constraint firstItem="YZF-zD-vfT" firstAttribute="leading" secondItem="Rsi-hh-aUj" secondAttribute="trailing" constant="5" id="6lQ-JF-dbL"/>
+                            <constraint firstItem="pfx-R2-IxZ" firstAttribute="leading" secondItem="QmA-aa-ETM" secondAttribute="leading" constant="10" id="AO4-xu-gj5"/>
+                            <constraint firstItem="u4W-eY-cdO" firstAttribute="leading" secondItem="Qnf-wS-LJ5" secondAttribute="trailing" constant="5" id="D0P-Ob-toB"/>
+                            <constraint firstItem="pfx-R2-IxZ" firstAttribute="top" secondItem="Qnf-wS-LJ5" secondAttribute="bottom" constant="10" id="FcO-5T-Avw"/>
+                            <constraint firstAttribute="trailing" secondItem="YZF-zD-vfT" secondAttribute="trailing" constant="10" id="LpS-bo-Gga"/>
+                            <constraint firstItem="Rsi-hh-aUj" firstAttribute="leading" secondItem="QmA-aa-ETM" secondAttribute="leading" constant="10" id="OPM-as-rxV"/>
+                            <constraint firstItem="xeT-Yn-KHr" firstAttribute="leading" secondItem="pfx-R2-IxZ" secondAttribute="trailing" constant="5" id="SpA-d5-jcj"/>
+                            <constraint firstItem="xeT-Yn-KHr" firstAttribute="top" secondItem="u4W-eY-cdO" secondAttribute="bottom" constant="11.33" id="Xn4-PD-k7H"/>
+                            <constraint firstItem="Qnf-wS-LJ5" firstAttribute="top" secondItem="Rsi-hh-aUj" secondAttribute="bottom" constant="10" id="axN-Wb-TEE"/>
+                            <constraint firstItem="Rsi-hh-aUj" firstAttribute="top" secondItem="QmA-aa-ETM" secondAttribute="top" constant="10" id="prK-KK-SOp"/>
+                            <constraint firstItem="u4W-eY-cdO" firstAttribute="centerY" secondItem="Qnf-wS-LJ5" secondAttribute="centerY" id="sKS-ml-DIg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="QmA-aa-ETM" secondAttribute="trailing" constant="20" id="4wX-2g-vAv"/>
+                    <constraint firstAttribute="bottom" secondItem="QmA-aa-ETM" secondAttribute="bottom" constant="10" id="mBt-wY-O4K"/>
+                    <constraint firstItem="QmA-aa-ETM" firstAttribute="leading" secondItem="ELi-s9-LwZ" secondAttribute="leading" constant="20" id="olU-ii-cT5"/>
+                    <constraint firstItem="QmA-aa-ETM" firstAttribute="top" secondItem="ELi-s9-LwZ" secondAttribute="top" constant="10" id="xZJ-xc-ZwS"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="393" height="125"/>
+            <connections>
+                <outlet property="dateLabel" destination="xeT-Yn-KHr" id="hua-Og-pIu"/>
+                <outlet property="itemsLabel" destination="YZF-zD-vfT" id="MMa-l2-nri"/>
+                <outlet property="orderContainer" destination="QmA-aa-ETM" id="A1H-Hs-82u"/>
+                <outlet property="priceLabel" destination="u4W-eY-cdO" id="WeP-U0-A3T"/>
+            </connections>
+            <point key="canvasLocation" x="46.564885496183201" y="20.774647887323944"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

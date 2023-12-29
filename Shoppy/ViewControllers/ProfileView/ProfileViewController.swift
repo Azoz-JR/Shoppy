@@ -7,11 +7,12 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var ordersViewModel: OrdersViewModel?
     var productsViewModel: ProductsViewModel?
     
     let profileView = ProfileView()
+    let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
     
     var orders: [Order] = []
     var lists: [List] = []
@@ -32,6 +33,7 @@ final class ProfileViewController: UIViewController {
         bindToOrders()
         bindToWishList()
         
+        configureOrdersCollection()
         profileView.configureOrder(with: orders)
         profileView.configureList(with: lists)
         configureProfileViewButtons()
@@ -45,6 +47,7 @@ final class ProfileViewController: UIViewController {
             }
             
             self.orders = orders
+            self.ordersCollectionViewDelegate.data = orders
             self.updateOrders()
         }
     }
@@ -63,6 +66,7 @@ final class ProfileViewController: UIViewController {
     
     func updateOrders() {
         profileView.configureOrder(with: orders)
+        reloadCollection()
     }
     
     func updateLists() {
@@ -85,6 +89,26 @@ final class ProfileViewController: UIViewController {
             let vc = OrdersViewController(orders: self.orders)
             self.show(vc, sender: self)
         }
+    }
+    
+    func configureOrdersCollection() {
+        ordersCollectionViewDelegate.data = orders
+        ordersCollectionViewDelegate.parentController = self
+        
+        profileView.ordersCollection.dataSource = ordersCollectionViewDelegate
+        profileView.ordersCollection.delegate = ordersCollectionViewDelegate
+        profileView.ordersCollection.register(OrderCollectionCell.register(), forCellWithReuseIdentifier: OrderCollectionCell.identifier)
+    }
+    
+    private func reloadCollection() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.profileView.ordersCollection.reloadData()
+        }
+    }
+    
+    func collectionViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = (scrollView.contentOffset.x / scrollView.frame.width).rounded()
+        profileView.pageControl.currentPage = Int(pageIndex)
     }
     
 }
