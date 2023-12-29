@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
+final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     @IBOutlet var contentView: UIView!
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var priceLabel: UILabel!
@@ -153,7 +153,6 @@ class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         availableColors = colors
         configureColorButtons()
         availableSizes = product.sizes
-        print(availableSizes)
         configureSizesButtons()
     }
     

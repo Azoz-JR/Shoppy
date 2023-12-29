@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesViewController: UIViewController, CategoriesPresenter {
+final class CategoriesViewController: UIViewController, CategoriesPresenter {
     @IBOutlet var collectionView: UICollectionView!
     
     let collectionDataSourceAndDelegate = CategoriesCollectionDataSourceAndDelegate()

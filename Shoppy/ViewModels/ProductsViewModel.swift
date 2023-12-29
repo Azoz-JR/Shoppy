@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductsViewModel {
+final class ProductsViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
     var likedProducts: Observable<[ItemViewModel]> = Observable([])

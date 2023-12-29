@@ -17,6 +17,10 @@ struct Order: Equatable, Codable {
         return items.first?.image
     }
     
+    var formattedDate: String {
+        date.formatted(date: .abbreviated, time: .shortened)
+    }
+    
     static func ==(lhs: Order, rhs: Order) -> Bool {
         lhs.id == rhs.id
     }

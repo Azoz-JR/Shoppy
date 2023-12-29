@@ -8,7 +8,7 @@
 import SDWebImage
 import UIKit
 
-class CartCellView: UITableViewCell {
+final class CartCellView: UITableViewCell {
     @IBOutlet var containerView: UIView!
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var productLabel: UILabel!

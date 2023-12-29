@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SmallCategoryCell: UICollectionViewCell {
+final class SmallCategoryCell: UICollectionViewCell {
     @IBOutlet var content: UIView!
     @IBOutlet var categoryImageView: UIImageView!
     @IBOutlet var categoryLabel: UILabel!
@@ -36,7 +36,6 @@ class SmallCategoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            print("isSelected: \(isSelected.description)")
             content.backgroundColor = isSelected ? .label : .categoryBackground
             categoryLabel.textColor = isSelected ? .systemBackground : .label
         }

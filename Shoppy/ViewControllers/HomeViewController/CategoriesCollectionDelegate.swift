@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesCollectionDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+final class CategoriesCollectionDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var data: [Category] = Category.allCases
     var parentController: HomeCategoriesPresenter?

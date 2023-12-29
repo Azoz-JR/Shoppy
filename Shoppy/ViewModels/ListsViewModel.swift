@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ListsViewModel {
+final class ListsViewModel {
     var likedProducts: Observable<[ItemViewModel]> = Observable([])
     var lists: Observable<[List]> = Observable([])
     

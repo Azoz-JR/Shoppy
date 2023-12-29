@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OrdersViewModel {
+final class OrdersViewModel {
     var orders: Observable<[Order]> = Observable([])
 
     func addOrder(order: Order) {

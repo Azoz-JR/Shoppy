@@ -8,7 +8,7 @@
 import SDWebImage
 import UIKit
 
-class ProductViewController: UIViewController {
+final class ProductViewController: UIViewController {
     var product: ItemViewModel? = nil
     var productsViewModel: ProductsViewModel
     var productView = ProductDetailView()

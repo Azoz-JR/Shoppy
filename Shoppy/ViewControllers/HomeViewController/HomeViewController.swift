@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     @IBOutlet var homeView: UIView!
     @IBOutlet var collectionView: UICollectionView!
     
@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
     let searchController = UISearchController()
     var categoriesCollectionView: UICollectionView!
+    private var refreshControl = UIRefreshControl()
     
     var productsViewModel: ProductsViewModel!
     let categories = Category.allCases
@@ -30,6 +31,11 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         configureCollectionDelegateAndDataSource()
         configureSearchBar()
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .myGreen
+        collectionView.refreshControl = refreshControl
+        
         refresh()
     }
     
@@ -47,6 +53,8 @@ class HomeViewController: UIViewController {
             self.show(error: error)
             print(error.localizedDescription)
         }
+        
+        refreshControl.endRefreshing()
     }
     
     func reloadCollectionView() {
@@ -64,7 +72,3 @@ class HomeViewController: UIViewController {
     }
     
 }
-
-
-
-

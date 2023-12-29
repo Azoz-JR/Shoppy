@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileView: UIView {
+final class ProfileView: UIView {
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var orderContainer: UIView!
     @IBOutlet var orderName: UILabel!
@@ -26,6 +26,7 @@ class ProfileView: UIView {
     @IBOutlet var noListsLabel: UILabel!
     
     var returnToHomeHandler: (() -> Void)?
+    var seeAllOrdersHandler: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +57,8 @@ class ProfileView: UIView {
         createListButton.layer.cornerRadius = 10
         createListButton.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         createListButton.layer.borderWidth = 1
+        
+        seeAllOrdersButton.addTarget(self, action: #selector(seeAllOrdersTapped), for: .touchUpInside)
     }
     
     
@@ -115,6 +118,10 @@ class ProfileView: UIView {
     
     @objc func returnToHomeTapped() {
         returnToHomeHandler?()
+    }
+    
+    @objc func seeAllOrdersTapped() {
+        seeAllOrdersHandler?()
     }
     
 }

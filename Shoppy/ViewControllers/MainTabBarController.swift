@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     let productsViewModel = ProductsViewModel()
     let ordersViewModel = OrdersViewModel()
     
@@ -58,7 +58,7 @@ class MainTabBarController: UITabBarController {
     }
     
     private func makeNav(for vc: UIViewController, title: String, icon: String, tag: Int) -> UIViewController {
-        vc.navigationItem.largeTitleDisplayMode = .always
+        //vc.navigationItem.largeTitleDisplayMode = .always
         
         let nav = UINavigationController(rootViewController: vc)
         nav.tabBarItem.image = UIImage(
@@ -68,16 +68,17 @@ class MainTabBarController: UITabBarController {
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
-        nav.navigationBar.prefersLargeTitles = true
-        nav.navigationItem.largeTitleDisplayMode = .always
+//        nav.navigationBar.prefersLargeTitles = true
+//        nav.navigationItem.largeTitleDisplayMode = .always
+        nav.translucentTabAndNavigationBars()
         return nav
     }
     
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
-        homeVC.navigationItem.largeTitleDisplayMode = .always
-        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
+//        homeVC.navigationItem.largeTitleDisplayMode = .always
+//        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api

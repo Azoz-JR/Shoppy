@@ -8,7 +8,7 @@
 import SDWebImage
 import UIKit
 
-class ProductCell: UICollectionViewCell {
+final class ProductCell: UICollectionViewCell {
     @IBOutlet var productImageView: UIImageView!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var productLabel: UILabel!

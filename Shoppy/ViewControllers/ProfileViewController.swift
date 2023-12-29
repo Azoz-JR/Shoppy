@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     var ordersViewModel: OrdersViewModel?
     var productsViewModel: ProductsViewModel?
     
@@ -34,9 +34,7 @@ class ProfileViewController: UIViewController {
         
         profileView.configureOrder(with: orders)
         profileView.configureList(with: lists)
-        profileView.returnToHomeHandler = { [weak self] in
-            self?.animateTabTransition(to: 0)
-        }
+        configureProfileViewButtons()
     }
     
     func bindToOrders() {
@@ -72,6 +70,21 @@ class ProfileViewController: UIViewController {
             return
         }
         profileView.configureList(with: [wishList])
+    }
+    
+    func configureProfileViewButtons() {
+        profileView.returnToHomeHandler = { [weak self] in
+            self?.animateTabTransition(to: 0)
+        }
+        
+        profileView.seeAllOrdersHandler = { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            let vc = OrdersViewController(orders: self.orders)
+            self.show(vc, sender: self)
+        }
     }
     
 }

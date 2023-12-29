@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController, UITextFieldDelegate {
+final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var checkoutContainer: UIView!
     @IBOutlet var couponContainer: UIView!
