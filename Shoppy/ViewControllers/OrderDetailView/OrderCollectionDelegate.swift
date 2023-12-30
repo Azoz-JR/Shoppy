@@ -15,11 +15,9 @@ class OrderCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell {
             let item = data[indexPath.row]
             cell.configure(with: item)
-            cell.likeButton.isHidden = true
-            cell.addToCartButton.isHidden = true
             
             return cell
         }

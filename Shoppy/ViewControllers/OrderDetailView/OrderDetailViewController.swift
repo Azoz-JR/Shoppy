@@ -30,6 +30,8 @@ class OrderDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Order Items"
 
         configureorderDetails()
         configuareCollectionView()
@@ -55,7 +57,7 @@ class OrderDetailViewController: UIViewController {
     }
     
     func registerCell() {
-        collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
+        collectionView.register(ItemCell.register(), forCellWithReuseIdentifier: ItemCell.identifier)
     }
 
 }
