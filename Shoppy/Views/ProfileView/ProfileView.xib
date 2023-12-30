@@ -165,28 +165,45 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm8-Z1-E39">
                                             <rect key="frame" x="10" y="50" width="373" height="120"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your list name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-1p-8Qp">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wish list" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-1p-8Qp">
                                                     <rect key="frame" x="15" y="30" width="130.66666666666666" height="26"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="right" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-Sn-jCA">
-                                                    <rect key="frame" x="155.66666666666663" y="10" width="207.33333333333337" height="100"/>
+                                                <stackView opaque="NO" contentMode="left" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-Sn-jCA">
+                                                    <rect key="frame" x="153" y="10" width="210" height="100"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fLg-i8-I89">
-                                                            <rect key="frame" x="0.0" y="0.0" width="207.33333333333334" height="100"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="b9E-hA-wiD">
+                                                            <rect key="frame" x="0.0" y="10" width="80" height="80"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="seh-uI-J6Q"/>
+                                                                <constraint firstAttribute="height" constant="80" id="x3n-a7-xnV"/>
+                                                            </constraints>
                                                         </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="wcb-4p-jhg">
+                                                            <rect key="frame" x="85" y="10" width="80" height="80"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="80" id="EBX-DW-ity"/>
+                                                                <constraint firstAttribute="height" constant="80" id="fDa-y9-SOI"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfR-gb-rvM">
+                                                            <rect key="frame" x="170" y="10" width="40" height="80"/>
+                                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="Jrf-TM-T5D"/>
+                                                                <constraint firstAttribute="height" constant="80" id="T2d-PP-MhR"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemCyanColor"/>
                                                 </stackView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="M0w-1p-8Qp" firstAttribute="width" secondItem="fm8-Z1-E39" secondAttribute="width" multiplier="0.35" id="4hM-wc-xdy"/>
-                                                <constraint firstItem="BlS-Sn-jCA" firstAttribute="leading" secondItem="M0w-1p-8Qp" secondAttribute="trailing" constant="10" id="A1Z-f4-akI"/>
+                                                <constraint firstAttribute="trailing" secondItem="BlS-Sn-jCA" secondAttribute="trailing" constant="10" id="5Fn-QH-bAO"/>
                                                 <constraint firstAttribute="bottom" secondItem="BlS-Sn-jCA" secondAttribute="bottom" constant="10" id="ONy-9T-kJE"/>
-                                                <constraint firstAttribute="trailing" secondItem="BlS-Sn-jCA" secondAttribute="trailing" constant="10" id="e6d-DT-36z"/>
                                                 <constraint firstItem="BlS-Sn-jCA" firstAttribute="top" secondItem="fm8-Z1-E39" secondAttribute="top" constant="10" id="jEr-o4-bR6"/>
                                                 <constraint firstItem="M0w-1p-8Qp" firstAttribute="leading" secondItem="fm8-Z1-E39" secondAttribute="leading" constant="15" id="ljQ-Qp-0Tf"/>
                                                 <constraint firstItem="M0w-1p-8Qp" firstAttribute="top" secondItem="fm8-Z1-E39" secondAttribute="top" constant="30" id="xg7-6m-FQH"/>
@@ -249,14 +266,15 @@
         </view>
     </objects>
     <resources>
+        <image name="TestImage.bmp" width="810" height="810"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

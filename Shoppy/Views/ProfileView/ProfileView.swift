@@ -25,6 +25,7 @@ final class ProfileView: UIView {
     
     var returnToHomeHandler: (() -> Void)?
     var seeAllOrdersHandler: (() -> Void)?
+    var seeAllListsHandler: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,6 +50,8 @@ final class ProfileView: UIView {
         createListButton.layer.borderWidth = 1
         
         seeAllOrdersButton.addTarget(self, action: #selector(seeAllOrdersTapped), for: .touchUpInside)
+        seeAllListsButton.addTarget(self, action: #selector(seeAllListsTapped), for: .touchUpInside)
+        
     }
     
     
@@ -72,20 +75,15 @@ final class ProfileView: UIView {
         
     }
     
-    func configureList(with lists: [List]) {
-        guard !lists.isEmpty, let list = lists.first else {
+    func configureWishList(with list: List) {
+        guard !list.items.isEmpty else {
             noListsConfiguration(value: true)
             return
         }
         
         noListsConfiguration(value: false)
-        listNameLabel.text = list.name
-        list.items.forEach { item in
-            let imageView = UIImageView()
-            imageView.sd_setImage(with: item.image) {[weak self] _,_,_,_ in
-                self?.imagesStackView.addArrangedSubview(imageView)
-            }
-        }
+        
+        configureWishListImages(items: list.items)
     }
     
     func noOrdersConfiguration(value: Bool) {
@@ -112,9 +110,73 @@ final class ProfileView: UIView {
         seeAllOrdersHandler?()
     }
     
+    @objc func seeAllListsTapped() {
+        seeAllListsHandler?()
+    }
+    
     @IBAction func pageControlTapped(_ sender: UIPageControl) {
         print("index: \(sender.currentPage)")
         let index = sender.currentPage
         ordersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
+    func configureWishListImages(items: [ItemViewModel]) {
+        imagesStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        
+        let count = items.count
+        
+        for (index, item) in items.enumerated() {
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+            imageView.layer.cornerRadius = 10
+            imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+            imageView.layer.borderWidth = 1
+            imageView.contentMode = .scaleAspectFit
+            
+            imageView.sd_setImage(with: item.image) {[weak self] _,_,_,_ in
+                self?.imagesStackView.addArrangedSubview(imageView)
+                NSLayoutConstraint.activate([
+                    imageView.widthAnchor.constraint(equalToConstant: 80),
+                    imageView.heightAnchor.constraint(equalToConstant: 80)
+                ])
+            }
+            
+            if index == 1 && count > 2 {
+                let remainingCount = count - 2
+                let plusView = createPlusView(number: remainingCount)
+                imagesStackView.addArrangedSubview(plusView)
+                
+                NSLayoutConstraint.activate([
+                    plusView.widthAnchor.constraint(equalToConstant: 40),
+                    plusView.heightAnchor.constraint(equalToConstant: 80)
+                ])
+                
+                break
+            }
+        }
+    }
+    
+    func createPlusView(number: Int) -> UIView {
+        let plusView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 80))
+        plusView.backgroundColor = .lightGray
+        plusView.layer.cornerRadius = 10
+        plusView.translatesAutoresizingMaskIntoConstraints = false
+
+        
+        let label = UILabel()
+        label.text = "+\(number)"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        plusView.addSubview(label)
+        
+        // Add constraints for label within plusView
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: plusView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: plusView.centerYAnchor),
+        ])
+        
+        return plusView
     }
 }

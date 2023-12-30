@@ -35,7 +35,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         
         configureOrdersCollection()
         profileView.configureOrder(with: orders)
-        profileView.configureList(with: lists)
+        profileView.configureWishList(with: lists.first ?? List(name: "", items: []))
         configureProfileViewButtons()
     }
     
@@ -73,7 +73,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         guard let wishList = lists.first else {
             return
         }
-        profileView.configureList(with: [wishList])
+        profileView.configureWishList(with: wishList)
     }
     
     func configureProfileViewButtons() {
@@ -87,6 +87,14 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
             }
             
             let vc = OrdersViewController(orders: self.orders)
+            self.show(vc, sender: self)
+        }
+        
+        profileView.seeAllListsHandler = { [weak self] in
+            guard let self, let productsViewModel = self.productsViewModel else {
+                return
+            }
+            let vc = ListsViewController(lists: self.lists, productsViewModel: productsViewModel)
             self.show(vc, sender: self)
         }
     }
