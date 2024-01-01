@@ -24,7 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func makeRootViewController() -> MainTabBarController {
-        MainTabBarController()
+        let tabBarController = MainTabBarController()
+        tabBarController.tabBar.backgroundColor = .green
+        tabBarController.navigationController?.navigationBar.backgroundColor = .green
+        
+        return tabBarController
     }
 
 }

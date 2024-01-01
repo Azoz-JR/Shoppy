@@ -8,31 +8,52 @@
 import Foundation
 
 final class ListsViewModel {
-    var likedProducts: Observable<[ItemViewModel]> = Observable([])
+    var wishList: Observable<List> = Observable(List(name: "Wish List", items: []))
     var lists: Observable<[List]> = Observable([])
     
-    func likeProduct(product: ItemViewModel) {
-        guard let products = likedProducts.value else {
+    func createList(list: List) {
+        guard !contains(list: list) else {
             return
         }
-        
-        guard !products.contains(product) else {
+        lists.value?.append(list)
+    }
+    
+    func delete(list: List) {
+        if let index = lists.value?.firstIndex(of: list) {
+            lists.value?.remove(at: index)
+        }
+    }
+    
+    func add(item: ItemViewModel, at index: Int) {
+        lists.value?[index].add(item: item)
+    }
+    
+    private func contains(list: List) -> Bool {
+        guard let lists = lists.value, lists.contains(where: { $0 == list }) else {
+            return false
+        }
+        return true
+    }
+    
+}
+
+// MARK: Wish list Methods
+extension ListsViewModel {
+    func likeProduct(product: ItemViewModel) {
+        guard !isLiked(product: product) else {
             unlikeProduct(product: product)
             return
         }
         
-        likedProducts.value?.insert(product, at: 0)
+        wishList.value?.add(item: product)
     }
     
     private func unlikeProduct(product: ItemViewModel) {
-        guard let index = likedProducts.value?.firstIndex(of: product) else {
-            return
-        }
-        likedProducts.value?.remove(at: index)
+        wishList.value?.remove(item: product)
     }
     
     func isLiked(product: ItemViewModel) -> Bool {
-        guard let products = likedProducts.value, products.contains(product) else {
+        guard let list = wishList.value, list.contains(item: product) else {
             return false
         }
         

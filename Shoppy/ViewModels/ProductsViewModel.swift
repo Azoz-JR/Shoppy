@@ -10,7 +10,6 @@ import Foundation
 final class ProductsViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
-    var likedProducts: Observable<[ItemViewModel]> = Observable([])
     var lists: Observable<[List]> = Observable([])
     
     var total: Double {
@@ -98,35 +97,4 @@ extension ProductsViewModel {
         cartCount.value = count
     }
     
-}
-
-// MARK: Wish list Methods
-extension ProductsViewModel {
-    func likeProduct(product: ItemViewModel) {
-        guard let products = likedProducts.value else {
-            return
-        }
-        
-        guard !products.contains(product) else {
-            unlikeProduct(product: product)
-            return
-        }
-        
-        likedProducts.value?.insert(product, at: 0)
-    }
-    
-    private func unlikeProduct(product: ItemViewModel) {
-        guard let index = likedProducts.value?.firstIndex(of: product) else {
-            return
-        }
-        likedProducts.value?.remove(at: index)
-    }
-    
-    func isLiked(product: ItemViewModel) -> Bool {
-        guard let products = likedProducts.value, products.contains(product) else {
-            return false
-        }
-        
-        return true
-    }
 }

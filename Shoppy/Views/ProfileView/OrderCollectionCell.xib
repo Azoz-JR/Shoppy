@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmA-aa-ETM">
-                        <rect key="frame" x="20" y="10" width="353" height="100"/>
+                        <rect key="frame" x="10" y="10" width="373" height="100"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsi-hh-aUj">
                                 <rect key="frame" x="10" y="10.000000000000002" width="50" height="21.666666666666671"/>
@@ -45,7 +45,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADIDAS | Classic BackPack | LEGEND" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-zD-vfT">
-                                <rect key="frame" x="65" y="11.333333333333334" width="278" height="19.333333333333329"/>
+                                <rect key="frame" x="65" y="11.333333333333334" width="298" height="19.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -79,9 +79,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="QmA-aa-ETM" secondAttribute="trailing" constant="20" id="4wX-2g-vAv"/>
+                    <constraint firstAttribute="trailing" secondItem="QmA-aa-ETM" secondAttribute="trailing" constant="10" id="4wX-2g-vAv"/>
                     <constraint firstAttribute="bottom" secondItem="QmA-aa-ETM" secondAttribute="bottom" constant="10" id="mBt-wY-O4K"/>
-                    <constraint firstItem="QmA-aa-ETM" firstAttribute="leading" secondItem="ELi-s9-LwZ" secondAttribute="leading" constant="20" id="olU-ii-cT5"/>
+                    <constraint firstItem="QmA-aa-ETM" firstAttribute="leading" secondItem="ELi-s9-LwZ" secondAttribute="leading" constant="10" id="olU-ii-cT5"/>
                     <constraint firstItem="QmA-aa-ETM" firstAttribute="top" secondItem="ELi-s9-LwZ" secondAttribute="top" constant="10" id="xZJ-xc-ZwS"/>
                 </constraints>
             </collectionViewCellContentView>

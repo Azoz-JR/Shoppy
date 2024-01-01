@@ -25,13 +25,20 @@ class ListCell: UITableViewCell {
         listContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         listContainer.layer.borderWidth = 1
         
+        listImage.layer.cornerRadius = 20
+        listImage.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        listImage.layer.borderWidth = 1
+        
         activityIndicator.startAnimating()
     }
     
     func configure(with list: List) {
         listNameLabel.text = list.name
         
-        guard let image = list.items.first?.image else {
+        guard !list.items.isEmpty, let image = list.items.first?.image else {
+            activityIndicator.stopAnimating()
+            listImage.image = UIImage(systemName: "photo.fill")
+            listImage.tintColor = .gray
             return
         }
         listImage.sd_setImage(with: image) { [weak self] _, _, _, _ in

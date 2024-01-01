@@ -14,6 +14,7 @@ extension HomeViewController: ParentControllerPresenter {
         collectionView.dataSource = productsCollectionDataSourceAndDelegate
         
         productsCollectionDataSourceAndDelegate.productsViewModel = productsViewModel
+        productsCollectionDataSourceAndDelegate.listsViewModel = listsViewModel
         productsCollectionDataSourceAndDelegate.parentController = self
     }
     
@@ -28,7 +29,7 @@ extension HomeViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
-        select(product: product, productsViewModel: productsViewModel)
+        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
     
 }

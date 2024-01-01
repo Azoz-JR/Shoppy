@@ -7,7 +7,35 @@
 
 import Foundation
 
-struct List {
-    let name: String
-    let items: [ItemViewModel]
+struct List: Equatable {
+    var name: String
+    var items: [ItemViewModel]
+    
+    mutating func add(item: ItemViewModel) {
+        guard !contains(item: item) else {
+            return
+        }
+        items.insert(item, at: 0)
+    }
+    
+    mutating func remove(item: ItemViewModel) {
+        guard contains(item: item) else {
+            return
+        }
+        
+        if let index = items.firstIndex(of: item) {
+            items.remove(at: index)
+        }
+    }
+    
+    func contains(item: ItemViewModel) -> Bool {
+        guard items.contains(item) else {
+            return false
+        }
+        return true
+    }
+    
+    static func ==(lhs: List, rhs: List) -> Bool {
+        lhs.name == rhs.name
+    }
 }

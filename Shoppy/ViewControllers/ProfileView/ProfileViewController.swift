@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var ordersViewModel: OrdersViewModel?
     var productsViewModel: ProductsViewModel?
+    var listsViewModel: ListsViewModel?
     
     let profileView = ProfileView()
     let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
@@ -31,11 +32,11 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         view.backgroundColor = .systemBackground
         
         bindToOrders()
-        bindToWishList()
+        bindToLists()
         
         configureOrdersCollection()
         profileView.configureOrder(with: orders)
-        profileView.configureWishList(with: lists.first ?? List(name: "", items: []))
+        profileView.configureLists(with: lists)
         configureProfileViewButtons()
     }
     
@@ -52,14 +53,14 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         }
     }
     
-    func bindToWishList() {
-        productsViewModel?.likedProducts.addObserver { [weak self] items in
-            guard let items = items, !items.isEmpty else {
+    func bindToLists() {
+        listsViewModel?.lists.addObserver { [weak self] lists in
+            guard let lists, !lists.isEmpty else {
                 self?.updateLists()
                 return
             }
             
-            self?.lists = [List(name: "Wish list", items: items)]
+            self?.lists = lists
             self?.updateLists()
         }
     }
@@ -70,15 +71,25 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     }
     
     func updateLists() {
-        guard let wishList = lists.first else {
-            return
-        }
-        profileView.configureWishList(with: wishList)
+        profileView.configureLists(with: lists)
     }
     
     func configureProfileViewButtons() {
         profileView.returnToHomeHandler = { [weak self] in
             self?.animateTabTransition(to: 0)
+        }
+        
+        profileView.createListHandler = { [weak self] in
+            let vc = CreateListView()
+            vc.listsViewModel = self?.listsViewModel
+            vc.modalPresentationStyle = .pageSheet
+            vc.sheetPresentationController?.detents = [
+                .custom { _ in
+                    return 280
+                }
+            ]
+            
+            self?.present(vc, animated: true)
         }
         
         profileView.seeAllOrdersHandler = { [weak self] in
@@ -91,10 +102,10 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         }
         
         profileView.seeAllListsHandler = { [weak self] in
-            guard let self, let productsViewModel = self.productsViewModel else {
+            guard let self, let productsViewModel = self.productsViewModel, let listsViewModel else {
                 return
             }
-            let vc = ListsViewController(lists: self.lists, productsViewModel: productsViewModel)
+            let vc = ListsViewController(lists: self.lists, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
             self.show(vc, sender: self)
         }
     }

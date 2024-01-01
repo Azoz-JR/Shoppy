@@ -171,32 +171,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="left" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-Sn-jCA">
-                                                    <rect key="frame" x="153" y="10" width="210" height="100"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="b9E-hA-wiD">
-                                                            <rect key="frame" x="0.0" y="10" width="80" height="80"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="seh-uI-J6Q"/>
-                                                                <constraint firstAttribute="height" constant="80" id="x3n-a7-xnV"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="wcb-4p-jhg">
-                                                            <rect key="frame" x="85" y="10" width="80" height="80"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="EBX-DW-ity"/>
-                                                                <constraint firstAttribute="height" constant="80" id="fDa-y9-SOI"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfR-gb-rvM">
-                                                            <rect key="frame" x="170" y="10" width="40" height="80"/>
-                                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="40" id="Jrf-TM-T5D"/>
-                                                                <constraint firstAttribute="height" constant="80" id="T2d-PP-MhR"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
+                                                <stackView opaque="NO" contentMode="left" ambiguous="YES" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-Sn-jCA">
+                                                    <rect key="frame" x="283" y="10" width="80" height="100"/>
                                                 </stackView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -266,15 +242,11 @@
         </view>
     </objects>
     <resources>
-        <image name="TestImage.bmp" width="810" height="810"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

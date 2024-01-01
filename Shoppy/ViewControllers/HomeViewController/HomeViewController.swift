@@ -18,6 +18,7 @@ final class HomeViewController: UIViewController {
     private var refreshControl = UIRefreshControl()
     
     var productsViewModel: ProductsViewModel!
+    var listsViewModel: ListsViewModel!
     let categories = Category.allCases
     var service: Service?
     var products: [ItemViewModel] = []
@@ -26,6 +27,10 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+        tabBarController?.tabBar.backgroundColor = .clear
+        
         
         configureCategoriesCollection()
         configureCollectionView()

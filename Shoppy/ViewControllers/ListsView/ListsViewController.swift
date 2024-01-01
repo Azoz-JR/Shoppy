@@ -13,10 +13,12 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     let listsTableViewDelegate = ListsTableViewDelegate()
     var lists: [List]
     var productsViewModel: ProductsViewModel
+    var listsViewModel: ListsViewModel
     
-    init(lists: [List], productsViewModel: ProductsViewModel) {
+    init(lists: [List], productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
         self.lists = lists
         self.productsViewModel = productsViewModel
+        self.listsViewModel = listsViewModel
         
         super.init(nibName: "ListsViewController", bundle: nil)
     }
@@ -49,7 +51,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     
     func listSelected(at index: Int) {
         let list = lists[index]
-        let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel)
+        let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
         
         show(vc, sender: self)
     }

@@ -20,8 +20,8 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    func select(product: ItemViewModel, productsViewModel: ProductsViewModel) {
-        let vc = ProductViewController(product: product, productsViewModel: productsViewModel)
+    func select(product: ItemViewModel, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
+        let vc = ProductViewController(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -72,38 +72,48 @@ extension UIViewController {
         }
     }
     
-    func translucentTabAndNavigationBars() {
-        if let navigationBar = navigationController?.navigationBar {
-            
-            // Remove background and border
-            navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
-            
-            // Make navigation bar ultra-thin
-            navigationBar.isTranslucent = true
-            //navigationBar.tintColor = .yourTintColor // Set your preferred tint color
-            
-            // Optional: Customize title text attributes
-//            navigationBar.titleTextAttributes = [
-//                NSAttributedString.Key.foregroundColor: UIColor.yourTextColor,
-//                NSAttributedString.Key.font: UIFont.yourFont
-//            ]
-        }
-        
-        // Configure Tab Bar
-        if let tabBar = tabBarController?.tabBar {
-            
-            // Remove background and border
-            tabBar.backgroundImage = UIImage()
-            tabBar.shadowImage = UIImage()
-            
-            // Make tab bar ultra-thin
-            tabBar.isTranslucent = true
-            //tabBar.tintColor = .yourTabTintColor // Set your preferred tab tint color
-            
-            // Optional: Customize unselected tab item appearance
-            //tabBar.unselectedItemTintColor = .yourUnselectedColor
-        }
+    func showAlert(title: String, dismiss: Bool) {
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] _ in
+            if dismiss {
+                self?.dismiss(animated: true)
+            }
+        }))
+        present(alert, animated: true)
     }
+    
+//    func translucentTabAndNavigationBars() {
+//        if let navigationBar = navigationController?.navigationBar {
+//            
+//            // Remove background and border
+//            navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            navigationBar.shadowImage = UIImage()
+//            
+//            // Make navigation bar ultra-thin
+//            navigationBar.isTranslucent = true
+//            //navigationBar.tintColor = .yourTintColor // Set your preferred tint color
+//            
+//            // Optional: Customize title text attributes
+////            navigationBar.titleTextAttributes = [
+////                NSAttributedString.Key.foregroundColor: UIColor.yourTextColor,
+////                NSAttributedString.Key.font: UIFont.yourFont
+////            ]
+//        }
+//        
+//        // Configure Tab Bar
+//        if let tabBar = tabBarController?.tabBar {
+//            
+//            // Remove background and border
+//            tabBar.backgroundImage = UIImage()
+//            tabBar.shadowImage = UIImage()
+//            
+//            // Make tab bar ultra-thin
+//            tabBar.isTranslucent = true
+//            //tabBar.tintColor = .yourTabTintColor // Set your preferred tab tint color
+//            
+//            // Optional: Customize unselected tab item appearance
+//            //tabBar.unselectedItemTintColor = .yourUnselectedColor
+//        }
+//    }
     
 }

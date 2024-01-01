@@ -11,6 +11,7 @@ extension CategoryViewController: ParentControllerPresenter {
     
     func configureCollectionView() {
         productsDataSourceAndDelegate.productsViewModel = productsViewModel
+        productsDataSourceAndDelegate.listsViewModel = listsViewModel
         productsDataSourceAndDelegate.parentController = self
         
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
@@ -30,6 +31,6 @@ extension CategoryViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
-        select(product: product, productsViewModel: productsViewModel)
+        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
 }

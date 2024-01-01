@@ -15,10 +15,12 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
     
     var list: List
     var productsViewModel: ProductsViewModel
+    var listsViewModel: ListsViewModel
     
-    init(list: List, productsViewModel: ProductsViewModel) {
+    init(list: List, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
         self.list = list
         self.productsViewModel = productsViewModel
+        self.listsViewModel = listsViewModel
         
         super.init(nibName: "ListDetailViewController", bundle: nil)
     }
@@ -42,6 +44,7 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
         productsCollectioDelegateAndDataSource.data = list.items
         productsCollectioDelegateAndDataSource.parentController = self
         productsCollectioDelegateAndDataSource.productsViewModel = productsViewModel
+        productsCollectioDelegateAndDataSource.listsViewModel = listsViewModel
         
         registerCell()
     }
@@ -56,7 +59,7 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = list.items[index.row]
-        select(product: product, productsViewModel: productsViewModel)
+        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
 
 }

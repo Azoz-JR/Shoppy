@@ -86,6 +86,10 @@
 		9790F9072B40946200597A50 /* ListCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F9062B40946200597A50 /* ListCollectionDelegate.swift */; };
 		9790F90C2B40950800597A50 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F90A2B40950800597A50 /* ListCell.swift */; };
 		9790F90D2B40950800597A50 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F90B2B40950800597A50 /* ListCell.xib */; };
+		9790F9172B41DFC300597A50 /* ListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F9162B41DFC300597A50 /* ListSelectionViewController.swift */; };
+		9790F9192B41DFCF00597A50 /* ListSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F9182B41DFCF00597A50 /* ListSelectionView.xib */; };
+		9790F9202B41FAAC00597A50 /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F91E2B41FAAC00597A50 /* CreateListView.swift */; };
+		9790F9212B41FAAC00597A50 /* CreateListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F91F2B41FAAC00597A50 /* CreateListView.xib */; };
 		97B38FFD2B1F845900EB90EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFC2B1F845900EB90EA /* AppDelegate.swift */; };
 		97B38FFF2B1F845900EB90EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */; };
 		97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B390052B1F845B00EB90EA /* Assets.xcassets */; };
@@ -180,6 +184,10 @@
 		9790F9062B40946200597A50 /* ListCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionDelegate.swift; sourceTree = "<group>"; };
 		9790F90A2B40950800597A50 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		9790F90B2B40950800597A50 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		9790F9162B41DFC300597A50 /* ListSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelectionViewController.swift; sourceTree = "<group>"; };
+		9790F9182B41DFCF00597A50 /* ListSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListSelectionView.xib; sourceTree = "<group>"; };
+		9790F91E2B41FAAC00597A50 /* CreateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListView.swift; sourceTree = "<group>"; };
+		9790F91F2B41FAAC00597A50 /* CreateListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateListView.xib; sourceTree = "<group>"; };
 		97B38FF92B1F845900EB90EA /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B38FFC2B1F845900EB90EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +292,7 @@
 				972FAC2F2B3E63210017114A /* OrderDetailView */,
 				9790F8FC2B3FC10800597A50 /* ListsView */,
 				9790F9012B4092D600597A50 /* DetailListView */,
+				9790F9122B41DD8500597A50 /* ListSelectionView */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -373,6 +382,7 @@
 				9790F8EC2B3F241900597A50 /* PrdouctDetailVIew */,
 				9790F8ED2B3F244900597A50 /* ProfileView */,
 				9790F8EE2B3F248300597A50 /* OrdersView */,
+				9790F9132B41DDB900597A50 /* ListSelectionView */,
 				9790F8F72B3FC07600597A50 /* ListsView */,
 				97B390072B1F845B00EB90EA /* LaunchScreen.storyboard */,
 			);
@@ -502,6 +512,24 @@
 			path = DetailListView;
 			sourceTree = "<group>";
 		};
+		9790F9122B41DD8500597A50 /* ListSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				9790F9162B41DFC300597A50 /* ListSelectionViewController.swift */,
+				9790F91E2B41FAAC00597A50 /* CreateListView.swift */,
+				9790F91F2B41FAAC00597A50 /* CreateListView.xib */,
+			);
+			path = ListSelectionView;
+			sourceTree = "<group>";
+		};
+		9790F9132B41DDB900597A50 /* ListSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				9790F9182B41DFCF00597A50 /* ListSelectionView.xib */,
+			);
+			path = ListSelectionView;
+			sourceTree = "<group>";
+		};
 		97B38FF02B1F845900EB90EA = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +643,7 @@
 				973CEA482B2796BD00E0487D /* Main.storyboard in Resources */,
 				97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */,
 				972FAC262B3E52CE0017114A /* OrderDetailViewController.xib in Resources */,
+				9790F9212B41FAAC00597A50 /* CreateListView.xib in Resources */,
 				9790F9052B40931C00597A50 /* ListDetailViewController.xib in Resources */,
 				970EECD82B33304C009D53C7 /* ImageCell.xib in Resources */,
 				970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */,
@@ -623,6 +652,7 @@
 				97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */,
 				974DF5DC2B34AF4400786FC2 /* CategoriesView.xib in Resources */,
 				972FAC152B3E456B0017114A /* OrdersViewController.xib in Resources */,
+				9790F9192B41DFCF00597A50 /* ListSelectionView.xib in Resources */,
 				97EEFABE2B2BB5B300065A8A /* ProductCell.xib in Resources */,
 				972FAC1B2B3E465F0017114A /* OrderCellView.xib in Resources */,
 				973CEA532B28D1D900E0487D /* CartCellView.xib in Resources */,
@@ -685,6 +715,7 @@
 				9790F8FA2B3FC0FA00597A50 /* ListsViewController.swift in Sources */,
 				972FABE52B3C9F070017114A /* OrdersViewModel.swift in Sources */,
 				973CEA4F2B27F6F600E0487D /* ProductsViewModel.swift in Sources */,
+				9790F9172B41DFC300597A50 /* ListSelectionViewController.swift in Sources */,
 				9790F9042B40931C00597A50 /* ListDetailViewController.swift in Sources */,
 				970EECCE2B310AF5009D53C7 /* ProductVariant.swift in Sources */,
 				9758BA022B23D59000F4E8F4 /* ProductsAPI.swift in Sources */,
@@ -706,6 +737,7 @@
 				9790F8F22B3F25A500597A50 /* ProfileViewPresenter.swift in Sources */,
 				972FAC1E2B3E50530017114A /* OrdersTableViewDelegate.swift in Sources */,
 				972FABDD2B3B8FB30017114A /* ProfileView.swift in Sources */,
+				9790F9202B41FAAC00597A50 /* CreateListView.swift in Sources */,
 				9790F9002B3FC14100597A50 /* ListsTableViewDelegate.swift in Sources */,
 				9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */,
 				97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */,

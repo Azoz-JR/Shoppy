@@ -11,6 +11,7 @@ extension WishListViewController: ParentControllerPresenter {
     func configureCollectionView() {
         productsDataSourceAndDelegate.productsViewModel = productsViewModel
         productsDataSourceAndDelegate.parentController = self
+        productsDataSourceAndDelegate.listsViewModel = listsViewModel
         
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.delegate = productsDataSourceAndDelegate
@@ -28,7 +29,7 @@ extension WishListViewController: ParentControllerPresenter {
     }
     
     func itemSelected(at index: IndexPath) {
-        let product = likedProducts[index.row]
-        select(product: product, productsViewModel: productsViewModel)
+        let product = wishList[index.row]
+        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
 }

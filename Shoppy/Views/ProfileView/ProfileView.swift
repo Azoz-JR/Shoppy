@@ -10,12 +10,15 @@ import UIKit
 final class ProfileView: UIView {
     
     @IBOutlet var usernameLabel: UILabel!
+    
+    // Orders
     @IBOutlet var seeAllOrdersButton: UIButton!
     @IBOutlet var returnToHomeButton: UIButton!
     @IBOutlet var noOrdersLabel: UILabel!
     @IBOutlet var ordersCollection: UICollectionView!
     @IBOutlet var pageControl: UIPageControl!
     
+    //Lists
     @IBOutlet var listContainer: UIView!
     @IBOutlet var listNameLabel: UILabel!
     @IBOutlet var imagesStackView: UIStackView!
@@ -23,7 +26,9 @@ final class ProfileView: UIView {
     @IBOutlet var createListButton: UIButton!
     @IBOutlet var noListsLabel: UILabel!
     
+    //Buttons
     var returnToHomeHandler: (() -> Void)?
+    var createListHandler: (() -> Void)?
     var seeAllOrdersHandler: (() -> Void)?
     var seeAllListsHandler: (() -> Void)?
     
@@ -48,6 +53,7 @@ final class ProfileView: UIView {
         createListButton.layer.cornerRadius = 10
         createListButton.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         createListButton.layer.borderWidth = 1
+        createListButton.addTarget(self, action: #selector(createListTapped), for: .touchUpInside)
         
         seeAllOrdersButton.addTarget(self, action: #selector(seeAllOrdersTapped), for: .touchUpInside)
         seeAllListsButton.addTarget(self, action: #selector(seeAllListsTapped), for: .touchUpInside)
@@ -64,6 +70,38 @@ final class ProfileView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
     
+    
+}
+
+
+// MARK: Buttons methods
+extension ProfileView {
+    @objc func returnToHomeTapped() {
+        returnToHomeHandler?()
+    }
+    
+    @objc func createListTapped() {
+        createListHandler?()
+    }
+    
+    @objc func seeAllOrdersTapped() {
+        seeAllOrdersHandler?()
+    }
+    
+    @objc func seeAllListsTapped() {
+        seeAllListsHandler?()
+    }
+    
+    @IBAction func pageControlTapped(_ sender: UIPageControl) {
+        print("index: \(sender.currentPage)")
+        let index = sender.currentPage
+        ordersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
+}
+
+// MARK: Views Configurations
+extension ProfileView {
     func configureOrder(with orders: [Order]) {
         guard !orders.isEmpty else {
             noOrdersConfiguration(value: true)
@@ -75,15 +113,20 @@ final class ProfileView: UIView {
         
     }
     
-    func configureWishList(with list: List) {
-        guard !list.items.isEmpty else {
+    func configureLists(with lists: [List]) {
+        guard !lists.isEmpty, let list = lists.first else {
             noListsConfiguration(value: true)
             return
         }
         
         noListsConfiguration(value: false)
+        listNameLabel.text = list.name
         
-        configureWishListImages(items: list.items)
+        guard !list.items.isEmpty else {
+            noItemsConfiguration()
+            return
+        }
+        configureListImages(items: list.items)
     }
     
     func noOrdersConfiguration(value: Bool) {
@@ -102,25 +145,7 @@ final class ProfileView: UIView {
         createListButton.isHidden = !value
     }
     
-    @objc func returnToHomeTapped() {
-        returnToHomeHandler?()
-    }
-    
-    @objc func seeAllOrdersTapped() {
-        seeAllOrdersHandler?()
-    }
-    
-    @objc func seeAllListsTapped() {
-        seeAllListsHandler?()
-    }
-    
-    @IBAction func pageControlTapped(_ sender: UIPageControl) {
-        print("index: \(sender.currentPage)")
-        let index = sender.currentPage
-        ordersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
-    }
-    
-    func configureWishListImages(items: [ItemViewModel]) {
+    func configureListImages(items: [ItemViewModel]) {
         imagesStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
@@ -155,6 +180,22 @@ final class ProfileView: UIView {
                 break
             }
         }
+    }
+    
+    func noItemsConfiguration() {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        imageView.layer.borderWidth = 1
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "photo")
+        imageView.tintColor = .gray
+        imagesStackView.addArrangedSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: 80),
+            imageView.heightAnchor.constraint(equalToConstant: 80)
+        ])
     }
     
     func createPlusView(number: Int) -> UIView {

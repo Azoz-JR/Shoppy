@@ -11,6 +11,7 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
     var data: [ItemViewModel] = []
     var productsViewModel: ProductsViewModel?
     var parentController: ParentControllerPresenter?
+    var listsViewModel: ListsViewModel?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count
@@ -21,7 +22,7 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
             
             let product = data[indexPath.row]
             cell.configure(with: product)
-            cell.liked = productsViewModel?.isLiked(product: product) ?? false
+            cell.liked = listsViewModel?.isLiked(product: product) ?? false
             
             cell.addToCartHandler = { [weak self] in
                 guard let productsViewModel = self?.productsViewModel else {
@@ -32,11 +33,11 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
             }
             
             cell.likeButtonHandler = { [weak self] in
-                guard let productsViewModel = self?.productsViewModel else {
+                guard let listsViewModel = self?.listsViewModel else {
                     return
                 }
                 
-                productsViewModel.likeProduct(product: product)
+                listsViewModel.likeProduct(product: product)
             }
             
             return cell

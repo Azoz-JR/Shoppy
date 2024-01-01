@@ -14,7 +14,8 @@ class WishListViewController: UIViewController {
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
     var productsViewModel: ProductsViewModel!
-    var likedProducts: [ItemViewModel] = []
+    var listsViewModel: ListsViewModel!
+    var wishList: [ItemViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +32,12 @@ class WishListViewController: UIViewController {
     }
     
     func bindToViewModel() {
-        productsViewModel.likedProducts.addObserver { [weak self] products in
-            guard let self, let products else {
+        listsViewModel?.wishList.addObserver { [weak self] wishList in
+            guard let self, let products = wishList?.items else {
                 return
             }
             
-            self.likedProducts = products
+            self.wishList = products
             self.productsDataSourceAndDelegate.data = products
             reloadCollection()
             

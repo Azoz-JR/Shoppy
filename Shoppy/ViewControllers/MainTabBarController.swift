@@ -10,6 +10,7 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     let productsViewModel = ProductsViewModel()
     let ordersViewModel = OrdersViewModel()
+    let listsViewModel = ListsViewModel()
     
     var cartCount: Int = 0 {
         didSet {
@@ -19,7 +20,10 @@ final class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .clear
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+        tabBarController?.tabBar.backgroundColor = .clear
         
         bindToProductsViewModel()
         
@@ -70,13 +74,16 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.badgeColor = .red
 //        nav.navigationBar.prefersLargeTitles = true
 //        nav.navigationItem.largeTitleDisplayMode = .always
-        nav.translucentTabAndNavigationBars()
+        nav.navigationController?.navigationBar.backgroundColor = .clear
+        nav.tabBarController?.tabBar.backgroundColor = .clear
         return nav
     }
     
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
+        homeVC.navigationController?.navigationBar.backgroundColor = .clear
+        homeVC.tabBarController?.tabBar.backgroundColor = .clear
 //        homeVC.navigationItem.largeTitleDisplayMode = .always
 //        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -84,6 +91,7 @@ final class MainTabBarController: UITabBarController {
         homeVC.service = api
         
         homeVC.productsViewModel = productsViewModel
+        homeVC.listsViewModel = listsViewModel
         
         return homeVC
     }
@@ -98,6 +106,7 @@ final class MainTabBarController: UITabBarController {
         categoryVC.service = api
                 
         categoryVC.productsViewModel = productsViewModel
+        categoryVC.listsViewModel = listsViewModel
         
         return categoryVC
     }
@@ -114,12 +123,14 @@ final class MainTabBarController: UITabBarController {
         let profileVC = ProfileViewController()
         profileVC.ordersViewModel = ordersViewModel
         profileVC.productsViewModel = productsViewModel
+        profileVC.listsViewModel = listsViewModel
         return profileVC
     }
     
     func makeWishListView() -> WishListViewController {
         let wishListVC = WishListViewController()
         wishListVC.productsViewModel = productsViewModel
+        wishListVC.listsViewModel = listsViewModel
         
         return wishListVC
     }

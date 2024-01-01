@@ -12,15 +12,14 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var productLabel: UILabel!
-    @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var colorsView: UIStackView!
     @IBOutlet var sizesView: UIStackView!
-    @IBOutlet var ratingView: UIStackView!
     @IBOutlet var descriptionText: UITextView!
     @IBOutlet var dismissButton: UIButton!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var pageControl: UIPageControl!
+    @IBOutlet var addToListButton: UIButton!
     
     var images: [URL?] = []
     var availableColors: [UIColor] = []
@@ -41,7 +40,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         
         configureLikeButton()
         configureContentView()
-        configureRatingView()
         configurePriceLabel()
         configureDescriptionText()
         configureCollectionView()
@@ -71,12 +69,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
     
     private func configureContentView() {
         contentView.layer.cornerRadius = 30
-    }
-    
-    private func configureRatingView() {
-        ratingView.distribution = .fillEqually
-        ratingView.spacing = 0
-        ratingView.alignment = .center
     }
     
     private func configureColorButtons() {
@@ -141,10 +133,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         productLabel.text = product.title
         descriptionText.text = product.description
         priceLabel.text = "\(product.price)$"
-//        ratingLabel.text = "\(product.rating)"
-//        setRating(rating: product.rating)
-        ratingLabel.text = "5"
-        setRating(rating: 5)
         
         images = product.images
         pageControl.numberOfPages = product.images.count
@@ -154,18 +142,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         configureColorButtons()
         availableSizes = product.sizes
         configureSizesButtons()
-    }
-    
-    func setRating(rating: Double) {
-        let rate = Int(rating.rounded())
-        
-        for (index, imageView) in ratingView.arrangedSubviews.enumerated() {
-            if let imageView = imageView as? UIImageView {
-                imageView.image = index < rate
-                ? UIImage(systemName: "star.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
-                : UIImage(systemName: "star", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
-            }
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

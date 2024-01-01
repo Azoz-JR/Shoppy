@@ -11,11 +11,14 @@ import UIKit
 final class ProductViewController: UIViewController {
     var product: ItemViewModel? = nil
     var productsViewModel: ProductsViewModel
+    var listsViewModel: ListsViewModel
+    
     var productView = ProductDetailView()
     
-    init(product: ItemViewModel? = nil, productsViewModel: ProductsViewModel) {
+    init(product: ItemViewModel? = nil, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
         self.product = product
         self.productsViewModel = productsViewModel
+        self.listsViewModel = listsViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,7 +52,7 @@ final class ProductViewController: UIViewController {
             return
         }
         
-        liked = productsViewModel.likedProducts.value?.contains(product) ?? false
+        liked = listsViewModel.isLiked(product: product)
         productView.configure(with: product)
         configButtons()
     }
@@ -65,6 +68,19 @@ final class ProductViewController: UIViewController {
             colorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
         }
         
+        productView.addToListButton.addTarget(self, action: #selector(addToListTapped), for: .touchUpInside)
+        
+    }
+    
+    @objc func addToListTapped() {
+        guard let product else {
+            return
+        }
+        
+        let vc = ListSelectionViewController(item: product, listsViewModel: listsViewModel)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+        present(nav, animated: true)
     }
     
     @objc func dismissButtonTapped() {
@@ -76,7 +92,7 @@ final class ProductViewController: UIViewController {
             return
         }
         
-        productsViewModel.likeProduct(product: product)
+        listsViewModel.likeProduct(product: product)
         liked.toggle()
         updateLikeButton(value: liked)
     }
