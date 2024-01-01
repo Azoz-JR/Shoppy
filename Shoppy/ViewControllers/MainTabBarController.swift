@@ -22,9 +22,6 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         
-        navigationController?.navigationBar.backgroundColor = .clear
-        tabBarController?.tabBar.backgroundColor = .clear
-        
         bindToProductsViewModel()
         
         let homeVC = makeHomeView()
@@ -74,16 +71,12 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.badgeColor = .red
 //        nav.navigationBar.prefersLargeTitles = true
 //        nav.navigationItem.largeTitleDisplayMode = .always
-        nav.navigationController?.navigationBar.backgroundColor = .clear
-        nav.tabBarController?.tabBar.backgroundColor = .clear
         return nav
     }
     
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
-        homeVC.navigationController?.navigationBar.backgroundColor = .clear
-        homeVC.tabBarController?.tabBar.backgroundColor = .clear
 //        homeVC.navigationItem.largeTitleDisplayMode = .always
 //        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         

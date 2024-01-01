@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,8 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pkZ-7i-gr2">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pkZ-7i-gr2">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -29,8 +29,8 @@
             <constraints>
                 <constraint firstItem="pkZ-7i-gr2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8Hu-uX-fas"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pkZ-7i-gr2" secondAttribute="trailing" id="GOS-V4-vVz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pkZ-7i-gr2" secondAttribute="bottom" id="KHn-fe-h1p"/>
-                <constraint firstItem="pkZ-7i-gr2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ocu-y0-DCm"/>
+                <constraint firstAttribute="bottom" secondItem="pkZ-7i-gr2" secondAttribute="bottom" id="KHn-fe-h1p"/>
+                <constraint firstItem="pkZ-7i-gr2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ocu-y0-DCm"/>
             </constraints>
             <point key="canvasLocation" x="22" y="-11"/>
         </view>

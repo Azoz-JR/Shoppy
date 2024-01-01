@@ -17,6 +17,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var checkoutButton: UIButton!
     
+    
     var viewModel: ProductsViewModel
     var ordersViewModel: OrdersViewModel
     

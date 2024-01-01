@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-fN-0I6">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="eLS-2T-qU0">
                         <size key="itemSize" width="170" height="150"/>
@@ -35,9 +35,9 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SvC-fN-0I6" secondAttribute="trailing" id="WXo-IZ-Whv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SvC-fN-0I6" secondAttribute="bottom" id="fdg-i3-uBp"/>
+                <constraint firstAttribute="bottom" secondItem="SvC-fN-0I6" secondAttribute="bottom" id="fdg-i3-uBp"/>
                 <constraint firstItem="SvC-fN-0I6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="klf-7y-6Uk"/>
-                <constraint firstItem="SvC-fN-0I6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="lic-mn-apP"/>
+                <constraint firstItem="SvC-fN-0I6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lic-mn-apP"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>
         </view>

@@ -82,38 +82,16 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-//    func translucentTabAndNavigationBars() {
-//        if let navigationBar = navigationController?.navigationBar {
-//            
-//            // Remove background and border
-//            navigationBar.setBackgroundImage(UIImage(), for: .default)
-//            navigationBar.shadowImage = UIImage()
-//            
-//            // Make navigation bar ultra-thin
-//            navigationBar.isTranslucent = true
-//            //navigationBar.tintColor = .yourTintColor // Set your preferred tint color
-//            
-//            // Optional: Customize title text attributes
-////            navigationBar.titleTextAttributes = [
-////                NSAttributedString.Key.foregroundColor: UIColor.yourTextColor,
-////                NSAttributedString.Key.font: UIFont.yourFont
-////            ]
-//        }
-//        
-//        // Configure Tab Bar
-//        if let tabBar = tabBarController?.tabBar {
-//            
-//            // Remove background and border
-//            tabBar.backgroundImage = UIImage()
-//            tabBar.shadowImage = UIImage()
-//            
-//            // Make tab bar ultra-thin
-//            tabBar.isTranslucent = true
-//            //tabBar.tintColor = .yourTabTintColor // Set your preferred tab tint color
-//            
-//            // Optional: Customize unselected tab item appearance
-//            //tabBar.unselectedItemTintColor = .yourUnselectedColor
-//        }
-//    }
+    func showCreateListView(listsViewModel: ListsViewModel?) {
+        let vc = CreateListView()
+        vc.listsViewModel = listsViewModel
+        vc.modalPresentationStyle = .pageSheet
+        vc.sheetPresentationController?.detents = [
+            .custom { _ in
+                return 280
+            }
+        ]
+        present(vc, animated: true)
+    }
     
 }

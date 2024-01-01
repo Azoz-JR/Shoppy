@@ -25,6 +25,7 @@ final class ProfileView: UIView {
     @IBOutlet var seeAllListsButton: UIButton!
     @IBOutlet var createListButton: UIButton!
     @IBOutlet var noListsLabel: UILabel!
+    @IBOutlet var itemsCountLabel: UILabel!
     
     //Buttons
     var returnToHomeHandler: (() -> Void)?
@@ -121,6 +122,7 @@ extension ProfileView {
         
         noListsConfiguration(value: false)
         listNameLabel.text = list.name
+        itemsCountLabel.text = "Items: \(list.items.count)"
         
         guard !list.items.isEmpty else {
             noItemsConfiguration()
@@ -153,11 +155,13 @@ extension ProfileView {
         let count = items.count
         
         for (index, item) in items.enumerated() {
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+            let imageView = UIImageView()
             imageView.layer.cornerRadius = 10
             imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
             imageView.layer.borderWidth = 1
-            imageView.contentMode = .scaleAspectFit
+            imageView.clipsToBounds = true
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleToFill
             
             imageView.sd_setImage(with: item.image) {[weak self] _,_,_,_ in
                 self?.imagesStackView.addArrangedSubview(imageView)
@@ -183,13 +187,15 @@ extension ProfileView {
     }
     
     func noItemsConfiguration() {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         imageView.layer.borderWidth = 1
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.image = UIImage(systemName: "photo")
         imageView.tintColor = .gray
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
         imagesStackView.addArrangedSubview(imageView)
         
         NSLayoutConstraint.activate([

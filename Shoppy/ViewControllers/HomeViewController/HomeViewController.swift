@@ -28,9 +28,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.backgroundColor = .clear
-        tabBarController?.tabBar.backgroundColor = .clear
-        
+        view.backgroundColor = .clear
         
         configureCategoriesCollection()
         configureCollectionView()

@@ -31,6 +31,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         super.viewDidLoad()
         
         title = "Your Lists"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
 
         configuareTableView()
     }
@@ -54,6 +55,10 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
         
         show(vc, sender: self)
+    }
+    
+    @objc func addListTapped() {
+        showCreateListView(listsViewModel: listsViewModel)
     }
 
 }

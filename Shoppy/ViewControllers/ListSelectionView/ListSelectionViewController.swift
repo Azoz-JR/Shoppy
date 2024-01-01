@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListSelectionViewController: UIViewController, ListsControllerPresenter {
+class ListSelectionViewController: UIViewController, ListsControllerPresenter, UIScrollViewDelegate {
     @IBOutlet var tableView: UITableView!
     
     let listsTableViewDelegate = ListsTableViewDelegate()
@@ -31,7 +31,9 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
         super.viewDidLoad()
         
         title = "Your Lists"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showCreateListView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
+        
+        view.backgroundColor = .clear
         
         bindToListsViewModel()
         configuareTableView()
@@ -78,16 +80,8 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
         }
     }
     
-    @objc func showCreateListView() {
-        let vc = CreateListView()
-        vc.listsViewModel = listsViewModel
-        vc.modalPresentationStyle = .pageSheet
-        vc.sheetPresentationController?.detents = [
-            .custom { _ in
-                return 280
-            }
-        ]
-        present(vc, animated: true)
+    @objc func addListTapped() {
+        showCreateListView(listsViewModel: listsViewModel)
     }
     
 }

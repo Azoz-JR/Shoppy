@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
                 <outlet property="applyButton" destination="0gy-ae-iVH" id="sEF-GX-MOz"/>
-                <outlet property="checkoutButton" destination="d0J-iU-ylo" id="VZp-in-uuO"/>
+                <outlet property="checkoutButton" destination="ZqJ-mC-H3g" id="mb0-tw-O6e"/>
                 <outlet property="checkoutContainer" destination="Gq3-ZO-z7i" id="MCz-C3-dZO"/>
                 <outlet property="couponContainer" destination="kZr-lH-y89" id="LGi-fD-2CY"/>
                 <outlet property="couponTextField" destination="LOj-Cb-qfm" id="LHq-TZ-bM8"/>
@@ -28,23 +28,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-0D-uZd">
-                    <rect key="frame" x="0.0" y="58.999999999999972" width="393" height="455.33333333333326"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="511.33333333333331"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gq3-ZO-z7i" userLabel="CheckoutContainer">
-                    <rect key="frame" x="10" y="524.33333333333337" width="373" height="283.66666666666663"/>
+                    <rect key="frame" x="10" y="521.33333333333337" width="373" height="286.66666666666663"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0J-iU-ylo">
-                            <rect key="frame" x="61.666666666666686" y="223.66666666666663" width="250" height="50"/>
-                            <color key="backgroundColor" name="myGreen"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="CQl-bV-7if"/>
-                                <constraint firstAttribute="width" constant="250" id="LaY-yk-Cig"/>
-                            </constraints>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Checkout"/>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBO-6f-cpu">
                             <rect key="frame" x="10" y="70" width="67.333333333333329" height="45"/>
                             <constraints>
@@ -110,6 +99,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZqJ-mC-H3g">
+                            <rect key="frame" x="60" y="226.66666666666663" width="253" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="MHL-1h-PvH"/>
+                            </constraints>
+                            <color key="tintColor" name="myGreen"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Checkout">
+                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </buttonConfiguration>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" name="sectionBackground"/>
                     <constraints>
@@ -118,23 +118,24 @@
                         <constraint firstItem="kZr-lH-y89" firstAttribute="top" secondItem="Gq3-ZO-z7i" secondAttribute="top" constant="10" id="7dl-Pq-ORa"/>
                         <constraint firstItem="r9G-Ig-E3J" firstAttribute="top" secondItem="kZr-lH-y89" secondAttribute="bottom" constant="30" id="9fa-xS-9JY"/>
                         <constraint firstItem="bvP-qW-KZv" firstAttribute="top" secondItem="r9G-Ig-E3J" secondAttribute="bottom" constant="10" id="B1o-6f-SlO"/>
+                        <constraint firstAttribute="bottom" secondItem="ZqJ-mC-H3g" secondAttribute="bottom" constant="10" id="Bts-KZ-He9"/>
                         <constraint firstAttribute="trailing" secondItem="bvP-qW-KZv" secondAttribute="trailing" constant="10" id="KUZ-7m-X8O"/>
                         <constraint firstItem="kZr-lH-y89" firstAttribute="leading" secondItem="Gq3-ZO-z7i" secondAttribute="leading" constant="10" id="Kgm-gN-bZ8"/>
                         <constraint firstItem="MGP-lE-c9C" firstAttribute="centerY" secondItem="bvP-qW-KZv" secondAttribute="centerY" id="Nrm-72-1sK"/>
+                        <constraint firstAttribute="trailing" secondItem="ZqJ-mC-H3g" secondAttribute="trailing" constant="60" id="XVV-yA-Hx6"/>
                         <constraint firstItem="RBO-6f-cpu" firstAttribute="centerY" secondItem="r9G-Ig-E3J" secondAttribute="centerY" id="Yq9-VA-eq9"/>
-                        <constraint firstAttribute="bottom" secondItem="d0J-iU-ylo" secondAttribute="bottom" constant="10" id="ba3-Qu-hNM"/>
+                        <constraint firstItem="ZqJ-mC-H3g" firstAttribute="leading" secondItem="Gq3-ZO-z7i" secondAttribute="leading" constant="60" id="cAF-qZ-LPf"/>
                         <constraint firstAttribute="trailing" secondItem="r9G-Ig-E3J" secondAttribute="trailing" constant="10" id="tCR-LM-eCC"/>
-                        <constraint firstItem="d0J-iU-ylo" firstAttribute="centerX" secondItem="Gq3-ZO-z7i" secondAttribute="centerX" id="tJ3-sG-9Cp"/>
                         <constraint firstItem="RBO-6f-cpu" firstAttribute="leading" secondItem="Gq3-ZO-z7i" secondAttribute="leading" constant="10" id="zLi-k6-HuU"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemGreenColor"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="PYr-0D-uZd" firstAttribute="height" secondItem="fnl-2z-Ty3" secondAttribute="height" multiplier="0.6" id="1W8-bP-nio"/>
+                <constraint firstItem="PYr-0D-uZd" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="1W8-bP-nio"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7eR-7V-bKF"/>
-                <constraint firstItem="PYr-0D-uZd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="BCH-wu-gzn"/>
+                <constraint firstItem="PYr-0D-uZd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BCH-wu-gzn"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="top" secondItem="PYr-0D-uZd" secondAttribute="bottom" constant="10" id="LO2-tN-adW"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="W8c-D6-FAH"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="a2p-Ln-RRl"/>
@@ -159,9 +160,6 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>

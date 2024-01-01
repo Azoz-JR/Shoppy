@@ -8,7 +8,6 @@
 import UIKit
 
 class ItemCell: UICollectionViewCell {
-    @IBOutlet var itemContainer: UIView!
     @IBOutlet var itemCountLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var itemLabel: UILabel!
@@ -26,9 +25,9 @@ class ItemCell: UICollectionViewCell {
         
         activityIndicator.startAnimating()
         
-        itemContainer.layer.cornerRadius = 20
-        itemContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        itemContainer.layer.borderWidth = 1
+        layer.cornerRadius = 20
+        layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        layer.borderWidth = 1
     }
     
     func configure(with item: ItemViewModel) {
