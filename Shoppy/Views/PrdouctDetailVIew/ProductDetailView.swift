@@ -15,8 +15,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
     @IBOutlet var colorsView: UIStackView!
     @IBOutlet var sizesView: UIStackView!
     @IBOutlet var descriptionText: UITextView!
-    @IBOutlet var dismissButton: UIButton!
-    @IBOutlet var likeButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var addToListButton: UIButton!
@@ -35,10 +33,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
             addSubview(view)
         }
         
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
-        contentView.layer.borderWidth = 0.4
-        
-        configureLikeButton()
         configureContentView()
         configurePriceLabel()
         configureDescriptionText()
@@ -62,13 +56,17 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         pageControl.currentPage = 0
     }
     
-    private func configureLikeButton() {
-        likeButton.tintColor = .label
-        likeButton.sizeToFit()
-    }
-    
     private func configureContentView() {
+        //contentView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 30)
+        //contentView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        //contentView.layer.borderWidth = 0.5
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        contentView.layer.shadowRadius = 30
+        contentView.layer.shadowOpacity = 0.3
         contentView.layer.cornerRadius = 30
+        contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        contentView.layer.masksToBounds = false
     }
     
     private func configureColorButtons() {

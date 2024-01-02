@@ -12,6 +12,7 @@ final class ProductViewController: UIViewController {
     var product: ItemViewModel? = nil
     var productsViewModel: ProductsViewModel
     var listsViewModel: ListsViewModel
+    var likeButton: UIBarButtonItem!
     
     var productView = ProductDetailView()
     
@@ -52,16 +53,25 @@ final class ProductViewController: UIViewController {
             return
         }
         
+        
+        configureLikeButton()
         liked = listsViewModel.isLiked(product: product)
         productView.configure(with: product)
         configButtons()
     }
     
+    @objc func back() {
+        
+    }
+    
+    private func configureLikeButton() {
+        let image = UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        likeButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonTapped))
+        likeButton.tintColor = .systemRed
+        navigationItem.rightBarButtonItem = likeButton
+    }
+    
     func configButtons() {
-        productView.dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
-        
-        productView.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        
         productView.addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
         
         for case let colorButton as UIButton in productView.colorsView.arrangedSubviews {
@@ -119,7 +129,7 @@ final class ProductViewController: UIViewController {
     }
     
     func updateLikeButton(value: Bool) {
-        productView.likeButton.setImage(UIImage(systemName: (value ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20)), for: .normal)
+        likeButton.image = UIImage(systemName: (value ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
     }
     
     

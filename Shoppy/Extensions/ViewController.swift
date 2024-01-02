@@ -22,8 +22,9 @@ extension UIViewController {
     
     func select(product: ItemViewModel, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
         let vc = ProductViewController(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        //vc.modalPresentationStyle = .fullScreen
+        //present(vc, animated: true)
+        show(vc, sender: self)
     }
     
     func isHidingSearchBarOnScrolling(_ bool: Bool) {
