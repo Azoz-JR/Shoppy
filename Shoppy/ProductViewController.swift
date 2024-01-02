@@ -53,15 +53,10 @@ final class ProductViewController: UIViewController {
             return
         }
         
-        
         configureLikeButton()
         liked = listsViewModel.isLiked(product: product)
         productView.configure(with: product)
         configButtons()
-    }
-    
-    @objc func back() {
-        
     }
     
     private func configureLikeButton() {

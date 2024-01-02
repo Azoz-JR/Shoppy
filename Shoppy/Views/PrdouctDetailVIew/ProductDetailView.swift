@@ -9,12 +9,14 @@ import UIKit
 
 final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     @IBOutlet var contentView: UIView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var scrollContentView: UIView!
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var productLabel: UILabel!
     @IBOutlet var colorsView: UIStackView!
     @IBOutlet var sizesView: UIStackView!
-    @IBOutlet var descriptionText: UITextView!
+    @IBOutlet var descriptionText: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var addToListButton: UIButton!
@@ -35,7 +37,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         
         configureContentView()
         configurePriceLabel()
-        configureDescriptionText()
         configureCollectionView()
     }
     
@@ -56,17 +57,21 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         pageControl.currentPage = 0
     }
     
-    private func configureContentView() {
-        //contentView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 30)
-        //contentView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        //contentView.layer.borderWidth = 0.5
+    private func configureContentView() {        
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        contentView.layer.shadowRadius = 30
-        contentView.layer.shadowOpacity = 0.3
+        contentView.layer.shadowRadius = 4
+        contentView.layer.shadowOpacity = 0.1
         contentView.layer.cornerRadius = 30
         contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         contentView.layer.masksToBounds = false
+        
+        scrollView.layer.cornerRadius = 30
+        scrollView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        scrollContentView.layer.cornerRadius = 30
+        scrollContentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
     }
     
     private func configureColorButtons() {
@@ -110,14 +115,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
             sizeButton.tag = index
             sizesView.addArrangedSubview(sizeButton)
         }
-    }
-    
-    private func configureDescriptionText() {
-        descriptionText.textContainerInset = UIEdgeInsets(top: .zero, left: .zero, bottom: .zero, right: .zero)
-        descriptionText.textColor = .secondaryLabel
-        descriptionText.font = .systemFont(ofSize: 14)
-        descriptionText.isEditable = false
-        descriptionText.isScrollEnabled = true
     }
     
     private func configurePriceLabel() {
