@@ -74,7 +74,7 @@ extension UIViewController {
     }
     
     func showAlert(title: String, dismiss: Bool) {
-        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: title, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] _ in
             if dismiss {
                 self?.dismiss(animated: true)

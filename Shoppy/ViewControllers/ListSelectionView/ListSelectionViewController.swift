@@ -9,6 +9,7 @@ import UIKit
 
 class ListSelectionViewController: UIViewController, ListsControllerPresenter, UIScrollViewDelegate {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noListsLabel: UILabel!
     
     let listsTableViewDelegate = ListsTableViewDelegate()
     var lists: [List] = []
@@ -32,6 +33,7 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
         
         title = "Your Lists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .selectedTab
         
         view.backgroundColor = .clear
         
@@ -58,6 +60,11 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
                 return
             }
             
+            if lists.isEmpty {
+                self?.noListsLabel.isHidden = false
+            }
+            
+            self?.noListsLabel.isHidden = true
             self?.lists = lists
             self?.listsTableViewDelegate.data = lists
             self?.reloadTableView()

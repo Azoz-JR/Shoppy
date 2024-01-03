@@ -25,7 +25,7 @@ class ListCell: UITableViewCell {
         listContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         listContainer.layer.borderWidth = 1
         
-        listImage.layer.cornerRadius = 20
+        listImage.layer.cornerRadius = 10
         listImage.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         listImage.layer.borderWidth = 1
         
@@ -37,10 +37,13 @@ class ListCell: UITableViewCell {
         
         guard !list.items.isEmpty, let image = list.items.first?.image else {
             activityIndicator.stopAnimating()
-            listImage.image = UIImage(systemName: "photo.fill")
+            listImage.contentMode = .center
+            listImage.image = UIImage(systemName: "photo")?.withConfiguration(UIImage.SymbolConfiguration(scale: .large))
             listImage.tintColor = .gray
             return
         }
+        
+        listImage.contentMode = .scaleToFill
         listImage.sd_setImage(with: image) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()
         }

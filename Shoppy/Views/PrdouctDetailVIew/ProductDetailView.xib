@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailView" customModule="Shoppy" customModuleProvider="target">
             <connections>
                 <outlet property="addToCartButton" destination="Htb-eW-LBI" id="NqD-J7-0nh"/>
-                <outlet property="addToListButton" destination="zcO-jf-hhu" id="Fw3-Ja-J6C"/>
+                <outlet property="addToListButton" destination="Rz7-kj-pZx" id="cmM-aa-hvJ"/>
                 <outlet property="collectionView" destination="E8X-GS-hHA" id="fMf-RB-cBW"/>
                 <outlet property="colorsView" destination="hEP-T2-KaT" id="cZz-hI-nA9"/>
                 <outlet property="contentView" destination="1b3-Wg-x0d" id="qHK-Xi-Lyo"/>
@@ -33,7 +34,7 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="E8X-GS-hHA">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="426"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="S4y-Og-hCi">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="S4y-Og-hCi">
                         <size key="itemSize" width="393" height="426"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -92,11 +93,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcO-jf-hhu">
-                                            <rect key="frame" x="282.66666666666669" y="60.333333333333314" width="100.33333333333331" height="38.333333333333343"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="Add to list"/>
-                                        </button>
                                         <stackView opaque="NO" contentMode="left" ambiguous="YES" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hEP-T2-KaT">
                                             <rect key="frame" x="15" y="100.33333333333331" width="144" height="30"/>
                                             <constraints>
@@ -128,12 +124,27 @@
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rz7-kj-pZx">
+                                            <rect key="frame" x="259.66666666666669" y="64.666666666666686" width="123.33333333333331" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="NPh-VT-HEW"/>
+                                            </constraints>
+                                            <color key="tintColor" name="myGreen"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" imagePlacement="leading" title="Add to list" imagePadding="5">
+                                                <imageReference key="image" image="list.bullet.rectangle.portrait" catalog="system" symbolScale="medium"/>
+                                                <backgroundConfiguration key="background" cornerRadius="10">
+                                                    <color key="backgroundColor" name="myGreen"/>
+                                                </backgroundConfiguration>
+                                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="kWs-sQ-46S" firstAttribute="top" secondItem="mMv-Ml-YS3" secondAttribute="bottom" constant="10" id="0fF-J7-jfx"/>
-                                        <constraint firstAttribute="trailing" secondItem="zcO-jf-hhu" secondAttribute="trailing" constant="10" id="14C-VY-pKL"/>
                                         <constraint firstItem="mMv-Ml-YS3" firstAttribute="leading" secondItem="7Cy-QY-RRS" secondAttribute="leading" constant="10" id="8sp-l5-IfX"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rz7-kj-pZx" secondAttribute="trailing" constant="10" id="Gtz-fA-gIb"/>
                                         <constraint firstItem="Uez-tL-hid" firstAttribute="leading" secondItem="7Cy-QY-RRS" secondAttribute="leading" constant="15" id="LJB-qF-vPL"/>
                                         <constraint firstItem="hEP-T2-KaT" firstAttribute="top" secondItem="TAf-LC-cQj" secondAttribute="bottom" constant="10" id="Mn4-KE-mFQ"/>
                                         <constraint firstItem="hEP-T2-KaT" firstAttribute="leading" secondItem="7Cy-QY-RRS" secondAttribute="leading" constant="10" id="OSf-C6-TeJ"/>
@@ -141,10 +152,10 @@
                                         <constraint firstItem="TAf-LC-cQj" firstAttribute="top" secondItem="yDG-jz-as8" secondAttribute="bottom" constant="20" id="PgX-ng-8H9"/>
                                         <constraint firstAttribute="trailing" secondItem="yDG-jz-as8" secondAttribute="trailing" constant="10" id="QAN-XX-4t8"/>
                                         <constraint firstItem="r4h-Rp-Sux" firstAttribute="top" secondItem="kWs-sQ-46S" secondAttribute="bottom" constant="5" id="T1r-9Q-Jbb"/>
+                                        <constraint firstItem="Rz7-kj-pZx" firstAttribute="centerY" secondItem="TAf-LC-cQj" secondAttribute="centerY" id="Uib-bI-6Bv"/>
                                         <constraint firstItem="mMv-Ml-YS3" firstAttribute="top" secondItem="Uez-tL-hid" secondAttribute="bottom" constant="10" id="aXh-ic-fJs"/>
                                         <constraint firstAttribute="bottom" secondItem="r4h-Rp-Sux" secondAttribute="bottom" constant="10" id="dG5-1e-J80"/>
                                         <constraint firstAttribute="trailing" secondItem="r4h-Rp-Sux" secondAttribute="trailing" constant="10" id="ghc-bj-JNJ"/>
-                                        <constraint firstItem="zcO-jf-hhu" firstAttribute="centerY" secondItem="TAf-LC-cQj" secondAttribute="centerY" id="iyi-b6-xNB"/>
                                         <constraint firstItem="yDG-jz-as8" firstAttribute="top" secondItem="7Cy-QY-RRS" secondAttribute="top" constant="20" id="mTt-h0-318"/>
                                         <constraint firstItem="kWs-sQ-46S" firstAttribute="leading" secondItem="7Cy-QY-RRS" secondAttribute="leading" constant="15" id="qAz-HT-3xK"/>
                                         <constraint firstItem="yDG-jz-as8" firstAttribute="leading" secondItem="7Cy-QY-RRS" secondAttribute="leading" constant="15" id="sXl-aW-LWi"/>
@@ -198,6 +209,7 @@
     </objects>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
         <namedColor name="myGreen">
             <color red="0.85098039215686272" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

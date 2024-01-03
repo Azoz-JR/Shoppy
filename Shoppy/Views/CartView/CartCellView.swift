@@ -34,7 +34,7 @@ final class CartCellView: UITableViewCell {
         
         backgroundColor = .clear
         containerView.backgroundColor = .sectionBackground
-        containerView.applyShadow(cornerRadius: 30)
+        containerView.applyShadow(cornerRadius: 20)
         productImage.round(20)
         productImage.addBorder(color: .lightGray, width: 1)
         

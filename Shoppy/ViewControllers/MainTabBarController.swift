@@ -20,7 +20,8 @@ final class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = .systemBackground
+        tabBar.tintColor = .selectedTab
         
         bindToProductsViewModel()
         
@@ -35,7 +36,7 @@ final class MainTabBarController: UITabBarController {
             makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2.fill", tag: 1),
             makeNav(for: cartVC, title: "Cart", icon: "cart.fill", tag: 2),
             makeNav(for: wishListVC, title: "Wish list", icon: "heart.fill", tag: 3),
-            makeNav(for: profileVC, title: "You", icon: "person", tag: 4)
+            makeNav(for: profileVC, title: "You", icon: "person.fill", tag: 4)
         ]
     }
     

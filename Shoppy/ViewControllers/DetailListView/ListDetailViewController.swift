@@ -8,11 +8,10 @@
 import UIKit
 
 class ListDetailViewController: UIViewController, ParentControllerPresenter {
-    
     @IBOutlet var itemsCollection: UICollectionView!
+    @IBOutlet var noItemsLabel: UILabel!
     
     let productsCollectioDelegateAndDataSource = ProductsCollectionDataSourceAndDelegate()
-    
     var list: List
     var productsViewModel: ProductsViewModel
     var listsViewModel: ListsViewModel
@@ -60,6 +59,16 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
     func itemSelected(at index: IndexPath) {
         let product = list.items[index.row]
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !list.items.isEmpty {
+            noItemsLabel.isHidden = true
+        } else {
+            noItemsLabel.isHidden = false
+        }
     }
 
 }

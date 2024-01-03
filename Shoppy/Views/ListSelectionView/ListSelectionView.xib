@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListSelectionViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
+                <outlet property="noListsLabel" destination="kR3-zV-EZc" id="nZW-dI-PBJ"/>
                 <outlet property="tableView" destination="fTs-pv-UAF" id="kJe-HE-Z7y"/>
                 <outlet property="view" destination="iN0-l3-epB" id="S84-gt-K6E"/>
             </connections>
@@ -23,12 +24,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't created any lists yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kR3-zV-EZc">
+                    <rect key="frame" x="72" y="428" width="249" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="kR3-zV-EZc" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="0gC-eQ-22C"/>
                 <constraint firstAttribute="bottom" secondItem="fTs-pv-UAF" secondAttribute="bottom" id="9Vq-bF-Cmb"/>
                 <constraint firstItem="fTs-pv-UAF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KPm-bh-N6J"/>
+                <constraint firstItem="kR3-zV-EZc" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="YGO-Sa-stS"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fTs-pv-UAF" secondAttribute="trailing" id="ilZ-qa-y9S"/>
                 <constraint firstItem="fTs-pv-UAF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="tFV-ar-NGP"/>
             </constraints>
@@ -36,6 +45,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

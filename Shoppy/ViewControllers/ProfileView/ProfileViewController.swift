@@ -29,14 +29,26 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = .systemBackground
+        
+//        let appearance = UINavigationBarAppearance()
+//        appearance.backgroundColor = .navigationBar
+//        appearance.shadowColor = .clear
+//        
+//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//        navigationController?.navigationBar.standardAppearance = appearance
+        
+        let name = UIButton(type: .system)
+        name.setTitle("Shoppy", for: .normal)
+        name.tintColor = .label
+        name.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        
+        let label = UIBarButtonItem(customView: name)
+        
+        navigationItem.leftBarButtonItem = label
         
         bindToOrders()
         bindToLists()
-        
         configureOrdersCollection()
-        profileView.configureOrder(with: orders)
-        profileView.configureLists(with: lists)
         configureProfileViewButtons()
     }
     
@@ -105,7 +117,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
             guard let self, let productsViewModel = self.productsViewModel, let listsViewModel else {
                 return
             }
-            let vc = ListsViewController(lists: self.lists, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+            let vc = ListsViewController(productsViewModel: productsViewModel, listsViewModel: listsViewModel)
             self.show(vc, sender: self)
         }
     }

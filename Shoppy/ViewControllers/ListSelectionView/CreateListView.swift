@@ -20,6 +20,7 @@ class CreateListView: UIViewController, UITextFieldDelegate {
         createListButton.isEnabled = false
         createListButton.round()
         createListButton.addTarget(self, action: #selector(createList), for: .touchUpInside)
+        textField.becomeFirstResponder()
     }
     
     @objc func createList() {
@@ -30,6 +31,7 @@ class CreateListView: UIViewController, UITextFieldDelegate {
         let list = List(name: text, items: [])
         listsViewModel?.createList(list: list)
         showAlert(title: "\(list.name) created successfully", dismiss: true)
+        textField.resignFirstResponder()
     }
     
     // MARK: TextField Method

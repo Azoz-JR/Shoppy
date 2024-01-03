@@ -10,13 +10,14 @@ import UIKit
 class ListsViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var noListsLabel: UILabel!
     let listsTableViewDelegate = ListsTableViewDelegate()
-    var lists: [List]
+    var lists: [List] = []
+    
     var productsViewModel: ProductsViewModel
     var listsViewModel: ListsViewModel
     
-    init(lists: [List], productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
-        self.lists = lists
+    init(productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
         self.productsViewModel = productsViewModel
         self.listsViewModel = listsViewModel
         
@@ -29,6 +30,8 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bindtoListsViewModel()
         
         title = "Your Lists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
@@ -59,6 +62,29 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     
     @objc func addListTapped() {
         showCreateListView(listsViewModel: listsViewModel)
+    }
+    
+    func bindtoListsViewModel() {
+        listsViewModel.lists.addObserver { [weak self] lists in
+            guard let self, let lists else {
+                return
+            }
+            
+            if lists.isEmpty {
+                noListsLabel.isHidden = false
+            }
+            
+            noListsLabel.isHidden = true
+            self.lists = lists
+            self.listsTableViewDelegate.data = lists
+            reloadTableView()
+        }
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.tableView.reloadData()
+        }
     }
 
 }

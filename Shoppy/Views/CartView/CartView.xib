@@ -32,7 +32,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gq3-ZO-z7i" userLabel="CheckoutContainer">
-                    <rect key="frame" x="10" y="521.33333333333337" width="373" height="286.66666666666663"/>
+                    <rect key="frame" x="15" y="521.33333333333337" width="363" height="286.66666666666663"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBO-6f-cpu">
                             <rect key="frame" x="10" y="70" width="67.333333333333329" height="45"/>
@@ -44,7 +44,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000.99$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9G-Ig-E3J">
-                            <rect key="frame" x="286" y="80" width="77" height="25"/>
+                            <rect key="frame" x="276" y="80" width="77" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="avL-rW-svE"/>
                             </constraints>
@@ -53,7 +53,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.99$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvP-qW-KZv">
-                            <rect key="frame" x="294" y="115" width="69" height="25"/>
+                            <rect key="frame" x="284" y="115" width="69" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="hrc-SX-9gb"/>
                             </constraints>
@@ -62,10 +62,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZr-lH-y89" userLabel="CouponContainer">
-                            <rect key="frame" x="10" y="10" width="353" height="40"/>
+                            <rect key="frame" x="10" y="10" width="343" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gy-ae-iVH">
-                                    <rect key="frame" x="277.66666666666669" y="0.0" width="70.333333333333314" height="40"/>
+                                    <rect key="frame" x="267.66666666666669" y="0.0" width="70.333333333333314" height="40"/>
                                     <color key="tintColor" systemColor="labelColor"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="Apply" titleAlignment="center">
@@ -73,7 +73,7 @@
                                     </buttonConfiguration>
                                 </button>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter coupon" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOj-Cb-qfm">
-                                    <rect key="frame" x="10" y="0.0" width="257.66666666666669" height="40"/>
+                                    <rect key="frame" x="9.9999999999999858" y="0.0" width="247.66666666666663" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -100,7 +100,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZqJ-mC-H3g">
-                            <rect key="frame" x="60" y="226.66666666666663" width="253" height="50"/>
+                            <rect key="frame" x="60" y="226.66666666666663" width="243" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="MHL-1h-PvH"/>
                             </constraints>
@@ -137,10 +137,10 @@
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7eR-7V-bKF"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BCH-wu-gzn"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="top" secondItem="PYr-0D-uZd" secondAttribute="bottom" constant="10" id="LO2-tN-adW"/>
-                <constraint firstItem="Gq3-ZO-z7i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="W8c-D6-FAH"/>
+                <constraint firstItem="Gq3-ZO-z7i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="W8c-D6-FAH"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="a2p-Ln-RRl"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-10" id="bc3-mG-gBC"/>
-                <constraint firstItem="Gq3-ZO-z7i" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-10" id="hPx-TN-Zv5"/>
+                <constraint firstItem="Gq3-ZO-z7i" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-15" id="hPx-TN-Zv5"/>
             </constraints>
             <point key="canvasLocation" x="29.770992366412212" y="-12.67605633802817"/>
         </view>

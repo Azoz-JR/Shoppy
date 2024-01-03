@@ -10,6 +10,7 @@ import UIKit
 final class ProfileView: UIView {
     
     @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var userImageView: UIImageView!
     
     // Orders
     @IBOutlet var seeAllOrdersButton: UIButton!
@@ -41,6 +42,8 @@ final class ProfileView: UIView {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(view)
         }
+        
+        userImageView.layer.cornerRadius = 15
         
         listContainer.layer.cornerRadius = 10
         listContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
@@ -187,11 +190,12 @@ extension ProfileView {
     }
     
     func noItemsConfiguration() {
+        print("noItemsCalled")
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         imageView.layer.borderWidth = 1
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .center
         imageView.image = UIImage(systemName: "photo")
         imageView.tintColor = .gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
