@@ -89,7 +89,7 @@ extension UIViewController {
         vc.modalPresentationStyle = .pageSheet
         vc.sheetPresentationController?.detents = [
             .custom { _ in
-                return 280
+                return 250
             }
         ]
         present(vc, animated: true)

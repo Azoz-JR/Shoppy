@@ -18,14 +18,14 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var checkoutButton: UIButton!
     
     
-    var viewModel: ProductsViewModel
+    var productsViewModel: ProductsViewModel
     var ordersViewModel: OrdersViewModel
     
     var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
     
-    init(viewModel: ProductsViewModel, ordersViewModel: OrdersViewModel) {
-        self.viewModel = viewModel
+    init(productsViewModel: ProductsViewModel, ordersViewModel: OrdersViewModel) {
+        self.productsViewModel = productsViewModel
         self.ordersViewModel = ordersViewModel
         
         super.init(nibName: "CartView", bundle: nil)
@@ -55,15 +55,15 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateUI() {
-        subtotalLabel.text = "\(viewModel.total)$"
-        totalLabel.text = "\(viewModel.total)$"
+        subtotalLabel.text = "\(productsViewModel.total)$"
+        totalLabel.text = "\(productsViewModel.total)$"
         checkoutButton.isEnabled = !cartProducts.isEmpty
         checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
         reloadTableView()
     }
     
     func bindViewModel() {
-        viewModel.cartProducts.addObserver { [weak self] products in
+        productsViewModel.cartProducts.addObserver { [weak self] products in
             guard let self = self, let products = products else {
                 return
             }
@@ -84,9 +84,9 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func checkoutTapped() {
-        let order = Order(id: UUID(), items: cartProducts, price: viewModel.total, date: Date.now)
+        let order = Order(id: UUID(), items: cartProducts, price: productsViewModel.total, date: Date.now)
         ordersViewModel.placeOrder(order: order) { [weak self] _ in
-            self?.viewModel.clearCart()
+            self?.productsViewModel.clearCart()
             
             self?.showOrederConfirmationMessage()
         }

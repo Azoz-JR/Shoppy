@@ -20,7 +20,9 @@ extension WishListViewController: ParentControllerPresenter {
     
     func reloadCollectionView() {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -30,6 +32,10 @@ extension WishListViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = wishList[index.row]
+        guard let listsViewModel, let productsViewModel else {
+            return
+        }
+        
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
 }

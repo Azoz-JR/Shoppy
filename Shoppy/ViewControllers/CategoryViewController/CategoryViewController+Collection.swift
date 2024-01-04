@@ -21,7 +21,9 @@ extension CategoryViewController: ParentControllerPresenter {
     
     func reloadCollectionView() {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -31,6 +33,10 @@ extension CategoryViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
+        guard let productsViewModel, let listsViewModel else {
+            return
+        }
+        
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
 }

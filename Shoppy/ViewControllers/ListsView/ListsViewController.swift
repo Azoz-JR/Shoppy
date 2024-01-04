@@ -60,6 +60,11 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         show(vc, sender: self)
     }
     
+    func listDeleted(at index: IndexPath) {
+        let listTitle = lists[index.row].name
+        showDeleteListAlert(title: listTitle, index: index)
+    }
+    
     @objc func addListTapped() {
         showCreateListView(listsViewModel: listsViewModel)
     }
@@ -72,9 +77,10 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
             
             if lists.isEmpty {
                 noListsLabel.isHidden = false
+            } else {
+                noListsLabel.isHidden = true
             }
             
-            noListsLabel.isHidden = true
             self.lists = lists
             self.listsTableViewDelegate.data = lists
             reloadTableView()
@@ -83,8 +89,29 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     
     func reloadTableView() {
         DispatchQueue.mainAsyncIfNeeded {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.tableView.reloadData()
+            }
         }
+    }
+    
+    func showDeleteListAlert(title: String, index: IndexPath) {
+        let alert = UIAlertController(title: "", message: "Delete \(title) list?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            self?.deleteList(index: index)
+        }))
+        
+        present(alert, animated: true)
+    }
+    
+    private func deleteList(index: IndexPath) {
+        listsTableViewDelegate.data.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: .fade)
+        
+        let list = lists[index.row]
+        listsViewModel.delete(list: list)
     }
 
 }

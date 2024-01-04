@@ -42,10 +42,10 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
     }
     
     func configuareTableView() {
+        listsTableViewDelegate.listsDeleteAndSelection = false
+        listsTableViewDelegate.parentController = self
         tableView.delegate = listsTableViewDelegate
         tableView.dataSource = listsTableViewDelegate
-        
-        listsTableViewDelegate.parentController = self
         
         registerCell()
     }
@@ -62,9 +62,10 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
             
             if lists.isEmpty {
                 self?.noListsLabel.isHidden = false
+            } else {
+                self?.noListsLabel.isHidden = true
             }
             
-            self?.noListsLabel.isHidden = true
             self?.lists = lists
             self?.listsTableViewDelegate.data = lists
             self?.reloadTableView()
@@ -83,7 +84,9 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
     
     func reloadTableView() {
         DispatchQueue.mainAsyncIfNeeded {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.tableView.reloadData()
+            }
         }
     }
     

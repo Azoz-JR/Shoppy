@@ -11,8 +11,8 @@ final class CategoriesViewController: UIViewController, CategoriesPresenter {
     @IBOutlet var collectionView: UICollectionView!
     
     let collectionDataSourceAndDelegate = CategoriesCollectionDataSourceAndDelegate()
-    var productsViewModel: ProductsViewModel!
-    var listsViewModel: ListsViewModel!
+    var productsViewModel: ProductsViewModel?
+    var listsViewModel: ListsViewModel?
     private var collections: [ItemViewModel] = []
     var service: Service? = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
     
@@ -43,7 +43,7 @@ final class CategoriesViewController: UIViewController, CategoriesPresenter {
         case .success(let collections):
             self.collections = collections
             collectionDataSourceAndDelegate.data = collections
-            collectionView.reloadData()
+            reloadCollection()
         case .failure(let error):
             self.show(error: error)
             print(error.localizedDescription)
@@ -67,6 +67,12 @@ final class CategoriesViewController: UIViewController, CategoriesPresenter {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func reloadCollection() {
+        UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+            self.collectionView.reloadData()
+        }
     }
     
 }

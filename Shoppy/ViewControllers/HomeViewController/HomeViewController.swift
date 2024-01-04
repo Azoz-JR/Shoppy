@@ -17,8 +17,8 @@ final class HomeViewController: UIViewController {
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()
     
-    var productsViewModel: ProductsViewModel!
-    var listsViewModel: ListsViewModel!
+    var productsViewModel: ProductsViewModel?
+    var listsViewModel: ListsViewModel?
     let categories = Category.allCases
     var service: Service?
     var products: [ItemViewModel] = []
@@ -51,7 +51,7 @@ final class HomeViewController: UIViewController {
         case .success(let products):
             self.products = products
             productsCollectionDataSourceAndDelegate.data = products
-            collectionView.reloadData()
+            reloadCollectionView()
         case .failure(let error):
             self.show(error: error)
             print(error.localizedDescription)

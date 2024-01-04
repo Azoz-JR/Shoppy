@@ -11,6 +11,7 @@ final class ProfileView: UIView {
     
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var userImageView: UIImageView!
+    @IBOutlet var scrollView: UIScrollView!
     
     // Orders
     @IBOutlet var seeAllOrdersButton: UIButton!
@@ -190,7 +191,10 @@ extension ProfileView {
     }
     
     func noItemsConfiguration() {
-        print("noItemsCalled")
+        imagesStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor

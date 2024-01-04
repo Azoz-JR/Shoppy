@@ -13,8 +13,8 @@ class WishListViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
-    var productsViewModel: ProductsViewModel!
-    var listsViewModel: ListsViewModel!
+    var productsViewModel: ProductsViewModel?
+    var listsViewModel: ListsViewModel?
     var wishList: [ItemViewModel] = []
     
     override func viewDidLoad() {
@@ -49,7 +49,9 @@ class WishListViewController: UIViewController {
     
     func reloadCollection() {
         DispatchQueue.mainAsyncIfNeeded {
-            self.collectionView.reloadData()
+            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.collectionView.reloadData()
+            }
         }
     }
     

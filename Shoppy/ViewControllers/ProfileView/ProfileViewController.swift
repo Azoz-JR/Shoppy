@@ -30,12 +30,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
         
-//        let appearance = UINavigationBarAppearance()
-//        appearance.backgroundColor = .navigationBar
-//        appearance.shadowColor = .clear
-//        
-//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//        navigationController?.navigationBar.standardAppearance = appearance
+        configureNavBar()
         
         let name = UIButton(type: .system)
         name.setTitle("Shoppy", for: .normal)
@@ -77,6 +72,11 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         }
     }
     
+    private func updateUI() {
+        updateOrders()
+        updateLists()
+    }
+    
     func updateOrders() {
         profileView.configureOrder(with: orders)
         reloadCollection()
@@ -92,16 +92,10 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         }
         
         profileView.createListHandler = { [weak self] in
-            let vc = CreateListView()
-            vc.listsViewModel = self?.listsViewModel
-            vc.modalPresentationStyle = .pageSheet
-            vc.sheetPresentationController?.detents = [
-                .custom { _ in
-                    return 280
-                }
-            ]
-            
-            self?.present(vc, animated: true)
+            guard let listsViewModel = self?.listsViewModel else {
+                return
+            }
+            self?.showCreateListView(listsViewModel: listsViewModel)
         }
         
         profileView.seeAllOrdersHandler = { [weak self] in
@@ -133,13 +127,28 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     
     private func reloadCollection() {
         DispatchQueue.mainAsyncIfNeeded {
-            self.profileView.ordersCollection.reloadData()
+            UIView.transition(with: self.profileView.ordersCollection, duration: 0.3, options: .transitionCrossDissolve) {
+                self.profileView.ordersCollection.reloadData()
+            }
         }
     }
     
     func collectionViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = (scrollView.contentOffset.x / scrollView.frame.width).rounded()
         profileView.pageControl.currentPage = Int(pageIndex)
+    }
+    
+    func configureNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .clear
+        
+        let scrollAppearance = UINavigationBarAppearance()
+        scrollAppearance.backgroundColor = .clear
+        scrollAppearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.scrollEdgeAppearance = scrollAppearance
+        navigationController?.navigationBar.standardAppearance = appearance
     }
     
 }

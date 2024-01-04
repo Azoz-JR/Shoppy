@@ -38,17 +38,17 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setUpCell(with: product)
             
             cell.increaseButtonHandler = { [weak self] in
-                self?.viewModel.addProduct(product: product)
+                self?.productsViewModel.addProduct(product: product)
                 self?.updateUI()
             }
             
             cell.decreaseButtonHandler = { [weak self] in
-                self?.viewModel.removeProduct(product: product)
+                self?.productsViewModel.removeProduct(product: product)
                 self?.updateUI()
             }
             
             cell.removeButtonHandler = { [weak self] in
-                self?.viewModel.removeProduct(at: indexPath.row)
+                self?.productsViewModel.removeProduct(at: indexPath.row)
                 self?.updateUI()
             }
             

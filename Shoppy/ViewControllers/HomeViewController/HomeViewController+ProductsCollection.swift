@@ -29,6 +29,10 @@ extension HomeViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
+        guard let productsViewModel, let listsViewModel else {
+            return
+        }
+        
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
     

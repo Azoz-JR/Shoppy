@@ -13,8 +13,8 @@ final class CategoryViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
-    var productsViewModel: ProductsViewModel!
-    var listsViewModel: ListsViewModel!
+    var productsViewModel: ProductsViewModel?
+    var listsViewModel: ListsViewModel?
     var service: Service?
     var category: String? = nil
     var products: [ItemViewModel] = []
@@ -51,7 +51,8 @@ final class CategoryViewController: UIViewController {
             : isHidingSearchBarOnScrolling(true)
             self.products = products
             productsDataSourceAndDelegate.data = products
-            collectionView.reloadData()
+            reloadCollectionView()
+            
         case .failure(let error):
             self.show(error: error)
             print(error.localizedDescription)
