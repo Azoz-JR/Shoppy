@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
-        
+
         configureNavBar()
         
         let name = UIButton(type: .system)
@@ -139,16 +139,17 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     }
     
     func configureNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .clear
-        appearance.shadowColor = .clear
-        
-        let scrollAppearance = UINavigationBarAppearance()
-        scrollAppearance.backgroundColor = .clear
-        scrollAppearance.shadowColor = .clear
-        
-        navigationController?.navigationBar.scrollEdgeAppearance = scrollAppearance
-        navigationController?.navigationBar.standardAppearance = appearance
+//        let appearance = UINavigationBarAppearance()
+//        appearance.backgroundColor = .systemBlue
+//        appearance.shadowColor = .clear
+//        
+//        let scrollAppearance = UINavigationBarAppearance()
+//        scrollAppearance.backgroundColor = .clear
+//        scrollAppearance.shadowColor = .clear
+//        
+//        navigationController?.navigationBar.scrollEdgeAppearance = scrollAppearance
+//        navigationController?.navigationBar.standardAppearance = appearance
+//        navigationController?.navigationBar.compactAppearance = appearance
     }
     
 }

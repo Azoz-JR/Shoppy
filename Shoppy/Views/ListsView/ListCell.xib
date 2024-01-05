@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6td-4z-2qn">
-                        <rect key="frame" x="10" y="10" width="273.66666666666669" height="100"/>
+                        <rect key="frame" x="15" y="10" width="263.66666666666669" height="100"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="4Ti-7M-WMY">
                                 <rect key="frame" x="15" y="15" width="70" height="70"/>
@@ -27,7 +27,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping List" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lu-ET-cYM">
-                                <rect key="frame" x="94.999999999999986" y="39" width="168.66666666666663" height="22.333333333333329"/>
+                                <rect key="frame" x="94.999999999999986" y="39" width="158.66666666666663" height="22.333333333333329"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,8 +50,8 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="6td-4z-2qn" secondAttribute="bottom" constant="10" id="MLB-w0-uTw"/>
                     <constraint firstItem="6td-4z-2qn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="c4i-qb-Xfn"/>
-                    <constraint firstAttribute="trailing" secondItem="6td-4z-2qn" secondAttribute="trailing" constant="10" id="cKJ-4Z-giT"/>
-                    <constraint firstItem="6td-4z-2qn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="kPD-gJ-mle"/>
+                    <constraint firstAttribute="trailing" secondItem="6td-4z-2qn" secondAttribute="trailing" constant="15" id="cKJ-4Z-giT"/>
+                    <constraint firstItem="6td-4z-2qn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="kPD-gJ-mle"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

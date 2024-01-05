@@ -1,13 +1,13 @@
 //
-//  ListsTableViewDelegate.swift
+//  ListsSelectionTableViewDelegate.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 29/12/2023.
+//  Created by Azoz Salah on 04/01/2024.
 //
 
 import UIKit
 
-class ListsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
+class ListsSelectionTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     var data: [List] = []
     var parentController: ListsControllerPresenter?
     
@@ -18,6 +18,8 @@ class ListsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as? ListCell {
+            cell.accessoryType = .none
+            
             let list = data[indexPath.row]
             cell.configure(with: list)
 
@@ -28,20 +30,6 @@ class ListsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         parentController?.listSelected(at: indexPath.row)
-    }
-    
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-                
-        let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
-            
-            self?.parentController?.listDeleted(at: indexPath)
-        }
-        
-        delete.image = UIImage(systemName: "trash.fill")
-        
-        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
-        return swipeActions
     }
     
 }

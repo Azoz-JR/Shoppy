@@ -23,7 +23,7 @@ struct SmartCollection: Codable {
     let image: Image
     
     func toItemViewModel() -> ItemViewModel {
-        return ItemViewModel(id: id, title: title, price: 0, discountPercentage: 0, category: nil, image: imageURL, images: [], sizes: [], colors: [], description: "")
+        return ItemViewModel(id: id, title: title, price: 0, discountPercentage: 0, category: nil, image: imageURL, images: [], sizes: [], colors: [], description: "", vendor: title)
     }
     
     var imageURL: URL? {

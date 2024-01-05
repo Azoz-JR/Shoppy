@@ -10,8 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListDetailViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
-                <outlet property="itemsCollection" destination="pXb-yi-9qY" id="HHB-pc-din"/>
                 <outlet property="noItemsLabel" destination="lbO-2f-3H0" id="jdL-pw-ZO3"/>
+                <outlet property="tableView" destination="bdA-sF-wcL" id="LWj-x0-7mD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,16 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="pXb-yi-9qY">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="220" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bdA-sF-wcL">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="cWb-Qv-Eqq">
-                        <size key="itemSize" width="170" height="250"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="10"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't added any items to this list yet." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-2f-3H0">
                     <rect key="frame" x="32.333333333333343" y="428" width="328.33333333333326" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -40,11 +34,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="pXb-yi-9qY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Wwc-5V-chR"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pXb-yi-9qY" secondAttribute="bottom" id="cnX-cu-jm6"/>
-                <constraint firstItem="pXb-yi-9qY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ntH-pK-d81"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bdA-sF-wcL" secondAttribute="trailing" id="5JL-G0-Dco"/>
+                <constraint firstItem="bdA-sF-wcL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cmo-1v-EeS"/>
+                <constraint firstItem="bdA-sF-wcL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gvj-px-Q6i"/>
+                <constraint firstAttribute="bottom" secondItem="bdA-sF-wcL" secondAttribute="bottom" id="sca-bv-UhA"/>
                 <constraint firstItem="lbO-2f-3H0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="tKq-lN-Vpm"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pXb-yi-9qY" secondAttribute="trailing" id="uGi-rl-GEP"/>
                 <constraint firstItem="lbO-2f-3H0" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="yhm-hI-bDs"/>
             </constraints>
             <point key="canvasLocation" x="62" y="-11"/>

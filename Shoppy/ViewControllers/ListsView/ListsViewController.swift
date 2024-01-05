@@ -34,39 +34,27 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         bindtoListsViewModel()
         
         title = "Your Lists"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
+        
+        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
+        let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        
+        navigationItem.rightBarButtonItems = [addBarButton, editBarButton]
 
         configuareTableView()
     }
     
-    func configuareTableView() {
-        tableView.delegate = listsTableViewDelegate
-        tableView.dataSource = listsTableViewDelegate
-        
-        listsTableViewDelegate.data = lists
-        listsTableViewDelegate.parentController = self
-        
-        registerCell()
-    }
-    
-    func registerCell() {
-        tableView.register(ListCell.register(), forCellReuseIdentifier: ListCell.identifier)
-    }
-    
-    func listSelected(at index: Int) {
-        let list = lists[index]
-        let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-        
-        show(vc, sender: self)
-    }
-    
-    func listDeleted(at index: IndexPath) {
-        let listTitle = lists[index.row].name
-        showDeleteListAlert(title: listTitle, index: index)
-    }
-    
     @objc func addListTapped() {
         showCreateListView(listsViewModel: listsViewModel)
+    }
+    
+    @objc func editTapped() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        
+        if tableView.isEditing {
+            navigationItem.rightBarButtonItems?[1] = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editTapped))
+        } else {
+            navigationItem.rightBarButtonItems?[1] = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        }
     }
     
     func bindtoListsViewModel() {
@@ -84,14 +72,6 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
             self.lists = lists
             self.listsTableViewDelegate.data = lists
             reloadTableView()
-        }
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.mainAsyncIfNeeded {
-            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
-                self.tableView.reloadData()
-            }
         }
     }
     
@@ -114,4 +94,42 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         listsViewModel.delete(list: list)
     }
 
+}
+
+
+//MARK: TableView Configurations
+extension ListsViewController {
+    func configuareTableView() {
+        tableView.delegate = listsTableViewDelegate
+        tableView.dataSource = listsTableViewDelegate
+        
+        listsTableViewDelegate.data = lists
+        listsTableViewDelegate.parentController = self
+        
+        registerCell()
+    }
+    
+    func registerCell() {
+        tableView.register(ListCell.register(), forCellReuseIdentifier: ListCell.identifier)
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func listSelected(at index: Int) {
+        let list = lists[index]
+        let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+        
+        show(vc, sender: self)
+    }
+    
+    func listDeleted(at index: IndexPath) {
+        let listTitle = lists[index.row].name
+        showDeleteListAlert(title: listTitle, index: index)
+    }
 }

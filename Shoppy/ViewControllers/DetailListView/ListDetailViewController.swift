@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ListDetailViewController: UIViewController, ParentControllerPresenter {
-    @IBOutlet var itemsCollection: UICollectionView!
+class ListDetailViewController: UIViewController, ListDetailViewPresenter {
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var noItemsLabel: UILabel!
     
-    let productsCollectioDelegateAndDataSource = ProductsCollectionDataSourceAndDelegate()
+    let listItemsTableViewDelegate = ListItemsTableViewDelegate()
     var list: List
     var productsViewModel: ProductsViewModel
     var listsViewModel: ListsViewModel
@@ -37,19 +37,19 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
     }
     
     func configuareCollectionView() {
-        itemsCollection.delegate = productsCollectioDelegateAndDataSource
-        itemsCollection.dataSource = productsCollectioDelegateAndDataSource
+        tableView.delegate = listItemsTableViewDelegate
+        tableView.dataSource = listItemsTableViewDelegate
         
-        productsCollectioDelegateAndDataSource.data = list.items
-        productsCollectioDelegateAndDataSource.parentController = self
-        productsCollectioDelegateAndDataSource.productsViewModel = productsViewModel
-        productsCollectioDelegateAndDataSource.listsViewModel = listsViewModel
+        listItemsTableViewDelegate.data = list.items
+        listItemsTableViewDelegate.parentController = self
+        listItemsTableViewDelegate.productsViewModel = productsViewModel
+        listItemsTableViewDelegate.listsViewModel = listsViewModel
         
         registerCell()
     }
     
     func registerCell() {
-        itemsCollection.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
+        tableView.register(ListItemCellView.register(), forCellReuseIdentifier: ListItemCellView.identifier)
     }
     
     func showAlert() {
@@ -70,5 +70,6 @@ class ListDetailViewController: UIViewController, ParentControllerPresenter {
             noItemsLabel.isHidden = false
         }
     }
+    
 
 }

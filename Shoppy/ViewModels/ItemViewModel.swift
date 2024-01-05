@@ -18,10 +18,11 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     let sizes: [String]
     let colors: [ColorOption]
     let description: String
+    let vendor: String
     
     var count = 0
     
-    init(id: Int, title: String, price: Double, discountPercentage: Double, category: Category?, image: URL?, images: [URL?], sizes: [String], colors: [ColorOption], description: String) {
+    init(id: Int, title: String, price: Double, discountPercentage: Double, category: Category?, image: URL?, images: [URL?], sizes: [String], colors: [ColorOption], description: String, vendor: String) {
         self.id = id
         self.title = title
         self.price = price
@@ -32,6 +33,7 @@ struct ItemViewModel: Codable, Hashable, Equatable {
         self.sizes = sizes
         self.colors = colors
         self.description = description
+        self.vendor = vendor
     }
     
     mutating func increaseCount() {

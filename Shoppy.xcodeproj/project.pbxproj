@@ -96,6 +96,11 @@
 		97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97B390072B1F845B00EB90EA /* LaunchScreen.storyboard */; };
 		97B390112B1F857000EB90EA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B390102B1F857000EB90EA /* MainTabBarController.swift */; };
 		97B390132B1F92BB00EB90EA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B390122B1F92BB00EB90EA /* Observable.swift */; };
+		97D612912B471B01000174FE /* ListsSelectionTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612902B471B01000174FE /* ListsSelectionTableViewDelegate.swift */; };
+		97D612942B473BF7000174FE /* ListItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612922B473BF7000174FE /* ListItemCellView.swift */; };
+		97D612952B473BF7000174FE /* ListItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D612932B473BF7000174FE /* ListItemCellView.xib */; };
+		97D612972B477D5E000174FE /* ListItemsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612962B477D5E000174FE /* ListItemsTableViewDelegate.swift */; };
+		97D612992B477DFE000174FE /* ListDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612982B477DFE000174FE /* ListDetailViewPresenter.swift */; };
 		97E7A4342B37749B00A1C20E /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4332B37749B00A1C20E /* WishListViewController.swift */; };
 		97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E7A4352B3774E700A1C20E /* WishListView.xib */; };
 		97E7A4392B37773C00A1C20E /* WishListViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */; };
@@ -196,6 +201,11 @@
 		97B3900A2B1F845B00EB90EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B390102B1F857000EB90EA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		97B390122B1F92BB00EB90EA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		97D612902B471B01000174FE /* ListsSelectionTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsSelectionTableViewDelegate.swift; sourceTree = "<group>"; };
+		97D612922B473BF7000174FE /* ListItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemCellView.swift; sourceTree = "<group>"; };
+		97D612932B473BF7000174FE /* ListItemCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemCellView.xib; sourceTree = "<group>"; };
+		97D612962B477D5E000174FE /* ListItemsTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemsTableViewDelegate.swift; sourceTree = "<group>"; };
+		97D612982B477DFE000174FE /* ListDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewPresenter.swift; sourceTree = "<group>"; };
 		97E7A4332B37749B00A1C20E /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
 		97E7A4352B3774E700A1C20E /* WishListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishListView.xib; sourceTree = "<group>"; };
 		97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WishListViewController+CollectionView.swift"; sourceTree = "<group>"; };
@@ -486,9 +496,11 @@
 			isa = PBXGroup;
 			children = (
 				9790F8F92B3FC0FA00597A50 /* ListsViewController.xib */,
-				9790F9032B40931C00597A50 /* ListDetailViewController.xib */,
 				9790F90A2B40950800597A50 /* ListCell.swift */,
 				9790F90B2B40950800597A50 /* ListCell.xib */,
+				9790F9032B40931C00597A50 /* ListDetailViewController.xib */,
+				97D612922B473BF7000174FE /* ListItemCellView.swift */,
+				97D612932B473BF7000174FE /* ListItemCellView.xib */,
 			);
 			path = ListsView;
 			sourceTree = "<group>";
@@ -508,6 +520,8 @@
 			children = (
 				9790F9022B40931C00597A50 /* ListDetailViewController.swift */,
 				9790F9062B40946200597A50 /* ListCollectionDelegate.swift */,
+				97D612962B477D5E000174FE /* ListItemsTableViewDelegate.swift */,
+				97D612982B477DFE000174FE /* ListDetailViewPresenter.swift */,
 			);
 			path = DetailListView;
 			sourceTree = "<group>";
@@ -516,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				9790F9162B41DFC300597A50 /* ListSelectionViewController.swift */,
+				97D612902B471B01000174FE /* ListsSelectionTableViewDelegate.swift */,
 				9790F91E2B41FAAC00597A50 /* CreateListView.swift */,
 				9790F91F2B41FAAC00597A50 /* CreateListView.xib */,
 			);
@@ -657,6 +672,7 @@
 				972FAC1B2B3E465F0017114A /* OrderCellView.xib in Resources */,
 				973CEA532B28D1D900E0487D /* CartCellView.xib in Resources */,
 				9790F8F62B3FB44B00597A50 /* ItemCell.xib in Resources */,
+				97D612952B473BF7000174FE /* ListItemCellView.xib in Resources */,
 				970EECE82B33AE3A009D53C7 /* CollectionCell.xib in Resources */,
 				97EEFAED2B2E71BD00065A8A /* SmallCategoryCell.xib in Resources */,
 				972FABDB2B3B806B0017114A /* ProfileView.xib in Resources */,
@@ -682,6 +698,7 @@
 				974DF5E12B34B4D700786FC2 /* CategoriesPresenter.swift in Sources */,
 				9790F8FF2B3FC14100597A50 /* ListsControllerPresenter.swift in Sources */,
 				9758BA042B23DC9F00F4E8F4 /* Helpers.swift in Sources */,
+				97D612942B473BF7000174FE /* ListItemCellView.swift in Sources */,
 				974DF5E92B350F1300786FC2 /* CategoryViewController+Collection.swift in Sources */,
 				9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift in Sources */,
 				974DF5C72B345F5300786FC2 /* ProductsCollectionDataSourceAndDelegate.swift in Sources */,
@@ -689,6 +706,7 @@
 				9790F8E62B3F109900597A50 /* OrdersCollectionViewDelegate.swift in Sources */,
 				9758BA0A2B23F67C00F4E8F4 /* CategoryViewController.swift in Sources */,
 				972FABE92B3DEA8B0017114A /* ViewController.swift in Sources */,
+				97D612912B471B01000174FE /* ListsSelectionTableViewDelegate.swift in Sources */,
 				972FAC252B3E52CE0017114A /* OrderDetailViewController.swift in Sources */,
 				9737E73D2B29237000735A72 /* CartViewController.swift in Sources */,
 				97E7A4392B37773C00A1C20E /* WishListViewController+CollectionView.swift in Sources */,
@@ -727,6 +745,7 @@
 				972FAC142B3E456B0017114A /* OrdersViewController.swift in Sources */,
 				970EECD02B310D50009D53C7 /* ItemViewModel.swift in Sources */,
 				974DF5D82B34AB2900786FC2 /* HomeViewController+CategoriesCollection.swift in Sources */,
+				97D612992B477DFE000174FE /* ListDetailViewPresenter.swift in Sources */,
 				973CEA522B28D1D900E0487D /* CartCellView.swift in Sources */,
 				9758BA0C2B24AB3400F4E8F4 /* ProductsService.swift in Sources */,
 				970EECCA2B310715009D53C7 /* Product.swift in Sources */,
@@ -738,6 +757,7 @@
 				972FAC1E2B3E50530017114A /* OrdersTableViewDelegate.swift in Sources */,
 				972FABDD2B3B8FB30017114A /* ProfileView.swift in Sources */,
 				9790F9202B41FAAC00597A50 /* CreateListView.swift in Sources */,
+				97D612972B477D5E000174FE /* ListItemsTableViewDelegate.swift in Sources */,
 				9790F9002B3FC14100597A50 /* ListsTableViewDelegate.swift in Sources */,
 				9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */,
 				97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */,
@@ -895,6 +915,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -925,6 +946,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

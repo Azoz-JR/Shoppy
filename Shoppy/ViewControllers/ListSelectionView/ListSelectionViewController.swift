@@ -11,7 +11,7 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
     @IBOutlet var tableView: UITableView!
     @IBOutlet var noListsLabel: UILabel!
     
-    let listsTableViewDelegate = ListsTableViewDelegate()
+    let listsTableViewDelegate = ListsSelectionTableViewDelegate()
     var lists: [List] = []
     
     var item: ItemViewModel
@@ -42,7 +42,6 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter, U
     }
     
     func configuareTableView() {
-        listsTableViewDelegate.listsDeleteAndSelection = false
         listsTableViewDelegate.parentController = self
         tableView.delegate = listsTableViewDelegate
         tableView.dataSource = listsTableViewDelegate

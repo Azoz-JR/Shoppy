@@ -177,4 +177,5 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         let index = sender.currentPage
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
     }
+    
 }

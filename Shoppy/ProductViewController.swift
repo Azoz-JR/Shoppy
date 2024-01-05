@@ -127,5 +127,10 @@ final class ProductViewController: UIViewController {
         likeButton.image = UIImage(systemName: (value ? "heart.fill" : "heart"), withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.backgroundColor = .clear
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
 }
