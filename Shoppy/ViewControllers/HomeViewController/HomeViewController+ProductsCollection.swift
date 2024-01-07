@@ -12,6 +12,7 @@ extension HomeViewController: ParentControllerPresenter {
     func configureCollectionDelegateAndDataSource() {
         collectionView.delegate = productsCollectionDataSourceAndDelegate
         collectionView.dataSource = productsCollectionDataSourceAndDelegate
+        collectionView.keyboardDismissMode = .onDrag
         
         productsCollectionDataSourceAndDelegate.listsViewModel = listsViewModel
         productsCollectionDataSourceAndDelegate.parentController = self

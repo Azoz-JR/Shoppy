@@ -56,7 +56,7 @@ final class CategoriesViewController: UIViewController, CategoriesPresenter {
         vc.productsViewModel = productsViewModel
         vc.listsViewModel = listsViewModel
         let collection = collections[index.row]
-        vc.category = collection.title
+        vc.collection = collection
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared, category: collection.title)
         vc.service = api

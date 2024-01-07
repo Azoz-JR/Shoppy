@@ -15,6 +15,7 @@ extension WishListViewController: ParentControllerPresenter {
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.delegate = productsDataSourceAndDelegate
         collectionView.dataSource = productsDataSourceAndDelegate
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     func reloadCollectionView() {

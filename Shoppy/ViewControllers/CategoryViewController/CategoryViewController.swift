@@ -16,28 +16,46 @@ final class CategoryViewController: UIViewController {
     var productsViewModel: ProductsViewModel?
     var listsViewModel: ListsViewModel?
     var service: Service?
-    var category: String? = nil
+    var collection: ItemViewModel? = nil
     var products: [ItemViewModel] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let category = category else {
+        guard let collection else {
             return
         }
         
         configureCollectionView()
+        configureBackground()
         
         contentView.backgroundColor = .systemBackground
-        title = category
+        title = collection.title
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
         
+        
+        
         configureSearchBar()
             
         refresh()
+    }
+    
+    func configureBackground() {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .white
+        imageView.sd_setImage(with: collection?.image)
+        collectionView.backgroundView = imageView
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.frame = collectionView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.addSubview(blurEffectView)
     }
     
     @objc func refresh() {
