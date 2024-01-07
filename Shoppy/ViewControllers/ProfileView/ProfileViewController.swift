@@ -29,6 +29,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .navBarTint
 
         configureNavBar()
         

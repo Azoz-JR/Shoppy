@@ -29,6 +29,7 @@ class WishListViewController: UIViewController {
         title = "Wish list"
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .navBarTint
     }
     
     func bindToViewModel() {

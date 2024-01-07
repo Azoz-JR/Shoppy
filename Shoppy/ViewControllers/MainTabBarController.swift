@@ -70,8 +70,7 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
-//        nav.navigationBar.prefersLargeTitles = true
-//        nav.navigationItem.largeTitleDisplayMode = .always
+        
         return nav
     }
     

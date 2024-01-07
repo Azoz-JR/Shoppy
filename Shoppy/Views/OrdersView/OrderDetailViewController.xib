@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,10 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="jt4-3O-KHH" id="K41-C4-ARo"/>
                 <outlet property="detailsContainer" destination="HWi-tG-CO2" id="5r5-NM-kKu"/>
                 <outlet property="orderDateLabel" destination="A9G-DQ-Rjm" id="ufU-2d-rp8"/>
                 <outlet property="orderPriceLabel" destination="sGA-2r-Vcc" id="5A5-kd-9LK"/>
+                <outlet property="tableView" destination="ffW-Qz-Mu0" id="JnT-ab-SDY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,16 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jt4-3O-KHH">
-                    <rect key="frame" x="0.0" y="59" width="393" height="619"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Foy-1k-IkQ">
-                        <size key="itemSize" width="170" height="280"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="10"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HWi-tG-CO2">
                     <rect key="frame" x="20" y="698" width="353" height="90"/>
                     <subviews>
@@ -74,17 +64,21 @@
                         <constraint firstAttribute="height" constant="90" id="rnK-22-dgj"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="250" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ffW-Qz-Mu0">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="688"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="HWi-tG-CO2" firstAttribute="top" secondItem="jt4-3O-KHH" secondAttribute="bottom" constant="20" id="51y-fr-ocv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HWi-tG-CO2" secondAttribute="trailing" constant="20" id="B4u-Ee-eYt"/>
+                <constraint firstItem="ffW-Qz-Mu0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NEe-Vs-JUg"/>
                 <constraint firstItem="HWi-tG-CO2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="P8s-Mo-pWk"/>
-                <constraint firstItem="jt4-3O-KHH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PQg-Ya-k7C"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jt4-3O-KHH" secondAttribute="trailing" id="mO6-Dw-LXc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ffW-Qz-Mu0" secondAttribute="trailing" id="RhG-xv-pE0"/>
+                <constraint firstItem="HWi-tG-CO2" firstAttribute="top" secondItem="ffW-Qz-Mu0" secondAttribute="bottom" constant="10" id="cKK-Jw-dxs"/>
+                <constraint firstItem="ffW-Qz-Mu0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xNF-lt-cje"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HWi-tG-CO2" secondAttribute="bottom" constant="30" id="zD3-AP-MoV"/>
-                <constraint firstItem="jt4-3O-KHH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zJn-Wi-skA"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>

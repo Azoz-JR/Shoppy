@@ -9,7 +9,6 @@ import UIKit
 
 extension WishListViewController: ParentControllerPresenter {
     func configureCollectionView() {
-        productsDataSourceAndDelegate.productsViewModel = productsViewModel
         productsDataSourceAndDelegate.parentController = self
         productsDataSourceAndDelegate.listsViewModel = listsViewModel
         

@@ -8,6 +8,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmazonEmber_Rg.ttf">
+            <string>AmazonEmber-Regular</string>
+        </array>
+        <array key="BookerlyLCD_Rg.ttf">
+            <string>Bookerly-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,29 +29,30 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMT-JH-UdI">
                         <rect key="frame" x="20" y="10" width="353" height="215"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="wHM-a5-bjb">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TestImage.bmp" translatesAutoresizingMaskIntoConstraints="NO" id="wHM-a5-bjb">
                                 <rect key="frame" x="0.0" y="0.0" width="106" height="215"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADIDAS | CLASSIC | BackPack | ADIDAS | CLASSIC | BackPack" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvU-hh-gE4">
-                                <rect key="frame" x="116" y="15.000000000000004" width="227" height="38.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <rect key="frame" x="116" y="15" width="227" height="36"/>
+                                <fontDescription key="fontDescription" name="AmazonEmber-Regular" family="Amazon Ember" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Adidas" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GwU-FM-QC6">
-                                <rect key="frame" x="116" y="63.333333333333329" width="227" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="116" y="61" width="227" height="16"/>
+                                <fontDescription key="fontDescription" name="Bookerly-Regular" family="Bookerly" pointSize="12"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1029$ - 2022$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0T-j2-2ls">
-                                <rect key="frame" x="115.99999999999999" y="90.333333333333329" width="149.66666666666663" height="26.333333333333329"/>
+                                <rect key="frame" x="115.99999999999999" y="87" width="149.66666666666663" height="26.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvj-kp-XTB">
-                                <rect key="frame" x="116" y="156" width="167" height="39"/>
+                                <rect key="frame" x="116.00000000000001" y="156" width="143.33333333333337" height="39"/>
                                 <color key="tintColor" name="myGreen"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="cart.fill" catalog="system" title="Add to cart" imagePadding="5">
@@ -53,25 +62,12 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0S7-b2-5LQ">
-                                <rect key="frame" x="303" y="170.66666666666666" width="30" height="10"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="10" id="33A-Ce-lxN"/>
-                                    <constraint firstAttribute="width" constant="30" id="uFu-1N-M4h"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system" imagePadding="50">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
-                                </buttonConfiguration>
-                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ll6-kq-wq7">
                                 <rect key="frame" x="43" y="97.666666666666671" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0S7-b2-5LQ" firstAttribute="centerY" secondItem="Zvj-kp-XTB" secondAttribute="centerY" id="4b6-db-nvO"/>
                             <constraint firstAttribute="bottom" secondItem="Zvj-kp-XTB" secondAttribute="bottom" constant="20" id="5v0-DQ-pRp"/>
                             <constraint firstItem="wHM-a5-bjb" firstAttribute="leading" secondItem="VMT-JH-UdI" secondAttribute="leading" id="6k6-ex-CnU"/>
                             <constraint firstAttribute="bottom" secondItem="wHM-a5-bjb" secondAttribute="bottom" id="BM7-4q-kXG"/>
@@ -82,14 +78,12 @@
                             <constraint firstItem="Ll6-kq-wq7" firstAttribute="centerY" secondItem="wHM-a5-bjb" secondAttribute="centerY" id="Ozo-Gi-3Et"/>
                             <constraint firstItem="P0T-j2-2ls" firstAttribute="top" secondItem="GwU-FM-QC6" secondAttribute="bottom" constant="10" id="QXu-nh-vkz"/>
                             <constraint firstItem="IvU-hh-gE4" firstAttribute="top" secondItem="VMT-JH-UdI" secondAttribute="top" constant="15" id="RZW-eX-fei"/>
-                            <constraint firstItem="0S7-b2-5LQ" firstAttribute="leading" secondItem="Zvj-kp-XTB" secondAttribute="trailing" constant="20" id="VKN-O7-OvD"/>
                             <constraint firstItem="GwU-FM-QC6" firstAttribute="leading" secondItem="wHM-a5-bjb" secondAttribute="trailing" constant="10" id="Xd7-dG-Is8"/>
                             <constraint firstItem="Ll6-kq-wq7" firstAttribute="centerX" secondItem="wHM-a5-bjb" secondAttribute="centerX" id="dqO-fY-Jht"/>
                             <constraint firstAttribute="trailing" secondItem="GwU-FM-QC6" secondAttribute="trailing" constant="10" id="iHt-FW-9W7"/>
                             <constraint firstItem="wHM-a5-bjb" firstAttribute="top" secondItem="VMT-JH-UdI" secondAttribute="top" id="iWR-7R-Zt5"/>
                             <constraint firstItem="P0T-j2-2ls" firstAttribute="leading" secondItem="wHM-a5-bjb" secondAttribute="trailing" constant="10" id="rI3-R9-FTQ"/>
                             <constraint firstItem="IvU-hh-gE4" firstAttribute="leading" secondItem="wHM-a5-bjb" secondAttribute="trailing" constant="10" id="t6a-yq-Urd"/>
-                            <constraint firstAttribute="trailing" secondItem="0S7-b2-5LQ" secondAttribute="trailing" constant="20" id="ykI-dV-efq"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -105,7 +99,6 @@
                 <outlet property="activityIndicator" destination="Ll6-kq-wq7" id="qRo-KZ-HSa"/>
                 <outlet property="addToCartButton" destination="Zvj-kp-XTB" id="zIU-a8-Ccb"/>
                 <outlet property="containerView" destination="VMT-JH-UdI" id="qd7-5q-sVQ"/>
-                <outlet property="optionsButton" destination="0S7-b2-5LQ" id="JJR-mD-J4m"/>
                 <outlet property="productCollectionLabel" destination="GwU-FM-QC6" id="FtT-jL-yLP"/>
                 <outlet property="productImageView" destination="wHM-a5-bjb" id="NvG-3Q-x99"/>
                 <outlet property="productNameLabel" destination="IvU-hh-gE4" id="SmL-cF-cvj"/>
@@ -117,15 +110,11 @@
     <resources>
         <image name="TestImage.bmp" width="810" height="810"/>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <namedColor name="myGreen">
             <color red="0.85098039215686272" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

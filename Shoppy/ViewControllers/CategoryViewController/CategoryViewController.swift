@@ -33,6 +33,7 @@ final class CategoryViewController: UIViewController {
         title = category
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .navBarTint
         
         configureSearchBar()
             

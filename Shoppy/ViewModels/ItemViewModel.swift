@@ -21,6 +21,8 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     let vendor: String
     
     var count = 0
+    var color = "N/A"
+    var size = "N/A"
     
     init(id: Int, title: String, price: Double, discountPercentage: Double, category: Category?, image: URL?, images: [URL?], sizes: [String], colors: [ColorOption], description: String, vendor: String) {
         self.id = id
@@ -34,6 +36,9 @@ struct ItemViewModel: Codable, Hashable, Equatable {
         self.colors = colors
         self.description = description
         self.vendor = vendor
+        
+        self.color = colors.first?.rawValue ?? "N/A"
+        self.size = sizes.first ?? "N/A"
     }
     
     mutating func increaseCount() {
@@ -42,6 +47,14 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     
     mutating func decreaseCount() {
         count -= 1
+    }
+    
+    mutating func selectSize(size: String) {
+        self.size = size
+    }
+    
+    mutating func selectColor(color: String) {
+        self.color = color
     }
     
     static func ==(lhs: ItemViewModel, rhs: ItemViewModel) -> Bool {

@@ -20,6 +20,7 @@ final class CategoriesViewController: UIViewController, CategoriesPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = .navBarTint
         configureCollection()
         
         refresh()

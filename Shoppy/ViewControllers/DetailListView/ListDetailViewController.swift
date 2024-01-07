@@ -32,6 +32,8 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
         super.viewDidLoad()
 
         title = list.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteList))
+        navigationItem.rightBarButtonItem?.tintColor = .systemRed
         
         configuareCollectionView()
     }
@@ -59,6 +61,45 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
     func itemSelected(at index: IndexPath) {
         let product = list.items[index.row]
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+    }
+    
+    func itemDeleted(at index: IndexPath) {
+        showDeleteListAlert(index: index)
+    }
+    
+    func showDeleteListAlert(index: IndexPath) {
+        let alert = UIAlertController(title: "Delete item", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            self?.deleteItem(index: index)
+        }))
+        
+        present(alert, animated: true)
+    }
+    
+    func deleteItem(index: IndexPath) {
+        listItemsTableViewDelegate.data.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: .fade)
+        
+        let item = list.items[index.row]
+        listsViewModel.remove(item: item, at: index.row)
+    }
+    
+    @objc func deleteList() {
+        let alert = UIAlertController(title: "Delete list", message: "Are you sure you want to delete this list?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            guard let list = self?.list else {
+                return
+            }
+            
+            self?.listsViewModel.delete(list: list)
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        
+        present(alert, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

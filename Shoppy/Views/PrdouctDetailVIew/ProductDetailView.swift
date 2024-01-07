@@ -24,7 +24,8 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
     var images: [URL?] = []
     var availableColors: [UIColor] = []
     var availableSizes: [String] = []
-    var selectedSize: Int = 0
+    
+    var selectedSize = "N/A"
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,8 +79,6 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         let width = availableColors.count * 30 + (availableColors.count - 1) * 8
         colorsView.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
         
-        let selectedColor = availableColors.first
-        
         // Create circle buttons for each available color
         for (index, color) in availableColors.enumerated() {
             let colorButton = UIButton(type: .custom)
@@ -87,7 +86,7 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
             colorButton.backgroundColor = color
             colorButton.layer.cornerRadius = colorButton.frame.width / 2
             colorButton.layer.borderWidth = 2
-            colorButton.layer.borderColor = color == selectedColor ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
+            colorButton.layer.borderColor = color == availableColors.first ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
             
             // Set a tag to identify the color
             colorButton.tag = index
@@ -109,7 +108,7 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
             sizeButton.addTarget(self, action: #selector(sizeTapped), for: .touchUpInside)
             sizeButton.layer.cornerRadius = sizeButton.frame.width / 2
             sizeButton.layer.borderWidth = 1
-            sizeButton.layer.borderColor = index == selectedSize ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
+            sizeButton.layer.borderColor = index == 0 ? UIColor.lightGray.cgColor : UIColor.clear.cgColor
             
             // Set a tag to identify the color
             sizeButton.tag = index
@@ -137,6 +136,8 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         configureColorButtons()
         availableSizes = product.sizes
         configureSizesButtons()
+        
+        selectedSize = availableSizes.first ?? "N/A"
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -159,11 +160,11 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
     }
     
     @objc func sizeTapped(_ sender: UIButton) {
-        selectedSize = sender.tag
-        sizeSelected(at: selectedSize)
+        selectedSize = availableSizes[sender.tag]
+        sizeSelected(at: sender.tag)
     }
     
-    private func sizeSelected(at index: Int) {
+    func sizeSelected(at index: Int) {
         for case let button as UIButton in sizesView.arrangedSubviews {
             if button.tag == index {
                 button.layer.borderColor = UIColor.lightGray.cgColor

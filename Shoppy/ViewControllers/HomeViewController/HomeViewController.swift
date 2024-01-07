@@ -29,6 +29,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .navBarTint
         
         configureCategoriesCollection()
         configureCollectionView()

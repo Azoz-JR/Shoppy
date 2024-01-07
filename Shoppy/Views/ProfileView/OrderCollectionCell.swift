@@ -28,6 +28,8 @@ class OrderCollectionCell: UICollectionViewCell {
     }
 
     func configure(with order: Order) {
+        let titles = order.items.map( { $0.title })
+        itemsLabel.text = titles.joined(separator: ", ")
         priceLabel.text = "\(order.price)$"
         dateLabel.text = order.formattedDate
     }

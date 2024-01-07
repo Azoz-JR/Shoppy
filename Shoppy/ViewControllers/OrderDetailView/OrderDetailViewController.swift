@@ -8,12 +8,12 @@
 import UIKit
 
 class OrderDetailViewController: UIViewController {
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var detailsContainer: UIView!
     @IBOutlet var orderPriceLabel: UILabel!
     @IBOutlet var orderDateLabel: UILabel!
     
-    let orderCollectionViewDelegate = OrderCollectionDelegate()
+    let orderTableViewDelegate = OrderTableViewDelegate()
     
     var order: Order
     
@@ -34,7 +34,7 @@ class OrderDetailViewController: UIViewController {
         title = "Order Items"
 
         configureorderDetails()
-        configuareCollectionView()
+        configuareTableView()
     }
 
 
@@ -47,17 +47,19 @@ class OrderDetailViewController: UIViewController {
         orderDateLabel.text = order.formattedDate
     }
     
-    func configuareCollectionView() {
-        collectionView.delegate = orderCollectionViewDelegate
-        collectionView.dataSource = orderCollectionViewDelegate
+    func configuareTableView() {
+        tableView.delegate = orderTableViewDelegate
+        tableView.dataSource = orderTableViewDelegate
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
         
-        orderCollectionViewDelegate.data = order.items
+        orderTableViewDelegate.data = order.items
         
         registerCell()
     }
     
     func registerCell() {
-        collectionView.register(ItemCell.register(), forCellWithReuseIdentifier: ItemCell.identifier)
+        tableView.register(OrderItemCell.register(), forCellReuseIdentifier: OrderItemCell.identifier)
     }
 
 }

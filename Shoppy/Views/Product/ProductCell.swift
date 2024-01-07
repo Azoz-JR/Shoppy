@@ -13,11 +13,8 @@ final class ProductCell: UICollectionViewCell {
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var productLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    @IBOutlet var ratingLabel: UILabel!
-    @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    var addToCartHandler: (() -> Void)?
     var likeButtonHandler: (() -> Void)?
     
     static let identifier = "ProductCell"
@@ -45,9 +42,6 @@ final class ProductCell: UICollectionViewCell {
         
         productImageView.roundedCorners(corners: [.topLeft, .topRight], cornerRadius: 20)
         
-        addToCartButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        addToCartButton.roundedCorners(corners: [.topLeft, .bottomRight], cornerRadius: 20)
-        
         likeButton.sizeToFit()
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
@@ -61,17 +55,11 @@ final class ProductCell: UICollectionViewCell {
         }
         productLabel.text = product.title
         priceLabel.text = "$\(product.price)"
-        //ratingLabel.text = "\(product.rating)"
-        ratingLabel.text = "5"
     }
     
     @objc func likeButtonTapped() {
         likeButtonHandler?()
         liked.toggle()
-    }
-    
-    @objc func addButtonTapped() {
-        addToCartHandler?()
     }
     
     private func likeButton(value: Bool) {

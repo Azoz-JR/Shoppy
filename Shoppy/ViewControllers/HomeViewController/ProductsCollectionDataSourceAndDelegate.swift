@@ -9,7 +9,6 @@ import UIKit
 
 final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     var data: [ItemViewModel] = []
-    var productsViewModel: ProductsViewModel?
     var parentController: ParentControllerPresenter?
     var listsViewModel: ListsViewModel?
     
@@ -23,14 +22,6 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
             let product = data[indexPath.row]
             cell.configure(with: product)
             cell.liked = listsViewModel?.isLiked(product: product) ?? false
-            
-            cell.addToCartHandler = { [weak self] in
-                guard let productsViewModel = self?.productsViewModel else {
-                    return
-                }
-                productsViewModel.addProduct(product: product)
-                self?.parentController?.showAlert()
-            }
             
             cell.likeButtonHandler = { [weak self] in
                 guard let listsViewModel = self?.listsViewModel else {

@@ -13,7 +13,6 @@ extension HomeViewController: ParentControllerPresenter {
         collectionView.delegate = productsCollectionDataSourceAndDelegate
         collectionView.dataSource = productsCollectionDataSourceAndDelegate
         
-        productsCollectionDataSourceAndDelegate.productsViewModel = productsViewModel
         productsCollectionDataSourceAndDelegate.listsViewModel = listsViewModel
         productsCollectionDataSourceAndDelegate.parentController = self
     }
@@ -21,10 +20,6 @@ extension HomeViewController: ParentControllerPresenter {
     func configureCollectionView() {
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.contentInset = UIEdgeInsets(top: 70, left: .zero, bottom: .zero, right: .zero)
-    }
-    
-    func showAlert() {
-        showAddedSuccessfulyAlert()
     }
     
     func itemSelected(at index: IndexPath) {

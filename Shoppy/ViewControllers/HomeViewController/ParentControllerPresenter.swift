@@ -8,7 +8,6 @@
 import Foundation
 
 protocol ParentControllerPresenter {
-    func showAlert()
     func itemSelected(at index: IndexPath)
 }
 

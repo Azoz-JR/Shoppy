@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -84,6 +85,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-bQ-tnH">
                                             <rect key="frame" x="309" y="6" width="74" height="38.333333333333336"/>
+                                            <color key="tintColor" name="navBarTintColor"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="See all"/>
                                         </button>
@@ -161,10 +163,10 @@
                                             </state>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm8-Z1-E39">
-                                            <rect key="frame" x="10" y="50" width="373" height="120"/>
+                                            <rect key="frame" x="15" y="50" width="363" height="120"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wish list" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-1p-8Qp">
-                                                    <rect key="frame" x="15" y="30" width="130.66666666666666" height="21.666666666666671"/>
+                                                    <rect key="frame" x="15" y="30" width="127" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -194,14 +196,15 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-V0-Y53">
                                             <rect key="frame" x="309" y="6" width="74" height="38.333333333333336"/>
+                                            <color key="tintColor" name="navBarTintColor"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="See all"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="fm8-Z1-E39" secondAttribute="trailing" constant="10" id="CCd-gG-4cx"/>
-                                        <constraint firstItem="fm8-Z1-E39" firstAttribute="leading" secondItem="siu-gR-Sba" secondAttribute="leading" constant="10" id="CHQ-NZ-9uI"/>
+                                        <constraint firstAttribute="trailing" secondItem="fm8-Z1-E39" secondAttribute="trailing" constant="15" id="CCd-gG-4cx"/>
+                                        <constraint firstItem="fm8-Z1-E39" firstAttribute="leading" secondItem="siu-gR-Sba" secondAttribute="leading" constant="15" id="CHQ-NZ-9uI"/>
                                         <constraint firstAttribute="bottom" secondItem="fm8-Z1-E39" secondAttribute="bottom" constant="10" id="EuG-Bj-GzK"/>
                                         <constraint firstAttribute="trailing" secondItem="2xb-V0-Y53" secondAttribute="trailing" constant="10" id="S83-KN-1AR"/>
                                         <constraint firstAttribute="height" constant="180" id="Xnf-sX-e6Y"/>
@@ -254,11 +257,14 @@
     </objects>
     <resources>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="navBarTintColor">
+            <color red="0.0" green="0.6470588235294118" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

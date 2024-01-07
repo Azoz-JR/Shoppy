@@ -10,7 +10,6 @@ import UIKit
 extension CategoryViewController: ParentControllerPresenter {
     
     func configureCollectionView() {
-        productsDataSourceAndDelegate.productsViewModel = productsViewModel
         productsDataSourceAndDelegate.listsViewModel = listsViewModel
         productsDataSourceAndDelegate.parentController = self
         

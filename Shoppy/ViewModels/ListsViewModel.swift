@@ -28,6 +28,10 @@ final class ListsViewModel {
         lists.value?[index].add(item: item)
     }
     
+    func remove(item: ItemViewModel, at index: Int) {
+        lists.value?[index].remove(item: item)
+    }
+    
     private func contains(list: List) -> Bool {
         guard let lists = lists.value, lists.contains(where: { $0 == list }) else {
             return false

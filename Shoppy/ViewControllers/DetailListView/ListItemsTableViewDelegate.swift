@@ -33,10 +33,6 @@ class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewData
                 self?.parentController?.showAlert()
             }
             
-            cell.optionsHandler = { [weak self] in
-                
-            }
-            
             return cell
         }
         fatalError("Unable to deque ListItemCellView")
@@ -44,6 +40,19 @@ class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         parentController?.itemSelected(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+                
+        let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
+            
+            self?.parentController?.itemDeleted(at: indexPath)
+        }
+        
+        delete.image = UIImage(systemName: "trash.fill")
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+        return swipeActions
     }
     
 }

@@ -11,7 +11,6 @@ class ListItemCellView: UITableViewCell {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var containerView: UIView!
-    @IBOutlet var optionsButton: UIButton!
     @IBOutlet var addToCartButton: UIButton!
     @IBOutlet var productPriceLabel: UILabel!
     @IBOutlet var productCollectionLabel: UILabel!
@@ -24,16 +23,16 @@ class ListItemCellView: UITableViewCell {
     }
     
     var addToCartHandler: (() -> Void)?
-    var optionsHandler: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         containerView.round()
         containerView.addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)
-        productImageView.addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)
+        
+        configureImageView()
+        
         addToCartButton.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)
-        optionsButton.addTarget(self, action: #selector(optionsTapped), for: .touchUpInside)
         
         activityIndicator.startAnimating()
     }
@@ -47,13 +46,16 @@ class ListItemCellView: UITableViewCell {
         productPriceLabel.text = "$\(product.price)"
         productCollectionLabel.text = "By \(product.vendor)"
     }
+    
+    func configureImageView() {
+        let borderLayer = CALayer()
+        borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+        borderLayer.frame = CGRect(x: productImageView.bounds.maxX - 1, y: productImageView.bounds.minY, width: 1, height: productImageView.bounds.height)
+        productImageView.layer.addSublayer(borderLayer)
+    }
 
     @objc func addToCartTapped() {
         addToCartHandler?()
-    }
-    
-    @objc func optionsTapped() {
-        optionsHandler?()
     }
     
 }

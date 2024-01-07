@@ -21,6 +21,48 @@
 		970EECE02B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECDF2B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift */; };
 		970EECE72B33AE3A009D53C7 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECE52B33AE3A009D53C7 /* CollectionCell.swift */; };
 		970EECE82B33AE3A009D53C7 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970EECE62B33AE3A009D53C7 /* CollectionCell.xib */; };
+		9728F8EA2B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C32B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf */; };
+		9728F8EB2B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C42B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf */; };
+		9728F8EC2B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C52B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf */; };
+		9728F8ED2B480BAC00E5CEA9 /* AmazonEmberCd_BdIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C62B480BAC00E5CEA9 /* AmazonEmberCd_BdIt.ttf */; };
+		9728F8EE2B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C72B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf */; };
+		9728F8EF2B480BAC00E5CEA9 /* AmazonEmber_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C82B480BAC00E5CEA9 /* AmazonEmber_Rg.ttf */; };
+		9728F8F02B480BAC00E5CEA9 /* AmazonEmberDuospace_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8C92B480BAC00E5CEA9 /* AmazonEmberDuospace_Rg.ttf */; };
+		9728F8F12B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CA2B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf */; };
+		9728F8F22B480BAC00E5CEA9 /* AmazonEmberMono_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CB2B480BAC00E5CEA9 /* AmazonEmberMono_Bd.ttf */; };
+		9728F8F32B480BAC00E5CEA9 /* AmazonEmberCd_RgIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CC2B480BAC00E5CEA9 /* AmazonEmberCd_RgIt.ttf */; };
+		9728F8F42B480BAC00E5CEA9 /* AmazonEmber_ThIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CD2B480BAC00E5CEA9 /* AmazonEmber_ThIt.ttf */; };
+		9728F8F52B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CE2B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf */; };
+		9728F8F62B480BAC00E5CEA9 /* AmazonEmberDisplay_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8CF2B480BAC00E5CEA9 /* AmazonEmberDisplay_Rg.ttf */; };
+		9728F8F72B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D02B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf */; };
+		9728F8F82B480BAC00E5CEA9 /* AmazonEmber_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D12B480BAC00E5CEA9 /* AmazonEmber_Lt.ttf */; };
+		9728F8F92B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D22B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf */; };
+		9728F8FA2B480BAC00E5CEA9 /* BookerlyLCD_It.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D32B480BAC00E5CEA9 /* BookerlyLCD_It.ttf */; };
+		9728F8FB2B480BAC00E5CEA9 /* BookerlyDisplay_BdIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D42B480BAC00E5CEA9 /* BookerlyDisplay_BdIt.ttf */; };
+		9728F8FC2B480BAC00E5CEA9 /* AmazonEmberMono_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D52B480BAC00E5CEA9 /* AmazonEmberMono_Rg.ttf */; };
+		9728F8FD2B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D62B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf */; };
+		9728F8FE2B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D72B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf */; };
+		9728F8FF2B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D82B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf */; };
+		9728F9002B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8D92B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf */; };
+		9728F9012B480BAC00E5CEA9 /* AmazonEmber_Th.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DA2B480BAC00E5CEA9 /* AmazonEmber_Th.ttf */; };
+		9728F9022B480BAC00E5CEA9 /* AmazonEmberDisplay_He.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DB2B480BAC00E5CEA9 /* AmazonEmberDisplay_He.ttf */; };
+		9728F9032B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DC2B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf */; };
+		9728F9042B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DD2B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf */; };
+		9728F9052B480BAC00E5CEA9 /* AmazonEmber-MdIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DE2B480BAC00E5CEA9 /* AmazonEmber-MdIt.ttf */; };
+		9728F9062B480BAC00E5CEA9 /* AmazonEmber-Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8DF2B480BAC00E5CEA9 /* AmazonEmber-Md.ttf */; };
+		9728F9072B480BAC00E5CEA9 /* BookerlyLCD_LtIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E02B480BAC00E5CEA9 /* BookerlyLCD_LtIt.ttf */; };
+		9728F9082B480BAC00E5CEA9 /* AmazonEmber_RgIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E12B480BAC00E5CEA9 /* AmazonEmber_RgIt.ttf */; };
+		9728F9092B480BAC00E5CEA9 /* AmazonEmberCd_ThIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E22B480BAC00E5CEA9 /* AmazonEmberCd_ThIt.ttf */; };
+		9728F90A2B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E32B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf */; };
+		9728F90B2B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E42B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf */; };
+		9728F90C2B480BAC00E5CEA9 /* AmazonEmber_He.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E52B480BAC00E5CEA9 /* AmazonEmber_He.ttf */; };
+		9728F90D2B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E62B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf */; };
+		9728F90E2B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E72B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf */; };
+		9728F90F2B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E82B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf */; };
+		9728F9102B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9728F8E92B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf */; };
+		9728F9132B48397A00E5CEA9 /* OrderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728F9112B48397A00E5CEA9 /* OrderItemCell.swift */; };
+		9728F9142B48397A00E5CEA9 /* OrderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9728F9122B48397A00E5CEA9 /* OrderItemCell.xib */; };
+		9728F9162B48AF3800E5CEA9 /* OrderTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9728F9152B48AF3800E5CEA9 /* OrderTableViewDelegate.swift */; };
 		972FABDB2B3B806B0017114A /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972FABDA2B3B806B0017114A /* ProfileView.xib */; };
 		972FABDD2B3B8FB30017114A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972FABDC2B3B8FB30017114A /* ProfileView.swift */; };
 		972FABDF2B3C9A9F0017114A /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972FABDE2B3C9A9F0017114A /* Order.swift */; };
@@ -37,7 +79,6 @@
 		972FAC202B3E51210017114A /* OrdersControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972FAC1F2B3E51210017114A /* OrdersControllerPresenter.swift */; };
 		972FAC252B3E52CE0017114A /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972FAC232B3E52CE0017114A /* OrderDetailViewController.swift */; };
 		972FAC262B3E52CE0017114A /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972FAC242B3E52CE0017114A /* OrderDetailViewController.xib */; };
-		972FAC282B3E5F570017114A /* OrderCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972FAC272B3E5F570017114A /* OrderCollectionDelegate.swift */; };
 		9737E73D2B29237000735A72 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737E73B2B29237000735A72 /* CartViewController.swift */; };
 		9737E73E2B29237000735A72 /* CartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9737E73C2B29237000735A72 /* CartView.xib */; };
 		9737E7402B292F4700735A72 /* CartViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */; };
@@ -75,8 +116,6 @@
 		9790F8E42B3F0A5400597A50 /* OrderCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8E22B3F0A5400597A50 /* OrderCollectionCell.xib */; };
 		9790F8E62B3F109900597A50 /* OrdersCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8E52B3F109900597A50 /* OrdersCollectionViewDelegate.swift */; };
 		9790F8F22B3F25A500597A50 /* ProfileViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8F12B3F25A500597A50 /* ProfileViewPresenter.swift */; };
-		9790F8F52B3FB44B00597A50 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8F32B3FB44B00597A50 /* ItemCell.swift */; };
-		9790F8F62B3FB44B00597A50 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8F42B3FB44B00597A50 /* ItemCell.xib */; };
 		9790F8FA2B3FC0FA00597A50 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8F82B3FC0FA00597A50 /* ListsViewController.swift */; };
 		9790F8FB2B3FC0FA00597A50 /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8F92B3FC0FA00597A50 /* ListsViewController.xib */; };
 		9790F8FF2B3FC14100597A50 /* ListsControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8FD2B3FC14100597A50 /* ListsControllerPresenter.swift */; };
@@ -125,6 +164,48 @@
 		970EECDF2B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsAPIServiceAdapter.swift; sourceTree = "<group>"; };
 		970EECE52B33AE3A009D53C7 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		970EECE62B33AE3A009D53C7 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		9728F8C32B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_Bd.ttf; sourceTree = "<group>"; };
+		9728F8C42B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_Th.ttf; sourceTree = "<group>"; };
+		9728F8C52B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Md.ttf; sourceTree = "<group>"; };
+		9728F8C62B480BAC00E5CEA9 /* AmazonEmberCd_BdIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_BdIt.ttf; sourceTree = "<group>"; };
+		9728F8C72B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Lt.ttf; sourceTree = "<group>"; };
+		9728F8C82B480BAC00E5CEA9 /* AmazonEmber_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_Rg.ttf; sourceTree = "<group>"; };
+		9728F8C92B480BAC00E5CEA9 /* AmazonEmberDuospace_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDuospace_Rg.ttf; sourceTree = "<group>"; };
+		9728F8CA2B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_Bd.ttf; sourceTree = "<group>"; };
+		9728F8CB2B480BAC00E5CEA9 /* AmazonEmberMono_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberMono_Bd.ttf; sourceTree = "<group>"; };
+		9728F8CC2B480BAC00E5CEA9 /* AmazonEmberCd_RgIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_RgIt.ttf; sourceTree = "<group>"; };
+		9728F8CD2B480BAC00E5CEA9 /* AmazonEmber_ThIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_ThIt.ttf; sourceTree = "<group>"; };
+		9728F8CE2B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_LtIt.ttf; sourceTree = "<group>"; };
+		9728F8CF2B480BAC00E5CEA9 /* AmazonEmberDisplay_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Rg.ttf; sourceTree = "<group>"; };
+		9728F8D02B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyDisplay_Rg.ttf; sourceTree = "<group>"; };
+		9728F8D12B480BAC00E5CEA9 /* AmazonEmber_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_Lt.ttf; sourceTree = "<group>"; };
+		9728F8D22B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_BdIt.ttf; sourceTree = "<group>"; };
+		9728F8D32B480BAC00E5CEA9 /* BookerlyLCD_It.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_It.ttf; sourceTree = "<group>"; };
+		9728F8D42B480BAC00E5CEA9 /* BookerlyDisplay_BdIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyDisplay_BdIt.ttf; sourceTree = "<group>"; };
+		9728F8D52B480BAC00E5CEA9 /* AmazonEmberMono_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberMono_Rg.ttf; sourceTree = "<group>"; };
+		9728F8D62B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyDisplay_It.ttf; sourceTree = "<group>"; };
+		9728F8D72B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDuospace_Bd.ttf; sourceTree = "<group>"; };
+		9728F8D82B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_Bd.ttf; sourceTree = "<group>"; };
+		9728F8D92B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_Rg.ttf; sourceTree = "<group>"; };
+		9728F8DA2B480BAC00E5CEA9 /* AmazonEmber_Th.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_Th.ttf; sourceTree = "<group>"; };
+		9728F8DB2B480BAC00E5CEA9 /* AmazonEmberDisplay_He.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_He.ttf; sourceTree = "<group>"; };
+		9728F8DC2B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_LtIt.ttf; sourceTree = "<group>"; };
+		9728F8DD2B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_Rg.ttf; sourceTree = "<group>"; };
+		9728F8DE2B480BAC00E5CEA9 /* AmazonEmber-MdIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmazonEmber-MdIt.ttf"; sourceTree = "<group>"; };
+		9728F8DF2B480BAC00E5CEA9 /* AmazonEmber-Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmazonEmber-Md.ttf"; sourceTree = "<group>"; };
+		9728F8E02B480BAC00E5CEA9 /* BookerlyLCD_LtIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_LtIt.ttf; sourceTree = "<group>"; };
+		9728F8E12B480BAC00E5CEA9 /* AmazonEmber_RgIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_RgIt.ttf; sourceTree = "<group>"; };
+		9728F8E22B480BAC00E5CEA9 /* AmazonEmberCd_ThIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_ThIt.ttf; sourceTree = "<group>"; };
+		9728F8E32B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyDisplay_Bd.ttf; sourceTree = "<group>"; };
+		9728F8E42B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BookerlyLCD_Lt.ttf; sourceTree = "<group>"; };
+		9728F8E52B480BAC00E5CEA9 /* AmazonEmber_He.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_He.ttf; sourceTree = "<group>"; };
+		9728F8E62B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Bd.ttf; sourceTree = "<group>"; };
+		9728F8E72B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_HeIt.ttf; sourceTree = "<group>"; };
+		9728F8E82B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberCd_Lt.ttf; sourceTree = "<group>"; };
+		9728F8E92B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmber_BdIt.ttf; sourceTree = "<group>"; };
+		9728F9112B48397A00E5CEA9 /* OrderItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemCell.swift; sourceTree = "<group>"; };
+		9728F9122B48397A00E5CEA9 /* OrderItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderItemCell.xib; sourceTree = "<group>"; };
+		9728F9152B48AF3800E5CEA9 /* OrderTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewDelegate.swift; sourceTree = "<group>"; };
 		972FABDA2B3B806B0017114A /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		972FABDC2B3B8FB30017114A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		972FABDE2B3C9A9F0017114A /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -141,7 +222,6 @@
 		972FAC1F2B3E51210017114A /* OrdersControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersControllerPresenter.swift; sourceTree = "<group>"; };
 		972FAC232B3E52CE0017114A /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		972FAC242B3E52CE0017114A /* OrderDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
-		972FAC272B3E5F570017114A /* OrderCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionDelegate.swift; sourceTree = "<group>"; };
 		9737E73B2B29237000735A72 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		9737E73C2B29237000735A72 /* CartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartView.xib; sourceTree = "<group>"; };
 		9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -178,8 +258,6 @@
 		9790F8E22B3F0A5400597A50 /* OrderCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCollectionCell.xib; sourceTree = "<group>"; };
 		9790F8E52B3F109900597A50 /* OrdersCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		9790F8F12B3F25A500597A50 /* ProfileViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenter.swift; sourceTree = "<group>"; };
-		9790F8F32B3FB44B00597A50 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
-		9790F8F42B3FB44B00597A50 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		9790F8F82B3FC0FA00597A50 /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
 		9790F8F92B3FC0FA00597A50 /* ListsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
 		9790F8FD2B3FC14100597A50 /* ListsControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsControllerPresenter.swift; sourceTree = "<group>"; };
@@ -248,6 +326,52 @@
 			path = Collections;
 			sourceTree = "<group>";
 		};
+		9728F8C22B480BAC00E5CEA9 /* MyFonts */ = {
+			isa = PBXGroup;
+			children = (
+				9728F8C32B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf */,
+				9728F8C42B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf */,
+				9728F8C52B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf */,
+				9728F8C62B480BAC00E5CEA9 /* AmazonEmberCd_BdIt.ttf */,
+				9728F8C72B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf */,
+				9728F8C82B480BAC00E5CEA9 /* AmazonEmber_Rg.ttf */,
+				9728F8C92B480BAC00E5CEA9 /* AmazonEmberDuospace_Rg.ttf */,
+				9728F8CA2B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf */,
+				9728F8CB2B480BAC00E5CEA9 /* AmazonEmberMono_Bd.ttf */,
+				9728F8CC2B480BAC00E5CEA9 /* AmazonEmberCd_RgIt.ttf */,
+				9728F8CD2B480BAC00E5CEA9 /* AmazonEmber_ThIt.ttf */,
+				9728F8CE2B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf */,
+				9728F8CF2B480BAC00E5CEA9 /* AmazonEmberDisplay_Rg.ttf */,
+				9728F8D02B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf */,
+				9728F8D12B480BAC00E5CEA9 /* AmazonEmber_Lt.ttf */,
+				9728F8D22B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf */,
+				9728F8D32B480BAC00E5CEA9 /* BookerlyLCD_It.ttf */,
+				9728F8D42B480BAC00E5CEA9 /* BookerlyDisplay_BdIt.ttf */,
+				9728F8D52B480BAC00E5CEA9 /* AmazonEmberMono_Rg.ttf */,
+				9728F8D62B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf */,
+				9728F8D72B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf */,
+				9728F8D82B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf */,
+				9728F8D92B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf */,
+				9728F8DA2B480BAC00E5CEA9 /* AmazonEmber_Th.ttf */,
+				9728F8DB2B480BAC00E5CEA9 /* AmazonEmberDisplay_He.ttf */,
+				9728F8DC2B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf */,
+				9728F8DD2B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf */,
+				9728F8DE2B480BAC00E5CEA9 /* AmazonEmber-MdIt.ttf */,
+				9728F8DF2B480BAC00E5CEA9 /* AmazonEmber-Md.ttf */,
+				9728F8E02B480BAC00E5CEA9 /* BookerlyLCD_LtIt.ttf */,
+				9728F8E12B480BAC00E5CEA9 /* AmazonEmber_RgIt.ttf */,
+				9728F8E22B480BAC00E5CEA9 /* AmazonEmberCd_ThIt.ttf */,
+				9728F8E32B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf */,
+				9728F8E42B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf */,
+				9728F8E52B480BAC00E5CEA9 /* AmazonEmber_He.ttf */,
+				9728F8E62B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf */,
+				9728F8E72B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf */,
+				9728F8E82B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf */,
+				9728F8E92B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf */,
+			);
+			path = MyFonts;
+			sourceTree = "<group>";
+		};
 		972FAC1C2B3E50260017114A /* OrdersViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,7 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				972FAC232B3E52CE0017114A /* OrderDetailViewController.swift */,
-				972FAC272B3E5F570017114A /* OrderCollectionDelegate.swift */,
+				9728F9152B48AF3800E5CEA9 /* OrderTableViewDelegate.swift */,
 			);
 			path = OrderDetailView;
 			sourceTree = "<group>";
@@ -377,6 +501,7 @@
 				97B390052B1F845B00EB90EA /* Assets.xcassets */,
 				9758BA052B23DDBC00F4E8F4 /* Constants.swift */,
 				97B390122B1F92BB00EB90EA /* Observable.swift */,
+				9728F8C22B480BAC00E5CEA9 /* MyFonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -469,8 +594,8 @@
 				972FAC192B3E465F0017114A /* OrderCellView.xib */,
 				972FAC182B3E465F0017114A /* OrderCellView.swift */,
 				972FAC242B3E52CE0017114A /* OrderDetailViewController.xib */,
-				9790F8F32B3FB44B00597A50 /* ItemCell.swift */,
-				9790F8F42B3FB44B00597A50 /* ItemCell.xib */,
+				9728F9112B48397A00E5CEA9 /* OrderItemCell.swift */,
+				9728F9122B48397A00E5CEA9 /* OrderItemCell.xib */,
 			);
 			path = OrdersView;
 			sourceTree = "<group>";
@@ -655,32 +780,71 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9728F8EE2B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf in Resources */,
 				973CEA482B2796BD00E0487D /* Main.storyboard in Resources */,
+				9728F8F92B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf in Resources */,
 				97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */,
+				9728F90A2B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf in Resources */,
+				9728F8FC2B480BAC00E5CEA9 /* AmazonEmberMono_Rg.ttf in Resources */,
+				9728F8F02B480BAC00E5CEA9 /* AmazonEmberDuospace_Rg.ttf in Resources */,
+				9728F9052B480BAC00E5CEA9 /* AmazonEmber-MdIt.ttf in Resources */,
+				9728F8F62B480BAC00E5CEA9 /* AmazonEmberDisplay_Rg.ttf in Resources */,
+				9728F8F82B480BAC00E5CEA9 /* AmazonEmber_Lt.ttf in Resources */,
+				9728F9082B480BAC00E5CEA9 /* AmazonEmber_RgIt.ttf in Resources */,
+				9728F9022B480BAC00E5CEA9 /* AmazonEmberDisplay_He.ttf in Resources */,
 				972FAC262B3E52CE0017114A /* OrderDetailViewController.xib in Resources */,
 				9790F9212B41FAAC00597A50 /* CreateListView.xib in Resources */,
 				9790F9052B40931C00597A50 /* ListDetailViewController.xib in Resources */,
 				970EECD82B33304C009D53C7 /* ImageCell.xib in Resources */,
+				9728F9072B480BAC00E5CEA9 /* BookerlyLCD_LtIt.ttf in Resources */,
 				970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */,
+				9728F8EA2B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf in Resources */,
 				9790F8FB2B3FC0FA00597A50 /* ListsViewController.xib in Resources */,
 				974DF5CE2B34848500786FC2 /* HomeView.xib in Resources */,
 				97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */,
+				9728F9032B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf in Resources */,
 				974DF5DC2B34AF4400786FC2 /* CategoriesView.xib in Resources */,
+				9728F9012B480BAC00E5CEA9 /* AmazonEmber_Th.ttf in Resources */,
 				972FAC152B3E456B0017114A /* OrdersViewController.xib in Resources */,
+				9728F90C2B480BAC00E5CEA9 /* AmazonEmber_He.ttf in Resources */,
+				9728F8F32B480BAC00E5CEA9 /* AmazonEmberCd_RgIt.ttf in Resources */,
+				9728F8FA2B480BAC00E5CEA9 /* BookerlyLCD_It.ttf in Resources */,
 				9790F9192B41DFCF00597A50 /* ListSelectionView.xib in Resources */,
 				97EEFABE2B2BB5B300065A8A /* ProductCell.xib in Resources */,
 				972FAC1B2B3E465F0017114A /* OrderCellView.xib in Resources */,
 				973CEA532B28D1D900E0487D /* CartCellView.xib in Resources */,
-				9790F8F62B3FB44B00597A50 /* ItemCell.xib in Resources */,
+				9728F9092B480BAC00E5CEA9 /* AmazonEmberCd_ThIt.ttf in Resources */,
 				97D612952B473BF7000174FE /* ListItemCellView.xib in Resources */,
+				9728F90B2B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf in Resources */,
+				9728F9042B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf in Resources */,
+				9728F8F72B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf in Resources */,
+				9728F90F2B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf in Resources */,
+				9728F8EC2B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf in Resources */,
 				970EECE82B33AE3A009D53C7 /* CollectionCell.xib in Resources */,
 				97EEFAED2B2E71BD00065A8A /* SmallCategoryCell.xib in Resources */,
+				9728F8F22B480BAC00E5CEA9 /* AmazonEmberMono_Bd.ttf in Resources */,
+				9728F8EF2B480BAC00E5CEA9 /* AmazonEmber_Rg.ttf in Resources */,
+				9728F8ED2B480BAC00E5CEA9 /* AmazonEmberCd_BdIt.ttf in Resources */,
 				972FABDB2B3B806B0017114A /* ProfileView.xib in Resources */,
+				9728F8FE2B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf in Resources */,
+				9728F9062B480BAC00E5CEA9 /* AmazonEmber-Md.ttf in Resources */,
+				9728F8FF2B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf in Resources */,
+				9728F90E2B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf in Resources */,
+				9728F9142B48397A00E5CEA9 /* OrderItemCell.xib in Resources */,
 				9790F8E42B3F0A5400597A50 /* OrderCollectionCell.xib in Resources */,
+				9728F8FB2B480BAC00E5CEA9 /* BookerlyDisplay_BdIt.ttf in Resources */,
+				9728F8EB2B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf in Resources */,
+				9728F8F52B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf in Resources */,
 				9790F90D2B40950800597A50 /* ListCell.xib in Resources */,
+				9728F9002B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf in Resources */,
+				9728F9102B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf in Resources */,
 				9737E73E2B29237000735A72 /* CartView.xib in Resources */,
 				974DF5E42B350AA500786FC2 /* CategoryView.xib in Resources */,
+				9728F8F42B480BAC00E5CEA9 /* AmazonEmber_ThIt.ttf in Resources */,
 				97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */,
+				9728F8F12B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf in Resources */,
+				9728F8FD2B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf in Resources */,
+				9728F90D2B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,11 +878,10 @@
 				97E7A43B2B37776500A1C20E /* WishListViewController+Search.swift in Sources */,
 				9758B9FE2B22B53500F4E8F4 /* ProductCell.swift in Sources */,
 				97B390132B1F92BB00EB90EA /* Observable.swift in Sources */,
-				972FAC282B3E5F570017114A /* OrderCollectionDelegate.swift in Sources */,
+				9728F9132B48397A00E5CEA9 /* OrderItemCell.swift in Sources */,
 				972FABDF2B3C9A9F0017114A /* Order.swift in Sources */,
 				97E7A4342B37749B00A1C20E /* WishListViewController.swift in Sources */,
 				972FABE12B3C9B680017114A /* List.swift in Sources */,
-				9790F8F52B3FB44B00597A50 /* ItemCell.swift in Sources */,
 				972FAC202B3E51210017114A /* OrdersControllerPresenter.swift in Sources */,
 				970EECDE2B33A649009D53C7 /* CollectionsAPI.swift in Sources */,
 				9758BA062B23DDBC00F4E8F4 /* Constants.swift in Sources */,
@@ -763,6 +926,7 @@
 				97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */,
 				970EECD22B31AF6D009D53C7 /* Products.swift in Sources */,
 				9758B9F22B211B9500F4E8F4 /* HomeViewController.swift in Sources */,
+				9728F9162B48AF3800E5CEA9 /* OrderTableViewDelegate.swift in Sources */,
 				9790F8E32B3F0A5400597A50 /* OrderCollectionCell.swift in Sources */,
 				970EECD72B33304C009D53C7 /* ImageCell.swift in Sources */,
 			);

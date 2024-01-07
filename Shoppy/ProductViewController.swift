@@ -57,6 +57,7 @@ final class ProductViewController: UIViewController {
         liked = listsViewModel.isLiked(product: product)
         productView.configure(with: product)
         configButtons()
+        selectedColor = productView.availableColors.first
     }
     
     private func configureLikeButton() {
@@ -116,10 +117,14 @@ final class ProductViewController: UIViewController {
     }
     
     @objc func addToCartButtonTapped() {
-        guard let productViewModel = product else {
+        guard var product, let selectedColor else {
             return
         }
-        productsViewModel.addProduct(product: productViewModel)
+        
+        product.selectColor(color: selectedColor.accessibilityName)
+        product.selectSize(size: productView.selectedSize)
+        
+        productsViewModel.addProduct(product: product)
         showAddedSuccessfulyAlert()
     }
     
