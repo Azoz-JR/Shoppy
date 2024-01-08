@@ -16,44 +16,36 @@ final class CategoryViewController: UIViewController {
     var productsViewModel: ProductsViewModel?
     var listsViewModel: ListsViewModel?
     var service: Service?
-    var collection: ItemViewModel? = nil
+    var collection: ItemViewModel?
+    var section: Section?
     var products: [ItemViewModel] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let collection else {
-            return
-        }
-        
-        configureCollectionView()
         configureBackground()
         
+        configureCollectionView()
+        
         contentView.backgroundColor = .systemBackground
-        title = collection.title
-        navigationController?.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
+        navigationItem.backButtonDisplayMode = .minimal
         
         configureSearchBar()
             
         refresh()
-    }
-    
-    func configureBackground() {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .white
-        imageView.sd_setImage(with: collection?.image)
-        collectionView.backgroundView = imageView
         
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.5
-        blurEffectView.frame = collectionView.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        imageView.addSubview(blurEffectView)
+        if let section {
+            products = section.items
+            productsDataSourceAndDelegate.data = products
+            reloadCollectionView()
+            
+            products.count < 5
+            ? isHidingSearchBarOnScrolling(false)
+            : isHidingSearchBarOnScrolling(true)
+        }
+        
     }
     
     @objc func refresh() {
@@ -79,7 +71,28 @@ final class CategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
         reloadCollectionView()
+    }
+    
+    func configureBackground() {
+        guard let collection else {
+            return
+        }
+        
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .white
+        imageView.sd_setImage(with: collection.image)
+        collectionView.backgroundView = imageView
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.frame = collectionView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.addSubview(blurEffectView)
     }
     
 }

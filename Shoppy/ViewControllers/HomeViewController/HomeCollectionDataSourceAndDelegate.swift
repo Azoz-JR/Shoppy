@@ -1,5 +1,5 @@
 //
-//  HomeColletionDataSourceAndDelegate.swift
+//  HomeCollectionDataSourceAndDelegate.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 07/01/2024.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class HomeColletionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var data: [Section] = []
-    var parentController: ParentControllerPresenter?
+    var parentController: HomeControllerPresenter?
     var listsViewModel: ListsViewModel?
 
     
@@ -18,7 +18,8 @@ final class HomeColletionDataSourceAndDelegate: NSObject, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        let count = data[section].items.count
+        return  count > 2 ? 2 : count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -31,8 +32,8 @@ final class HomeColletionDataSourceAndDelegate: NSObject, UICollectionViewDataSo
                 let sectionTitle = data[indexPath.section].title
                 headerView.configure(title: sectionTitle)
                 
-                headerView.seeMoreHandler = {
-                    
+                headerView.seeMoreHandler = { [weak self] in
+                    self?.parentController?.setionSelected(at: indexPath)
                 }
                 
                 return headerView

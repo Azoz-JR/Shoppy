@@ -35,10 +35,10 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteList))
         navigationItem.rightBarButtonItem?.tintColor = .systemRed
         
-        configuareCollectionView()
+        configuareTableView()
     }
     
-    func configuareCollectionView() {
+    func configuareTableView() {
         tableView.delegate = listItemsTableViewDelegate
         tableView.dataSource = listItemsTableViewDelegate
         

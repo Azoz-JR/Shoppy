@@ -1,14 +1,15 @@
 //
-//  ParentControllerPresenter.swift
+//  HomeControllerPresenter.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 21/12/2023.
+//  Created by Azoz Salah on 08/01/2024.
 //
 
 import Foundation
 
-protocol ParentControllerPresenter {
+protocol HomeControllerPresenter {
     func itemSelected(at index: IndexPath)
+    func setionSelected(at index: IndexPath)
 }
 
 protocol HomeCategoriesPresenter {

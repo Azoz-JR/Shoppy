@@ -11,18 +11,20 @@ final class HomeViewController: UIViewController {
     @IBOutlet var homeView: UIView!
     @IBOutlet var collectionView: UICollectionView!
     
-    let collectionDataSourceAndDelegate = HomeColletionDataSourceAndDelegate()
+    let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
     let searchController = UISearchController()
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()
+    let searchBar = UISearchBar()
     
     var productsViewModel: ProductsViewModel?
     var listsViewModel: ListsViewModel?
     let categories = Category.allCases
     var service: Service?
+    var sections: [Section] = []
     var products: [ItemViewModel] = []
-    var selectedIndex: IndexPath?
+    //var selectedIndex: IndexPath?
     
     
     override func viewDidLoad() {
@@ -30,6 +32,7 @@ final class HomeViewController: UIViewController {
         
         view.backgroundColor = .clear
         navigationController?.navigationBar.tintColor = .navBarTint
+        navigationItem.backButtonDisplayMode = .minimal
         
         configureCategoriesCollection()
         configureCollectionView()
@@ -52,7 +55,7 @@ final class HomeViewController: UIViewController {
         case .success(let products):
             self.products = products
             
-            let sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"}))]
+            self.sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})), Section(title: "Shoes", items: products.filter({$0.category == .shoes})), Section(title: "Accessories", items: products.filter({$0.category == .accessories})), Section(title: "T-Shirts", items: products.filter({$0.category == .tShirts}))]
             
             collectionDataSourceAndDelegate.data = sections
             reloadCollectionView()
@@ -75,6 +78,7 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        searchBar.resignFirstResponder()
         reloadCollectionView()
     }
     

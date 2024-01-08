@@ -34,10 +34,10 @@ final class SmallCategoryCell: UICollectionViewCell {
         categoryLabel.text = category.rawValue.capitalized
     }
     
-    override var isSelected: Bool {
-        didSet {
-            content.backgroundColor = isSelected ? .myGreen : .categoryBackground
-            categoryLabel.textColor = isSelected ? .black : .label
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            content.backgroundColor = isSelected ? .myGreen : .categoryBackground
+//            categoryLabel.textColor = isSelected ? .black : .label
+//        }
+//    }
 }

@@ -7,16 +7,32 @@
 
 import UIKit
 
-extension HomeViewController: UISearchResultsUpdating {
+extension HomeViewController: UISearchBarDelegate {
     
     func configureSearchBar() {
-        navigationItem.searchController = searchController
-        searchController.searchResultsUpdater = self
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = "Search Shoppy"
+        searchBar.tintColor = UIColor.lightGray
+        searchBar.barTintColor = UIColor.lightGray
+        navigationItem.titleView = searchBar
+        searchBar.isTranslucent = true
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
-//            productsCollectionDataSourceAndDelegate.data = products
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        let searchVC = SearchViewController()
+        searchVC.productsViewModel = productsViewModel
+        searchVC.listsViewModel = listsViewModel
+        searchVC.service = service
+        searchVC.result = products
+        
+        show(searchVC, sender: self)
+    }
+    
+//    func updateSearchResults(for searchController: UISearchController) {
+        //        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
+        //            productsCollectionDataSourceAndDelegate.data = products
 //            reloadCollectionView()
 //            return
 //        }
@@ -25,6 +41,6 @@ extension HomeViewController: UISearchResultsUpdating {
 //            product.title.uppercased().contains(text.uppercased())
 //        }
 //        reloadCollectionView()
-    }
+//    }
     
 }

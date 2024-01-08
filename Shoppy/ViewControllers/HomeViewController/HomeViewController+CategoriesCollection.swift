@@ -52,24 +52,37 @@ extension HomeViewController: HomeCategoriesPresenter {
 //        reloadCollectionView()
     }
     
+//    func categorySelected(at index: IndexPath) {
+//        guard let selectedIndex = selectedIndex else {
+//            selectedIndex = index
+//            filterProducts(category: categories[index.row])
+//            return
+//        }
+//        
+//        if selectedIndex != index {
+//            categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
+//            self.selectedIndex = index
+//            filterProducts(category: categories[index.row])
+//            return
+//        }
+//        
+//        // Selecting the currently selectedIndex condition
+//        categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
+//        self.selectedIndex = nil
+//        filterProducts(category: nil)
+//    }
+    
     func categorySelected(at index: IndexPath) {
-        guard let selectedIndex = selectedIndex else {
-            selectedIndex = index
-            filterProducts(category: categories[index.row])
-            return
-        }
+        let category = categories[index.row]
+        let section = Section(title: category.rawValue, items: products.filter({ $0.category == category}))
         
-        if selectedIndex != index {
-            categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
-            self.selectedIndex = index
-            filterProducts(category: categories[index.row])
-            return
-        }
+        let vc = CategoryViewController()
+        vc.productsViewModel = productsViewModel
+        vc.listsViewModel = listsViewModel
+        vc.section = section
+        vc.title = section.title
         
-        // Selecting the currently selectedIndex condition
-        categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
-        self.selectedIndex = nil
-        filterProducts(category: nil)
+        show(vc, sender: self)
     }
     
 }

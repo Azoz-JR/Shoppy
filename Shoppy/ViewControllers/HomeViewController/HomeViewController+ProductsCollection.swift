@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension HomeViewController: ParentControllerPresenter {
+extension HomeViewController: HomeControllerPresenter {
     
     func configureCollectionDelegateAndDataSource() {
         collectionView.delegate = collectionDataSourceAndDelegate
@@ -26,12 +26,26 @@ extension HomeViewController: ParentControllerPresenter {
     }
     
     func itemSelected(at index: IndexPath) {
-        let product = products[index.row]
+        let product = sections[index.section].items[index.row]
         guard let productsViewModel, let listsViewModel else {
             return
         }
         
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+    }
+    
+    func setionSelected(at index: IndexPath) {
+        let vc = CategoryViewController()
+        vc.productsViewModel = productsViewModel
+        vc.listsViewModel = listsViewModel
+        let section = sections[index.section]
+        vc.section = section
+        vc.title = section.title
+        
+//        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared, category: collection.title)
+//        vc.service = api
+        
+        show(vc, sender: self)
     }
     
 }
