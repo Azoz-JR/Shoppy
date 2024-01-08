@@ -36,8 +36,6 @@ final class CategoryViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
         
-        
-        
         configureSearchBar()
             
         refresh()

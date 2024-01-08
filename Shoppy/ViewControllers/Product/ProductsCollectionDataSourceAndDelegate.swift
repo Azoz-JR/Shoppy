@@ -11,6 +11,7 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
     var data: [ItemViewModel] = []
     var parentController: ParentControllerPresenter?
     var listsViewModel: ListsViewModel?
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count

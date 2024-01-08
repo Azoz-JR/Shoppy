@@ -15,6 +15,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .secondBackground
         tableView.allowsSelection = false
+        tableView.keyboardDismissMode = .onDrag
         
         registerCell()
     }

@@ -15,16 +15,16 @@ extension HomeViewController: UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
-            productsCollectionDataSourceAndDelegate.data = products
-            reloadCollectionView()
-            return
-        }
-        
-        productsCollectionDataSourceAndDelegate.data = products.filter { product in
-            product.title.uppercased().contains(text.uppercased())
-        }
-        reloadCollectionView()
+//        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
+//            productsCollectionDataSourceAndDelegate.data = products
+//            reloadCollectionView()
+//            return
+//        }
+//        
+//        productsCollectionDataSourceAndDelegate.data = products.filter { product in
+//            product.title.uppercased().contains(text.uppercased())
+//        }
+//        reloadCollectionView()
     }
     
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmazonEmber_Bd.ttf">
+            <string>AmazonEmber-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductsHeader" id="U6b-Vx-4bR" customClass="ProductsCollectionReusableView" customModule="Shoppy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-4d-fvr">
+                    <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recomended for you" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdK-g4-p8l">
+                            <rect key="frame" x="15" y="0.0" width="213.33333333333334" height="54"/>
+                            <fontDescription key="fontDescription" name="AmazonEmber-Bold" family="Amazon Ember" pointSize="22"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RF3-Gh-w5n">
+                            <rect key="frame" x="343" y="39" width="50" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="p8V-nm-BXI"/>
+                            </constraints>
+                            <color key="tintColor" systemColor="secondaryLabelColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="View all">
+                                <backgroundConfiguration key="background"/>
+                                <fontDescription key="titleFontDescription" name="AmazonEmber-Regular" family="Amazon Ember" pointSize="14"/>
+                                <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                            </buttonConfiguration>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="AdK-g4-p8l" firstAttribute="leading" secondItem="z1R-4d-fvr" secondAttribute="leading" constant="15" id="1Lg-3c-OJp"/>
+                        <constraint firstItem="AdK-g4-p8l" firstAttribute="top" secondItem="z1R-4d-fvr" secondAttribute="top" id="IzI-Qr-FQk"/>
+                        <constraint firstAttribute="bottom" secondItem="AdK-g4-p8l" secondAttribute="bottom" id="gKa-Rv-QSA"/>
+                        <constraint firstAttribute="bottom" secondItem="RF3-Gh-w5n" secondAttribute="bottom" id="gLg-j5-dMa"/>
+                        <constraint firstAttribute="trailing" secondItem="RF3-Gh-w5n" secondAttribute="trailing" constant="15" id="vsN-Oj-wkT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="z1R-4d-fvr" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="ZWM-bh-wbj"/>
+                <constraint firstItem="z1R-4d-fvr" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="j3W-LM-A90"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="z1R-4d-fvr" secondAttribute="trailing" id="wDd-PI-ona"/>
+                <constraint firstAttribute="bottom" secondItem="z1R-4d-fvr" secondAttribute="bottom" id="wHn-XM-tdN"/>
+            </constraints>
+            <connections>
+                <outlet property="seeMoreButton" destination="RF3-Gh-w5n" id="4Yh-hC-6mw"/>
+                <outlet property="titleLabel" destination="AdK-g4-p8l" id="tME-SF-1pg"/>
+            </connections>
+            <point key="canvasLocation" x="45.801526717557252" y="-95.774647887323951"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -36,8 +36,8 @@ final class SmallCategoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            content.backgroundColor = isSelected ? .label : .categoryBackground
-            categoryLabel.textColor = isSelected ? .systemBackground : .label
+            content.backgroundColor = isSelected ? .myGreen : .categoryBackground
+            categoryLabel.textColor = isSelected ? .black : .label
         }
     }
 }

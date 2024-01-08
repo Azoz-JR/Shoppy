@@ -15,18 +15,18 @@ extension HomeViewController: HomeCategoriesPresenter {
         layout.itemSize = CGSize(width: 125, height: 30)
         layout.scrollDirection = .horizontal
         
-        categoriesCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100), collectionViewLayout: layout)
+        categoriesCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30), collectionViewLayout: layout)
         categoriesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         categoriesCollectionView.showsHorizontalScrollIndicator = false
         categoriesCollectionView.register(SmallCategoryCell.register(), forCellWithReuseIdentifier: SmallCategoryCell.identifier)
         collectionView.addSubview(categoriesCollectionView)
-                
+                        
         
         NSLayoutConstraint.activate([
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10),
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -30),
             categoriesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             categoriesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 40)
+            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 30)
         ])
         
         configureCategoriesDelegateAndDataSource()
@@ -40,16 +40,16 @@ extension HomeViewController: HomeCategoriesPresenter {
     }
     
     func filterProducts(category: Category?) {
-        guard let category = category else {
-            productsCollectionDataSourceAndDelegate.data = products
-            reloadCollectionView()
-            return
-        }
-        
-        productsCollectionDataSourceAndDelegate.data = products.filter { product in
-            product.category == category
-        }
-        reloadCollectionView()
+//        guard let category = category else {
+//            productsCollectionDataSourceAndDelegate.data = products
+//            reloadCollectionView()
+//            return
+//        }
+//        
+//        productsCollectionDataSourceAndDelegate.data = products.filter { product in
+//            product.category == category
+//        }
+//        reloadCollectionView()
     }
     
     func categorySelected(at index: IndexPath) {

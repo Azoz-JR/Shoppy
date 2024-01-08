@@ -11,7 +11,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet var homeView: UIView!
     @IBOutlet var collectionView: UICollectionView!
     
-    let productsCollectionDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
+    let collectionDataSourceAndDelegate = HomeColletionDataSourceAndDelegate()
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
     let searchController = UISearchController()
     var categoriesCollectionView: UICollectionView!
@@ -51,7 +51,10 @@ final class HomeViewController: UIViewController {
         switch result {
         case .success(let products):
             self.products = products
-            productsCollectionDataSourceAndDelegate.data = products
+            
+            let sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"}))]
+            
+            collectionDataSourceAndDelegate.data = sections
             reloadCollectionView()
         case .failure(let error):
             self.show(error: error)

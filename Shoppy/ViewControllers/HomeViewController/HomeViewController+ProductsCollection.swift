@@ -10,16 +10,18 @@ import UIKit
 extension HomeViewController: ParentControllerPresenter {
     
     func configureCollectionDelegateAndDataSource() {
-        collectionView.delegate = productsCollectionDataSourceAndDelegate
-        collectionView.dataSource = productsCollectionDataSourceAndDelegate
+        collectionView.delegate = collectionDataSourceAndDelegate
+        collectionView.dataSource = collectionDataSourceAndDelegate
         collectionView.keyboardDismissMode = .onDrag
         
-        productsCollectionDataSourceAndDelegate.listsViewModel = listsViewModel
-        productsCollectionDataSourceAndDelegate.parentController = self
+        collectionDataSourceAndDelegate.listsViewModel = listsViewModel
+        collectionDataSourceAndDelegate.parentController = self
     }
     
     func configureCollectionView() {
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
+        collectionView.register(ProductsCollectionReusableView.register(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProductsCollectionReusableView.identifier)
+        
         collectionView.contentInset = UIEdgeInsets(top: 70, left: .zero, bottom: .zero, right: .zero)
     }
     
