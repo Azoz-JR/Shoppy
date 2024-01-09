@@ -18,6 +18,9 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var orders: [Order] = []
     var lists: [List] = []
     
+    var tabBarVisible = true
+    var lastContentOffset: CGFloat = 0
+    
     override func loadView() {
         super.loadView()
         
@@ -26,21 +29,9 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.tintColor = .navBarTint
 
         configureNavBar()
-        
-        let name = UIButton(type: .system)
-        name.setTitle("Shoppy", for: .normal)
-        name.tintColor = .label
-        name.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
-        
-        let label = UIBarButtonItem(customView: name)
-        
-        navigationItem.leftBarButtonItem = label
+        configureScrollView()
         
         bindToOrders()
         bindToLists()
@@ -140,6 +131,19 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     }
     
     func configureNavBar() {
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .navBarTint
+        
+        let name = UIButton(type: .system)
+        name.setTitle("Shoppy", for: .normal)
+        name.tintColor = .label
+        name.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        
+        let label = UIBarButtonItem(customView: name)
+        
+        navigationItem.leftBarButtonItem = label
+        
 //        let appearance = UINavigationBarAppearance()
 //        appearance.backgroundColor = .systemBlue
 //        appearance.shadowColor = .clear

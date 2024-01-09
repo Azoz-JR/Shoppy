@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
+                <outlet property="noResultsLabel" destination="A5R-GJ-2rS" id="gR2-Pr-0MT"/>
+                <outlet property="noResultsView" destination="8hM-t9-jwc" id="WE4-9O-IAO"/>
                 <outlet property="tableView" destination="zZY-rb-e2c" id="m1u-8n-t3u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,23 +21,54 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="162" estimatedRowHeight="162" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zZY-rb-e2c">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="162" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zZY-rb-e2c">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hM-t9-jwc">
+                    <rect key="frame" x="10" y="388.66666666666669" width="373" height="100"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results for " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5R-GJ-2rS">
+                            <rect key="frame" x="128.66666666666666" y="29" width="115.66666666666666" height="21.666666666666671"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try checking your spelling or use more general terms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSZ-9i-15g">
+                            <rect key="frame" x="15.333333333333343" y="55.666666666666629" width="342.66666666666663" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="pSZ-9i-15g" firstAttribute="centerX" secondItem="A5R-GJ-2rS" secondAttribute="centerX" id="GWO-Vb-5gj"/>
+                        <constraint firstItem="A5R-GJ-2rS" firstAttribute="bottom" secondItem="pSZ-9i-15g" secondAttribute="top" constant="-5" id="Lf6-Bu-3db"/>
+                        <constraint firstAttribute="height" constant="100" id="MFx-pq-p3m"/>
+                        <constraint firstItem="A5R-GJ-2rS" firstAttribute="centerX" secondItem="8hM-t9-jwc" secondAttribute="centerX" id="UKJ-ph-yt4"/>
+                        <constraint firstItem="A5R-GJ-2rS" firstAttribute="centerY" secondItem="8hM-t9-jwc" secondAttribute="centerY" constant="-10" id="WsX-gh-Wfb"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8hM-t9-jwc" secondAttribute="trailing" constant="10" id="10C-bs-EWp"/>
                 <constraint firstItem="zZY-rb-e2c" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="9ck-VV-1F5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zZY-rb-e2c" secondAttribute="trailing" id="AoK-d2-9cG"/>
+                <constraint firstItem="8hM-t9-jwc" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Cd6-oX-1Ue"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zZY-rb-e2c" secondAttribute="bottom" id="GPr-GK-9e4"/>
+                <constraint firstItem="8hM-t9-jwc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="cE1-OO-yuz"/>
                 <constraint firstItem="zZY-rb-e2c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="l08-qD-8su"/>
             </constraints>
             <point key="canvasLocation" x="131" y="-11"/>
         </view>
     </objects>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileView: UIView {
-    
+        
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var scrollView: UIScrollView!
@@ -43,7 +43,7 @@ final class ProfileView: UIView {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(view)
         }
-        
+                
         userImageView.layer.cornerRadius = 15
         
         listContainer.layer.cornerRadius = 10
@@ -74,12 +74,11 @@ final class ProfileView: UIView {
         let nib = UINib(nibName: "ProfileView", bundle: nil)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
-    
-    
+        
 }
 
 
-// MARK: Buttons methods
+// MARK: - Buttons methods
 extension ProfileView {
     @objc func returnToHomeTapped() {
         returnToHomeHandler?()
@@ -105,7 +104,8 @@ extension ProfileView {
     
 }
 
-// MARK: Views Configurations
+
+// MARK: - Views Configurations
 extension ProfileView {
     func configureOrder(with orders: [Order]) {
         guard !orders.isEmpty else {

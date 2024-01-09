@@ -24,7 +24,7 @@ class SearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         containerView.round()
-        containerView.addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)
+        containerView.addBorder(color: .lightGray.withAlphaComponent(0.3), width: 1)
         
         configureImageView()
         
@@ -43,7 +43,7 @@ class SearchTableViewCell: UITableViewCell {
     
     func configureImageView() {
         let borderLayer = CALayer()
-        borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+        borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3).cgColor
         borderLayer.frame = CGRect(x: itemImageView.bounds.maxX - 1, y: itemImageView.bounds.minY, width: 1, height: itemImageView.bounds.height)
         itemImageView.layer.addSublayer(borderLayer)
     }

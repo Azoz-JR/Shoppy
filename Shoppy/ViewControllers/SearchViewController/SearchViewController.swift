@@ -9,6 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDelegate {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noResultsView: UIView!
+    @IBOutlet var noResultsLabel: UILabel!
     
     let searchBar = UISearchBar()
     let searchTableViewDelegate = SearchTableViewDelegate()
@@ -49,6 +51,14 @@ class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDe
             product.title.uppercased().contains(text.uppercased())
         }
         reloadTableView()
+        
+        guard !searchTableViewDelegate.data.isEmpty else {
+            noResultsLabel.text = "No results for \(text)."
+            noResultsView.isHidden = false
+            return
+        }
+        
+        noResultsView.isHidden = true
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -88,11 +98,6 @@ class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDe
         let product = searchTableViewDelegate.data[index.row]
         
         select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
     }
     
 }

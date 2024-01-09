@@ -68,9 +68,21 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         parentController?.itemSelected(at: indexPath)
     }
-}
-
-struct Section {
-    let title: String
-    let items: [ItemViewModel]
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        parentController?.scrollViewWillBeginDragging(scrollView)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        parentController?.scrollViewDidScroll(scrollView)
+    }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        parentController?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+//    }
+//    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        parentController?.scrollViewDidEndDecelerating(scrollView)
+//    }
+    
 }

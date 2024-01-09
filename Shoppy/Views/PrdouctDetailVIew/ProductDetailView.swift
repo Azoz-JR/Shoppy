@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
+final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet var contentView: UIView!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var scrollContentView: UIView!

@@ -17,6 +17,8 @@ final class HomeViewController: UIViewController {
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()
     let searchBar = UISearchBar()
+    var tabBarVisible = true
+    var lastContentOffset: CGFloat = 0
     
     var productsViewModel: ProductsViewModel?
     var listsViewModel: ListsViewModel?
@@ -33,6 +35,7 @@ final class HomeViewController: UIViewController {
         view.backgroundColor = .clear
         navigationController?.navigationBar.tintColor = .navBarTint
         navigationItem.backButtonDisplayMode = .minimal
+                
         
         configureCategoriesCollection()
         configureCollectionView()
@@ -82,4 +85,48 @@ final class HomeViewController: UIViewController {
         reloadCollectionView()
     }
     
+}
+
+// MARK: - TabBar show/hide
+
+extension HomeViewController {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        lastContentOffset = scrollView.contentOffset.y
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentContentOffset = scrollView.contentOffset.y + view.safeAreaInsets.top + collectionView.contentInset.top
+                
+        // Check if scrolling up or down
+        if currentContentOffset > 1 && currentContentOffset > lastContentOffset && tabBarVisible {
+            // Scrolling down, hide the tab bar
+            hideTabBar()
+        } else if currentContentOffset < lastContentOffset && !tabBarVisible {
+            // Scrolling up, show the tab bar
+            showTabBar()
+        }
+        
+        lastContentOffset = currentContentOffset
+    }
+    
+    private func hideTabBar() {
+        guard tabBarVisible else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.navigationController?.tabBarController?.tabBar.frame.origin.y += self.tabBarHeight
+        }
+        
+        tabBarVisible = false
+    }
+    
+    private func showTabBar() {
+        guard !tabBarVisible else { return }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.navigationController?.tabBarController?.tabBar.frame.origin.y -= self.tabBarHeight
+        }
+        
+        tabBarVisible = true
+    }
 }

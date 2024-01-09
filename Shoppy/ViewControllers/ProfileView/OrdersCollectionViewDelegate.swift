@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OrdersCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
+final class OrdersCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     var data: [Order] = []
     var parentController: ProfileViewPresenter?
     
@@ -28,4 +28,5 @@ final class OrdersCollectionViewDelegate: NSObject, UICollectionViewDelegate, UI
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         parentController?.collectionViewDidScroll(scrollView)
     }
+    
 }

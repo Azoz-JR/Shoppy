@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListSelectionViewController: UIViewController, ListsControllerPresenter, UIScrollViewDelegate {
+class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var noListsLabel: UILabel!
     

@@ -26,6 +26,7 @@ extension HomeViewController: UISearchBarDelegate {
         searchVC.listsViewModel = listsViewModel
         searchVC.service = service
         searchVC.result = products
+        searchVC.searchBar.becomeFirstResponder()
         
         show(searchVC, sender: self)
     }
