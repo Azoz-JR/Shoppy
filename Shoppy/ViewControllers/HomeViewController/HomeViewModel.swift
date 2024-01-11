@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import RxSwift
+
 
 class HomeViewModel {
     var service: Service = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
-    var sections: Observable<[Section]> = Observable([])
-    var products: Observable<[ItemViewModel]> = Observable([])
-    var error: Observable<Error> = Observable(nil)
+    private let productsSubject = BehaviorSubject<[ItemViewModel]>(value: [])
+    var sections: [Section] = []
+    
+    var productsObservable: Observable<[ItemViewModel]> {
+        return productsSubject.asObservable()
+    }
     
     
     func load() async {
@@ -19,20 +24,20 @@ class HomeViewModel {
             let products = try await service.loadProducts()
             
             await MainActor.run {
-                self.products.value = products
-                
-                self.sections.value = [
+                self.sections = [
                     Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})),
                     Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})),
                     Section(title: "Shoes", items: products.filter({$0.category == .shoes})),
                     Section(title: "Accessories", items: products.filter({$0.category == .accessories})),
                     Section(title: "T-Shirts", items: products.filter({$0.category == .tShirts}))
                 ]
+                
+                self.productsSubject.onNext(products)
             }
             
         } catch {
             await MainActor.run {
-                self.error.value = error
+                self.productsSubject.onError(error)
             }
             print(error.localizedDescription)
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Observable<T> {
+class MyObservable<T> {
     typealias Observer = (T?) -> Void
     var observers: [Observer] = []
     

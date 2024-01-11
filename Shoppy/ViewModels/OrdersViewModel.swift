@@ -8,7 +8,7 @@
 import Foundation
 
 final class OrdersViewModel {
-    var orders: Observable<[Order]> = Observable([])
+    var orders: MyObservable<[Order]> = MyObservable([])
 
     func addOrder(order: Order) {
         orders.value?.insert(order, at: 0)

@@ -9,8 +9,8 @@ import Foundation
 
 class CollectionsViewModel {
     var service: Service = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
-    var collections: Observable<[ItemViewModel]> = Observable([])
-    var error: Observable<Error> = Observable(nil)
+    var collections: MyObservable<[ItemViewModel]> = MyObservable([])
+    var error: MyObservable<Error> = MyObservable(nil)
     
     
     func load() async {

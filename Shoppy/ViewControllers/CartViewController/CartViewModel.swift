@@ -8,8 +8,8 @@
 import Foundation
 
 class CartViewModel {
-    var cartProducts: Observable<[ItemViewModel]> = Observable([])
-    var cartCount: Observable<Int> = Observable(0)
+    var cartProducts: MyObservable<[ItemViewModel]> = MyObservable([])
+    var cartCount: MyObservable<Int> = MyObservable(0)
     
     var total: Double {
         guard let products = cartProducts.value, !products.isEmpty else {

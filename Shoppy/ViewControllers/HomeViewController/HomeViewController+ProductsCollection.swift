@@ -26,7 +26,7 @@ extension HomeViewController: HomeControllerPresenter {
     }
     
     func itemSelected(at index: IndexPath) {
-        let product = sections[index.section].items[index.row]
+        let product = homeViewModel.sections[index.section].items[index.row]
         guard let cartViewModel, let listsViewModel, let wishListViewModel else {
             return
         }
@@ -38,7 +38,7 @@ extension HomeViewController: HomeControllerPresenter {
         let vc = CollectionViewController()
         vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
-        let section = sections[index.section]
+        let section = homeViewModel.sections[index.section]
         vc.section = section
         vc.title = section.title
         

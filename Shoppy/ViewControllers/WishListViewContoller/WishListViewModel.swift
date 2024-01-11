@@ -8,7 +8,7 @@
 import Foundation
 
 class WishListViewModel {
-    var wishList: Observable<List> = Observable(List(name: "Wish List", items: []))
+    var wishList: MyObservable<List> = MyObservable(List(name: "Wish List", items: []))
 
     
     func likeProduct(product: ItemViewModel) {

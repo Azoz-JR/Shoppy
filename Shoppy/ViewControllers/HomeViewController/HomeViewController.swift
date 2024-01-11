@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class HomeViewController: UIViewController {
     @IBOutlet var homeView: UIView!
@@ -13,6 +14,7 @@ final class HomeViewController: UIViewController {
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()
     let searchBar = UISearchBar()
+    private let disposeBag = DisposeBag()
     
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
@@ -26,7 +28,6 @@ final class HomeViewController: UIViewController {
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
     
     var service: Service?
-    var sections: [Section] = []
     var products: [ItemViewModel] = []
     
     
@@ -52,38 +53,26 @@ final class HomeViewController: UIViewController {
     }
     
     func bindToViewModel() {
-        homeViewModel.sections.addObserver { [weak self] sections in
-            guard let sections, let self else {
-                return
+        homeViewModel.productsObservable
+            .subscribe { [weak self] products in
+                guard let self else {
+                    return
+                }
+                
+                self.products = products
+                self.collectionDataSourceAndDelegate.data = self.homeViewModel.sections
+                self.reloadCollectionView()
+            } onError: { [weak self] error in
+                self?.show(error: error)
+            } onCompleted: { [weak self] in
+                self?.refreshControl.endRefreshing()
             }
-            
-            self.sections = sections
-            collectionDataSourceAndDelegate.data = sections
-            reloadCollectionView()
-        }
-        
-        homeViewModel.products.addObserver { [weak self] products in
-            guard let self, let products else {
-                return
-            }
-            
-            self.products = products
-        }
-        
-        homeViewModel.error.addObserver { [weak self] error in
-            guard let self, let error else {
-                return
-            }
-            
-            self.show(error: error)
-        }
+            .disposed(by: disposeBag)
     }
     
     @objc func refresh() {
         Task(priority: .background) {
             await homeViewModel.load()
-            
-            refreshControl.endRefreshing()
         }
     }
     

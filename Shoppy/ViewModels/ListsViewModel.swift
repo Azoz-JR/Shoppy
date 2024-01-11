@@ -8,7 +8,7 @@
 import Foundation
 
 final class ListsViewModel {
-    var lists: Observable<[List]> = Observable([])
+    var lists: MyObservable<[List]> = MyObservable([])
     
     func createList(list: List) {
         guard !contains(list: list) else {
