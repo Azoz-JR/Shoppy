@@ -1,5 +1,5 @@
 //
-//  CreateListView.swift
+//  CreateListViewController.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 31/12/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateListView: UIViewController, UITextFieldDelegate {
+class CreateListViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var textField: UITextField!
     @IBOutlet var createListButton: UIButton!
     
@@ -34,7 +34,7 @@ class CreateListView: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
     }
     
-    // MARK: TextField Method
+    // MARK: - TextField Method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Handle text changes here
         if let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {

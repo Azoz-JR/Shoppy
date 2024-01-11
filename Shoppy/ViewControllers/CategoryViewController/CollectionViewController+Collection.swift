@@ -1,5 +1,5 @@
 //
-//  CategoryViewController+Collection.swift
+//  CollectionViewController+Collection.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 22/12/2023.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-extension CategoryViewController: ParentControllerPresenter {
+extension CollectionViewController: ParentControllerPresenter {
     
     func configureCollectionView() {
-        productsDataSourceAndDelegate.listsViewModel = listsViewModel
+        productsDataSourceAndDelegate.wishListViewModel = wishListViewModel
         productsDataSourceAndDelegate.parentController = self
         
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
@@ -32,10 +32,10 @@ extension CategoryViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = products[index.row]
-        guard let productsViewModel, let listsViewModel else {
+        guard let cartViewModel, let listsViewModel, let wishListViewModel else {
             return
         }
         
-        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+        select(product: product, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
     }
 }

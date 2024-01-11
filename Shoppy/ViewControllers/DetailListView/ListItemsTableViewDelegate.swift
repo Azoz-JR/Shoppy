@@ -10,7 +10,7 @@ import UIKit
 class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var data: [ItemViewModel] = []
-    var productsViewModel: ProductsViewModel?
+    var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var parentController: ListDetailViewPresenter?
 
@@ -26,10 +26,10 @@ class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewData
             cell.configure(with: item)
             
             cell.addToCartHandler = { [weak self] in
-                guard let productsViewModel = self?.productsViewModel else {
+                guard let cartViewModel = self?.cartViewModel else {
                     return
                 }
-                productsViewModel.addProduct(product: item)
+                cartViewModel.addProduct(product: item)
                 self?.parentController?.showAlert()
             }
             

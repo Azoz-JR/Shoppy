@@ -11,11 +11,11 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var noListsLabel: UILabel!
     
-    let listsTableViewDelegate = ListsSelectionTableViewDelegate()
-    var lists: [List] = []
-    
     var item: ItemViewModel
     var listsViewModel: ListsViewModel
+    
+    let listsTableViewDelegate = ListsSelectionTableViewDelegate()
+    var lists: [List] = []
     
     init(item: ItemViewModel, listsViewModel: ListsViewModel) {
         self.listsViewModel = listsViewModel
@@ -31,26 +31,17 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configNavigationBar()
+        bindToListsViewModel()
+        configuareTableView()
+    }
+    
+    func configNavigationBar() {
         title = "Your Lists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
         navigationItem.rightBarButtonItem?.tintColor = .selectedTab
         
         view.backgroundColor = .clear
-        
-        bindToListsViewModel()
-        configuareTableView()
-    }
-    
-    func configuareTableView() {
-        listsTableViewDelegate.parentController = self
-        tableView.delegate = listsTableViewDelegate
-        tableView.dataSource = listsTableViewDelegate
-        
-        registerCell()
-    }
-    
-    func registerCell() {
-        tableView.register(ListCell.register(), forCellReuseIdentifier: ListCell.identifier)
     }
     
     func bindToListsViewModel() {
@@ -68,24 +59,6 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
             self?.lists = lists
             self?.listsTableViewDelegate.data = lists
             self?.reloadTableView()
-        }
-    }
-    
-    func listSelected(at index: Int) {
-        guard !lists[index].contains(item: item) else {
-            showAlert(title: "This item is already added to this list before.", dismiss: false)
-            return
-        }
-        
-        listsViewModel.add(item: item, at: index)
-        showAlert(title: "Item added succesfully to \(lists[index].name)", dismiss: true)
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.mainAsyncIfNeeded {
-            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
-                self.tableView.reloadData()
-            }
         }
     }
     

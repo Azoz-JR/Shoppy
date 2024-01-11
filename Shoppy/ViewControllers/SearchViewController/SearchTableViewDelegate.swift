@@ -10,8 +10,6 @@ import UIKit
 class SearchTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var data: [ItemViewModel] = []
-    var productsViewModel: ProductsViewModel?
-    var listsViewModel: ListsViewModel?
     var parentController: SearchViewPresenter?
 
     

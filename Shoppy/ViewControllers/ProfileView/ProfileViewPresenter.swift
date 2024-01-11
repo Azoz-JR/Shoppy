@@ -9,4 +9,5 @@ import UIKit
 
 protocol ProfileViewPresenter {
     func collectionViewDidScroll(_ scrollView: UIScrollView)
+    func listsCollectionViewDidScroll(_ scrollView: UIScrollView)
 }

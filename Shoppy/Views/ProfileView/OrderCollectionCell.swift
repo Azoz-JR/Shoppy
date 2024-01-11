@@ -22,9 +22,8 @@ class OrderCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        orderContainer.layer.cornerRadius = 10
-        orderContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        orderContainer.layer.borderWidth = 1
+        orderContainer.round(10)
+        orderContainer.addBorder(color: .lightGray.withAlphaComponent(0.5), width: 1)
     }
 
     func configure(with order: Order) {

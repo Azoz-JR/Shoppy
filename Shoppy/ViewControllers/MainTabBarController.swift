@@ -8,9 +8,10 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-    let productsViewModel = ProductsViewModel()
+    let cartViewModel = CartViewModel()
     let ordersViewModel = OrdersViewModel()
     let listsViewModel = ListsViewModel()
+    let wishListViewModel = WishListViewModel()
     
     var cartCount: Int = 0 {
         didSet {
@@ -23,7 +24,7 @@ final class MainTabBarController: UITabBarController {
         view.backgroundColor = .systemBackground
         tabBar.tintColor = .selectedTab
         
-        bindToProductsViewModel()
+        bindToCartViewModel()
         
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
@@ -50,8 +51,8 @@ final class MainTabBarController: UITabBarController {
         cartTabBar?.badgeValue = "\(cartCount)"
     }
     
-    func bindToProductsViewModel() {
-        productsViewModel.cartCount.addObserver { [weak self] count in
+    func bindToCartViewModel() {
+        cartViewModel.cartCount.addObserver { [weak self] count in
             guard let self = self, let count = count else {
                 return
             }
@@ -77,35 +78,34 @@ final class MainTabBarController: UITabBarController {
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
-//        homeVC.navigationItem.largeTitleDisplayMode = .always
-//        homeVC.navigationController?.navigationBar.prefersLargeTitles = true
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api
         
-        homeVC.productsViewModel = productsViewModel
+        homeVC.cartViewModel = cartViewModel
         homeVC.listsViewModel = listsViewModel
+        homeVC.wishListViewModel = wishListViewModel
         
         return homeVC
     }
     
-    func makeCategoriesView() -> CategoriesViewController {
-        let categoryVC = CategoriesViewController()
+    func makeCategoriesView() -> CollectionsViewController {
+        let categoryVC = CollectionsViewController()
         categoryVC.title = "Categories"
         categoryVC.view.backgroundColor = .systemBackground
         categoryVC.navigationItem.largeTitleDisplayMode = .always
-        
         let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
         categoryVC.service = api
-                
-        categoryVC.productsViewModel = productsViewModel
+        categoryVC.cartViewModel = cartViewModel
         categoryVC.listsViewModel = listsViewModel
+        categoryVC.wishListViewModel = wishListViewModel
         
         return categoryVC
     }
     
     func makeCartView() -> CartViewController {
-        let cartVC = CartViewController(productsViewModel: productsViewModel, ordersViewModel: ordersViewModel)
+        let cartVC = CartViewController(cartViewModel: cartViewModel)
+        cartVC.ordersViewModel = ordersViewModel
         cartVC.title = "My Cart"
         cartVC.view.backgroundColor = .secondBackground
         
@@ -115,14 +115,16 @@ final class MainTabBarController: UITabBarController {
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
         profileVC.ordersViewModel = ordersViewModel
-        profileVC.productsViewModel = productsViewModel
+        profileVC.cartViewModel = cartViewModel
         profileVC.listsViewModel = listsViewModel
+        profileVC.wishListViewModel = wishListViewModel
         return profileVC
     }
     
     func makeWishListView() -> WishListViewController {
         let wishListVC = WishListViewController()
-        wishListVC.productsViewModel = productsViewModel
+        wishListVC.cartViewModel = cartViewModel
+        wishListVC.viewModel = wishListViewModel
         wishListVC.listsViewModel = listsViewModel
         
         return wishListVC

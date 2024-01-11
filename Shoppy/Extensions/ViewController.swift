@@ -20,10 +20,8 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    func select(product: ItemViewModel, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
-        let vc = ProductViewController(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-        //vc.modalPresentationStyle = .fullScreen
-        //present(vc, animated: true)
+    func select(product: ItemViewModel, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
+        let vc = ProductViewController(product: product, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
         show(vc, sender: self)
     }
     
@@ -84,7 +82,7 @@ extension UIViewController {
     }
     
     func showCreateListView(listsViewModel: ListsViewModel?) {
-        let vc = CreateListView()
+        let vc = CreateListViewController()
         vc.listsViewModel = listsViewModel
         vc.modalPresentationStyle = .pageSheet
         vc.sheetPresentationController?.detents = [

@@ -10,7 +10,7 @@ import UIKit
 final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     var data: [ItemViewModel] = []
     var parentController: ParentControllerPresenter?
-    var listsViewModel: ListsViewModel?
+    var wishListViewModel: WishListViewModel?
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -22,14 +22,14 @@ final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewD
             
             let product = data[indexPath.row]
             cell.configure(with: product)
-            cell.liked = listsViewModel?.isLiked(product: product) ?? false
+            cell.liked = wishListViewModel?.isLiked(product: product) ?? false
             
             cell.likeButtonHandler = { [weak self] in
-                guard let listsViewModel = self?.listsViewModel else {
+                guard let wishListViewModel = self?.wishListViewModel else {
                     return
                 }
                 
-                listsViewModel.likeProduct(product: product)
+                wishListViewModel.likeProduct(product: product)
             }
             
             return cell

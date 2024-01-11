@@ -9,11 +9,13 @@ import UIKit
 
 final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var ordersViewModel: OrdersViewModel?
-    var productsViewModel: ProductsViewModel?
+    var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
+    var wishListViewModel: WishListViewModel?
     
     let profileView = ProfileView()
     let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
+    let listsCollectionViewDelegate = ListsCollectionViewDelegate()
     
     var orders: [Order] = []
     var lists: [List] = []
@@ -36,46 +38,13 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         bindToOrders()
         bindToLists()
         configureOrdersCollection()
+        configureListsCollection()
         configureProfileViewButtons()
-    }
-    
-    func bindToOrders() {
-        ordersViewModel?.orders.addObserver { [weak self] orders in
-            guard let orders, let self else {
-                self?.updateOrders()
-                return
-            }
-            
-            self.orders = orders
-            self.ordersCollectionViewDelegate.data = orders
-            self.updateOrders()
-        }
-    }
-    
-    func bindToLists() {
-        listsViewModel?.lists.addObserver { [weak self] lists in
-            guard let lists, !lists.isEmpty else {
-                self?.updateLists()
-                return
-            }
-            
-            self?.lists = lists
-            self?.updateLists()
-        }
     }
     
     private func updateUI() {
         updateOrders()
         updateLists()
-    }
-    
-    func updateOrders() {
-        profileView.configureOrder(with: orders)
-        reloadCollection()
-    }
-    
-    func updateLists() {
-        profileView.configureLists(with: lists)
     }
     
     func configureProfileViewButtons() {
@@ -100,34 +69,13 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         }
         
         profileView.seeAllListsHandler = { [weak self] in
-            guard let self, let productsViewModel = self.productsViewModel, let listsViewModel else {
+            guard let self, let cartViewModel = self.cartViewModel, let listsViewModel, let wishListViewModel else {
                 return
             }
-            let vc = ListsViewController(productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+            
+            let vc = ListsViewController(cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
             self.show(vc, sender: self)
         }
-    }
-    
-    func configureOrdersCollection() {
-        ordersCollectionViewDelegate.data = orders
-        ordersCollectionViewDelegate.parentController = self
-        
-        profileView.ordersCollection.dataSource = ordersCollectionViewDelegate
-        profileView.ordersCollection.delegate = ordersCollectionViewDelegate
-        profileView.ordersCollection.register(OrderCollectionCell.register(), forCellWithReuseIdentifier: OrderCollectionCell.identifier)
-    }
-    
-    private func reloadCollection() {
-        DispatchQueue.mainAsyncIfNeeded {
-            UIView.transition(with: self.profileView.ordersCollection, duration: 0.3, options: .transitionCrossDissolve) {
-                self.profileView.ordersCollection.reloadData()
-            }
-        }
-    }
-    
-    func collectionViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = (scrollView.contentOffset.x / scrollView.frame.width).rounded()
-        profileView.pageControl.currentPage = Int(pageIndex)
     }
     
     func configureNavBar() {
@@ -143,18 +91,6 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         let label = UIBarButtonItem(customView: name)
         
         navigationItem.leftBarButtonItem = label
-        
-//        let appearance = UINavigationBarAppearance()
-//        appearance.backgroundColor = .systemBlue
-//        appearance.shadowColor = .clear
-//        
-//        let scrollAppearance = UINavigationBarAppearance()
-//        scrollAppearance.backgroundColor = .clear
-//        scrollAppearance.shadowColor = .clear
-//        
-//        navigationController?.navigationBar.scrollEdgeAppearance = scrollAppearance
-//        navigationController?.navigationBar.standardAppearance = appearance
-//        navigationController?.navigationBar.compactAppearance = appearance
     }
     
 }

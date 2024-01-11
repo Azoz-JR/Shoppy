@@ -10,23 +10,24 @@ import UIKit
 final class HomeViewController: UIViewController {
     @IBOutlet var homeView: UIView!
     @IBOutlet var collectionView: UICollectionView!
-    
-    let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
-    let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
-    let searchController = UISearchController()
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()
     let searchBar = UISearchBar()
+    
+    var cartViewModel: CartViewModel?
+    var listsViewModel: ListsViewModel?
+    var wishListViewModel: WishListViewModel?
+    var homeViewModel = HomeViewModel()
+    
     var tabBarVisible = true
     var lastContentOffset: CGFloat = 0
     
-    var productsViewModel: ProductsViewModel?
-    var listsViewModel: ListsViewModel?
-    let categories = Category.allCases
+    let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
+    let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
+    
     var service: Service?
     var sections: [Section] = []
     var products: [ItemViewModel] = []
-    //var selectedIndex: IndexPath?
     
     
     override func viewDidLoad() {
@@ -36,11 +37,12 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .navBarTint
         navigationItem.backButtonDisplayMode = .minimal
                 
+        bindToViewModel()
         
-        configureCategoriesCollection()
+        configureSearchBar()
         configureCollectionView()
         configureCollectionDelegateAndDataSource()
-        configureSearchBar()
+        configureCategoriesCollection()
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = .myGreen
@@ -49,25 +51,40 @@ final class HomeViewController: UIViewController {
         refresh()
     }
     
-    @objc func refresh() {
-        service?.loadProducts(completion: handleAPIResults)
-    }
-    
-    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
-        switch result {
-        case .success(let products):
-            self.products = products
+    func bindToViewModel() {
+        homeViewModel.sections.addObserver { [weak self] sections in
+            guard let sections, let self else {
+                return
+            }
             
-            self.sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})), Section(title: "Shoes", items: products.filter({$0.category == .shoes})), Section(title: "Accessories", items: products.filter({$0.category == .accessories})), Section(title: "T-Shirts", items: products.filter({$0.category == .tShirts}))]
-            
+            self.sections = sections
             collectionDataSourceAndDelegate.data = sections
             reloadCollectionView()
-        case .failure(let error):
-            self.show(error: error)
-            print(error.localizedDescription)
         }
         
-        refreshControl.endRefreshing()
+        homeViewModel.products.addObserver { [weak self] products in
+            guard let self, let products else {
+                return
+            }
+            
+            self.products = products
+        }
+        
+        homeViewModel.error.addObserver { [weak self] error in
+            guard let self, let error else {
+                return
+            }
+            
+            self.show(error: error)
+        }
+    }
+    
+    @objc func refresh() {
+        Task(priority: .background) {
+            await homeViewModel.load()
+            
+            refreshControl.endRefreshing()
+        }
     }
     
     func reloadCollectionView() {
@@ -85,48 +102,27 @@ final class HomeViewController: UIViewController {
         reloadCollectionView()
     }
     
-}
-
-// MARK: - TabBar show/hide
-
-extension HomeViewController {
+    /*
+//    @objc func refresh() {
+//        service?.loadProducts(completion: handleAPIResults)
+//    }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        lastContentOffset = scrollView.contentOffset.y
-    }
+//    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
+//        switch result {
+//        case .success(let products):
+//            self.products = products
+//            
+//            self.sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})), Section(title: "Shoes", items: products.filter({$0.category == .shoes})), Section(title: "Accessories", items: products.filter({$0.category == .accessories})), Section(title: "T-Shirts", items: products.filter({$0.category == .tShirts}))]
+//            
+//            collectionDataSourceAndDelegate.data = sections
+//            reloadCollectionView()
+//        case .failure(let error):
+//            self.show(error: error)
+//            print(error.localizedDescription)
+//        }
+//        
+//        refreshControl.endRefreshing()
+//    }
+     */
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentContentOffset = scrollView.contentOffset.y + view.safeAreaInsets.top + collectionView.contentInset.top
-                
-        // Check if scrolling up or down
-        if currentContentOffset > 1 && currentContentOffset > lastContentOffset && tabBarVisible {
-            // Scrolling down, hide the tab bar
-            hideTabBar()
-        } else if currentContentOffset < lastContentOffset && !tabBarVisible {
-            // Scrolling up, show the tab bar
-            showTabBar()
-        }
-        
-        lastContentOffset = currentContentOffset
-    }
-    
-    private func hideTabBar() {
-        guard tabBarVisible else { return }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.navigationController?.tabBarController?.tabBar.frame.origin.y += self.tabBarHeight
-        }
-        
-        tabBarVisible = false
-    }
-    
-    private func showTabBar() {
-        guard !tabBarVisible else { return }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.navigationController?.tabBarController?.tabBar.frame.origin.y -= self.tabBarHeight
-        }
-        
-        tabBarVisible = true
-    }
 }

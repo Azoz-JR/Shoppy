@@ -10,7 +10,7 @@ import UIKit
 extension WishListViewController: ParentControllerPresenter {
     func configureCollectionView() {
         productsDataSourceAndDelegate.parentController = self
-        productsDataSourceAndDelegate.listsViewModel = listsViewModel
+        productsDataSourceAndDelegate.wishListViewModel = viewModel
         
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.delegate = productsDataSourceAndDelegate
@@ -32,10 +32,10 @@ extension WishListViewController: ParentControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = wishList[index.row]
-        guard let listsViewModel, let productsViewModel else {
+        guard let listsViewModel, let cartViewModel else {
             return
         }
         
-        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+        select(product: product, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: viewModel)
     }
 }

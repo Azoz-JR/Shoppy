@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesViewController" customModule="Shoppy" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CollectionsViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="SvC-fN-0I6" id="CEx-Bk-EaV"/>
-                <outlet property="view" destination="iN0-l3-epB" id="2iM-6e-5Ks"/>
+                <outlet property="collectionView" destination="dOr-RU-F2o" id="DFK-lF-qGf"/>
+                <outlet property="view" destination="iN0-l3-epB" id="d8D-GA-PWp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,12 +19,11 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-fN-0I6">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dOr-RU-F2o">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="eLS-2T-qU0">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="tgp-k6-PjT">
                         <size key="itemSize" width="170" height="150"/>
-                        <size key="estimatedItemSize" width="300" height="150"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -34,12 +33,12 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SvC-fN-0I6" secondAttribute="trailing" id="WXo-IZ-Whv"/>
-                <constraint firstAttribute="bottom" secondItem="SvC-fN-0I6" secondAttribute="bottom" id="fdg-i3-uBp"/>
-                <constraint firstItem="SvC-fN-0I6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="klf-7y-6Uk"/>
-                <constraint firstItem="SvC-fN-0I6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lic-mn-apP"/>
+                <constraint firstAttribute="bottom" secondItem="dOr-RU-F2o" secondAttribute="bottom" id="E1V-lT-crP"/>
+                <constraint firstItem="dOr-RU-F2o" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H4h-qt-Xxf"/>
+                <constraint firstItem="dOr-RU-F2o" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YiN-3r-n5p"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dOr-RU-F2o" secondAttribute="trailing" id="lxg-TM-ChP"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="-11"/>
+            <point key="canvasLocation" x="-2" y="-12"/>
         </view>
     </objects>
     <resources>

@@ -13,7 +13,8 @@ class WishListViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
-    var productsViewModel: ProductsViewModel?
+    var cartViewModel: CartViewModel?
+    var viewModel: WishListViewModel!
     var listsViewModel: ListsViewModel?
     var wishList: [ItemViewModel] = []
     
@@ -33,7 +34,7 @@ class WishListViewController: UIViewController {
     }
     
     func bindToViewModel() {
-        listsViewModel?.wishList.addObserver { [weak self] wishList in
+        viewModel.wishList.addObserver { [weak self] wishList in
             guard let self, let products = wishList?.items else {
                 return
             }

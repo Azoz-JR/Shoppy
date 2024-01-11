@@ -14,7 +14,7 @@ extension HomeViewController: HomeControllerPresenter {
         collectionView.dataSource = collectionDataSourceAndDelegate
         collectionView.keyboardDismissMode = .onDrag
         
-        collectionDataSourceAndDelegate.listsViewModel = listsViewModel
+        collectionDataSourceAndDelegate.wishListViewModel = wishListViewModel
         collectionDataSourceAndDelegate.parentController = self
     }
     
@@ -27,16 +27,16 @@ extension HomeViewController: HomeControllerPresenter {
     
     func itemSelected(at index: IndexPath) {
         let product = sections[index.section].items[index.row]
-        guard let productsViewModel, let listsViewModel else {
+        guard let cartViewModel, let listsViewModel, let wishListViewModel else {
             return
         }
         
-        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
+        select(product: product, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
     }
     
     func setionSelected(at index: IndexPath) {
-        let vc = CategoryViewController()
-        vc.productsViewModel = productsViewModel
+        let vc = CollectionViewController()
+        vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
         let section = sections[index.section]
         vc.section = section

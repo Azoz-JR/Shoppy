@@ -1,5 +1,5 @@
 //
-//  CategoriesCollectionDelegateAndDataSource.swift
+//  CollectionsDataSourceAndDelegate.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 21/12/2023.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class CategoriesCollectionDataSourceAndDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+final class CollectionsDataSourceAndDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var data: [ItemViewModel] = []
-    var parentController: CategoriesPresenter?
+    var parentController: CollectionsPresenter?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count

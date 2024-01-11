@@ -9,6 +9,10 @@ import UIKit
 
 extension HomeViewController: HomeCategoriesPresenter {
     
+    var categories: [Category] {
+        return Category.allCases
+    }
+    
     func configureCategoriesCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -39,45 +43,12 @@ extension HomeViewController: HomeCategoriesPresenter {
         categoriesCollectionView.dataSource = categoriesCollectionDataSourceAndDelegate
     }
     
-    func filterProducts(category: Category?) {
-//        guard let category = category else {
-//            productsCollectionDataSourceAndDelegate.data = products
-//            reloadCollectionView()
-//            return
-//        }
-//        
-//        productsCollectionDataSourceAndDelegate.data = products.filter { product in
-//            product.category == category
-//        }
-//        reloadCollectionView()
-    }
-    
-//    func categorySelected(at index: IndexPath) {
-//        guard let selectedIndex = selectedIndex else {
-//            selectedIndex = index
-//            filterProducts(category: categories[index.row])
-//            return
-//        }
-//        
-//        if selectedIndex != index {
-//            categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
-//            self.selectedIndex = index
-//            filterProducts(category: categories[index.row])
-//            return
-//        }
-//        
-//        // Selecting the currently selectedIndex condition
-//        categoriesCollectionView.deselectItem(at: selectedIndex, animated: true)
-//        self.selectedIndex = nil
-//        filterProducts(category: nil)
-//    }
-    
     func categorySelected(at index: IndexPath) {
         let category = categories[index.row]
         let section = Section(title: category.rawValue, items: products.filter({ $0.category == category}))
         
-        let vc = CategoryViewController()
-        vc.productsViewModel = productsViewModel
+        let vc = CollectionViewController()
+        vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
         vc.section = section
         vc.title = section.title

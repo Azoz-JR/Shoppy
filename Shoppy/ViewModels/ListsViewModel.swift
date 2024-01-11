@@ -8,7 +8,6 @@
 import Foundation
 
 final class ListsViewModel {
-    var wishList: Observable<List> = Observable(List(name: "Wish List", items: []))
     var lists: Observable<[List]> = Observable([])
     
     func createList(list: List) {
@@ -39,28 +38,4 @@ final class ListsViewModel {
         return true
     }
     
-}
-
-// MARK: Wish list Methods
-extension ListsViewModel {
-    func likeProduct(product: ItemViewModel) {
-        guard !isLiked(product: product) else {
-            unlikeProduct(product: product)
-            return
-        }
-        
-        wishList.value?.add(item: product)
-    }
-    
-    private func unlikeProduct(product: ItemViewModel) {
-        wishList.value?.remove(item: product)
-    }
-    
-    func isLiked(product: ItemViewModel) -> Bool {
-        guard let list = wishList.value, list.contains(item: product) else {
-            return false
-        }
-        
-        return true
-    }
 }

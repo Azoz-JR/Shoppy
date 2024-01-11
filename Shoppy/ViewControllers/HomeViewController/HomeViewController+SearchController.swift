@@ -22,26 +22,14 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         let searchVC = SearchViewController()
-        searchVC.productsViewModel = productsViewModel
+        searchVC.cartViewModel = cartViewModel
         searchVC.listsViewModel = listsViewModel
         searchVC.service = service
         searchVC.result = products
+        searchVC.wishListViewModel = wishListViewModel
         searchVC.searchBar.becomeFirstResponder()
         
         show(searchVC, sender: self)
     }
-    
-//    func updateSearchResults(for searchController: UISearchController) {
-        //        guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
-        //            productsCollectionDataSourceAndDelegate.data = products
-//            reloadCollectionView()
-//            return
-//        }
-//        
-//        productsCollectionDataSourceAndDelegate.data = products.filter { product in
-//            product.title.uppercased().contains(text.uppercased())
-//        }
-//        reloadCollectionView()
-//    }
     
 }

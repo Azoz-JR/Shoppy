@@ -12,9 +12,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
         tableView.backgroundColor = .secondBackground
-        tableView.allowsSelection = false
         tableView.keyboardDismissMode = .onDrag
         
         registerCell()
@@ -29,27 +27,23 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cartProducts.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: CartCellView.identifier, for: indexPath) as? CartCellView {
             let product = cartProducts[indexPath.row]
             cell.setUpCell(with: product)
             
             cell.increaseButtonHandler = { [weak self] in
-                self?.productsViewModel.addProduct(product: product)
+                self?.cartViewModel.addProduct(product: product)
                 self?.updateUI()
             }
             
             cell.decreaseButtonHandler = { [weak self] in
-                self?.productsViewModel.removeProduct(product: product)
+                self?.cartViewModel.removeProduct(product: product)
                 self?.updateUI()
             }
             
             cell.removeButtonHandler = { [weak self] in
-                self?.productsViewModel.removeProduct(at: indexPath.row)
+                self?.cartViewModel.removeProduct(at: indexPath.row)
                 self?.updateUI()
             }
             

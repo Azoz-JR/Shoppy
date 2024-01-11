@@ -9,17 +9,19 @@ import UIKit
 
 class ListsViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
-    
     @IBOutlet var noListsLabel: UILabel!
+    
+    var cartViewModel: CartViewModel
+    var listsViewModel: ListsViewModel
+    var wishListViewModel: WishListViewModel
+    
     let listsTableViewDelegate = ListsTableViewDelegate()
     var lists: [List] = []
     
-    var productsViewModel: ProductsViewModel
-    var listsViewModel: ListsViewModel
-    
-    init(productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
-        self.productsViewModel = productsViewModel
+    init(cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
+        self.cartViewModel = cartViewModel
         self.listsViewModel = listsViewModel
+        self.wishListViewModel = wishListViewModel
         
         super.init(nibName: "ListsViewController", bundle: nil)
     }
@@ -31,15 +33,10 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bindtoListsViewModel()
-        
         title = "Your Lists"
         
-        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
-        let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-        
-        navigationItem.rightBarButtonItems = [addBarButton, editBarButton]
-
+        bindtoListsViewModel()
+        configNavigationBar()
         configuareTableView()
     }
     
@@ -55,6 +52,13 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         } else {
             navigationItem.rightBarButtonItems?[1] = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         }
+    }
+    
+    func configNavigationBar() {
+        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
+        let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        
+        navigationItem.rightBarButtonItems = [addBarButton, editBarButton]
     }
     
     func bindtoListsViewModel() {
@@ -94,42 +98,4 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         listsViewModel.delete(list: list)
     }
 
-}
-
-
-//MARK: TableView Configurations
-extension ListsViewController {
-    func configuareTableView() {
-        tableView.delegate = listsTableViewDelegate
-        tableView.dataSource = listsTableViewDelegate
-        
-        listsTableViewDelegate.data = lists
-        listsTableViewDelegate.parentController = self
-        
-        registerCell()
-    }
-    
-    func registerCell() {
-        tableView.register(ListCell.register(), forCellReuseIdentifier: ListCell.identifier)
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.mainAsyncIfNeeded {
-            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    func listSelected(at index: Int) {
-        let list = lists[index]
-        let vc = ListDetailViewController(list: list, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-        
-        show(vc, sender: self)
-    }
-    
-    func listDeleted(at index: IndexPath) {
-        let listTitle = lists[index.row].name
-        showDeleteListAlert(title: listTitle, index: index)
-    }
 }

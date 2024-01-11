@@ -1,17 +1,15 @@
 //
-//  ProductsViewModel.swift
+//  CartViewModel.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 12/12/2023.
+//  Created by Azoz Salah on 10/01/2024.
 //
 
 import Foundation
 
-
-final class ProductsViewModel {
+class CartViewModel {
     var cartProducts: Observable<[ItemViewModel]> = Observable([])
     var cartCount: Observable<Int> = Observable(0)
-    var lists: Observable<[List]> = Observable([])
     
     var total: Double {
         guard let products = cartProducts.value, !products.isEmpty else {
@@ -26,10 +24,7 @@ final class ProductsViewModel {
         return total
     }
     
-}
-
-// MARK: Cart Methods
-extension ProductsViewModel {
+    
     func addProduct(product: ItemViewModel) {
         guard let products = cartProducts.value else {
             return
@@ -97,5 +92,4 @@ extension ProductsViewModel {
         
         cartCount.value = count
     }
-    
 }

@@ -36,7 +36,7 @@ final class CartCellView: UITableViewCell {
         containerView.backgroundColor = .sectionBackground
         containerView.applyShadow(cornerRadius: 20)
         productImage.round(20)
-        productImage.addBorder(color: .lightGray, width: 1)
+        productImage.addBorder(color: .lightGray.withAlphaComponent(0.3), width: 1)
         
         increaseLabel.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
         reduceLabel.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)

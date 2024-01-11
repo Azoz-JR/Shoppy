@@ -1,5 +1,5 @@
 //
-//  CategoryViewController+SearchBar.swift
+//  CollectionViewController+SearchBar.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 22/12/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension CategoryViewController: UISearchResultsUpdating {
+extension CollectionViewController: UISearchResultsUpdating {
     
     func configureSearchBar() {
         navigationItem.searchController = searchController

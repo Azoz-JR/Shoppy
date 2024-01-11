@@ -10,16 +10,18 @@ import UIKit
 
 final class ProductViewController: UIViewController {
     var product: ItemViewModel? = nil
-    var productsViewModel: ProductsViewModel
+    var cartViewModel: CartViewModel
     var listsViewModel: ListsViewModel
+    var wishListViewModel: WishListViewModel
     var likeButton: UIBarButtonItem!
     
     var productView = ProductDetailView()
     
-    init(product: ItemViewModel? = nil, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
+    init(product: ItemViewModel? = nil, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         self.product = product
-        self.productsViewModel = productsViewModel
+        self.cartViewModel = cartViewModel
         self.listsViewModel = listsViewModel
+        self.wishListViewModel = wishListViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +56,7 @@ final class ProductViewController: UIViewController {
         }
         
         configureLikeButton()
-        liked = listsViewModel.isLiked(product: product)
+        liked = wishListViewModel.isLiked(product: product)
         productView.configure(with: product)
         configButtons()
         selectedColor = productView.availableColors.first
@@ -98,7 +100,7 @@ final class ProductViewController: UIViewController {
             return
         }
         
-        listsViewModel.likeProduct(product: product)
+        wishListViewModel.likeProduct(product: product)
         liked.toggle()
         updateLikeButton(value: liked)
     }
@@ -124,7 +126,7 @@ final class ProductViewController: UIViewController {
         product.selectColor(color: selectedColor.accessibilityName)
         product.selectSize(size: productView.selectedSize)
         
-        productsViewModel.addProduct(product: product)
+        cartViewModel.addProduct(product: product)
         showAddedSuccessfulyAlert()
     }
     

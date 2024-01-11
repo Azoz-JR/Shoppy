@@ -13,13 +13,15 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
     
     let listItemsTableViewDelegate = ListItemsTableViewDelegate()
     var list: List
-    var productsViewModel: ProductsViewModel
+    var cartViewModel: CartViewModel
     var listsViewModel: ListsViewModel
+    var wishListViewModel: WishListViewModel
     
-    init(list: List, productsViewModel: ProductsViewModel, listsViewModel: ListsViewModel) {
+    init(list: List, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         self.list = list
-        self.productsViewModel = productsViewModel
+        self.cartViewModel = cartViewModel
         self.listsViewModel = listsViewModel
+        self.wishListViewModel = wishListViewModel
         
         super.init(nibName: "ListDetailViewController", bundle: nil)
     }
@@ -31,59 +33,18 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = list.name
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteList))
-        navigationItem.rightBarButtonItem?.tintColor = .systemRed
-        
+        configNavigationBar()
         configuareTableView()
     }
     
-    func configuareTableView() {
-        tableView.delegate = listItemsTableViewDelegate
-        tableView.dataSource = listItemsTableViewDelegate
-        
-        listItemsTableViewDelegate.data = list.items
-        listItemsTableViewDelegate.parentController = self
-        listItemsTableViewDelegate.productsViewModel = productsViewModel
-        listItemsTableViewDelegate.listsViewModel = listsViewModel
-        
-        registerCell()
-    }
-    
-    func registerCell() {
-        tableView.register(ListItemCellView.register(), forCellReuseIdentifier: ListItemCellView.identifier)
+    func configNavigationBar() {
+        title = list.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteList))
+        navigationItem.rightBarButtonItem?.tintColor = .systemRed
     }
     
     func showAlert() {
         showAddedSuccessfulyAlert()
-    }
-    
-    func itemSelected(at index: IndexPath) {
-        let product = list.items[index.row]
-        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
-    }
-    
-    func itemDeleted(at index: IndexPath) {
-        showDeleteListAlert(index: index)
-    }
-    
-    func showDeleteListAlert(index: IndexPath) {
-        let alert = UIAlertController(title: "Delete item", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
-            self?.deleteItem(index: index)
-        }))
-        
-        present(alert, animated: true)
-    }
-    
-    func deleteItem(index: IndexPath) {
-        listItemsTableViewDelegate.data.remove(at: index.row)
-        tableView.deleteRows(at: [index], with: .fade)
-        
-        let item = list.items[index.row]
-        listsViewModel.remove(item: item, at: index.row)
     }
     
     @objc func deleteList() {

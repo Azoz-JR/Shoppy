@@ -19,6 +19,4 @@ protocol HomeCategoriesPresenter {
 protocol ScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func scrollViewDidScroll(_ scrollView: UIScrollView)
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
 }

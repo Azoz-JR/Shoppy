@@ -1,5 +1,5 @@
 //
-//  CategoriesPresenter.swift
+//  CollectionsPresenter.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 21/12/2023.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CategoriesPresenter {
+protocol CollectionsPresenter {
     func categorySelected(at index: IndexPath)
 }

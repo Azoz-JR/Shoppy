@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var noResultsView: UIView!
     @IBOutlet var noResultsLabel: UILabel!
@@ -15,8 +15,9 @@ class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDe
     let searchBar = UISearchBar()
     let searchTableViewDelegate = SearchTableViewDelegate()
     
-    var productsViewModel: ProductsViewModel?
+    var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
+    var wishListViewModel: WishListViewModel?
     var service: Service?
     var result: [ItemViewModel] = []
     
@@ -64,40 +65,6 @@ class SearchViewController: UIViewController, SearchViewPresenter, UISearchBarDe
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchTableViewDelegate.data = []
         reloadTableView()
-    }
-    
-    func configuareTableView() {
-        tableView.delegate = searchTableViewDelegate
-        tableView.dataSource = searchTableViewDelegate
-        tableView.keyboardDismissMode = .onDrag
-        
-        searchTableViewDelegate.parentController = self
-        searchTableViewDelegate.productsViewModel = productsViewModel
-        searchTableViewDelegate.listsViewModel = listsViewModel
-        
-        registerCell()
-    }
-    
-    func registerCell() {
-        tableView.register(SearchTableViewCell.register(), forCellReuseIdentifier: SearchTableViewCell.identifier)
-    }
-    
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    func itemSelected(at index: IndexPath) {
-        guard let productsViewModel, let listsViewModel else {
-            return
-        }
-        
-        let product = searchTableViewDelegate.data[index.row]
-        
-        select(product: product, productsViewModel: productsViewModel, listsViewModel: listsViewModel)
     }
     
 }

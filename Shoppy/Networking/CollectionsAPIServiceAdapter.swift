@@ -11,16 +11,25 @@ struct CollectionsAPIServiceAdapter: Service {
     let api: CollectionsAPI
     
     
-    func loadProducts(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
-        api.loadCollections { results in
-            DispatchQueue.mainAsyncIfNeeded {
-                completion(results.map({ collections in
-                    return collections.map { collection in
-                        collection.toItemViewModel()
-                    }
-                }))
-            }
+    func loadProducts() async throws -> [ItemViewModel] {
+        do {
+            let collections = try await api.loadCollections()
+            return collections.map { $0.toItemViewModel() }
+        } catch {
+            throw error
         }
     }
+    
+//    func loadProducts(completion: @escaping (Result<[ItemViewModel], Error>) -> Void) {
+//        api.loadCollections { results in
+//            DispatchQueue.mainAsyncIfNeeded {
+//                completion(results.map({ collections in
+//                    return collections.map { collection in
+//                        collection.toItemViewModel()
+//                    }
+//                }))
+//            }
+//        }
+//    }
     
 }
