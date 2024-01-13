@@ -23,7 +23,6 @@ final class ProfileView: UIView {
     //Lists
     @IBOutlet var listsPageControl: UIPageControl!
     @IBOutlet var listsCollection: UICollectionView!
-    @IBOutlet var imagesStackView: UIStackView!
     @IBOutlet var seeAllListsButton: UIButton!
     @IBOutlet var createListButton: UIButton!
     @IBOutlet var noListsLabel: UILabel!
@@ -118,8 +117,9 @@ extension ProfileView {
     }
     
     func configureLists(with lists: [List]) {
-        guard !lists.isEmpty, let list = lists.first else {
+        guard !lists.isEmpty else {
             noListsConfiguration(value: true)
+            listsPageControl.numberOfPages = 0
             return
         }
         

@@ -28,7 +28,7 @@ extension HomeViewController {
         lastContentOffset = currentContentOffset
     }
     
-    private func hideTabBar() {
+    func hideTabBar() {
         guard tabBarVisible else { return }
         
         UIView.animate(withDuration: 0.3) {
@@ -38,7 +38,7 @@ extension HomeViewController {
         tabBarVisible = false
     }
     
-    private func showTabBar() {
+    func showTabBar() {
         guard !tabBarVisible else { return }
         
         UIView.animate(withDuration: 0.3) {

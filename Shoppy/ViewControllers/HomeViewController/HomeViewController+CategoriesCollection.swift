@@ -50,6 +50,7 @@ extension HomeViewController: HomeCategoriesPresenter {
         let vc = CollectionViewController()
         vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
+        vc.wishListViewModel = wishListViewModel
         vc.section = section
         vc.title = section.title
         

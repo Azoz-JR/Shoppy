@@ -9,7 +9,6 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     let cartViewModel = CartViewModel()
-    let ordersViewModel = OrdersViewModel()
     let listsViewModel = ListsViewModel()
     let wishListViewModel = WishListViewModel()
     
@@ -105,7 +104,6 @@ final class MainTabBarController: UITabBarController {
     
     func makeCartView() -> CartViewController {
         let cartVC = CartViewController(cartViewModel: cartViewModel)
-        cartVC.ordersViewModel = ordersViewModel
         cartVC.title = "My Cart"
         cartVC.view.backgroundColor = .secondBackground
         
@@ -114,7 +112,6 @@ final class MainTabBarController: UITabBarController {
     
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
-        profileVC.ordersViewModel = ordersViewModel
         profileVC.cartViewModel = cartViewModel
         profileVC.listsViewModel = listsViewModel
         profileVC.wishListViewModel = wishListViewModel

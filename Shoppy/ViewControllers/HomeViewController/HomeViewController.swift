@@ -62,9 +62,10 @@ final class HomeViewController: UIViewController {
                 self.products = products
                 self.collectionDataSourceAndDelegate.data = self.homeViewModel.sections
                 self.reloadCollectionView()
+                self.refreshControl.endRefreshing()
+                
             } onError: { [weak self] error in
                 self?.show(error: error)
-            } onCompleted: { [weak self] in
                 self?.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
@@ -73,6 +74,7 @@ final class HomeViewController: UIViewController {
     @objc func refresh() {
         Task(priority: .background) {
             await homeViewModel.load()
+            
         }
     }
     
@@ -91,27 +93,10 @@ final class HomeViewController: UIViewController {
         reloadCollectionView()
     }
     
-    /*
-//    @objc func refresh() {
-//        service?.loadProducts(completion: handleAPIResults)
-//    }
-    
-//    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
-//        switch result {
-//        case .success(let products):
-//            self.products = products
-//            
-//            self.sections = [Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})), Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})), Section(title: "Shoes", items: products.filter({$0.category == .shoes})), Section(title: "Accessories", items: products.filter({$0.category == .accessories})), Section(title: "T-Shirts", items: products.filter({$0.category == .tShirts}))]
-//            
-//            collectionDataSourceAndDelegate.data = sections
-//            reloadCollectionView()
-//        case .failure(let error):
-//            self.show(error: error)
-//            print(error.localizedDescription)
-//        }
-//        
-//        refreshControl.endRefreshing()
-//    }
-     */
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        showTabBar()
+    }
     
 }

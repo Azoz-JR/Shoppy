@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 extension ProfileViewController {
     func bindToLists() {
-        listsViewModel?.lists.addObserver { [weak self] lists in
-            guard let lists, let self else {
+        listsViewModel?.lists.subscribe { [weak self] lists in
+            guard let self else {
                 self?.updateLists()
                 return
             }
@@ -19,6 +20,7 @@ extension ProfileViewController {
             self.listsCollectionViewDelegate.data = lists
             self.updateLists()
         }
+        .disposed(by: disposeBag)
     }
     
     func configureListsCollection() {

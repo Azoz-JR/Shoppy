@@ -11,13 +11,13 @@ final class CollectionViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var contentView: UIView!
     
-    
-    
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
+    
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
+    
     var service: Service?
     var collection: ItemViewModel?
     var section: Section?
@@ -109,27 +109,5 @@ final class CollectionViewController: UIViewController {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.addSubview(blurEffectView)
     }
-    
-    /*
-//    @objc func refresh() {
-//        service?.loadProducts(completion: handleAPIResults)
-//    }
-//    
-//    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
-//        switch result {
-//        case .success(let products):
-//            products.count < 5
-//            ? isHidingSearchBarOnScrolling(false)
-//            : isHidingSearchBarOnScrolling(true)
-//            self.products = products
-//            productsDataSourceAndDelegate.data = products
-//            reloadCollectionView()
-//            
-//        case .failure(let error):
-//            self.show(error: error)
-//            print(error.localizedDescription)
-//        }
-//    }
-     */
     
 }

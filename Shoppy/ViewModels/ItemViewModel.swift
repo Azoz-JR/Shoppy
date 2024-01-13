@@ -60,4 +60,39 @@ struct ItemViewModel: Codable, Hashable, Equatable {
     static func ==(lhs: ItemViewModel, rhs: ItemViewModel) -> Bool {
         lhs.id == rhs.id
     }
+    
+    init(from dictionary: [String: Any]) {
+        id = dictionary["id"] as? Int ?? 0
+        title = dictionary["title"] as? String ?? ""
+        price = dictionary["price"] as? Double ?? 0.0
+        discountPercentage = dictionary["discountPercentage"] as? Double ?? 0.0
+        category = Category(rawValue: dictionary["category"] as? String ?? "")
+        image = URL(string: dictionary["image"] as? String ?? "")
+        images = (dictionary["images"] as? [String])?.compactMap { URL(string: $0) } ?? []
+        sizes = dictionary["sizes"] as? [String] ?? []
+        colors = (dictionary["colors"] as? [String])?.map { ColorOption(rawValue: $0) } as? [ColorOption] ?? []
+        description = dictionary["description"] as? String ?? ""
+        vendor = dictionary["vendor"] as? String ?? ""
+        count = dictionary["count"] as? Int ?? 0
+        size = dictionary["size"] as? String ?? ""
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "title": title,
+            "price": price,
+            "discountPercentage": discountPercentage,
+            "category": category?.rawValue ?? "N/A", // Assuming Category is an enum with a rawValue
+            "image": image?.absoluteString ?? "N/A",
+            "images": images.map { $0?.absoluteString ?? "N/A" },
+            "sizes": sizes,
+            "colors": colors.map { $0.rawValue }, // Assuming ColorOption has a toDictionary method
+            "description": description,
+            "vendor": vendor,
+            "count": count,
+            "color": color,
+            "size": size
+        ]
+    }
 }

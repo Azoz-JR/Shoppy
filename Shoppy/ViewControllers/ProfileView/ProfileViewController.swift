@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import RxSwift
 
 final class ProfileViewController: UIViewController, ProfileViewPresenter {
-    var ordersViewModel: OrdersViewModel?
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
@@ -19,6 +19,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     
     var orders: [Order] = []
     var lists: [List] = []
+    let disposeBag = DisposeBag()
     
     var tabBarVisible = true
     var lastContentOffset: CGFloat = 0
@@ -35,6 +36,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         configureNavBar()
         configureScrollView()
         
+        listsViewModel?.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
         bindToOrders()
         bindToLists()
         configureOrdersCollection()

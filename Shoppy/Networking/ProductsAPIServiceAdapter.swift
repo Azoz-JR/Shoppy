@@ -19,7 +19,7 @@ struct ProductsAPIServiceAdapter: Service {
     func loadProducts() async throws -> [ItemViewModel] {
         if let category {
             do {
-                var products = try await api.loadCategoryProducts(category: category)
+                let products = try await api.loadCategoryProducts(category: category)
                 
                 return products.map { $0.toItemViewModel() }
             } catch {
@@ -27,7 +27,7 @@ struct ProductsAPIServiceAdapter: Service {
             }
             
         } else {
-            var products = try await api.loadProducts()
+            let products = try await api.loadProducts()
             
             return products.map { $0.toItemViewModel() }
         }

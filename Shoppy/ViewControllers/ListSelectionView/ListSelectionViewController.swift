@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
@@ -16,6 +17,7 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     
     let listsTableViewDelegate = ListsSelectionTableViewDelegate()
     var lists: [List] = []
+    private let disposeBag = DisposeBag()
     
     init(item: ItemViewModel, listsViewModel: ListsViewModel) {
         self.listsViewModel = listsViewModel
@@ -31,6 +33,7 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        listsViewModel.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
         configNavigationBar()
         bindToListsViewModel()
         configuareTableView()
@@ -45,21 +48,19 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     }
     
     func bindToListsViewModel() {
-        listsViewModel.lists.addObserver { [weak self] lists in
-            guard let lists else {
-                return
-            }
-            
-            if lists.isEmpty {
-                self?.noListsLabel.isHidden = false
-            } else {
-                self?.noListsLabel.isHidden = true
-            }
-            
+        listsViewModel.lists.subscribe { [weak self] lists in
             self?.lists = lists
             self?.listsTableViewDelegate.data = lists
             self?.reloadTableView()
+            
+            guard lists.isEmpty else {
+                self?.noListsLabel.isHidden = true
+                return
+            }
+            self?.noListsLabel.isHidden = false
         }
+        .disposed(by: disposeBag)
+        
     }
     
     @objc func addListTapped() {

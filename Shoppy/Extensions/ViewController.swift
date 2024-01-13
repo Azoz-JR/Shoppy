@@ -78,7 +78,10 @@ extension UIViewController {
                 self?.dismiss(animated: true)
             }
         }))
-        present(alert, animated: true)
+        
+        DispatchQueue.mainAsyncIfNeeded {
+            self.present(alert, animated: true)
+        }
     }
     
     func showCreateListView(listsViewModel: ListsViewModel?) {

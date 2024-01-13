@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+
 
 final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var tableView: UITableView!
@@ -18,10 +20,9 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var checkoutButton: UIButton!
     
     var cartViewModel: CartViewModel
-    var ordersViewModel: OrdersViewModel?
-    
     var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
+    let disposeBag = DisposeBag()
     
     init(cartViewModel: CartViewModel) {
         self.cartViewModel = cartViewModel
@@ -63,13 +64,14 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func bindToViewModel() {
-        cartViewModel.cartProducts.addObserver { [weak self] products in
-            guard let self = self, let products = products else {
+        cartViewModel.cartProducts.subscribe { [weak self] products in
+            guard let self = self else {
                 return
             }
             self.cartProducts = products
             self.updateUI()
         }
+        .disposed(by: disposeBag)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -83,11 +85,18 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func checkoutTapped() {
-        let order = Order(id: UUID(), items: cartProducts, price: cartViewModel.total, date: Date.now)
-        ordersViewModel?.placeOrder(order: order) { [weak self] _ in
-            self?.cartViewModel.clearCart()
-            
-            self?.showOrederConfirmationMessage()
+        let order = Order(id: UUID().uuidString, items: cartProducts, price: cartViewModel.total, date: Date.now)
+        
+        Task {
+            do {
+                try await cartViewModel.placeOrder(order: order) { [weak self] _ in
+                    self?.cartViewModel.clearCart()
+                    self?.showOrederConfirmationMessage()
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     

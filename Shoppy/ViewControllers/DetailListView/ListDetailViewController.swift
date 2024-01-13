@@ -71,6 +71,7 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
         } else {
             noItemsLabel.isHidden = false
         }
+        
     }
     
 

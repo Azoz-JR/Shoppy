@@ -9,8 +9,8 @@ import UIKit
 
 extension ProfileViewController {
     func bindToOrders() {
-        ordersViewModel?.orders.addObserver { [weak self] orders in
-            guard let orders, let self else {
+        cartViewModel?.orders.subscribe { [weak self] orders in
+            guard let self else {
                 self?.updateOrders()
                 return
             }
@@ -19,6 +19,8 @@ extension ProfileViewController {
             self.ordersCollectionViewDelegate.data = orders
             self.updateOrders()
         }
+        .disposed(by: disposeBag)
+        
     }
     
     func configureOrdersCollection() {

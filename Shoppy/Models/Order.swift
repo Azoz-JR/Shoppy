@@ -8,10 +8,17 @@
 import Foundation
 
 struct Order: Equatable, Codable {
-    let id: UUID
+    let id: String
     let items: [ItemViewModel]
     let price: Double
     let date: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case items
+        case price
+        case date
+    }
     
     var image: URL? {
         return items.first?.image
@@ -24,4 +31,14 @@ struct Order: Equatable, Codable {
     static func ==(lhs: Order, rhs: Order) -> Bool {
         lhs.id == rhs.id
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id" : id,
+            "items" : items.map{ $0.toDictionary() },
+            "price" : price,
+            "date" : date
+        ]
+    }
+    
 }

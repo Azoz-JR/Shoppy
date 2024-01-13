@@ -6,90 +6,200 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
+
 
 class CartViewModel {
-    var cartProducts: MyObservable<[ItemViewModel]> = MyObservable([])
+    var cartProductsRelay = BehaviorRelay<[ItemViewModel]>(value: [])
+    var cartProducts: Observable<[ItemViewModel]> {
+        cartProductsRelay.asObservable()
+    }
+    
     var cartCount: MyObservable<Int> = MyObservable(0)
     
+    private var ordersRelay = BehaviorRelay<[Order]>(value: [])
+    var orders: Observable<[Order]> {
+        ordersRelay.asObservable()
+    }
+    
     var total: Double {
-        guard let products = cartProducts.value, !products.isEmpty else {
+        guard !cartProductsRelay.value.isEmpty else {
             return 0.0
         }
         
         var total = 0.0
-        products.forEach { product in
+        cartProductsRelay.value.forEach { product in
             total += product.price * Double(product.count)
         }
         
         return total
     }
     
+    func getCart(userId: String) {
+        Task {
+            do {
+                let cart = try await UserManager.shared.getUserCart(userId: userId)                
+                await MainActor.run {
+                    cartProductsRelay.accept(cart)
+                    updateCount()
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     func addProduct(product: ItemViewModel) {
-        guard let products = cartProducts.value else {
-            return
-        }
-        
-        guard products.contains(product) else {
-            cartProducts.value?.insert(product, at: 0)
-            increaseProduct(at: 0)
-            return
-        }
-        
-        if let index = products.firstIndex(of: product) {
-            increaseProduct(at: index)
+        Task {
+            var cart = self.cartProductsRelay.value
+            
+            if !cart.contains(product) {
+                cart.insert(product, at: 0)
+                cart[0].increaseCount()
+            } else {
+                if let index = cart.firstIndex(of: product) {
+                    cart[index].increaseCount()
+                }
+            }
+            
+            do {
+                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                
+                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
         }
         
     }
     
-    func removeProduct(product: ItemViewModel) {
-        guard let index = cartProducts.value?.firstIndex(of: product) else {
-            return
+    func decreaseProduct(product: ItemViewModel) {
+        Task {
+            var cart = self.cartProductsRelay.value
+            
+            if let index =  cart.firstIndex(of: product) {
+                
+                if cart[index].count > 1 {
+                    cart[index].decreaseCount()
+                } else {
+                    cart.remove(at: index)
+                }
+            }
+            
+            do {
+                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                
+                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
         }
-        
-        guard let count = cartProducts.value?[index].count, count > 1 else {
-            removeProduct(at: index)
-            return
-        }
-        
-        cartProducts.value?[index].decreaseCount()
-        updateCount()
-    }
-    
-    private func increaseProduct(at index: Int) {
-        cartProducts.value?[index].increaseCount()
-        updateCount()
     }
     
     func removeProduct(at index: Int) {
-        cartProducts.value?.remove(at: index)
-        updateCount()
-    }
-    
-    func contains(product: ItemViewModel) -> Bool {
-        guard let products = cartProducts.value, products.contains(product) else {
-            return false
+        Task {
+            var cart = self.cartProductsRelay.value
+            cart.remove(at: index)
+            
+            do {
+                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                
+                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
         }
-        
-        return true
     }
     
     func clearCart() {
-        cartProducts.value?.removeAll()
-        
-        updateCount()
+        Task {
+            do {
+                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: [])
+                
+                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
+        }
     }
     
     func updateCount() {
-        guard let products = cartProducts.value else {
-            return
-        }
         var count = 0
         
-        products.forEach { item in
+        cartProductsRelay.value.forEach { item in
             count += item.count
         }
-        
         cartCount.value = count
     }
+}
+
+
+// MARK: - Orders Methods
+extension CartViewModel {
+    func getOrders(userId: String) {
+        Task {
+            do {
+                let orders = try await UserManager.shared.getAllUserOrders(userId: userId)
+                await MainActor.run {
+                    ordersRelay.accept(orders)
+                }
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
+    }
+    
+    func addOrder(order: Order) {
+        Task {
+            do {
+                try await UserManager.shared.addUserOrder(userId: "9Cvmx2WJsVBARTmaQy6Q", order: order)
+                
+                getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
+    }
+    
+    func removeOrder(order: Order) {
+        Task {
+            do {
+                try await UserManager.shared.removeUserOrder(userId: "9Cvmx2WJsVBARTmaQy6Q", orderId: order.id)
+                
+                getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
+    }
+    
+    func placeOrder(order: Order, completion: @escaping (Order) -> Void) async throws {
+        guard let url = URL(string: "https://reqres.in/api/cupcakes") else {
+            print("Failed to encode order")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        
+        do {
+            let encoded = try JSONEncoder().encode(order)
+            let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
+            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+            
+            self.addOrder(order: order)
+            
+            await MainActor.run {
+                completion(decodedOrder)
+            }
+                          
+        } catch {
+            print(error.localizedDescription)
+            print("Checkout failed")
+            throw error
+        }
+    }
+    
 }

@@ -12,7 +12,6 @@ extension ListsViewController {
         tableView.delegate = listsTableViewDelegate
         tableView.dataSource = listsTableViewDelegate
         
-        listsTableViewDelegate.data = lists
         listsTableViewDelegate.parentController = self
         
         registerCell()
@@ -31,14 +30,14 @@ extension ListsViewController {
     }
     
     func listSelected(at index: Int) {
-        let list = lists[index]
+        let list = listsTableViewDelegate.data[index]
         let vc = ListDetailViewController(list: list, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
         
         show(vc, sender: self)
     }
     
     func listDeleted(at index: IndexPath) {
-        let listTitle = lists[index.row].name
+        let listTitle = listsTableViewDelegate.data[index.row].name
         showDeleteListAlert(title: listTitle, index: index)
     }
 }

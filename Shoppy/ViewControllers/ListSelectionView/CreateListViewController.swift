@@ -27,11 +27,12 @@ class CreateListViewController: UIViewController, UITextFieldDelegate {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             return
         }
-        
-        let list = List(name: text, items: [])
-        listsViewModel?.createList(list: list)
-        showAlert(title: "\(list.name) created successfully", dismiss: true)
         textField.resignFirstResponder()
+        
+        listsViewModel?.createList(name: text) { [weak self] result in
+            self?.showAlert(title: result, dismiss: true)
+        }
+        
     }
     
     // MARK: - TextField Method

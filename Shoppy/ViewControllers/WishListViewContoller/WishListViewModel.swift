@@ -8,7 +8,18 @@
 import Foundation
 
 class WishListViewModel {
-    var wishList: MyObservable<List> = MyObservable(List(name: "Wish List", items: []))
+    var wishList: MyObservable<List> = MyObservable(List(id: UUID().uuidString, name: "Wish List", items: [], date: Date()))
+    
+    func getWishList(userId: String) {
+        Task {
+            do {
+                let wishList = try await UserManager.shared.getUserWishList(userId: userId)
+                self.wishList.value = wishList
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
+    }
 
     
     func likeProduct(product: ItemViewModel) {

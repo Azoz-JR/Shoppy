@@ -38,7 +38,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.decreaseButtonHandler = { [weak self] in
-                self?.cartViewModel.removeProduct(product: product)
+                self?.cartViewModel.decreaseProduct(product: product)
                 self?.updateUI()
             }
             

@@ -6,33 +6,94 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
+
 
 final class ListsViewModel {
-    var lists: MyObservable<[List]> = MyObservable([])
+    private var listsRelay = BehaviorRelay<[List]>(value: [])
+    var lists: Observable<[List]> {
+        listsRelay.asObservable()
+    }
     
-    func createList(list: List) {
-        guard !contains(list: list) else {
+    func getLists(userId: String) {
+        Task {
+            do {
+                let lists = try await UserManager.shared.getAllUserLists(userId: userId)
+                await MainActor.run {
+                    listsRelay.accept(lists)
+                }
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
+    }
+    
+    func createList(name: String, completion: @escaping (String) -> Void) {
+        guard !contains(name: name) else {
+            completion("\(name) list already exists. Try another name")
             return
         }
-        lists.value?.append(list)
+        
+        Task {
+            do {
+                try await UserManager.shared.addUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", name: name)
+                completion("\(name) cretaed successfully")
+                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                print("ERROR CREATING List")
+            }
+        }
     }
     
     func delete(list: List) {
-        if let index = lists.value?.firstIndex(of: list) {
-            lists.value?.remove(at: index)
+        Task {
+            do {
+                try await UserManager.shared.removeUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", listId: list.id)
+                
+                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                print("ERROR DELETING List")
+            }
         }
     }
     
     func add(item: ItemViewModel, at index: Int) {
-        lists.value?[index].add(item: item)
+        Task {
+            var list = self.listsRelay.value[index]
+            list.add(item: item)
+            
+            do {
+                try await UserManager.shared.updateUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: list)
+                
+                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
+        }
+        
     }
     
-    func remove(item: ItemViewModel, at index: Int) {
-        lists.value?[index].remove(item: item)
+    func remove(item: ItemViewModel, at list: List) {
+        
+        Task {
+            var tempList = list
+            tempList.remove(item: item)
+            
+            do {
+                try await UserManager.shared.updateUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: tempList)
+                print(list.name)
+                print(list.id)
+                
+                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
+        }
     }
     
-    private func contains(list: List) -> Bool {
-        guard let lists = lists.value, lists.contains(where: { $0 == list }) else {
+    private func contains(name: String) -> Bool {
+        guard listsRelay.value.contains(where: { $0.name == name }) else {
             return false
         }
         return true

@@ -7,9 +7,18 @@
 
 import Foundation
 
-struct List: Equatable {
+struct List: Equatable, Codable {
+    let id: String
     var name: String
     var items: [ItemViewModel]
+    let date: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case items
+        case date
+    }
     
     mutating func add(item: ItemViewModel) {
         guard !contains(item: item) else {
@@ -36,6 +45,16 @@ struct List: Equatable {
     }
     
     static func ==(lhs: List, rhs: List) -> Bool {
-        lhs.name == rhs.name
+        lhs.id == rhs.id
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id" : id,
+            "name" : name,
+            "items" : items.map{ $0.toDictionary() },
+            "date" : date
+        ]
+    }
+    
 }

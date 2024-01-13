@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ListsViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
@@ -14,9 +15,8 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     var cartViewModel: CartViewModel
     var listsViewModel: ListsViewModel
     var wishListViewModel: WishListViewModel
-    
+    private let disposeBag = DisposeBag()
     let listsTableViewDelegate = ListsTableViewDelegate()
-    var lists: [List] = []
     
     init(cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         self.cartViewModel = cartViewModel
@@ -35,9 +35,28 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         
         title = "Your Lists"
         
+        listsViewModel.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
         bindtoListsViewModel()
         configNavigationBar()
         configuareTableView()
+    }
+    
+    func bindtoListsViewModel() {
+        listsViewModel.lists.subscribe { [weak self] lists in
+            guard let self else {
+                return
+            }
+            
+            self.listsTableViewDelegate.data = lists
+            reloadTableView()
+            
+            if lists.isEmpty {
+                noListsLabel.isHidden = false
+            } else {
+                noListsLabel.isHidden = true
+            }
+        }
+        .disposed(by: disposeBag)
     }
     
     @objc func addListTapped() {
@@ -61,24 +80,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         navigationItem.rightBarButtonItems = [addBarButton, editBarButton]
     }
     
-    func bindtoListsViewModel() {
-        listsViewModel.lists.addObserver { [weak self] lists in
-            guard let self, let lists else {
-                return
-            }
-            
-            if lists.isEmpty {
-                noListsLabel.isHidden = false
-            } else {
-                noListsLabel.isHidden = true
-            }
-            
-            self.lists = lists
-            self.listsTableViewDelegate.data = lists
-            reloadTableView()
-        }
-    }
-    
+
     func showDeleteListAlert(title: String, index: IndexPath) {
         let alert = UIAlertController(title: "", message: "Delete \(title) list?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -91,10 +93,10 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     }
     
     private func deleteList(index: IndexPath) {
+        let list = listsTableViewDelegate.data[index.row]
+        
         listsTableViewDelegate.data.remove(at: index.row)
         tableView.deleteRows(at: [index], with: .fade)
-        
-        let list = lists[index.row]
         listsViewModel.delete(list: list)
     }
 
