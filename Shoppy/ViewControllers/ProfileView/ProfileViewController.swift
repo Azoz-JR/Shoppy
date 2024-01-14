@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     let profileView = ProfileView()
     let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
     let listsCollectionViewDelegate = ListsCollectionViewDelegate()
+    private var refreshControl = UIRefreshControl()
     
     var orders: [Order] = []
     var lists: [List] = []
@@ -35,13 +36,13 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
 
         configureNavBar()
         configureScrollView()
-        
-        listsViewModel?.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
         bindToOrders()
         bindToLists()
         configureOrdersCollection()
         configureListsCollection()
         configureProfileViewButtons()
+        
+        refresh()
     }
     
     private func updateUI() {
@@ -91,8 +92,19 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         name.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         
         let label = UIBarButtonItem(customView: name)
-        
         navigationItem.leftBarButtonItem = label
+        
+        //Refresh View
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .myGreen
+        profileView.scrollView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh() {
+        cartViewModel?.getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
+        listsViewModel?.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q") { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
     }
     
 }

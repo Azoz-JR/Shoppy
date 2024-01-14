@@ -18,11 +18,14 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var subtotalLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var checkoutButton: UIButton!
+    @IBOutlet var noItemsLabel: UILabel!
     
     var cartViewModel: CartViewModel
     var cartProducts: [ItemViewModel] = []
     var couponText: String = ""
     let disposeBag = DisposeBag()
+    private var refreshControl = UIRefreshControl()
+
     
     init(cartViewModel: CartViewModel) {
         self.cartViewModel = cartViewModel
@@ -42,6 +45,8 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         bindToViewModel()
         setUpTableView()
         configureNotifications()
+        
+        refresh()
     }
     
     func configView() {
@@ -52,10 +57,28 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         couponContainer.round(10)
         checkoutButton.round(20)
         
+        //Refresh View
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .myGreen
+        tableView.refreshControl = refreshControl
+        
         updateUI()
     }
     
+    @objc func refresh() {
+        cartViewModel.getCart(userId: "9Cvmx2WJsVBARTmaQy6Q") { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
+        
+    }
+    
     func updateUI() {
+        if cartProducts.isEmpty {
+            noItemsLabel.isHidden = false
+        } else {
+            noItemsLabel.isHidden = true
+        }
+        
         subtotalLabel.text = "\(cartViewModel.total)$"
         totalLabel.text = "\(cartViewModel.total)$"
         checkoutButton.isEnabled = !cartProducts.isEmpty

@@ -26,6 +26,7 @@ final class HomeViewController: UIViewController {
     
     let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     var service: Service?
     var products: [ItemViewModel] = []
@@ -38,18 +39,28 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .navBarTint
         navigationItem.backButtonDisplayMode = .minimal
                 
-        bindToViewModel()
-        
         configureSearchBar()
         configureCollectionView()
+        setUpProgressView()
         configureCollectionDelegateAndDataSource()
         configureCategoriesCollection()
+        bindToViewModel()
+        
+        
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = .myGreen
         collectionView.refreshControl = refreshControl
         
+        progressView.startAnimating()
         refresh()
+    }
+    
+    func setUpProgressView() {
+        view.addSubview(progressView)
+        progressView.center = view.center
+        progressView.isHidden = true
+        
     }
     
     func bindToViewModel() {
@@ -75,6 +86,9 @@ final class HomeViewController: UIViewController {
         Task(priority: .background) {
             await homeViewModel.load()
             
+            await MainActor.run {
+                self.progressView.stopAnimating()
+            }
         }
     }
     

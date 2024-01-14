@@ -25,10 +25,10 @@ struct DBUser: Codable{
     let dateCreated: Date?
     let isPremium: Bool?
     let preferences: [String]?
-    let wishList: List?
+    let wishList: List
     let cart: [ItemViewModel]
     
-    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List? = nil, cart: [ItemViewModel]) {
+    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemViewModel]) {
         self.userId = userId
         self.isAnonymous = isAnonymous
         self.email = email
@@ -77,7 +77,7 @@ struct DBUser: Codable{
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
-        self.wishList = try container.decodeIfPresent(List.self, forKey: .wishList)
+        self.wishList = try container.decode(List.self, forKey: .wishList)
         self.cart = try container.decode([ItemViewModel].self, forKey: .cart)
     }
     
@@ -90,7 +90,7 @@ struct DBUser: Codable{
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
-        try container.encodeIfPresent(self.wishList, forKey: .wishList)
+        try container.encode(self.wishList, forKey: .wishList)
         try container.encode(self.cart, forKey: .cart)
     }
     
@@ -220,7 +220,7 @@ final class UserManager {
         try await userListsCollection(userId: userId).getDocuments(as: List.self)
     }
     
-    func getUserWishList(userId: String) async throws -> List? {
+    func getUserWishList(userId: String) async throws -> List {
         return try await getUser(userId: userId).wishList
     }
     

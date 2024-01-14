@@ -16,12 +16,13 @@ final class ListsViewModel {
         listsRelay.asObservable()
     }
     
-    func getLists(userId: String) {
+    func getLists(userId: String, completion: (@escaping () -> Void) = {}) {
         Task {
             do {
                 let lists = try await UserManager.shared.getAllUserLists(userId: userId)
                 await MainActor.run {
                     listsRelay.accept(lists)
+                    completion()
                 }
             } catch {
                 print("ERROR CREATING List")

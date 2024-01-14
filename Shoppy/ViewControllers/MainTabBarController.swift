@@ -23,6 +23,8 @@ final class MainTabBarController: UITabBarController {
         view.backgroundColor = .systemBackground
         tabBar.tintColor = .selectedTab
         
+        wishListViewModel.getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+        
         bindToCartViewModel()
         
         let homeVC = makeHomeView()

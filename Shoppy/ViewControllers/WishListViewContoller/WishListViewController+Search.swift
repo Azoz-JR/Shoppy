@@ -15,12 +15,12 @@ extension WishListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), text != "" else {
-            productsDataSourceAndDelegate.data = wishList
+            productsDataSourceAndDelegate.data = wishListProducts
             reloadCollectionView()
             return
         }
         
-        productsDataSourceAndDelegate.data = wishList.filter { product in
+        productsDataSourceAndDelegate.data = wishListProducts.filter { product in
             product.title.localizedStandardContains(text)
         }
         reloadCollectionView()

@@ -157,6 +157,7 @@
 		97AB180F2B50CCA700522186 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 97AB180E2B50CCA700522186 /* FirebaseStorage */; };
 		97AB18162B517EEE00522186 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB18142B517EEE00522186 /* ProductManager.swift */; };
 		97AB18172B517EEE00522186 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB18152B517EEE00522186 /* UserManager.swift */; };
+		97AB181A2B534CDB00522186 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB18192B534CDB00522186 /* ProgressView.swift */; };
 		97B38FFD2B1F845900EB90EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFC2B1F845900EB90EA /* AppDelegate.swift */; };
 		97B38FFF2B1F845900EB90EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */; };
 		97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B390052B1F845B00EB90EA /* Assets.xcassets */; };
@@ -341,6 +342,7 @@
 		97AB17D92B50C98700522186 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97AB18142B517EEE00522186 /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		97AB18152B517EEE00522186 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		97AB18192B534CDB00522186 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		97B38FF92B1F845900EB90EA /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B38FFC2B1F845900EB90EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 		9758BA1A2B25132100F4E8F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				97AB18182B534CBE00522186 /* ProgressView */,
 				9790F8E92B3F232B00597A50 /* HomeView */,
 				9790F8EA2B3F233D00597A50 /* CategoriesView */,
 				9790F8EB2B3F237600597A50 /* CartView */,
@@ -819,6 +822,14 @@
 				97AB18142B517EEE00522186 /* ProductManager.swift */,
 			);
 			path = Firestore;
+			sourceTree = "<group>";
+		};
+		97AB18182B534CBE00522186 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				97AB18192B534CDB00522186 /* ProgressView.swift */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 		97B38FF02B1F845900EB90EA = {
@@ -1152,6 +1163,7 @@
 				9790F8FA2B3FC0FA00597A50 /* ListsViewController.swift in Sources */,
 				9790F9172B41DFC300597A50 /* ListSelectionViewController.swift in Sources */,
 				9790F9042B40931C00597A50 /* ListDetailViewController.swift in Sources */,
+				97AB181A2B534CDB00522186 /* ProgressView.swift in Sources */,
 				97AB17802B4F297100522186 /* WishListViewModel.swift in Sources */,
 				970EECCE2B310AF5009D53C7 /* ProductVariant.swift in Sources */,
 				97C489D62B4C7DB600D0E9D7 /* SearchViewPresenter.swift in Sources */,

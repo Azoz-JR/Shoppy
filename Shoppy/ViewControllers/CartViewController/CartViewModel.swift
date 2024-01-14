@@ -36,13 +36,14 @@ class CartViewModel {
         return total
     }
     
-    func getCart(userId: String) {
+    func getCart(userId: String, completion: (@escaping () -> Void) = {}) {
         Task {
             do {
                 let cart = try await UserManager.shared.getUserCart(userId: userId)                
                 await MainActor.run {
                     cartProductsRelay.accept(cart)
                     updateCount()
+                    completion()
                 }
             } catch {
                 print(error.localizedDescription)

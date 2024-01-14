@@ -31,7 +31,7 @@ extension WishListViewController: ParentControllerPresenter {
     }
     
     func itemSelected(at index: IndexPath) {
-        let product = wishList[index.row]
+        let product = productsDataSourceAndDelegate.data[index.row]
         guard let listsViewModel, let cartViewModel else {
             return
         }

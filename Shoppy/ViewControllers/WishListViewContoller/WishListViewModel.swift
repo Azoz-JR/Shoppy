@@ -6,15 +6,24 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
-class WishListViewModel {
-    var wishList: MyObservable<List> = MyObservable(List(id: UUID().uuidString, name: "Wish List", items: [], date: Date()))
+class WishListViewModel {    
+    var wishListRelay = BehaviorRelay<List>(value: List(id: UUID().uuidString, name: "Wish List", items: [], date: Date()))
+    var wishList: Observable<List> {
+        return wishListRelay.asObservable()
+    }
     
-    func getWishList(userId: String) {
+    func getWishList(userId: String, completion: (@escaping () -> Void) = {}) {
         Task {
             do {
                 let wishList = try await UserManager.shared.getUserWishList(userId: userId)
-                self.wishList.value = wishList
+                await MainActor.run {
+                    wishListRelay.accept(wishList)
+                    completion()
+                }
+                
             } catch {
                 print("ERROR CREATING List")
             }
@@ -28,15 +37,37 @@ class WishListViewModel {
             return
         }
         
-        wishList.value?.add(item: product)
+        Task {
+            var wishList = wishListRelay.value
+            wishList.add(item: product)
+            
+            do {
+                try await UserManager.shared.updateUserWishList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: wishList)
+                
+                getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
+        }
     }
     
     private func unlikeProduct(product: ItemViewModel) {
-        wishList.value?.remove(item: product)
+        Task {
+            var wishList = wishListRelay.value
+            wishList.remove(item: product)
+            
+            do {
+                try await UserManager.shared.updateUserWishList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: wishList)
+                
+                getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+            } catch {
+                
+            }
+        }
     }
     
     func isLiked(product: ItemViewModel) -> Bool {
-        guard let list = wishList.value, list.contains(item: product) else {
+        guard wishListRelay.value.contains(item: product) else {
             return false
         }
         

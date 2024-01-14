@@ -13,6 +13,7 @@ final class CollectionViewController: UIViewController {
     
     let productsDataSourceAndDelegate = ProductsCollectionDataSourceAndDelegate()
     let searchController = UISearchController()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
@@ -39,6 +40,7 @@ final class CollectionViewController: UIViewController {
         configureCollectionView()
         configureSearchBar()
         
+        progressView.startAnimating()
         refresh()
         
         if let section {
@@ -80,6 +82,10 @@ final class CollectionViewController: UIViewController {
     @objc func refresh() {
         Task {
             await viewModel.load()
+            
+            await MainActor.run {
+                self.progressView.stopAnimating()
+            }
         }
     }
     
@@ -102,9 +108,9 @@ final class CollectionViewController: UIViewController {
         imageView.sd_setImage(with: collection.image)
         collectionView.backgroundView = imageView
         
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.5
+        blurEffectView.alpha = 0.999
         blurEffectView.frame = collectionView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.addSubview(blurEffectView)

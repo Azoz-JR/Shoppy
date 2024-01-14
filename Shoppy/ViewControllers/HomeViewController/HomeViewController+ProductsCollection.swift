@@ -38,6 +38,7 @@ extension HomeViewController: HomeControllerPresenter {
         let vc = CollectionViewController()
         vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
+        vc.wishListViewModel = wishListViewModel
         let section = homeViewModel.sections[index.section]
         vc.section = section
         vc.title = section.title

@@ -16,6 +16,7 @@
                 <outlet property="checkoutContainer" destination="Gq3-ZO-z7i" id="MCz-C3-dZO"/>
                 <outlet property="couponContainer" destination="kZr-lH-y89" id="LGi-fD-2CY"/>
                 <outlet property="couponTextField" destination="LOj-Cb-qfm" id="LHq-TZ-bM8"/>
+                <outlet property="noItemsLabel" destination="2fM-Pc-sEm" id="eYF-To-Tzr"/>
                 <outlet property="subtotalLabel" destination="r9G-Ig-E3J" id="gHr-j9-Mcq"/>
                 <outlet property="tableView" destination="PYr-0D-uZd" id="wBF-vR-lnJ"/>
                 <outlet property="totalLabel" destination="bvP-qW-KZv" id="FDJ-l3-TG3"/>
@@ -129,18 +130,27 @@
                         <constraint firstItem="RBO-6f-cpu" firstAttribute="leading" secondItem="Gq3-ZO-z7i" secondAttribute="leading" constant="10" id="zLi-k6-HuU"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't added any items to your cart yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fM-Pc-sEm">
+                    <rect key="frame" x="10" y="299.66666666666669" width="373" height="21.666666666666686"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="1W8-bP-nio"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7eR-7V-bKF"/>
+                <constraint firstItem="2fM-Pc-sEm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="AKa-Me-F3L"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BCH-wu-gzn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2fM-Pc-sEm" secondAttribute="trailing" constant="10" id="EJi-B5-4Ne"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="top" secondItem="PYr-0D-uZd" secondAttribute="bottom" constant="10" id="LO2-tN-adW"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="W8c-D6-FAH"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="a2p-Ln-RRl"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-10" id="bc3-mG-gBC"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-15" id="hPx-TN-Zv5"/>
+                <constraint firstItem="Gq3-ZO-z7i" firstAttribute="top" secondItem="2fM-Pc-sEm" secondAttribute="bottom" constant="200" id="zSX-jm-gKw"/>
             </constraints>
             <point key="canvasLocation" x="29.770992366412212" y="-12.67605633802817"/>
         </view>
@@ -154,6 +164,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

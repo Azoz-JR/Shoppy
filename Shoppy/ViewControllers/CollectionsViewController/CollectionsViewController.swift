@@ -17,6 +17,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
     var service: Service?
     
     let collectionDataSourceAndDelegate = CollectionsDataSourceAndDelegate()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     private var collections: [ItemViewModel] = []
     
     
@@ -28,6 +29,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         
         bindToViewModel()
         
+        progressView.startAnimating()
         refresh()
     }
     
@@ -70,6 +72,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         let vc = CollectionViewController()
         vc.cartViewModel = cartViewModel
         vc.listsViewModel = listsViewModel
+        vc.wishListViewModel = wishListViewModel
         let collection = collections[index.row]
         vc.collection = collection
         vc.title = collection.title

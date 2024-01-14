@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZN4-tg-1tM">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="B8s-UJ-67A">
                         <size key="itemSize" width="170" height="250"/>
@@ -35,11 +35,11 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ZN4-tg-1tM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Kk5-2J-i1v"/>
-                <constraint firstItem="ZN4-tg-1tM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RAk-uT-nq0"/>
+                <constraint firstItem="ZN4-tg-1tM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="RAk-uT-nq0"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZN4-tg-1tM" secondAttribute="trailing" id="Sdw-Ik-KEt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZN4-tg-1tM" secondAttribute="bottom" id="Th8-jj-gHr"/>
             </constraints>
-            <point key="canvasLocation" x="-10" y="-11"/>
+            <point key="canvasLocation" x="-11.450381679389313" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
