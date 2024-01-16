@@ -43,7 +43,7 @@ final class CartCellView: UITableViewCell {
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     
-    func setUpCell(with product: ItemViewModel) {
+    func setUpCell(with product: ItemModel) {
         productImage.sd_setImage(with: product.image)
         productLabel.text = product.title
         categoryLabel.text = product.category?.rawValue

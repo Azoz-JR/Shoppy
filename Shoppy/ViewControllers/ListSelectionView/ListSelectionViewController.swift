@@ -12,14 +12,14 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var noListsLabel: UILabel!
     
-    var item: ItemViewModel
+    var item: ItemModel
     var listsViewModel: ListsViewModel
     
     let listsTableViewDelegate = ListsSelectionTableViewDelegate()
     var lists: [List] = []
     private let disposeBag = DisposeBag()
     
-    init(item: ItemViewModel, listsViewModel: ListsViewModel) {
+    init(item: ItemModel, listsViewModel: ListsViewModel) {
         self.listsViewModel = listsViewModel
         self.item = item
         

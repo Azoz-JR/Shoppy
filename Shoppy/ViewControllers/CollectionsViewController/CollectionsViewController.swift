@@ -18,7 +18,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
     
     let collectionDataSourceAndDelegate = CollectionsDataSourceAndDelegate()
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-    private var collections: [ItemViewModel] = []
+    private var collections: [ItemModel] = []
     
     
     override func viewDidLoad() {
@@ -100,7 +100,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
 //        service?.loadProducts(completion: handleAPIResults)
 //    }
 //    
-//    func handleAPIResults(_ result: Result<[ItemViewModel], Error>) {
+//    func handleAPIResults(_ result: Result<[ItemModel], Error>) {
 //        switch result {
 //        case .success(let collections):
 //            self.collections = collections

@@ -31,7 +31,7 @@ class WishListViewModel {
     }
 
     
-    func likeProduct(product: ItemViewModel) {
+    func likeProduct(product: ItemModel) {
         guard !isLiked(product: product) else {
             unlikeProduct(product: product)
             return
@@ -51,7 +51,7 @@ class WishListViewModel {
         }
     }
     
-    private func unlikeProduct(product: ItemViewModel) {
+    private func unlikeProduct(product: ItemModel) {
         Task {
             var wishList = wishListRelay.value
             wishList.remove(item: product)
@@ -66,7 +66,7 @@ class WishListViewModel {
         }
     }
     
-    func isLiked(product: ItemViewModel) -> Bool {
+    func isLiked(product: ItemModel) -> Bool {
         guard wishListRelay.value.contains(item: product) else {
             return false
         }

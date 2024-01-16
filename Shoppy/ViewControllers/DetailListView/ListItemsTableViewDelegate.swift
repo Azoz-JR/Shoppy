@@ -9,7 +9,7 @@ import UIKit
 
 class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    var data: [ItemViewModel] = []
+    var data: [ItemModel] = []
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var parentController: ListDetailViewPresenter?

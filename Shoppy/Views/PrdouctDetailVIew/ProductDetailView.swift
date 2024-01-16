@@ -123,7 +123,7 @@ final class ProductDetailView: UIView, UICollectionViewDelegate, UICollectionVie
         priceLabel.textAlignment = .left
     }
     
-    func configure(with product: ItemViewModel) {
+    func configure(with product: ItemModel) {
         productLabel.text = product.title
         descriptionText.text = product.description
         priceLabel.text = "\(product.price)$"

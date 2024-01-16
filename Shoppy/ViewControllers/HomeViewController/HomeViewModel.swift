@@ -11,10 +11,10 @@ import RxSwift
 
 class HomeViewModel {
     var service: Service = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
-    private let productsSubject = BehaviorSubject<[ItemViewModel]>(value: [])
+    private let productsSubject = BehaviorSubject<[ItemModel]>(value: [])
     var sections: [Section] = []
     
-    var productsObservable: Observable<[ItemViewModel]> {
+    var productsObservable: Observable<[ItemModel]> {
         return productsSubject.asObservable()
     }
     

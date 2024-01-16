@@ -37,7 +37,7 @@ class ListCollectionCell: UICollectionViewCell {
         configureListImages(items: list.items)
     }
     
-    func configureListImages(items: [ItemViewModel]) {
+    func configureListImages(items: [ItemModel]) {
         imagesStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }

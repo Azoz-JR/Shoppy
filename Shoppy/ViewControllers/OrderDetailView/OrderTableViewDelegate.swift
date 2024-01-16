@@ -9,7 +9,7 @@ import UIKit
 
 class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    var data: [ItemViewModel] = []
+    var data: [ItemModel] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data.count

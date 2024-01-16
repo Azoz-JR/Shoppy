@@ -20,9 +20,9 @@ final class CollectionViewController: UIViewController {
     var wishListViewModel: WishListViewModel?
     
     var service: Service?
-    var collection: ItemViewModel?
+    var collection: ItemModel?
     var section: Section?
-    var products: [ItemViewModel] = []
+    var products: [ItemModel] = []
     var viewModel = CollectionViewModel()
     
 

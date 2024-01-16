@@ -19,6 +19,8 @@ struct Movie: Codable {
 
 struct DBUser: Codable{
     let userId: String
+    let firstName: String
+    let lastName: String
     let isAnonymous: Bool?
     let email: String?
     let photoUrl: String?
@@ -26,10 +28,12 @@ struct DBUser: Codable{
     let isPremium: Bool?
     let preferences: [String]?
     let wishList: List
-    let cart: [ItemViewModel]
+    let cart: [ItemModel]
     
-    init(userId: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemViewModel]) {
+    init(userId: String, firstName: String, lastName: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemModel]) {
         self.userId = userId
+        self.firstName = firstName
+        self.lastName = lastName
         self.isAnonymous = isAnonymous
         self.email = email
         self.photoUrl = photoUrl
@@ -40,16 +44,19 @@ struct DBUser: Codable{
         self.cart = cart
     }
     
-//    init(auth: AuthDataResultModel) {
-//        self.userId = auth.uid
-//        self.isAnonymous = auth.isAnonymous
-//        self.email = auth.email
-//        self.photoUrl = auth.photoURL
-//        self.dateCreated = Date()
-//        self.isPremium = false
-//        self.preferences = nil
-//        self.favoriteMovie = nil
-//    }
+    init(auth: AuthDataResultModel, firstName: String, lastName: String) {
+        self.userId = auth.uid
+        self.firstName = firstName
+        self.lastName = lastName
+        self.isAnonymous = auth.isAnonymous
+        self.email = auth.email
+        self.photoUrl = auth.photoURL
+        self.dateCreated = Date()
+        self.isPremium = false
+        self.preferences = nil
+        self.wishList = List(id: UUID().uuidString, name: "Wish list", items: [], date: Date())
+        self.cart = []
+    }
     
 //    mutating func togglePremiumStatus() {
 //        let currentValue = isPremium ?? false
@@ -58,6 +65,8 @@ struct DBUser: Codable{
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
+        case firstName = "first_name"
+        case lastName = "last_name"
         case isAnonymous = "is_anonymous"
         case email = "email"
         case photoUrl = "photo_url"
@@ -71,6 +80,8 @@ struct DBUser: Codable{
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userId = try container.decode(String.self, forKey: .userId)
+        self.firstName = try container.decode(String.self, forKey: .firstName)
+        self.lastName = try container.decode(String.self, forKey: .lastName)
         self.isAnonymous = try container.decodeIfPresent(Bool.self, forKey: .isAnonymous)
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
@@ -78,12 +89,14 @@ struct DBUser: Codable{
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
         self.wishList = try container.decode(List.self, forKey: .wishList)
-        self.cart = try container.decode([ItemViewModel].self, forKey: .cart)
+        self.cart = try container.decode([ItemModel].self, forKey: .cart)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.userId, forKey: .userId)
+        try container.encode(self.firstName, forKey: .firstName)
+        try container.encode(self.lastName, forKey: .lastName)
         try container.encodeIfPresent(self.isAnonymous, forKey: .isAnonymous)
         try container.encodeIfPresent(self.email, forKey: .email)
         try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
@@ -126,13 +139,11 @@ final class UserManager {
     
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }()
 
     private let decoder: Firestore.Decoder = {
         let decoder = Firestore.Decoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
     
@@ -152,7 +163,7 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
-    func updateUserCart(userId: String, cart: [ItemViewModel]) async throws {
+    func updateUserCart(userId: String, cart: [ItemModel]) async throws {
         let data: [String: Any] = [
             DBUser.CodingKeys.cart.rawValue: cart.map { $0.toDictionary() }
         ]
@@ -168,7 +179,7 @@ final class UserManager {
         try await userListDocument(userId: userId, listId: list.id).updateData(data)
     }
     
-    func updateUserListItems(userId: String, list: List, items: [ItemViewModel]) async throws {
+    func updateUserListItems(userId: String, list: List, items: [ItemModel]) async throws {
         let data: [String: Any] = [
             List.CodingKeys.items.rawValue: list.items.map { $0.toDictionary() }
         ]
@@ -224,7 +235,7 @@ final class UserManager {
         return try await getUser(userId: userId).wishList
     }
     
-    func getUserCart(userId: String) async throws -> [ItemViewModel] {
+    func getUserCart(userId: String) async throws -> [ItemModel] {
         return try await getUser(userId: userId).cart
     }
     
@@ -256,34 +267,4 @@ struct UserFavoriteProduct: Codable, Identifiable {
         try container.encode(self.dateCreated, forKey: .dateCreated)
     }
     
-}
-
-extension Query {
-    
-    func getDocuments<T: Decodable>(as type: T.Type) async throws -> [T] {
-        try await getDocumentsWithSnapshot(as: type).products
-    }
-    
-    func getDocumentsWithSnapshot<T: Decodable>(as type: T.Type) async throws -> (products: [T], lastDocumnet: DocumentSnapshot?) {
-        let snapshot = try await self.getDocuments()
-        
-        let products = try snapshot.documents.map({ document in
-            try document.data(as: T.self)
-        })
-                
-        return (products, snapshot.documents.last)
-    }
-    
-    func startOptionally(afterDocument lastDocument: DocumentSnapshot?) -> Query {
-        guard let lastDocument else {
-            return self
-        }
-        
-        return self.start(afterDocument: lastDocument)
-    }
-    
-    func aggregateCount() async throws -> Int {
-        let snapshot = try await self.count.getAggregation(source: .server)
-        return Int(truncating: snapshot.count)
-    }
 }

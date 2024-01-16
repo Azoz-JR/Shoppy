@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProductsCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
-    var data: [ItemViewModel] = []
+    var data: [ItemModel] = []
     var parentController: ParentControllerPresenter?
     var wishListViewModel: WishListViewModel?
 

@@ -59,7 +59,7 @@ final class ListsViewModel {
         }
     }
     
-    func add(item: ItemViewModel, at index: Int) {
+    func add(item: ItemModel, at index: Int) {
         Task {
             var list = self.listsRelay.value[index]
             list.add(item: item)
@@ -75,7 +75,7 @@ final class ListsViewModel {
         
     }
     
-    func remove(item: ItemViewModel, at list: List) {
+    func remove(item: ItemModel, at list: List) {
         
         Task {
             var tempList = list

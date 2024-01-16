@@ -38,7 +38,7 @@ class ProgressView: UIView {
         
         // Set background color and corner radius
         backgroundColor = UIColor.systemBackground
-        layer.cornerRadius = 20.0
+        layer.cornerRadius = 15.0
 
         //Add border
         addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)

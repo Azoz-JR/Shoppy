@@ -34,7 +34,7 @@ class OrderItemCell: UITableViewCell {
         activityIndicator.startAnimating()
     }
 
-    func configure(with item: ItemViewModel) {
+    func configure(with item: ItemModel) {
         itemImageView.sd_setImage(with: item.image) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()
         }

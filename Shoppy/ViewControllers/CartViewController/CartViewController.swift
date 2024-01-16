@@ -21,7 +21,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var noItemsLabel: UILabel!
     
     var cartViewModel: CartViewModel
-    var cartProducts: [ItemViewModel] = []
+    var cartProducts: [ItemModel] = []
     var couponText: String = ""
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()

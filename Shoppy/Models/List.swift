@@ -10,7 +10,7 @@ import Foundation
 struct List: Equatable, Codable {
     let id: String
     var name: String
-    var items: [ItemViewModel]
+    var items: [ItemModel]
     let date: Date
     
     enum CodingKeys: String, CodingKey {
@@ -20,14 +20,14 @@ struct List: Equatable, Codable {
         case date
     }
     
-    mutating func add(item: ItemViewModel) {
+    mutating func add(item: ItemModel) {
         guard !contains(item: item) else {
             return
         }
         items.insert(item, at: 0)
     }
     
-    mutating func remove(item: ItemViewModel) {
+    mutating func remove(item: ItemModel) {
         guard contains(item: item) else {
             return
         }
@@ -37,7 +37,7 @@ struct List: Equatable, Codable {
         }
     }
     
-    func contains(item: ItemViewModel) -> Bool {
+    func contains(item: ItemModel) -> Bool {
         guard items.contains(item) else {
             return false
         }

@@ -27,8 +27,8 @@ struct Product: Codable {
         case variants, options, images, image
     }
     
-    func toItemViewModel() -> ItemViewModel {
-        ItemViewModel(id: id, title: title, price: prices.first ?? 0
+    func toItemModel() -> ItemModel {
+        ItemModel(id: id, title: title, price: prices.first ?? 0
                       , discountPercentage: 0, category: productType, image: imageURL, images: imagesURLs, sizes: sizes, colors: colors, description: bodyHtml, vendor: vendor)
     }
     

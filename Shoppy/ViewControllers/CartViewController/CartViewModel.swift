@@ -11,8 +11,8 @@ import RxRelay
 
 
 class CartViewModel {
-    var cartProductsRelay = BehaviorRelay<[ItemViewModel]>(value: [])
-    var cartProducts: Observable<[ItemViewModel]> {
+    var cartProductsRelay = BehaviorRelay<[ItemModel]>(value: [])
+    var cartProducts: Observable<[ItemModel]> {
         cartProductsRelay.asObservable()
     }
     
@@ -51,7 +51,7 @@ class CartViewModel {
         }
     }
     
-    func addProduct(product: ItemViewModel) {
+    func addProduct(product: ItemModel) {
         Task {
             var cart = self.cartProductsRelay.value
             
@@ -75,7 +75,7 @@ class CartViewModel {
         
     }
     
-    func decreaseProduct(product: ItemViewModel) {
+    func decreaseProduct(product: ItemModel) {
         Task {
             var cart = self.cartProductsRelay.value
             

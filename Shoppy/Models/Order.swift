@@ -9,7 +9,7 @@ import Foundation
 
 struct Order: Equatable, Codable {
     let id: String
-    let items: [ItemViewModel]
+    let items: [ItemModel]
     let price: Double
     let date: Date
     

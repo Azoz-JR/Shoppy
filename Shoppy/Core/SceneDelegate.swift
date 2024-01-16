@@ -5,6 +5,7 @@
 //  Created by Azoz Salah on 05/12/2023.
 //
 
+import FirebaseAuth
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,14 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = makeRootViewController()
-        window?.makeKeyAndVisible()
-    }
-    
-    func makeRootViewController() -> MainTabBarController {
-        let tabBarController = MainTabBarController()
         
-        return tabBarController
+        Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+            if user != nil {
+                self?.window?.rootViewController = MainTabBarController()
+            } else {
+                self?.window?.rootViewController = UINavigationController(rootViewController: AuthenticationViewController())
+            }
+        }
+        
+        window?.makeKeyAndVisible()
     }
 
 }

@@ -9,7 +9,7 @@ import Foundation
 
 class CollectionViewModel {
     var service: Service?
-    var products: MyObservable<[ItemViewModel]> = MyObservable([])
+    var products: MyObservable<[ItemModel]> = MyObservable([])
     var error: MyObservable<Error> = MyObservable(nil)
     
     

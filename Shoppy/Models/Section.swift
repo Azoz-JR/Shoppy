@@ -9,5 +9,5 @@ import Foundation
 
 struct Section {
     let title: String
-    let items: [ItemViewModel]
+    let items: [ItemModel]
 }

@@ -9,7 +9,7 @@ import Foundation
 
 class CollectionsViewModel {
     var service: Service = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
-    var collections: MyObservable<[ItemViewModel]> = MyObservable([])
+    var collections: MyObservable<[ItemModel]> = MyObservable([])
     var error: MyObservable<Error> = MyObservable(nil)
     
     

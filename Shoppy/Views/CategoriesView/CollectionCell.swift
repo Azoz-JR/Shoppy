@@ -25,7 +25,7 @@ final class CollectionCell: UICollectionViewCell {
         layer.borderWidth = 1
     }
     
-    func configure(with collection: ItemViewModel) {
+    func configure(with collection: ItemModel) {
         imageView.sd_setImage(with: collection.image) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()
         }

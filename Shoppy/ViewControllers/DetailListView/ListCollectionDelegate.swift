@@ -8,7 +8,7 @@
 import UIKit
 
 class ListCollectionDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
-    var data: [ItemViewModel] = []
+    var data: [ItemModel] = []
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count

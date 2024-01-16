@@ -9,7 +9,7 @@ import UIKit
 
 final class CollectionsDataSourceAndDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var data: [ItemViewModel] = []
+    var data: [ItemModel] = []
     var parentController: CollectionsPresenter?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

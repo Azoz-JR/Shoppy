@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Service {
-    func loadProducts() async throws -> [ItemViewModel]
+    func loadProducts() async throws -> [ItemModel]
 }

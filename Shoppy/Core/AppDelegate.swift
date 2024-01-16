@@ -18,6 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        Task {
+            do {
+                try AuthenticationManager.shared.signOut()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
         return true
     }
     

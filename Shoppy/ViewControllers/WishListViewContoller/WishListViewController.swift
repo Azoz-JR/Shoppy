@@ -17,7 +17,7 @@ class WishListViewController: UIViewController {
     var cartViewModel: CartViewModel?
     var viewModel: WishListViewModel!
     var listsViewModel: ListsViewModel?
-    var wishListProducts: [ItemViewModel] = []
+    var wishListProducts: [ItemModel] = []
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
     

@@ -14,13 +14,19 @@ extension UIViewController {
         showDetailViewController(alert, sender: self)
     }
     
+    func showError(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        showDetailViewController(alert, sender: self)
+    }
+    
     func showAddedSuccessfulyAlert() {
         let alert = UIAlertController(title: "Success", message: "Product added to cart successfully!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
     }
     
-    func select(product: ItemViewModel, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
+    func select(product: ItemModel, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         let vc = ProductViewController(product: product, cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
         show(vc, sender: self)
     }

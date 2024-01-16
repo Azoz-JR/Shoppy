@@ -19,7 +19,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
     var service: Service?
-    var result: [ItemViewModel] = []
+    var result: [ItemModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

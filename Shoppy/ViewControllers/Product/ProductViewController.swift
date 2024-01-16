@@ -9,7 +9,7 @@ import SDWebImage
 import UIKit
 
 final class ProductViewController: UIViewController {
-    var product: ItemViewModel? = nil
+    var product: ItemModel? = nil
     var cartViewModel: CartViewModel
     var listsViewModel: ListsViewModel
     var wishListViewModel: WishListViewModel
@@ -17,7 +17,7 @@ final class ProductViewController: UIViewController {
     
     var productView = ProductDetailView()
     
-    init(product: ItemViewModel? = nil, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
+    init(product: ItemModel? = nil, cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         self.product = product
         self.cartViewModel = cartViewModel
         self.listsViewModel = listsViewModel

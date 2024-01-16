@@ -29,7 +29,7 @@ final class HomeViewController: UIViewController {
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     var service: Service?
-    var products: [ItemViewModel] = []
+    var products: [ItemModel] = []
     
     
     override func viewDidLoad() {

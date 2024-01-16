@@ -48,7 +48,7 @@ final class ProductCell: UICollectionViewCell {
         activityIndicator.startAnimating()
     }
     
-    func configure(with product: ItemViewModel) {
+    func configure(with product: ItemModel) {
         let url = product.image
         productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()

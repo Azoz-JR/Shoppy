@@ -1,5 +1,5 @@
 //
-//  ItemViewModel.swift
+//  ItemModel.swift
 //  Shoppy
 //
 //  Created by Azoz Salah on 19/12/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemViewModel: Codable, Hashable, Equatable {
+struct ItemModel: Codable, Hashable, Equatable {
     let id: Int
     let title: String
     let price: Double
@@ -57,7 +57,7 @@ struct ItemViewModel: Codable, Hashable, Equatable {
         self.color = color
     }
     
-    static func ==(lhs: ItemViewModel, rhs: ItemViewModel) -> Bool {
+    static func ==(lhs: ItemModel, rhs: ItemModel) -> Bool {
         lhs.id == rhs.id
     }
     
