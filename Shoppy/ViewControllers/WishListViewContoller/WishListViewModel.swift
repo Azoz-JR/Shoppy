@@ -15,10 +15,16 @@ class WishListViewModel {
         return wishListRelay.asObservable()
     }
     
-    func getWishList(userId: String, completion: (@escaping () -> Void) = {}) {
+    var currentUserId: String {
+        let uid = try? AuthenticationManager.shared.getAuthenticatedUser().uid
+        return uid ?? ""
+    }
+    
+    
+    func getWishList(completion: (@escaping () -> Void) = {}) {
         Task {
             do {
-                let wishList = try await UserManager.shared.getUserWishList(userId: userId)
+                let wishList = try await UserManager.shared.getUserWishList(userId: currentUserId)
                 await MainActor.run {
                     wishListRelay.accept(wishList)
                     completion()
@@ -42,9 +48,9 @@ class WishListViewModel {
             wishList.add(item: product)
             
             do {
-                try await UserManager.shared.updateUserWishList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: wishList)
+                try await UserManager.shared.updateUserWishList(userId: currentUserId, list: wishList)
                 
-                getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getWishList()
             } catch {
                 
             }
@@ -57,9 +63,9 @@ class WishListViewModel {
             wishList.remove(item: product)
             
             do {
-                try await UserManager.shared.updateUserWishList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: wishList)
+                try await UserManager.shared.updateUserWishList(userId: currentUserId, list: wishList)
                 
-                getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getWishList()
             } catch {
                 
             }

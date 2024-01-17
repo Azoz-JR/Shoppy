@@ -57,7 +57,7 @@ class WishListViewController: UIViewController {
     }
     
     @objc func refresh() {
-        viewModel.getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q") { [weak self] in
+        viewModel.getWishList() { [weak self] in
             self?.refreshControl.endRefreshing()
         }
         

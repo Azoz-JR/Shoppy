@@ -5,6 +5,7 @@
 //  Created by Azoz Salah on 06/12/2023.
 //
 
+import FirebaseAuth
 import UIKit
 import RxSwift
 
@@ -12,6 +13,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
+    var userViewModel: UserViewModel?
     
     let profileView = ProfileView()
     let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
@@ -25,10 +27,12 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var tabBarVisible = true
     var lastContentOffset: CGFloat = 0
     
+    
     override func loadView() {
         super.loadView()
         
         view = profileView
+        
     }
 
     override func viewDidLoad() {
@@ -86,23 +90,36 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
         
+        profileView.usernameLabel.text = "Hello, \(userViewModel?.currentUser?.firstName?.capitalized ?? "")"
+        
         let name = UIButton(type: .system)
         name.setTitle("Shoppy", for: .normal)
         name.tintColor = .label
         name.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
-        
         let label = UIBarButtonItem(customView: name)
         navigationItem.leftBarButtonItem = label
-        
+                
         //Refresh View
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = .myGreen
         profileView.scrollView.refreshControl = refreshControl
+        
+        configNavBarMenu()
+    }
+    
+    func configNavBarMenu() {
+        let signOut = UIAction(title: "Sign out") { _ in
+            try? AuthenticationManager.shared.signOut()
+        }
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: [signOut])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.3.horizontal"), primaryAction: nil, menu: menu)
+        
     }
     
     @objc func refresh() {
-        cartViewModel?.getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
-        listsViewModel?.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q") { [weak self] in
+        cartViewModel?.getOrders()
+        listsViewModel?.getLists() { [weak self] in
             self?.refreshControl.endRefreshing()
         }
     }

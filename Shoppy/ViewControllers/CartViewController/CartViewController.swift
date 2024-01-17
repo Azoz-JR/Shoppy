@@ -66,7 +66,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func refresh() {
-        cartViewModel.getCart(userId: "9Cvmx2WJsVBARTmaQy6Q") { [weak self] in
+        cartViewModel.getCart() { [weak self] in
             self?.refreshControl.endRefreshing()
         }
         

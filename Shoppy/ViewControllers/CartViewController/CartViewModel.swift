@@ -23,6 +23,11 @@ class CartViewModel {
         ordersRelay.asObservable()
     }
     
+    var currentUserId: String {
+        let uid = try? AuthenticationManager.shared.getAuthenticatedUser().uid
+        return uid ?? ""
+    }
+    
     var total: Double {
         guard !cartProductsRelay.value.isEmpty else {
             return 0.0
@@ -36,10 +41,10 @@ class CartViewModel {
         return total
     }
     
-    func getCart(userId: String, completion: (@escaping () -> Void) = {}) {
+    func getCart(completion: (@escaping () -> Void) = {}) {
         Task {
             do {
-                let cart = try await UserManager.shared.getUserCart(userId: userId)                
+                let cart = try await UserManager.shared.getUserCart(userId: currentUserId)
                 await MainActor.run {
                     cartProductsRelay.accept(cart)
                     updateCount()
@@ -65,9 +70,9 @@ class CartViewModel {
             }
             
             do {
-                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
                 
-                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getCart()
             } catch {
                 
             }
@@ -89,9 +94,9 @@ class CartViewModel {
             }
             
             do {
-                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
                 
-                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getCart()
             } catch {
                 
             }
@@ -104,9 +109,9 @@ class CartViewModel {
             cart.remove(at: index)
             
             do {
-                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: cart)
+                try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
                 
-                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getCart()
             } catch {
                 
             }
@@ -116,9 +121,9 @@ class CartViewModel {
     func clearCart() {
         Task {
             do {
-                try await UserManager.shared.updateUserCart(userId: "9Cvmx2WJsVBARTmaQy6Q", cart: [])
+                try await UserManager.shared.updateUserCart(userId: currentUserId, cart: [])
                 
-                getCart(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getCart()
             } catch {
                 
             }
@@ -138,10 +143,10 @@ class CartViewModel {
 
 // MARK: - Orders Methods
 extension CartViewModel {
-    func getOrders(userId: String) {
+    func getOrders() {
         Task {
             do {
-                let orders = try await UserManager.shared.getAllUserOrders(userId: userId)
+                let orders = try await UserManager.shared.getAllUserOrders(userId: currentUserId)
                 await MainActor.run {
                     ordersRelay.accept(orders)
                 }
@@ -154,9 +159,9 @@ extension CartViewModel {
     func addOrder(order: Order) {
         Task {
             do {
-                try await UserManager.shared.addUserOrder(userId: "9Cvmx2WJsVBARTmaQy6Q", order: order)
+                try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
                 
-                getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getOrders()
             } catch {
                 print("ERROR CREATING List")
             }
@@ -166,9 +171,9 @@ extension CartViewModel {
     func removeOrder(order: Order) {
         Task {
             do {
-                try await UserManager.shared.removeUserOrder(userId: "9Cvmx2WJsVBARTmaQy6Q", orderId: order.id)
+                try await UserManager.shared.removeUserOrder(userId: currentUserId, orderId: order.id)
                 
-                getOrders(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getOrders()
             } catch {
                 print("ERROR CREATING List")
             }

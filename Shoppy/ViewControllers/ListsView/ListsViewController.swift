@@ -35,7 +35,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         
         title = "Your Lists"
         
-        listsViewModel.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+        listsViewModel.getLists()
         bindtoListsViewModel()
         configNavigationBar()
         configuareTableView()

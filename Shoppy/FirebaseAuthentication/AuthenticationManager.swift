@@ -86,14 +86,14 @@ extension AuthenticationManager {
 // MARK: SIGN IN SSO
 extension AuthenticationManager {
     @discardableResult
-    func signInWithGoogle(tokens: GoogleSignInResultModel) async throws -> AuthDataResultModel {
+    func signInWithGoogle(tokens: GoogleSignInResultModel) async throws -> (auth: AuthDataResultModel, user: User) {
         let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
         return try await signIn(credential: credential)
     }
     
-    func signIn(credential: AuthCredential) async throws -> AuthDataResultModel {
+    func signIn(credential: AuthCredential) async throws -> (AuthDataResultModel, User) {
         let authDataResult = try await Auth.auth().signIn(with: credential)
-        return AuthDataResultModel(user: authDataResult.user)
+        return (AuthDataResultModel(user: authDataResult.user), authDataResult.user)
     }
 }
 

@@ -11,6 +11,7 @@ final class MainTabBarController: UITabBarController {
     let cartViewModel = CartViewModel()
     let listsViewModel = ListsViewModel()
     let wishListViewModel = WishListViewModel()
+    let userViewModel = UserViewModel()
     
     var cartCount: Int = 0 {
         didSet {
@@ -18,12 +19,14 @@ final class MainTabBarController: UITabBarController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
         tabBar.tintColor = .selectedTab
         
-        wishListViewModel.getWishList(userId: "9Cvmx2WJsVBARTmaQy6Q")
+        wishListViewModel.getWishList()
         
         bindToCartViewModel()
         
@@ -117,6 +120,8 @@ final class MainTabBarController: UITabBarController {
         profileVC.cartViewModel = cartViewModel
         profileVC.listsViewModel = listsViewModel
         profileVC.wishListViewModel = wishListViewModel
+        profileVC.userViewModel = userViewModel
+                
         return profileVC
     }
     

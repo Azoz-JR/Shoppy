@@ -19,8 +19,8 @@ struct Movie: Codable {
 
 struct DBUser: Codable{
     let userId: String
-    let firstName: String
-    let lastName: String
+    let firstName: String?
+    let lastName: String?
     let isAnonymous: Bool?
     let email: String?
     let photoUrl: String?
@@ -30,7 +30,7 @@ struct DBUser: Codable{
     let wishList: List
     let cart: [ItemModel]
     
-    init(userId: String, firstName: String, lastName: String, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemModel]) {
+    init(userId: String, firstName: String?, lastName: String?, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemModel]) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
@@ -44,7 +44,7 @@ struct DBUser: Codable{
         self.cart = cart
     }
     
-    init(auth: AuthDataResultModel, firstName: String, lastName: String) {
+    init(auth: AuthDataResultModel, firstName: String? = nil, lastName: String? = nil) {
         self.userId = auth.uid
         self.firstName = firstName
         self.lastName = lastName
@@ -80,8 +80,8 @@ struct DBUser: Codable{
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.userId = try container.decode(String.self, forKey: .userId)
-        self.firstName = try container.decode(String.self, forKey: .firstName)
-        self.lastName = try container.decode(String.self, forKey: .lastName)
+        self.firstName = try container.decodeIfPresent(String.self, forKey: .firstName)
+        self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
         self.isAnonymous = try container.decodeIfPresent(Bool.self, forKey: .isAnonymous)
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
@@ -95,8 +95,8 @@ struct DBUser: Codable{
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.userId, forKey: .userId)
-        try container.encode(self.firstName, forKey: .firstName)
-        try container.encode(self.lastName, forKey: .lastName)
+        try container.encodeIfPresent(self.firstName, forKey: .firstName)
+        try container.encodeIfPresent(self.lastName, forKey: .lastName)
         try container.encodeIfPresent(self.isAnonymous, forKey: .isAnonymous)
         try container.encodeIfPresent(self.email, forKey: .email)
         try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
@@ -153,6 +153,16 @@ final class UserManager {
         
     func getUser(userId: String) async throws -> DBUser {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
+    }
+    
+    func getCurrentUser() async -> DBUser? {
+        do {
+            let uid = try AuthenticationManager.shared.getAuthenticatedUser().uid
+            return try await userDocument(userId: uid).getDocument(as: DBUser.self)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
     
     func updateUserWishList(userId: String, list: List) async throws {

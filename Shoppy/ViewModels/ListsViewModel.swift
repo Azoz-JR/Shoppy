@@ -16,10 +16,15 @@ final class ListsViewModel {
         listsRelay.asObservable()
     }
     
-    func getLists(userId: String, completion: (@escaping () -> Void) = {}) {
+    var currentUserId: String {
+        let uid =  try? AuthenticationManager.shared.getAuthenticatedUser().uid
+        return uid ?? ""
+    }
+    
+    func getLists(completion: (@escaping () -> Void) = {}) {
         Task {
             do {
-                let lists = try await UserManager.shared.getAllUserLists(userId: userId)
+                let lists = try await UserManager.shared.getAllUserLists(userId: currentUserId)
                 await MainActor.run {
                     listsRelay.accept(lists)
                     completion()
@@ -38,9 +43,9 @@ final class ListsViewModel {
         
         Task {
             do {
-                try await UserManager.shared.addUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", name: name)
+                try await UserManager.shared.addUserList(userId: currentUserId, name: name)
                 completion("\(name) cretaed successfully")
-                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getLists()
             } catch {
                 print("ERROR CREATING List")
             }
@@ -50,9 +55,9 @@ final class ListsViewModel {
     func delete(list: List) {
         Task {
             do {
-                try await UserManager.shared.removeUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", listId: list.id)
+                try await UserManager.shared.removeUserList(userId: currentUserId, listId: list.id)
                 
-                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getLists()
             } catch {
                 print("ERROR DELETING List")
             }
@@ -65,9 +70,9 @@ final class ListsViewModel {
             list.add(item: item)
             
             do {
-                try await UserManager.shared.updateUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: list)
+                try await UserManager.shared.updateUserList(userId: currentUserId, list: list)
                 
-                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getLists()
             } catch {
                 
             }
@@ -82,11 +87,11 @@ final class ListsViewModel {
             tempList.remove(item: item)
             
             do {
-                try await UserManager.shared.updateUserList(userId: "9Cvmx2WJsVBARTmaQy6Q", list: tempList)
+                try await UserManager.shared.updateUserList(userId: currentUserId, list: tempList)
                 print(list.name)
                 print(list.id)
                 
-                getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+                getLists()
             } catch {
                 
             }

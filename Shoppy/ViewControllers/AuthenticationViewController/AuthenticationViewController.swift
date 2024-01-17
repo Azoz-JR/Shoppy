@@ -23,7 +23,6 @@ class AuthenticationViewController: UIViewController {
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +32,7 @@ class AuthenticationViewController: UIViewController {
         setUpPasswordTextField()
         setUpSignInButton()
         setUpCreateAccountButton()
+        configGoogleButton()
         
     }
     
@@ -88,16 +88,51 @@ class AuthenticationViewController: UIViewController {
     }
     
     func configTextFieldView() {
-        emailTextField.addBorder(color: .label, width: 1.5)
-        emailTextField.round(15)
-        emailTextField.setLeftPaddingPoints(10)
-        emailTextField.setRightPaddingPoints(1)
+        emailTextField.addBorderAndPadding()
         
-        passwordTextField.addBorder(color: .label, width: 1.5)
-        passwordTextField.round(15)
-        passwordTextField.setLeftPaddingPoints(10)
-        passwordTextField.setRightPaddingPoints(1)
+        passwordTextField.addBorderAndPadding()
     }
+    
+    func configGoogleButton() {
+        googleButton
+            .rx
+            .tap
+            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
+            .bind { [weak self] in
+                guard let self else { return }
+                
+                self.signInGoogle()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    @MainActor
+    func signInGoogle() {
+        Task {
+            do {
+                let helper = SignInGoogleHelper()
+                let tokens = try await helper.signIn(presenter: self)
+                
+                progressView.startAnimating()
+                
+                let result = try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+                progressView.stopAnimating()
+                
+                // Check if this is the first signning in with this Google account
+                guard result.user.metadata.creationDate == result.user.metadata.lastSignInDate else {
+                    progressView.stopAnimating()
+                    return
+                }
+                
+                let user = DBUser(auth: result.auth, firstName: tokens.name)
+                try await UserManager.shared.createNewUser(user: user)
+            } catch {
+                print(error.localizedDescription)
+                progressView.stopAnimating()
+            }
+        }
+    }
+
     
     func signIn(email: String, password: String) {
         guard !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, password.trimmingCharacters(in: .whitespacesAndNewlines).count > 4 else {
@@ -122,5 +157,6 @@ class AuthenticationViewController: UIViewController {
         progressView.center = view.center
         progressView.isHidden = true
     }
+    
 
 }

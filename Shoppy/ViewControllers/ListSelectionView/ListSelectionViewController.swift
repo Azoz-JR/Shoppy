@@ -33,7 +33,7 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listsViewModel.getLists(userId: "9Cvmx2WJsVBARTmaQy6Q")
+        listsViewModel.getLists()
         configNavigationBar()
         bindToListsViewModel()
         configuareTableView()

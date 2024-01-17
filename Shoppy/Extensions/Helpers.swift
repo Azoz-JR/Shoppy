@@ -39,7 +39,7 @@ extension UITextField {
     }
     
     func addBorderAndPadding() {
-        addBorder(color: .label, width: 1.5)
+        addBorder(color: .lightGray, width: 1.5)
         round(15)
         setLeftPaddingPoints(10)
         setRightPaddingPoints(1)
