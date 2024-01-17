@@ -150,15 +150,22 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let offsetY = keyboardSize.height
-            UIView.animate(withDuration: 0.3) {
-                self.checkoutContainer.frame.origin.y -= offsetY
+            if self.view.frame.origin.y == 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.view.frame.origin.y -= offsetY
+                }
             }
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.checkoutContainer.frame.origin.y = 0
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let offsetY = keyboardSize.height
+            if self.view.frame.origin.y != 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.view.frame.origin.y = 0
+                }
+            }
         }
     }
     
