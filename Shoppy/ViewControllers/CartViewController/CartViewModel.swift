@@ -156,18 +156,6 @@ extension CartViewModel {
         }
     }
     
-    func addOrder(order: Order) {
-        Task {
-            do {
-                try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
-                
-                getOrders()
-            } catch {
-                print("ERROR CREATING List")
-            }
-        }
-    }
-    
     func removeOrder(order: Order) {
         Task {
             do {
@@ -180,32 +168,45 @@ extension CartViewModel {
         }
     }
     
-    func placeOrder(order: Order, completion: @escaping (Order) -> Void) async throws {
-        guard let url = URL(string: "https://reqres.in/api/cupcakes") else {
-            print("Failed to encode order")
-            return
+    func placeOrder(completion: @escaping () -> Void) async throws {
+        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, price: total, date: Date.now)
+        
+        Task {
+            try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
+            
+            getOrders()
         }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        
-        do {
-            let encoded = try JSONEncoder().encode(order)
-            let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
-            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
-            
-            self.addOrder(order: order)
-            
-            await MainActor.run {
-                completion(decodedOrder)
-            }
-                          
-        } catch {
-            print(error.localizedDescription)
-            print("Checkout failed")
-            throw error
+                
+        await MainActor.run {
+            completion()
         }
     }
+    
+//    func placeOrder(order: Order, completion: @escaping (Order) -> Void) async throws {
+//        guard let url = URL(string: "https://reqres.in/api/cupcakes") else {
+//            print("Failed to encode order")
+//            return
+//        }
+//        
+//        var request = URLRequest(url: url)
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "POST"
+//        
+//        do {
+//            let encoded = try JSONEncoder().encode(order)
+//            let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
+//            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+//            
+//            self.addOrder(order: order)
+//            
+//            await MainActor.run {
+//                completion(decodedOrder)
+//            }
+//                          
+//        } catch {
+//            print(error.localizedDescription)
+//            throw error
+//        }
+//    }
     
 }

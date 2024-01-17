@@ -52,7 +52,7 @@ final class HomeViewController: UIViewController {
         refreshControl.tintColor = .myGreen
         collectionView.refreshControl = refreshControl
         
-        progressView.startAnimating()
+        showProgressView()
         refresh()
     }
     
@@ -87,7 +87,7 @@ final class HomeViewController: UIViewController {
             await homeViewModel.load()
             
             await MainActor.run {
-                self.progressView.stopAnimating()
+                self.hideProgressView()
             }
         }
     }
@@ -111,6 +111,16 @@ final class HomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         showTabBar()
+    }
+    
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
     
 }

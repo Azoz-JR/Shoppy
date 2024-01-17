@@ -131,17 +131,17 @@ class CreateAccountViewController: UIViewController {
         }
         
         Task {
-            progressView.startAnimating()
+            showProgressView()
             do {
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
                 let user = DBUser(auth: authDataResult, firstName: firstName, lastName: lastName)
                 try await UserManager.shared.createNewUser(user: user)
                 
-                progressView.stopAnimating()
+                hideProgressView()
                 dismiss(animated: true)
             } catch {
                 print(error.localizedDescription)
-                progressView.stopAnimating()
+                hideProgressView()
             }
         }
     }
@@ -174,6 +174,16 @@ class CreateAccountViewController: UIViewController {
         }
         
         return true
+    }
+    
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
 
 }

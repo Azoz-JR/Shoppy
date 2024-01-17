@@ -17,7 +17,6 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
     var service: Service?
     
     let collectionDataSourceAndDelegate = CollectionsDataSourceAndDelegate()
-    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     private var collections: [ItemModel] = []
     
     
@@ -29,7 +28,6 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         
         bindToViewModel()
         
-        progressView.startAnimating()
         refresh()
     }
     
@@ -94,23 +92,5 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
             self.collectionView.reloadData()
         }
     }
-    
-    /*
-//    func refresh() {
-//        service?.loadProducts(completion: handleAPIResults)
-//    }
-//    
-//    func handleAPIResults(_ result: Result<[ItemModel], Error>) {
-//        switch result {
-//        case .success(let collections):
-//            self.collections = collections
-//            collectionDataSourceAndDelegate.data = collections
-//            reloadCollection()
-//        case .failure(let error):
-//            self.show(error: error)
-//            print(error.localizedDescription)
-//        }
-//    }
-     */
     
 }

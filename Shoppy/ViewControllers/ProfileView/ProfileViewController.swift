@@ -90,7 +90,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
         
-        profileView.usernameLabel.text = "Hello, \(userViewModel?.currentUser?.firstName?.capitalized ?? "")"
+        profileView.usernameLabel.text = "Hello, \(userViewModel?.currentUser?.firstName?.capitalizedSentence ?? "")"
         
         let name = UIButton(type: .system)
         name.setTitle("Shoppy", for: .normal)

@@ -40,7 +40,7 @@ final class CollectionViewController: UIViewController {
         configureCollectionView()
         configureSearchBar()
         
-        progressView.startAnimating()
+        showProgressView()
         refresh()
         
         if let section {
@@ -84,7 +84,7 @@ final class CollectionViewController: UIViewController {
             await viewModel.load()
             
             await MainActor.run {
-                self.progressView.stopAnimating()
+                self.hideProgressView()
             }
         }
     }
@@ -114,6 +114,16 @@ final class CollectionViewController: UIViewController {
         blurEffectView.frame = collectionView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.addSubview(blurEffectView)
+    }
+    
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
     
 }

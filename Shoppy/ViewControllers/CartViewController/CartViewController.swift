@@ -25,6 +25,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     var couponText: String = ""
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
 
     
     init(cartViewModel: CartViewModel) {
@@ -45,6 +46,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         bindToViewModel()
         setUpTableView()
         configureNotifications()
+        setUpProgressView()
         
         refresh()
     }
@@ -63,6 +65,13 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         tableView.refreshControl = refreshControl
         
         updateUI()
+    }
+    
+    func setUpProgressView() {
+        view.addSubview(progressView)
+        progressView.center = view.center
+        progressView.isHidden = true
+        
     }
     
     @objc func refresh() {
@@ -108,19 +117,24 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func checkoutTapped() {
-        let order = Order(id: UUID().uuidString, items: cartProducts, price: cartViewModel.total, date: Date.now)
+        showProgressView()
         
         Task {
             do {
-                try await cartViewModel.placeOrder(order: order) { [weak self] _ in
+                try await cartViewModel.placeOrder() { [weak self] in
                     self?.cartViewModel.clearCart()
+                    self?.hideProgressView()
+                    
                     self?.showOrederConfirmationMessage()
                 }
                 
             } catch {
                 print(error.localizedDescription)
+                showError(title: "Checkout failed", message: error.localizedDescription)
+                hideProgressView()
             }
         }
+        
     }
     
     // MARK: - Keyboard methods
@@ -146,6 +160,16 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
             self.checkoutContainer.frame.origin.y = 0
         }
+    }
+    
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
     
     deinit {

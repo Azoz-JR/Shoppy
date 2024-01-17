@@ -113,14 +113,14 @@ class AuthenticationViewController: UIViewController {
                 let helper = SignInGoogleHelper()
                 let tokens = try await helper.signIn(presenter: self)
                 
-                progressView.startAnimating()
+                showProgressView()
                 
                 let result = try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
-                progressView.stopAnimating()
+                hideProgressView()
                 
                 // Check if this is the first signning in with this Google account
                 guard result.user.metadata.creationDate == result.user.metadata.lastSignInDate else {
-                    progressView.stopAnimating()
+                    hideProgressView()
                     return
                 }
                 
@@ -128,7 +128,7 @@ class AuthenticationViewController: UIViewController {
                 try await UserManager.shared.createNewUser(user: user)
             } catch {
                 print(error.localizedDescription)
-                progressView.stopAnimating()
+                hideProgressView()
             }
         }
     }
@@ -140,14 +140,14 @@ class AuthenticationViewController: UIViewController {
         }
         
         Task {
-            progressView.startAnimating()
+            showProgressView()
             do {
                 try await AuthenticationManager.shared.signInUser(email: email, password: password)
                 
-                progressView.stopAnimating()
+                hideProgressView()
             } catch {
                 print(error.localizedDescription)
-                progressView.stopAnimating()
+                hideProgressView()
             }
         }
     }
@@ -158,5 +158,14 @@ class AuthenticationViewController: UIViewController {
         progressView.isHidden = true
     }
     
-
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
+    
 }
