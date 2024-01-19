@@ -48,6 +48,7 @@ class OrdersViewController: UIViewController, OrdersControllerPresenter {
     func orderSelected(at index: Int) {
         let order = orders[index]
         let vc = OrderDetailViewController(order: order)
+        vc.title = "Order Items"
         
         show(vc, sender: self)
     }

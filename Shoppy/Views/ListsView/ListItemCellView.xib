@@ -111,7 +111,7 @@
         <image name="TestImage.bmp" width="810" height="810"/>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
         <namedColor name="myGreen">
-            <color red="0.85098039215686272" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.84705882352941175" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

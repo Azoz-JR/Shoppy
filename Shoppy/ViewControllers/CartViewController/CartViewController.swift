@@ -159,12 +159,9 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let offsetY = keyboardSize.height
-            if self.view.frame.origin.y != 0 {
-                UIView.animate(withDuration: 0.3) {
-                    self.view.frame.origin.y = 0
-                }
+        if self.view.frame.origin.y != 0 {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = 0
             }
         }
     }

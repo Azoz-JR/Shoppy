@@ -1,13 +1,13 @@
 //
-//  OrderItemCell.swift
+//  OrderItemsTableCell.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 05/01/2024.
+//  Created by Azoz Salah on 18/01/2024.
 //
 
 import UIKit
 
-class OrderItemCell: UITableViewCell {
+class OrderItemsTableCell: UITableViewCell {
     @IBOutlet var containerView: UIView!
     @IBOutlet var sizeLabel: UILabel!
     @IBOutlet var colorLabel: UILabel!
@@ -19,20 +19,20 @@ class OrderItemCell: UITableViewCell {
     @IBOutlet var quantityLabel: UILabel!
     
     
-    static let identifier = "OrderItemCell"
+    static let identifier = "OrderItemsTableCell"
     static func register() -> UINib {
-        UINib(nibName: "OrderItemCell", bundle: nil)
+        UINib(nibName: "OrderItemsTableCell", bundle: nil)
     }
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
         containerView.round()
         containerView.addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)
-        
         configureImageView()
+        
         activityIndicator.startAnimating()
+        
     }
 
     func configure(with item: ItemModel) {
@@ -47,13 +47,18 @@ class OrderItemCell: UITableViewCell {
         nameLabel.text = item.title
         priceLabel.text = "\(item.price)$"
         
+        let borderLayer = CALayer()
+        borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+        borderLayer.frame = CGRect(x: itemImageView.frame.width - 1, y: 0, width: 1, height: itemImageView.frame.height)
+        containerView.layer.addSublayer(borderLayer)
+        
     }
     
     func configureImageView() {
         let borderLayer = CALayer()
         borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
-        borderLayer.frame = CGRect(x: itemImageView.frame.width - 1, y: 0, width: 1, height: containerView.frame.height)
-        containerView.layer.addSublayer(borderLayer)
+        borderLayer.frame = CGRect(x: itemImageView.bounds.maxX - 1, y: itemImageView.bounds.minY, width: 1, height: itemImageView.bounds.height)
+        itemImageView.layer.addSublayer(borderLayer)
     }
     
 }

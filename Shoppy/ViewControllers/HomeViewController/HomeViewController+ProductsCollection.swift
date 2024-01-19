@@ -22,7 +22,7 @@ extension HomeViewController: HomeControllerPresenter {
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.register(ProductsCollectionReusableView.register(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProductsCollectionReusableView.identifier)
         
-        collectionView.contentInset = UIEdgeInsets(top: 70, left: .zero, bottom: .zero, right: .zero)
+        collectionView.contentInset = UIEdgeInsets(top: 50, left: .zero, bottom: .zero, right: .zero)
     }
     
     func itemSelected(at index: IndexPath) {

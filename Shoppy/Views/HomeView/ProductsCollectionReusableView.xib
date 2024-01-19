@@ -29,9 +29,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RF3-Gh-w5n">
-                            <rect key="frame" x="343" y="39" width="50" height="15"/>
+                            <rect key="frame" x="343" y="24" width="50" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="15" id="p8V-nm-BXI"/>
+                                <constraint firstAttribute="height" constant="30" id="p8V-nm-BXI"/>
                             </constraints>
                             <color key="tintColor" systemColor="secondaryLabelColor"/>
                             <state key="normal" title="Button"/>

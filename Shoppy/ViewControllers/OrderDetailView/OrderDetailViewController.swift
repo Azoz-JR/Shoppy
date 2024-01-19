@@ -31,14 +31,13 @@ class OrderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Order Items"
-
-        configureorderDetails()
+        navigationItem.backButtonDisplayMode = .minimal
+        configureOrderDetails()
         configuareTableView()
     }
 
 
-    func configureorderDetails() {
+    func configureOrderDetails() {
         detailsContainer.layer.cornerRadius = 20
         detailsContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         detailsContainer.layer.borderWidth = 1
@@ -50,8 +49,7 @@ class OrderDetailViewController: UIViewController {
     func configuareTableView() {
         tableView.delegate = orderTableViewDelegate
         tableView.dataSource = orderTableViewDelegate
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 250
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 110, right: 0)
         
         orderTableViewDelegate.data = order.items
         
@@ -60,6 +58,17 @@ class OrderDetailViewController: UIViewController {
     
     func registerCell() {
         tableView.register(OrderItemCell.register(), forCellReuseIdentifier: OrderItemCell.identifier)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.hidesBarsOnSwipe = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.hidesBarsOnSwipe = true
     }
 
 }

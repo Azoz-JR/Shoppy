@@ -27,7 +27,7 @@ extension HomeViewController: HomeCategoriesPresenter {
                         
         
         NSLayoutConstraint.activate([
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -30),
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10),
             categoriesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             categoriesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             categoriesCollectionView.heightAnchor.constraint(equalToConstant: 30)
