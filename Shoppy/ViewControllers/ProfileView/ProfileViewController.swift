@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     var wishListViewModel: WishListViewModel?
     var userViewModel: UserViewModel?
     
-    let profileView = ProfileView()
+    var profileView = ProfileView()
     let ordersCollectionViewDelegate = OrdersCollectionViewDelegate()
     let listsCollectionViewDelegate = ListsCollectionViewDelegate()
     private var refreshControl = UIRefreshControl()
@@ -32,7 +32,6 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         super.loadView()
         
         view = profileView
-        
     }
 
     override func viewDidLoad() {
@@ -42,6 +41,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         configureScrollView()
         bindToOrders()
         bindToLists()
+        bindToUser()
         configureOrdersCollection()
         configureListsCollection()
         configureProfileViewButtons()
@@ -53,6 +53,19 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         updateOrders()
         updateLists()
     }
+    
+    func bindToUser() {
+        userViewModel?.currentUser.subscribe(onNext: { [weak self] user in
+            guard let user else {
+                self?.profileView.usernameLabel.text = "Hello"
+                return
+            }
+            
+            self?.profileView.usernameLabel.text = "Hello, \(user.firstName?.capitalizedSentence ?? "UNKNOWN")"
+        } )
+        .disposed(by: disposeBag)
+    }
+        
     
     func configureProfileViewButtons() {
         profileView.returnToHomeHandler = { [weak self] in
@@ -90,8 +103,6 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = .navBarTint
         
-        profileView.usernameLabel.text = "Hello, \(userViewModel?.currentUser?.firstName?.capitalizedSentence ?? "")"
-        
         let name = UIButton(type: .system)
         name.setTitle("Shoppy", for: .normal)
         name.tintColor = .label
@@ -103,17 +114,6 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = .myGreen
         profileView.scrollView.refreshControl = refreshControl
-        
-        configNavBarMenu()
-    }
-    
-    func configNavBarMenu() {
-        let signOut = UIAction(title: "Sign out") { _ in
-            try? AuthenticationManager.shared.signOut()
-        }
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: [signOut])
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.3.horizontal"), primaryAction: nil, menu: menu)
         
     }
     

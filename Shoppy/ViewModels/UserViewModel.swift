@@ -6,19 +6,50 @@
 //
 
 import Foundation
+import RxSwift
+
 
 final class UserViewModel {
-    var currentUser: DBUser?
+    private let userSubject = BehaviorSubject<DBUser?>(value: nil)
     
-    init(currentUser: DBUser? = nil) {
-        self.currentUser = currentUser
-        
+    var currentUser: Observable<DBUser?> {
+        userSubject.asObservable()
+    }
+    
+    init() {
         getCurrentUser()
     }
     
     func getCurrentUser() {
         Task {
-            currentUser = await UserManager.shared.getCurrentUser()
+            let currentUser = await UserManager.shared.getCurrentUser()
+            userSubject.onNext(currentUser)
         }
     }
+    
+    func uploadImage(image: Data, completion: @escaping (Error?) -> Void) {
+        Task(priority: .background) {
+            do {
+                guard let userId = try userSubject.value()?.userId else {
+                    await MainActor.run {
+                        completion(URLError(.badURL))
+                    }
+                    return
+                }
+                
+                try await UserManager.shared.updateUserProfilePicture(userId: userId, picture: image)
+                
+                await MainActor.run {
+                    completion(nil)
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    completion(error)
+                }
+            }
+        }
+    }
+
 }

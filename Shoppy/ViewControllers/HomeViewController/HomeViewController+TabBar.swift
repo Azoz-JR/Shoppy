@@ -14,7 +14,7 @@ extension HomeViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentContentOffset = scrollView.contentOffset.y + view.safeAreaInsets.top + collectionView.contentInset.top
+        let currentContentOffset = scrollView.contentOffset.y + collectionView.contentInset.top
                 
         // Check if scrolling up or down
         if currentContentOffset > 1 && currentContentOffset > lastContentOffset && tabBarVisible {

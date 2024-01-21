@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProfileViewPresenter {
+protocol ProfileViewPresenter: AnyObject {
     func collectionViewDidScroll(_ scrollView: UIScrollView)
     func listsCollectionViewDidScroll(_ scrollView: UIScrollView)
 }

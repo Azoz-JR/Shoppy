@@ -5,18 +5,32 @@
 //  Created by Azoz Salah on 05/12/2023.
 //
 
+import RxSwift
 import UIKit
+
 
 final class MainTabBarController: UITabBarController {
     let cartViewModel = CartViewModel()
     let listsViewModel = ListsViewModel()
     let wishListViewModel = WishListViewModel()
     let userViewModel = UserViewModel()
+    let sideProfileView = SideProfile()
+    let disposeBag = DisposeBag()
+    var isProfileVisible = false
+    
     
     var cartCount: Int = 0 {
         didSet {
             updateCartTabBarBadge()
         }
+    }
+    
+    override func loadView() {
+        super.loadView()
+        
+        sideProfileView.frame = CGRect(x: -view.frame.width, y: 0, width: view.frame.width, height: view.frame.height)
+        view.addSubview(sideProfileView)
+        
     }
     
     
@@ -29,6 +43,9 @@ final class MainTabBarController: UITabBarController {
         wishListViewModel.getWishList()
         
         bindToCartViewModel()
+        bindToUser()
+        
+        configureSideProfile()
         
         let homeVC = makeHomeView()
         let categoriesVC = makeCategoriesView()
@@ -82,6 +99,7 @@ final class MainTabBarController: UITabBarController {
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
         homeVC.title = "Home"
+        homeVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api

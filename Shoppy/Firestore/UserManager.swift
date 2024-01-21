@@ -5,7 +5,7 @@
 //  Created by Azoz Salah on 07/04/2023.
 //
 
-import Foundation
+import UIKit
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -29,8 +29,9 @@ struct DBUser: Codable{
     let preferences: [String]?
     let wishList: List
     let cart: [ItemModel]
+    let profilePicture: Data?
     
-    init(userId: String, firstName: String?, lastName: String?, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemModel]) {
+    init(userId: String, firstName: String?, lastName: String?, isAnonymous: Bool? = nil, email: String? = nil, photoUrl: String? = nil, dateCreated: Date? = nil, isPremium: Bool? = nil, preferences: [String]? = nil, wishList: List, cart: [ItemModel], profilePicture: Data? = nil) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
@@ -42,6 +43,7 @@ struct DBUser: Codable{
         self.preferences = preferences
         self.wishList = wishList
         self.cart = cart
+        self.profilePicture = profilePicture
     }
     
     init(auth: AuthDataResultModel, firstName: String? = nil, lastName: String? = nil) {
@@ -56,6 +58,7 @@ struct DBUser: Codable{
         self.preferences = nil
         self.wishList = List(id: UUID().uuidString, name: "Wish list", items: [], date: Date())
         self.cart = []
+        self.profilePicture = nil
     }
     
 //    mutating func togglePremiumStatus() {
@@ -75,6 +78,7 @@ struct DBUser: Codable{
         case preferences = "preferences"
         case wishList = "wish_list"
         case cart = "cart"
+        case profilePicture = "profile_picture"
     }
     
     init(from decoder: Decoder) throws {
@@ -90,6 +94,7 @@ struct DBUser: Codable{
         self.preferences = try container.decodeIfPresent([String].self, forKey: .preferences)
         self.wishList = try container.decode(List.self, forKey: .wishList)
         self.cart = try container.decode([ItemModel].self, forKey: .cart)
+        self.profilePicture = try container.decodeIfPresent(Data.self, forKey: .profilePicture)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -105,6 +110,27 @@ struct DBUser: Codable{
         try container.encodeIfPresent(self.preferences, forKey: .preferences)
         try container.encode(self.wishList, forKey: .wishList)
         try container.encode(self.cart, forKey: .cart)
+        try container.encode(self.profilePicture, forKey: .profilePicture)
+    }
+    
+    var profileImage: UIImage? {
+        guard let data = profilePicture else {
+            return nil
+        }
+        
+        return UIImage(data: data)
+    }
+    
+    var fullName: String? {
+        guard let firstName else {
+            return nil
+        }
+        
+        guard let lastName else {
+            return firstName
+        }
+        
+        return (firstName + " " + lastName)
     }
     
 }
@@ -195,6 +221,14 @@ final class UserManager {
         ]
         
         try await userListDocument(userId: userId, listId: list.id).updateData(data)
+    }
+    
+    func updateUserProfilePicture(userId: String, picture: Data) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.profilePicture.rawValue: picture
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
     }
     
     func addUserOrder(userId: String, order: Order) async throws {
