@@ -20,8 +20,6 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     let listsCollectionViewDelegate = ListsCollectionViewDelegate()
     private var refreshControl = UIRefreshControl()
     
-    var orders: [Order] = []
-    var lists: [List] = []
     let disposeBag = DisposeBag()
     
     var tabBarVisible = true
@@ -84,7 +82,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
                 return
             }
             
-            let vc = OrdersViewController(orders: self.orders)
+            let vc = OrdersViewController()
             self.show(vc, sender: self)
         }
         

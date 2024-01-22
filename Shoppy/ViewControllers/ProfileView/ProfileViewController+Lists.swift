@@ -16,7 +16,6 @@ extension ProfileViewController {
                 return
             }
             
-            self.lists = lists
             self.listsCollectionViewDelegate.data = lists
             self.updateLists()
         }
@@ -24,7 +23,6 @@ extension ProfileViewController {
     }
     
     func configureListsCollection() {
-        listsCollectionViewDelegate.data = lists
         listsCollectionViewDelegate.parentController = self
         
         profileView.listsCollection.dataSource = listsCollectionViewDelegate
@@ -33,7 +31,7 @@ extension ProfileViewController {
     }
     
     func updateLists() {
-        profileView.configureLists(with: lists)
+        profileView.configureLists(with: listsCollectionViewDelegate.data)
         reloadListsCollection()
     }
     

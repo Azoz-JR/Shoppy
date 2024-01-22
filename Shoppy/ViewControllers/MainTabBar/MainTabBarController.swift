@@ -16,7 +16,12 @@ final class MainTabBarController: UITabBarController {
     let userViewModel = UserViewModel()
     let sideProfileView = SideProfile()
     let disposeBag = DisposeBag()
+    let sideProfileTableDelegate = SideProfileTableViewDelegate()
     var isProfileVisible = false
+    
+    // Threshold for triggering the page swipe
+    let swipeThreshold: CGFloat = UIScreen.main.bounds.width / 2.0
+    var initialTranslationX: CGFloat = 0.0
     
     
     var cartCount: Int = 0 {
@@ -28,7 +33,7 @@ final class MainTabBarController: UITabBarController {
     override func loadView() {
         super.loadView()
         
-        sideProfileView.frame = CGRect(x: -view.frame.width, y: 0, width: view.frame.width, height: view.frame.height)
+        sideProfileView.frame = CGRect(x: -view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.addSubview(sideProfileView)
         
     }
@@ -46,16 +51,17 @@ final class MainTabBarController: UITabBarController {
         bindToUser()
         
         configureSideProfile()
+        configureSideProfileTableView()
         
         let homeVC = makeHomeView()
-        let categoriesVC = makeCategoriesView()
+        let categoriesVC = makeCollectionsView()
         let cartVC = makeCartView()
         let wishListVC = makeWishListView()
         let profileVC = makeProfileView()
         
         viewControllers = [
             makeNav(for: homeVC, title: "Home", icon: "house.fill", tag: 0),
-            makeNav(for: categoriesVC, title: "Categories", icon: "square.grid.2x2.fill", tag: 1),
+            makeNav(for: categoriesVC, title: "Collections", icon: "square.grid.2x2.fill", tag: 1),
             makeNav(for: cartVC, title: "Cart", icon: "cart.fill", tag: 2),
             makeNav(for: wishListVC, title: "Wish list", icon: "heart.fill", tag: 3),
             makeNav(for: profileVC, title: "You", icon: "person.fill", tag: 4)
@@ -82,8 +88,6 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func makeNav(for vc: UIViewController, title: String, icon: String, tag: Int) -> UIViewController {
-        //vc.navigationItem.largeTitleDisplayMode = .always
-        
         let nav = UINavigationController(rootViewController: vc)
         nav.tabBarItem.image = UIImage(
             systemName: icon,
@@ -92,13 +96,13 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
+        nav.navigationBar.tintColor = .navBarTint
         
         return nav
     }
     
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
-        homeVC.title = "Home"
         homeVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
@@ -111,23 +115,22 @@ final class MainTabBarController: UITabBarController {
         return homeVC
     }
     
-    func makeCategoriesView() -> CollectionsViewController {
-        let categoryVC = CollectionsViewController()
-        categoryVC.title = "Categories"
-        categoryVC.view.backgroundColor = .systemBackground
-        categoryVC.navigationItem.largeTitleDisplayMode = .always
+    func makeCollectionsView() -> CollectionsViewController {
+        let collectionsVC = CollectionsViewController()
+        collectionsVC.view.backgroundColor = .systemBackground
+        collectionsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
-        categoryVC.service = api
-        categoryVC.cartViewModel = cartViewModel
-        categoryVC.listsViewModel = listsViewModel
-        categoryVC.wishListViewModel = wishListViewModel
+        collectionsVC.service = api
+        collectionsVC.cartViewModel = cartViewModel
+        collectionsVC.listsViewModel = listsViewModel
+        collectionsVC.wishListViewModel = wishListViewModel
         
-        return categoryVC
+        return collectionsVC
     }
     
     func makeCartView() -> CartViewController {
         let cartVC = CartViewController(cartViewModel: cartViewModel)
-        cartVC.title = "My Cart"
+        cartVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         cartVC.view.backgroundColor = .secondBackground
         
         return cartVC
@@ -135,6 +138,7 @@ final class MainTabBarController: UITabBarController {
     
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
+        profileVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         profileVC.cartViewModel = cartViewModel
         profileVC.listsViewModel = listsViewModel
         profileVC.wishListViewModel = wishListViewModel
@@ -145,6 +149,7 @@ final class MainTabBarController: UITabBarController {
     
     func makeWishListView() -> WishListViewController {
         let wishListVC = WishListViewController()
+        wishListVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         wishListVC.cartViewModel = cartViewModel
         wishListVC.viewModel = wishListViewModel
         wishListVC.listsViewModel = listsViewModel

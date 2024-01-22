@@ -19,7 +19,7 @@ class WishListViewController: UIViewController {
     var listsViewModel: ListsViewModel?
     var wishListProducts: [ItemModel] = []
     let disposeBag = DisposeBag()
-    private var refreshControl = UIRefreshControl()
+    var refreshControl: UIRefreshControl? = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class WishListViewController: UIViewController {
     
     @objc func refresh() {
         viewModel.getWishList() { [weak self] in
-            self?.refreshControl.endRefreshing()
+            self?.refreshControl?.endRefreshing()
         }
         
     }
@@ -72,8 +72,8 @@ class WishListViewController: UIViewController {
     }
     
     func configRefreshView() {
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        refreshControl.tintColor = .myGreen
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl?.tintColor = .myGreen
         collectionView.refreshControl = refreshControl
     }
     

@@ -15,7 +15,6 @@ extension ProfileViewController {
                 return
             }
             
-            self.orders = orders
             self.ordersCollectionViewDelegate.data = orders
             self.updateOrders()
         }
@@ -24,7 +23,6 @@ extension ProfileViewController {
     }
     
     func configureOrdersCollection() {
-        ordersCollectionViewDelegate.data = orders
         ordersCollectionViewDelegate.parentController = self
         
         profileView.ordersCollection.dataSource = ordersCollectionViewDelegate
@@ -33,7 +31,7 @@ extension ProfileViewController {
     }
     
     func updateOrders() {
-        profileView.configureOrder(with: orders)
+        profileView.configureOrder(with: ordersCollectionViewDelegate.data)
         reloadCollection()
     }
     

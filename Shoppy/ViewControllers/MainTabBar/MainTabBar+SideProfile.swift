@@ -24,8 +24,13 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     func configureSideProfile() {
+        // Add pan gesture recognizer to the swipeable view
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        view.addGestureRecognizer(panGesture)
+
+        
         sideProfileView.tapHandler = { [weak self] in
-            self?.showProfile()
+            self?.resetSwipeableViewPosition()
         }
         
         sideProfileView.imagePickerHandler = { [weak self] in
@@ -33,26 +38,56 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
         }
     }
     
-    @objc func showProfile() {
-        if !isProfileVisible {
-            UIView.animate(withDuration: 0.5) {
-                self.sideProfileView.frame.origin.x = 0
-                //self.view.frame.origin.x = self.view.frame.width * 0.9
-                //self.view.setNeedsLayout()
-                self.isProfileVisible = true
+    @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: view)
+        
+        if (sideProfileView.frame.origin.x == 0 && translation.x > 0) || (sideProfileView.frame.maxX == 0 && translation.x < 0) {
+            return
+        }
+        
+        switch recognizer.state {
+        case .began:
+            initialTranslationX = sideProfileView.transform.tx
+            
+        case .changed:
+            sideProfileView.transform = CGAffineTransform(translationX: initialTranslationX + translation.x, y: 0)
+            self.sideProfileView.mainContainer.backgroundColor = .clear
+            
+        case .ended:
+            recognizer.setTranslation(CGPoint.zero, in: self.view)
+            // Check if the translation is beyond the threshold
+            if sideProfileView.frame.maxX > swipeThreshold {
+                // Perform the page swipe action (e.g., navigate to the next page)
+                nextPageSwipe()
+            } else {
+                // Reset the swipeable view to its hidden position
+                resetSwipeableViewPosition()
             }
-        } else {
-            hideProfile()
-            self.isProfileVisible = false
+            
+        default:
+            break
+        }
+        
+    }
+    
+    func nextPageSwipe() {
+        UIView.animate(withDuration: 0.3) {
+            self.sideProfileView.transform = CGAffineTransform(translationX: self.view.frame.width, y: 0)
+        } completion: { _ in
+            self.sideProfileView.mainContainer.backgroundColor = .black.withAlphaComponent(0.3)
         }
     }
     
-    private func hideProfile() {
-        UIView.animate(withDuration: 0.5) {
-            self.view.frame.origin.x = 0
-            self.sideProfileView.frame.origin.x = -self.view.frame.maxX
-            self.view.setNeedsLayout()
+    func resetSwipeableViewPosition() {
+        // Reset the swipeable view to its hidden position
+        UIView.animate(withDuration: 0.3) {
+            self.sideProfileView.transform = .identity
+            self.sideProfileView.mainContainer.backgroundColor = .clear
         }
+    }
+    
+    @objc func showProfile() {
+        nextPageSwipe()
     }
     
     func configureImagePicker() {

@@ -5,37 +5,54 @@
 //  Created by Azoz Salah on 29/12/2023.
 //
 
+import RxSwift
 import UIKit
 
 class OrdersViewController: UIViewController, OrdersControllerPresenter {
     @IBOutlet var tableView: UITableView!
     
     let ordersTableViewDelegate = OrdersTableViewDelegate()
-    var orders: [Order]
+    var cartViewModel: CartViewModel?
+    let disposeBag = DisposeBag()
     
-    init(orders: [Order]) {
-        self.orders = orders
-        
-        super.init(nibName: "OrdersViewController", bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Previous Orders"
+        title = "Your Orders"
 
+        bindToOrders()
         configuareTableView()
+        
+        cartViewModel?.getOrders()
+    }
+    
+    func bindToOrders() {
+        cartViewModel?.orders.subscribe(onNext: { [weak self] orders in
+            guard let self else {
+                self?.updateOrders()
+                return
+            }
+            
+            self.ordersTableViewDelegate.data = orders
+            self.updateOrders()
+        })
+        .disposed(by: disposeBag)
+        
+    }
+    
+    func updateOrders() {
+        DispatchQueue.mainAsyncIfNeeded {
+            UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func configuareTableView() {
         tableView.delegate = ordersTableViewDelegate
         tableView.dataSource = ordersTableViewDelegate
         
-        ordersTableViewDelegate.data = orders
         ordersTableViewDelegate.parentController = self
         
         registerCell()
@@ -46,7 +63,7 @@ class OrdersViewController: UIViewController, OrdersControllerPresenter {
     }
     
     func orderSelected(at index: Int) {
-        let order = orders[index]
+        let order = ordersTableViewDelegate.data[index]
         let vc = OrderDetailViewController(order: order)
         vc.title = "Order Items"
         

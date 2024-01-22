@@ -46,7 +46,6 @@ class OrderItemCell: UITableViewCell {
         quantityLabel.text = "\(item.count)"
         nameLabel.text = item.title
         priceLabel.text = "\(item.price)$"
-        
     }
     
     func configureImageView() {

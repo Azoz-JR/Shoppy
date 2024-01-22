@@ -23,6 +23,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Collections"
         navigationController?.navigationBar.tintColor = .navBarTint
         configureCollection()
         
@@ -79,12 +80,6 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         vc.service = api
         
         show(vc, sender: self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func reloadCollection() {

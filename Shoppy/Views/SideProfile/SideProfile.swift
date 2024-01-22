@@ -8,11 +8,12 @@
 import UIKit
 
 class SideProfile: UIView {
-    @IBOutlet var mainContainer: UIView!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var mainContainer: UIView!
     @IBOutlet var containerView: UIView!
     @IBOutlet var signOutButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var imagePickerButton: UIButton!
     
     let progressView = ProgressView(frame: CGRect(origin: .zero, size: CGSize(width: 80, height: 80)))
@@ -27,7 +28,6 @@ class SideProfile: UIView {
         if let view = loadFromNib() {
             view.frame = bounds
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            mainContainer.backgroundColor = .black.withAlphaComponent(0.3)
             addSubview(view)
         }
         
@@ -36,13 +36,7 @@ class SideProfile: UIView {
         
         // Create a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-
-        // Add the gesture recognizer to a view
         mainContainer.addGestureRecognizer(tapGesture)
-        
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(viewSwipped))
-        swipeGesture.direction = .left
-        addGestureRecognizer(swipeGesture)
         
         signOutButton.addTarget(self, action: #selector(signOutTapped), for: .touchUpInside)
         imagePickerButton.addTarget(self, action: #selector(imagePickerTapped), for: .touchUpInside)
@@ -65,14 +59,10 @@ class SideProfile: UIView {
     
     func configureImage() {
         imageView.layer.cornerRadius = 40
-        imageView.image = UIImage(named: "profile")
+        imageView.image = UIImage(systemName: "photo")
     }
     
     @objc func viewTapped() {
-        tapHandler?()
-    }
-    
-    @objc func viewSwipped() {
         tapHandler?()
     }
     
