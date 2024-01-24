@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="T-SHIRTS" translatesAutoresizingMaskIntoConstraints="NO" id="N19-gd-Pxw">
-                        <rect key="frame" x="35" y="35" width="167" height="121"/>
+                        <rect key="frame" x="20" y="20" width="197" height="151"/>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LNy-aC-YJy">
                         <rect key="frame" x="100" y="77" width="37" height="37"/>
@@ -27,12 +27,12 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="N19-gd-Pxw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="35" id="Dm7-8y-wZv"/>
-                <constraint firstAttribute="trailing" secondItem="N19-gd-Pxw" secondAttribute="trailing" constant="35" id="OdM-w7-ahC"/>
+                <constraint firstItem="N19-gd-Pxw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="Dm7-8y-wZv"/>
+                <constraint firstAttribute="trailing" secondItem="N19-gd-Pxw" secondAttribute="trailing" constant="20" id="OdM-w7-ahC"/>
                 <constraint firstItem="LNy-aC-YJy" firstAttribute="centerY" secondItem="N19-gd-Pxw" secondAttribute="centerY" id="YFA-rR-oIG"/>
                 <constraint firstItem="LNy-aC-YJy" firstAttribute="centerX" secondItem="N19-gd-Pxw" secondAttribute="centerX" id="ad0-Nd-K21"/>
-                <constraint firstItem="N19-gd-Pxw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="35" id="cMe-6m-TDy"/>
-                <constraint firstAttribute="bottom" secondItem="N19-gd-Pxw" secondAttribute="bottom" constant="35" id="uzu-D6-eW2"/>
+                <constraint firstItem="N19-gd-Pxw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="cMe-6m-TDy"/>
+                <constraint firstAttribute="bottom" secondItem="N19-gd-Pxw" secondAttribute="bottom" constant="20" id="uzu-D6-eW2"/>
             </constraints>
             <size key="customSize" width="237" height="191"/>
             <connections>

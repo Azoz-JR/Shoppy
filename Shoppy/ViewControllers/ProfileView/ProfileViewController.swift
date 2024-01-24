@@ -59,7 +59,10 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
                 return
             }
             
-            self?.profileView.usernameLabel.text = "Hello, \(user.firstName?.capitalizedSentence ?? "UNKNOWN")"
+            DispatchQueue.mainAsyncIfNeeded {
+                self?.profileView.userImageView.image = user.profileImage
+                self?.profileView.usernameLabel.text = "Hello, \(user.firstName?.capitalizedSentence ?? "UNKNOWN")"
+            }
         } )
         .disposed(by: disposeBag)
     }
@@ -83,6 +86,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
             }
             
             let vc = OrdersViewController()
+            vc.cartViewModel = cartViewModel
             self.show(vc, sender: self)
         }
         

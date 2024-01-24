@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="250" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ffW-Qz-Mu0">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="708"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7P8-Ov-oJJ">
@@ -85,11 +85,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ffW-Qz-Mu0" secondAttribute="bottom" id="D0X-y8-aGx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7P8-Ov-oJJ" secondAttribute="bottom" id="E0Y-L4-QQZ"/>
                 <constraint firstItem="ffW-Qz-Mu0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NEe-Vs-JUg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7P8-Ov-oJJ" secondAttribute="trailing" id="Q6a-R5-TtN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ffW-Qz-Mu0" secondAttribute="trailing" id="RhG-xv-pE0"/>
+                <constraint firstItem="7P8-Ov-oJJ" firstAttribute="top" secondItem="ffW-Qz-Mu0" secondAttribute="bottom" id="RhU-3D-eUX"/>
                 <constraint firstItem="7P8-Ov-oJJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lIc-dW-TUw"/>
                 <constraint firstItem="ffW-Qz-Mu0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xNF-lt-cje"/>
             </constraints>

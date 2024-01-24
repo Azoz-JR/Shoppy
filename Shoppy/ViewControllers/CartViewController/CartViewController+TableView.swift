@@ -33,13 +33,20 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setUpCell(with: product)
             
             cell.increaseButtonHandler = { [weak self] in
-                self?.cartViewModel.addProduct(product: product)
-                self?.updateUI()
+                self?.progressView.startAnimating()
+                
+                self?.cartViewModel.addProduct(product: product) {
+                    self?.progressView.stopAnimating()
+                    self?.updateUI()
+                }
             }
             
             cell.decreaseButtonHandler = { [weak self] in
-                self?.cartViewModel.decreaseProduct(product: product)
-                self?.updateUI()
+                self?.cartViewModel.decreaseProduct(product: product) {
+                    self?.progressView.stopAnimating()
+                    self?.updateUI()
+                }
+                
             }
             
             cell.removeButtonHandler = { [weak self] in

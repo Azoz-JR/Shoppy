@@ -12,11 +12,11 @@ protocol HomeControllerPresenter: ScrollViewDelegate {
     func setionSelected(at index: IndexPath)
 }
 
-protocol HomeCategoriesPresenter {
+protocol HomeCategoriesPresenter: AnyObject {
     func categorySelected(at index: IndexPath)
 }
 
-protocol ScrollViewDelegate {
+protocol ScrollViewDelegate: AnyObject {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     func scrollViewDidScroll(_ scrollView: UIScrollView)
 }

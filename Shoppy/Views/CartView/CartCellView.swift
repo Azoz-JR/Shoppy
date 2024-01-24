@@ -13,6 +13,8 @@ final class CartCellView: UITableViewCell {
     @IBOutlet var productImage: UIImageView!
     @IBOutlet var productLabel: UILabel!
     @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet var colorLabel: UILabel!
+    @IBOutlet var sizeLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var removeButton: UIButton!
     @IBOutlet var reduceLabel: UIButton!
@@ -49,6 +51,8 @@ final class CartCellView: UITableViewCell {
         categoryLabel.text = product.category?.rawValue
         priceLabel.text = "\(product.price)$"
         productCount.text = "\(product.count)"
+        colorLabel.text = product.color
+        sizeLabel.text = product.size
     }
     
     @objc func increaseButtonTapped() {

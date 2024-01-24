@@ -88,4 +88,10 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
 }

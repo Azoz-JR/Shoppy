@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 
 final class HomeViewController: UIViewController {
-    @IBOutlet var homeView: UIView!
     @IBOutlet var collectionView: UICollectionView!
     var categoriesCollectionView: UICollectionView!
     private var refreshControl = UIRefreshControl()

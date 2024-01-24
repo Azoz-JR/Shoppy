@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var data: [Section] = []
-    var parentController: HomeControllerPresenter?
+    weak var parentController: HomeControllerPresenter?
     var wishListViewModel: WishListViewModel?
 
     

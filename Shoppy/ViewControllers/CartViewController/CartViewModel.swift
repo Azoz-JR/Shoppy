@@ -56,7 +56,7 @@ class CartViewModel {
         }
     }
     
-    func addProduct(product: ItemModel) {
+    func addProduct(product: ItemModel, completion: @escaping () -> Void) {
         Task {
             var cart = self.cartProductsRelay.value
             
@@ -73,14 +73,21 @@ class CartViewModel {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
                 
                 getCart()
-            } catch {
                 
+                await MainActor.run {
+                    completion()
+                }
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    completion()
+                }
             }
         }
         
     }
     
-    func decreaseProduct(product: ItemModel) {
+    func decreaseProduct(product: ItemModel, completion: @escaping () -> Void) {
         Task {
             var cart = self.cartProductsRelay.value
             
@@ -97,8 +104,15 @@ class CartViewModel {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
                 
                 getCart()
-            } catch {
                 
+                await MainActor.run {
+                    completion()
+                }
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    completion()
+                }
             }
         }
     }

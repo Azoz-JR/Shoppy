@@ -36,7 +36,7 @@ final class CollectionViewController: UIViewController {
         viewModel.service = service
         bindToViewModel()
         
-        configureBackground()
+        //configureBackground()
         configureCollectionView()
         configureSearchBar()
         

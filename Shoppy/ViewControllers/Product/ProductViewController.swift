@@ -126,8 +126,10 @@ final class ProductViewController: UIViewController {
         product.selectColor(color: selectedColor.accessibilityName)
         product.selectSize(size: productView.selectedSize)
         
-        cartViewModel.addProduct(product: product)
-        showAddedSuccessfulyAlert()
+        cartViewModel.addProduct(product: product) { [weak self] in
+            self?.showAddedSuccessfulyAlert()
+        }
+        
     }
     
     func updateLikeButton(value: Bool) {

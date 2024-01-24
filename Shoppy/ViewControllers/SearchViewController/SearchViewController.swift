@@ -62,9 +62,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         noResultsView.isHidden = true
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchTableViewDelegate.data = []
-        reloadTableView()
-    }
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        searchTableViewDelegate.data = []
+//        reloadTableView()
+//    }
     
 }

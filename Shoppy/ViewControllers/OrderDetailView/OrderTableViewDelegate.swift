@@ -10,6 +10,7 @@ import UIKit
 class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var data: [ItemModel] = []
+    var parentController: ScrollViewDelegate?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data.count
@@ -23,6 +24,14 @@ class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
             return cell
         }
         fatalError("Unable to deque ListItemCellView")
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        parentController?.scrollViewWillBeginDragging(scrollView)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        parentController?.scrollViewDidScroll(scrollView)
     }
     
 }

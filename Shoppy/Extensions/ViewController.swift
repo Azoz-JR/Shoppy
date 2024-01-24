@@ -106,4 +106,8 @@ extension UIViewController {
         self.navigationController?.tabBarController?.tabBar.frame.height ?? 0
     }
     
+    var navigationBarHeight: CGFloat {
+        self.navigationController?.navigationBar.frame.height ?? 0
+    }
+    
 }

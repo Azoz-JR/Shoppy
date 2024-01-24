@@ -15,6 +15,9 @@ class OrderDetailViewController: UIViewController {
     
     let orderTableViewDelegate = OrderTableViewDelegate()
     
+    var navBarVisible = true
+    var lastContentOffset: CGFloat = 0
+    
     var order: Order
     
     init(order: Order) {
@@ -31,7 +34,6 @@ class OrderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.backButtonDisplayMode = .minimal
         configureOrderDetails()
         configuareTableView()
     }
@@ -49,9 +51,9 @@ class OrderDetailViewController: UIViewController {
     func configuareTableView() {
         tableView.delegate = orderTableViewDelegate
         tableView.dataSource = orderTableViewDelegate
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 110, right: 0)
         
         orderTableViewDelegate.data = order.items
+        orderTableViewDelegate.parentController = self
         
         registerCell()
     }
@@ -62,13 +64,12 @@ class OrderDetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.hidesBarsOnSwipe = false
+        showNavBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.hidesBarsOnSwipe = true
     }
 
 }

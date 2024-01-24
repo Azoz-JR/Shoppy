@@ -9,9 +9,10 @@ import FirebaseAuth
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
+    
+    var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+        authStateListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             if user != nil {
                 self?.window?.rootViewController = MainTabBarController()
             } else {
@@ -31,6 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.makeKeyAndVisible()
     }
-
+    
+    func sceneDidDisconnect(_ scene: UIScene) {
+        print("sceneDidDisconnect")
+        if let handle = authStateListenerHandle {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
+    }
+    
 }
 

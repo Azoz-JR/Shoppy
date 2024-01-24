@@ -29,8 +29,10 @@ class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewData
                 guard let cartViewModel = self?.cartViewModel else {
                     return
                 }
-                cartViewModel.addProduct(product: item)
-                self?.parentController?.showAlert()
+                cartViewModel.addProduct(product: item) {
+                    self?.parentController?.showAlert()
+                }
+                
             }
             
             return cell

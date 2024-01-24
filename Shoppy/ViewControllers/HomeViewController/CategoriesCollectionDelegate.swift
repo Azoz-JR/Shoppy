@@ -10,7 +10,7 @@ import UIKit
 final class CategoriesCollectionDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var data: [Category] = Category.allCases
-    var parentController: HomeCategoriesPresenter?
+    weak var parentController: HomeCategoriesPresenter?
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

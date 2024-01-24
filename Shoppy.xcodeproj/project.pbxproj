@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		312889B5A6A084FD2BE59EF6 /* Pods_Shoppy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F0260CABAC62E95D8CAB1D /* Pods_Shoppy.framework */; };
+		97068D972B61D2510019BD0E /* OrderDetailView+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068D962B61D2510019BD0E /* OrderDetailView+NavBar.swift */; };
 		970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */; };
 		970EECCA2B310715009D53C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECC92B310715009D53C7 /* Product.swift */; };
 		970EECCC2B310AC0009D53C7 /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECCB2B310AC0009D53C7 /* ProductImage.swift */; };
@@ -224,6 +225,7 @@
 
 /* Begin PBXFileReference section */
 		65F0260CABAC62E95D8CAB1D /* Pods_Shoppy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97068D962B61D2510019BD0E /* OrderDetailView+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDetailView+NavBar.swift"; sourceTree = "<group>"; };
 		970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
 		970EECC92B310715009D53C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		970EECCB2B310AC0009D53C7 /* ProductImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImage.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				972FAC232B3E52CE0017114A /* OrderDetailViewController.swift */,
+				97068D962B61D2510019BD0E /* OrderDetailView+NavBar.swift */,
 				9728F9152B48AF3800E5CEA9 /* OrderTableViewDelegate.swift */,
 			);
 			path = OrderDetailView;
@@ -668,7 +671,7 @@
 				9788DDE82B5CAE1400CF44A8 /* SideProfile */,
 				97AB18182B534CBE00522186 /* ProgressView */,
 				9790F8E92B3F232B00597A50 /* HomeView */,
-				9790F8EA2B3F233D00597A50 /* CategoriesView */,
+				9790F8EA2B3F233D00597A50 /* CollectionsView */,
 				9790F8EB2B3F237600597A50 /* CartView */,
 				9790F8F02B3F24B600597A50 /* WishListView */,
 				9790F8EF2B3F24A200597A50 /* Product */,
@@ -743,7 +746,7 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
-		9790F8EA2B3F233D00597A50 /* CategoriesView */ = {
+		9790F8EA2B3F233D00597A50 /* CollectionsView */ = {
 			isa = PBXGroup;
 			children = (
 				97AB17942B4F846200522186 /* CollectionsView.xib */,
@@ -751,7 +754,7 @@
 				970EECE62B33AE3A009D53C7 /* CollectionCell.xib */,
 				97AB17962B4F869200522186 /* CollectionView.xib */,
 			);
-			path = CategoriesView;
+			path = CollectionsView;
 			sourceTree = "<group>";
 		};
 		9790F8EB2B3F237600597A50 /* CartView */ = {
@@ -1277,6 +1280,7 @@
 				97B390132B1F92BB00EB90EA /* Observable.swift in Sources */,
 				9728F9132B48397A00E5CEA9 /* OrderItemCell.swift in Sources */,
 				972FABDF2B3C9A9F0017114A /* Order.swift in Sources */,
+				97068D972B61D2510019BD0E /* OrderDetailView+NavBar.swift in Sources */,
 				97E7A4342B37749B00A1C20E /* WishListViewController.swift in Sources */,
 				972FABE12B3C9B680017114A /* List.swift in Sources */,
 				972FAC202B3E51210017114A /* OrdersControllerPresenter.swift in Sources */,

@@ -28,12 +28,12 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-0D-uZd">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PYr-0D-uZd">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="511.33333333333331"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't added any items to your cart yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fM-Pc-sEm">
-                    <rect key="frame" x="10" y="299.66666666666669" width="373" height="21.666666666666686"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't added any items to your cart yet." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fM-Pc-sEm">
+                    <rect key="frame" x="20" y="278.33333333333331" width="353" height="43"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
                     <nil key="highlightedColor"/>
@@ -143,9 +143,9 @@
             <constraints>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="1W8-bP-nio"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7eR-7V-bKF"/>
-                <constraint firstItem="2fM-Pc-sEm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="AKa-Me-F3L"/>
+                <constraint firstItem="2fM-Pc-sEm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="AKa-Me-F3L"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BCH-wu-gzn"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2fM-Pc-sEm" secondAttribute="trailing" constant="10" id="EJi-B5-4Ne"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2fM-Pc-sEm" secondAttribute="trailing" constant="20" id="EJi-B5-4Ne"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="top" secondItem="PYr-0D-uZd" secondAttribute="bottom" constant="10" id="LO2-tN-adW"/>
                 <constraint firstItem="Gq3-ZO-z7i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="W8c-D6-FAH"/>
                 <constraint firstItem="PYr-0D-uZd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="a2p-Ln-RRl"/>
