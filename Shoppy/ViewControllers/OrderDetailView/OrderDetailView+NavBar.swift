@@ -10,13 +10,11 @@ import UIKit
 extension OrderDetailViewController: ScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         lastContentOffset = scrollView.contentOffset.y
-        print("lastContentOffset: \(lastContentOffset)")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentContentOffset = scrollView.contentOffset.y + view.safeAreaInsets.top
                 
-        print("currentContentOffset: \(currentContentOffset)")
         // Check if scrolling up or down
         if currentContentOffset > 1 && currentContentOffset > lastContentOffset && navBarVisible {
             // Scrolling down, hide the tab bar

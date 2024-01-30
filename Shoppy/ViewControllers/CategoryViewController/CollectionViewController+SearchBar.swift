@@ -22,7 +22,7 @@ extension CollectionViewController: UISearchResultsUpdating {
         }
         
         productsDataSourceAndDelegate.data = products.filter { product in
-            product.title.uppercased().contains(text.uppercased())
+            product.title.localizedStandardContains(text)
         }
         reloadCollectionView()
     }

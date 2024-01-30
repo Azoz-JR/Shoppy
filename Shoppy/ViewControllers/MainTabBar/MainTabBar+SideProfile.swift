@@ -39,6 +39,13 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+        // Check if the current view controller is the root view controller of its navigation controller
+        if let currentViewController = selectedViewController as? UINavigationController,
+           currentViewController.viewControllers.count > 1 {
+            // If it's not the root view controller, prevent the side view from responding to the swipe gesture
+            return
+        }
+        
         let translation = recognizer.translation(in: view)
         
         if (sideProfileView.frame.origin.x == 0 && translation.x > 0) || (sideProfileView.frame.maxX == 0 && translation.x < 0) {
@@ -124,6 +131,18 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
         dismiss(animated: true) { [weak self] in
             self?.imageSelected(image: image)
         }
+    }
+    
+    func hasDetailViewController() -> Bool {
+        // Check if any detail view controller is active in the tab bar
+        for viewController in viewControllers ?? [] {
+            if let navController = viewController as? UINavigationController {
+                let topViewController = navController.viewControllers.count
+                print(topViewController)
+                return true
+            }
+        }
+        return false
     }
     
 

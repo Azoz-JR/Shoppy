@@ -14,15 +14,15 @@ final class MainTabBarController: UITabBarController {
     let listsViewModel = ListsViewModel()
     let wishListViewModel = WishListViewModel()
     let userViewModel = UserViewModel()
+    
+    // Side Profile
     let sideProfileView = SideProfile()
-    let disposeBag = DisposeBag()
     let sideProfileTableDelegate = SideProfileTableViewDelegate()
     var isProfileVisible = false
-    
-    // Threshold for triggering the page swipe
     let swipeThreshold: CGFloat = UIScreen.main.bounds.width / 2.0
     var initialTranslationX: CGFloat = 0.0
     
+    let disposeBag = DisposeBag()
     
     var cartCount: Int = 0 {
         didSet {
@@ -35,18 +35,14 @@ final class MainTabBarController: UITabBarController {
         
         sideProfileView.frame = CGRect(x: -view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.addSubview(sideProfileView)
-        
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         tabBar.tintColor = .selectedTab
-        
-        wishListViewModel.getWishList()
-        
+                
         bindToCartViewModel()
         bindToUser()
         
@@ -97,7 +93,7 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
         nav.navigationBar.tintColor = .navBarTint
-        
+                
         return nav
     }
     

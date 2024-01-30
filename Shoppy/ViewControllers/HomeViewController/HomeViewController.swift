@@ -11,33 +11,31 @@ import RxSwift
 final class HomeViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     var categoriesCollectionView: UICollectionView!
+    
+    let homeViewModel = HomeViewModel()
     private var refreshControl = UIRefreshControl()
     let searchBar = UISearchBar()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     private let disposeBag = DisposeBag()
     
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
-    var homeViewModel = HomeViewModel()
-    
+
+    // Show/Hide TabBar properties
     var tabBarVisible = true
     var lastContentOffset: CGFloat = 0
     
     let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
     let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
-    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-    
-    var service: Service?
     var products: [ItemModel] = []
     
+    var service: Service?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .clear
-        navigationController?.navigationBar.tintColor = .navBarTint
-        navigationItem.backButtonDisplayMode = .minimal
                 
+        setUpHomeView()
         configureSearchBar()
         configureCollectionView()
         setUpProgressView()
@@ -45,21 +43,24 @@ final class HomeViewController: UIViewController {
         configureCategoriesCollection()
         bindToViewModel()
         
-        
+        showProgressView()
+        refresh()
+    }
+    
+    func setUpHomeView() {
+        view.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .navBarTint
+        navigationItem.backButtonDisplayMode = .minimal
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = .myGreen
         collectionView.refreshControl = refreshControl
-        
-        showProgressView()
-        refresh()
     }
     
     func setUpProgressView() {
         view.addSubview(progressView)
         progressView.center = view.center
         progressView.isHidden = true
-        
     }
     
     func bindToViewModel() {

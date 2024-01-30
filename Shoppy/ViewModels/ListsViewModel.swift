@@ -21,6 +21,7 @@ final class ListsViewModel {
         return uid ?? ""
     }
     
+    
     func getLists(completion: (@escaping () -> Void) = {}) {
         Task {
             do {
@@ -30,7 +31,7 @@ final class ListsViewModel {
                     completion()
                 }
             } catch {
-                print("ERROR CREATING List")
+                print("ERROR Fetching Lists: \(error.localizedDescription)")
             }
         }
     }
@@ -59,7 +60,7 @@ final class ListsViewModel {
                 
                 getLists()
             } catch {
-                print("ERROR DELETING List")
+                print("ERROR DELETING List: \(error.localizedDescription)")
             }
         }
     }
@@ -74,14 +75,13 @@ final class ListsViewModel {
                 
                 getLists()
             } catch {
-                
+                print("ERROR Adding an item to a list \(error.localizedDescription)")
             }
         }
         
     }
     
     func remove(item: ItemModel, at list: List) {
-        
         Task {
             var tempList = list
             tempList.remove(item: item)
@@ -93,7 +93,7 @@ final class ListsViewModel {
                 
                 getLists()
             } catch {
-                
+                print("ERROR removing an item from a list \(error.localizedDescription)")
             }
         }
     }

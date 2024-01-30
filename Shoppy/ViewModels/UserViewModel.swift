@@ -20,6 +20,7 @@ final class UserViewModel {
         getCurrentUser()
     }
     
+    
     func getCurrentUser() {
         Task {
             let currentUser = await UserManager.shared.getCurrentUser()
@@ -39,12 +40,14 @@ final class UserViewModel {
                 
                 try await UserManager.shared.updateUserProfilePicture(userId: userId, picture: image)
                 
+                getCurrentUser()
+                
                 await MainActor.run {
                     completion(nil)
                 }
                 
             } catch {
-                print(error.localizedDescription)
+                print("ERROR Uploading profile picture: \(error.localizedDescription)")
                 await MainActor.run {
                     completion(error)
                 }

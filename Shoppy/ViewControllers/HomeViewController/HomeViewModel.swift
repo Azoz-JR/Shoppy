@@ -18,7 +18,6 @@ class HomeViewModel {
         return productsSubject.asObservable()
     }
     
-    
     func load() async {
         do {
             let products = try await service.loadProducts()

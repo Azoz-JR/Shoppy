@@ -20,6 +20,10 @@ class WishListViewModel {
         return uid ?? ""
     }
     
+    init() {
+        getWishList()
+    }
+    
     
     func getWishList(completion: (@escaping () -> Void) = {}) {
         Task {

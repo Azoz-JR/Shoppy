@@ -20,12 +20,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var wishListViewModel: WishListViewModel?
     var service: Service?
     var result: [ItemModel] = []
+    var text: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpNavBar()
         configuareTableView()
+        
+        if let text {
+            searchFor(text: text)
+        }
     }
     
     func setUpNavBar() {
@@ -35,8 +40,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.placeholder = "Search by "
         searchBar.tintColor = UIColor.lightGray
         searchBar.barTintColor = UIColor.lightGray
-        navigationItem.titleView = searchBar
         searchBar.isTranslucent = true
+        navigationItem.titleView = searchBar
+        navigationItem.backButtonDisplayMode = .minimal
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -48,8 +54,26 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             return
         }
         
+        createSearchView(for: text)
+    }
+    
+    func createSearchView(for text: String) {
+        let searchVC = SearchViewController()
+        searchVC.cartViewModel = cartViewModel
+        searchVC.listsViewModel = listsViewModel
+        searchVC.service = service
+        searchVC.result = result
+        searchVC.wishListViewModel = wishListViewModel
+        searchVC.text = text
+        
+        show(searchVC, sender: self)
+    }
+    
+    func searchFor(text: String) {
         searchTableViewDelegate.data = result.filter { product in
-            product.title.uppercased().contains(text.uppercased())
+            product.title.localizedStandardContains(text)
+            || (product.category?.rawValue ?? "").localizedStandardContains(text)
+            || product.vendor.localizedStandardContains(text)
         }
         reloadTableView()
         
@@ -60,6 +84,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
         
         noResultsView.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchBar.text = text
     }
     
 //    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
