@@ -18,12 +18,24 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
+        
         let count = data[section].items.count
         return  count > 2 ? 2 : count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         CGSize(width: collectionView.frame.width, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize(width: collectionView.frame.width, height: 250)
+        }
+        
+        return CGSize(width: 170, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -33,12 +45,17 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
                 ofKind: kind,
                 withReuseIdentifier: ProductsCollectionReusableView.identifier,
                 for: indexPath) as? ProductsCollectionReusableView {
-                
-                let sectionTitle = data[indexPath.section].title
-                headerView.configure(title: sectionTitle)
-                
-                headerView.seeMoreHandler = { [weak self] in
-                    self?.parentController?.setionSelected(at: indexPath)
+                if indexPath.section == 0 {
+                    headerView.configure(title: "SALES")
+                    headerView.seeMoreButton.isHidden = true
+                } else {
+                    let sectionTitle = data[indexPath.section].title
+                    headerView.configure(title: sectionTitle)
+                    
+                    headerView.seeMoreHandler = { [weak self] in
+                        self?.parentController?.setionSelected(at: indexPath)
+                    }
+                    
                 }
                 
                 return headerView
@@ -50,6 +67,15 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SalesCellView.identifier, for: indexPath) as? SalesCellView {
+                
+                cell.configure(with: salesURLs)
+
+                return cell
+            }
+        }
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell {
             
             let product = data[indexPath.section].items[indexPath.row]
@@ -70,6 +96,10 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
+        
         parentController?.itemSelected(at: indexPath)
     }
     

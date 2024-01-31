@@ -24,6 +24,7 @@ class HomeViewModel {
             
             await MainActor.run {
                 self.sections = [
+                    Section(title: "SALES", items: []),
                     Section(title: "Recomended for you", items: products.filter({$0.vendor == "ADIDAS"})),
                     Section(title: "Most popular", items: products.filter({$0.vendor == "NIKE"})),
                     Section(title: "Shoes", items: products.filter({$0.category == .shoes})),

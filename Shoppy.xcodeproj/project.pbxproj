@@ -11,6 +11,10 @@
 		97068D972B61D2510019BD0E /* OrderDetailView+NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068D962B61D2510019BD0E /* OrderDetailView+NavBar.swift */; };
 		97068DFC2B6809450019BD0E /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068DFB2B6809450019BD0E /* DBUser.swift */; };
 		97068E012B69D14F0019BD0E /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068E002B69D14F0019BD0E /* LaunchViewController.swift */; };
+		97068E062B6AB18A0019BD0E /* SalesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068E042B6AB18A0019BD0E /* SalesCellView.swift */; };
+		97068E072B6AB18A0019BD0E /* SalesCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97068E052B6AB18A0019BD0E /* SalesCellView.xib */; };
+		97068E0A2B6AC4470019BD0E /* SalesCollectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97068E082B6AC4460019BD0E /* SalesCollectionCellView.swift */; };
+		97068E0B2B6AC4470019BD0E /* SalesCollectionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97068E092B6AC4470019BD0E /* SalesCollectionCellView.xib */; };
 		970EECC82B2FD40A009D53C7 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */; };
 		970EECCA2B310715009D53C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECC92B310715009D53C7 /* Product.swift */; };
 		970EECCC2B310AC0009D53C7 /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970EECCB2B310AC0009D53C7 /* ProductImage.swift */; };
@@ -228,6 +232,10 @@
 		97068D962B61D2510019BD0E /* OrderDetailView+NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDetailView+NavBar.swift"; sourceTree = "<group>"; };
 		97068DFB2B6809450019BD0E /* DBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		97068E002B69D14F0019BD0E /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		97068E042B6AB18A0019BD0E /* SalesCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCellView.swift; sourceTree = "<group>"; };
+		97068E052B6AB18A0019BD0E /* SalesCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SalesCellView.xib; sourceTree = "<group>"; };
+		97068E082B6AC4460019BD0E /* SalesCollectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesCollectionCellView.swift; sourceTree = "<group>"; };
+		97068E092B6AC4470019BD0E /* SalesCollectionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SalesCollectionCellView.xib; sourceTree = "<group>"; };
 		970EECC72B2FD40A009D53C7 /* ProductDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
 		970EECC92B310715009D53C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		970EECCB2B310AC0009D53C7 /* ProductImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImage.swift; sourceTree = "<group>"; };
@@ -750,6 +758,10 @@
 				97EEFAEB2B2E71BD00065A8A /* SmallCategoryCell.xib */,
 				9728F9172B4B4D6300E5CEA9 /* ProductsCollectionReusableView.swift */,
 				9728F9182B4B4D6300E5CEA9 /* ProductsCollectionReusableView.xib */,
+				97068E042B6AB18A0019BD0E /* SalesCellView.swift */,
+				97068E052B6AB18A0019BD0E /* SalesCellView.xib */,
+				97068E082B6AC4460019BD0E /* SalesCollectionCellView.swift */,
+				97068E092B6AC4470019BD0E /* SalesCollectionCellView.xib */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -1176,6 +1188,7 @@
 				9728F8EB2B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf in Resources */,
 				9728F8F52B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf in Resources */,
 				9790F90D2B40950800597A50 /* ListCell.xib in Resources */,
+				97068E0B2B6AC4470019BD0E /* SalesCollectionCellView.xib in Resources */,
 				9728F9002B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf in Resources */,
 				9728F9102B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf in Resources */,
 				97B4413B2B5AA88F0011C1F8 /* SideProfileView.xib in Resources */,
@@ -1187,6 +1200,7 @@
 				97AB17972B4F869200522186 /* CollectionView.xib in Resources */,
 				97A877912B55B0CF0095F83E /* AuthenticationViewController.xib in Resources */,
 				9728F8F12B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf in Resources */,
+				97068E072B6AB18A0019BD0E /* SalesCellView.xib in Resources */,
 				9728F8FD2B480BAC00E5CEA9 /* BookerlyDisplay_It.ttf in Resources */,
 				9728F90D2B480BAC00E5CEA9 /* AmazonEmberDisplay_Bd.ttf in Resources */,
 			);
@@ -1290,6 +1304,7 @@
 				970EECCC2B310AC0009D53C7 /* ProductImage.swift in Sources */,
 				97AB178C2B4F7CB500522186 /* ListsViewController+TableView.swift in Sources */,
 				97AB17872B4F712200522186 /* ListCollectionCell.swift in Sources */,
+				97068E0A2B6AC4470019BD0E /* SalesCollectionCellView.swift in Sources */,
 				972FABE72B3D0B710017114A /* ListsViewModel.swift in Sources */,
 				9790F9072B40946200597A50 /* ListCollectionDelegate.swift in Sources */,
 				97AB177A2B4F196F00522186 /* CollectionsViewModel.swift in Sources */,
@@ -1328,6 +1343,7 @@
 				97AB18272B5575D100522186 /* AuthProviderOption.swift in Sources */,
 				974DF5D42B34A03C00786FC2 /* HomeViewController+SearchController.swift in Sources */,
 				97C489D12B4C7BC800D0E9D7 /* SearchViewController.swift in Sources */,
+				97068E062B6AB18A0019BD0E /* SalesCellView.swift in Sources */,
 				97C489DA2B4C7ED700D0E9D7 /* SearchTableViewCell.swift in Sources */,
 				970EECE02B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift in Sources */,
 				9728F9192B4B4D6300E5CEA9 /* ProductsCollectionReusableView.swift in Sources */,
