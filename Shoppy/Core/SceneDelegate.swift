@@ -22,22 +22,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        authStateListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
-            if user != nil {
-                self?.window?.rootViewController = MainTabBarController()
-            } else {
-                self?.window?.rootViewController = UINavigationController(rootViewController: AuthenticationViewController())
-            }
-        }
+//        authStateListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+//            if user != nil {
+//                self?.window?.rootViewController = MainTabBarController()
+//            } else {
+//                self?.window?.rootViewController = UINavigationController(rootViewController: AuthenticationViewController())
+//            }
+//        }
+        
+        window?.rootViewController = LaunchViewController()
         
         window?.makeKeyAndVisible()
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
-        if let handle = authStateListenerHandle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
-    }
+//    func sceneDidDisconnect(_ scene: UIScene) {
+//        if let handle = authStateListenerHandle {
+//            Auth.auth().removeStateDidChangeListener(handle)
+//        }
+//    }
     
 }
 
