@@ -189,3 +189,41 @@ extension UserManager {
         return try await userCartDocument(userId: userId).getDocument(as: UserCart.self).cart
     }
 }
+
+// MARK: - Promo Codes
+extension UserManager {
+    
+    private func userUsedPromoCodes(userId: String) -> DocumentReference {
+        userDocument(userId: userId).collection("used_promo_codes").document("promos")
+    }
+    
+    private func updateUsedPromoCodes(userId: String, codes: [String: Double]) async throws {
+        let data: [String: Any] = [
+            "promos": codes
+        ]
+        
+        try await userUsedPromoCodes(userId: userId).setData(data, merge: false)
+    }
+    
+    func checkPromoCode(userId: String, code: PromoCode) async throws -> Bool {
+        guard var usedPromos = try? await userUsedPromoCodes(userId: userId).getDocument(as: WinterSales.self).promos else {
+            // User hasn't used any promo codes before
+            let usedPromos: [String: Double] = [code.rawValue: code.value]
+            try await updateUsedPromoCodes(userId: userId, codes: usedPromos)
+            
+            return true
+        }
+        
+        // Check if the promo code already used before
+        if let _ = usedPromos[code.rawValue] {
+            // Promo code already used before
+            return false
+        } else {
+            // Add the promo code to the used promo codes and store them
+            usedPromos[code.rawValue] = code.value
+            try await updateUsedPromoCodes(userId: userId, codes: usedPromos)
+            
+            return true
+        }
+    }
+}

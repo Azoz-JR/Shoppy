@@ -16,6 +16,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var applyButton: UIButton!
     @IBOutlet var couponTextField: UITextField!
     @IBOutlet var subtotalLabel: UILabel!
+    @IBOutlet var discountLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var checkoutButton: UIButton!
     @IBOutlet var noItemsLabel: UILabel!
@@ -23,6 +24,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     var cartViewModel: CartViewModel
     var cartProducts: [ItemModel] = []
     var couponText: String = ""
+    var isPromoCodeApplied = false
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
@@ -67,6 +69,9 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         refreshControl.tintColor = .myGreen
         tableView.refreshControl = refreshControl
         
+        checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
+        applyButton.addTarget(self, action: #selector(applyPromoCodeTapped), for: .touchUpInside)
+        
         updateUI()
     }
     
@@ -91,10 +96,10 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             noItemsLabel.isHidden = true
         }
         
-        subtotalLabel.text = "\(cartViewModel.total)$"
+        subtotalLabel.text = "\(cartViewModel.subTotal)$"
+        discountLabel.text = "-\(cartViewModel.discount)"
         totalLabel.text = "\(cartViewModel.total)$"
         checkoutButton.isEnabled = !cartProducts.isEmpty
-        checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
         reloadTableView()
     }
     
@@ -120,6 +125,8 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func checkoutTapped() {
+        
+        
         showProgressView()
         
         Task {
@@ -138,6 +145,52 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+    }
+    
+    @objc func applyPromoCodeTapped() {
+        // Check if there's a promo code already applied
+        if isPromoCodeApplied {
+            removePromoCode()
+            return
+        }
+        
+        showProgressView()
+        
+        Task {
+            do {
+                try await cartViewModel.applyPromoCode(code: couponText) { [weak self] error in
+                    self?.hideProgressView()
+                    if let error {
+                        self?.showError(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    
+                    DispatchQueue.mainAsyncIfNeeded {
+                        self?.updateUI()
+                        
+                        self?.applyButton.setTitle("Remove", for: .normal)
+                        self?.applyButton.tintColor = .systemRed
+                        self?.couponTextField.isEnabled = false
+                        self?.isPromoCodeApplied = true
+                    }
+                }
+            } catch {
+                hideProgressView()
+                showError(title: "Error Applying Promo Code", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func removePromoCode() {
+        isPromoCodeApplied = false
+        couponTextField.text = ""
+        cartViewModel.discountPercentage = 0
+        applyButton.setTitle("Apply", for: .normal)
+        applyButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        applyButton.tintColor = .label
+        applyButton.isEnabled = false
+        couponTextField.isEnabled = true
+        updateUI()
     }
     
     // MARK: - Keyboard methods
@@ -170,13 +223,18 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func showProgressView() {
-        progressView.startAnimating()
-        view.isUserInteractionEnabled = false
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.startAnimating()
+            self.view.isUserInteractionEnabled = false
+        }
+        
     }
     
     func hideProgressView() {
-        progressView.stopAnimating()
-        view.isUserInteractionEnabled = true
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     deinit {

@@ -23,12 +23,14 @@ class CartViewModel {
         ordersRelay.asObservable()
     }
     
+    var discountPercentage = 0.0
+    
     var currentUserId: String {
         let uid = try? AuthenticationManager.shared.getAuthenticatedUser().uid
         return uid ?? ""
     }
     
-    var total: Double {
+    var subTotal: Double {
         guard !cartProductsRelay.value.isEmpty else {
             return 0.0
         }
@@ -39,6 +41,14 @@ class CartViewModel {
         }
         
         return total
+    }
+    
+    var total: Double {
+        return subTotal * (1 - discountPercentage)
+    }
+    
+    var discount: Double {
+        return subTotal * discountPercentage
     }
     
     func getCart(completion: (@escaping () -> Void) = {}) {
@@ -53,6 +63,19 @@ class CartViewModel {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func applyPromoCode(code: String, completion: @escaping (PromoCodeError?) -> Void) async throws {
+        try await PromoCodesManager.shared.applyPromoCode(code: code) { [weak self] promoCode, error in
+            if let error {
+                // Wrong Promo code
+                completion(error)
+                return
+            }
+            
+            self?.discountPercentage = promoCode?.value ?? 0.0
+            completion(nil)
         }
     }
     
@@ -183,7 +206,7 @@ extension CartViewModel {
     }
     
     func placeOrder(completion: @escaping () -> Void) async throws {
-        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, price: total, date: Date.now)
+        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, price: subTotal, date: Date.now)
         
         Task {
             try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)

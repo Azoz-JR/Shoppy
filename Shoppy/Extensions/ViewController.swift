@@ -17,7 +17,10 @@ extension UIViewController {
     func showError(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        showDetailViewController(alert, sender: self)
+        
+        DispatchQueue.mainAsyncIfNeeded {
+            self.showDetailViewController(alert, sender: self)
+        }
     }
     
     func showAddedSuccessfulyAlert() {
