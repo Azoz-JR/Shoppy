@@ -48,13 +48,4 @@ struct List: Equatable, Codable {
         lhs.id == rhs.id
     }
     
-    func toDictionary() -> [String: Any] {
-        return [
-            "id" : id,
-            "name" : name,
-            "items" : items.map{ $0.toDictionary() },
-            "date" : date
-        ]
-    }
-    
 }

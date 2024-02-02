@@ -19,11 +19,10 @@ extension HomeViewController: HomeControllerPresenter {
     }
     
     func configureCollectionView() {
+        collectionView.register(SmallCategoryCollectionCell.register(), forCellWithReuseIdentifier: SmallCategoryCollectionCell.identifier)
         collectionView.register(SalesCellView.register(), forCellWithReuseIdentifier: SalesCellView.identifier)
         collectionView.register(ProductCell.register(), forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView.register(ProductsCollectionReusableView.register(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProductsCollectionReusableView.identifier)
-        
-        collectionView.contentInset = UIEdgeInsets(top: 50, left: .zero, bottom: .zero, right: .zero)
     }
     
     func itemSelected(at index: IndexPath) {

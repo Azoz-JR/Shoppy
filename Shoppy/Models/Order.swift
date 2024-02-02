@@ -10,14 +10,52 @@ import Foundation
 struct Order: Equatable, Codable {
     let id: String
     let items: [ItemModel]
-    let price: Double
+    let total: Double
+    let subTotal: Double
+    let discount: Double
+    let promoCode: String?
     let date: Date
+    
+    init(id: String, items: [ItemModel], total: Double, subTotal: Double, discount: Double = 0.0, promoCode: String? = nil, date: Date) {
+        self.id = id
+        self.items = items
+        self.total = total
+        self.subTotal = subTotal
+        self.discount = discount
+        self.promoCode = promoCode
+        self.date = date
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
         case items
-        case price
+        case total
+        case subTotal = "sub_total"
+        case discount
+        case promoCode = "promo_code"
         case date
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.items, forKey: .items)
+        try container.encode(self.total, forKey: .total)
+        try container.encode(self.subTotal, forKey: .subTotal)
+        try container.encode(self.discount, forKey: .discount)
+        try container.encodeIfPresent(self.promoCode, forKey: .promoCode)
+        try container.encode(self.date, forKey: .date)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.items = try container.decode([ItemModel].self, forKey: .items)
+        self.total = try container.decode(Double.self, forKey: .total)
+        self.subTotal = try container.decode(Double.self, forKey: .subTotal)
+        self.discount = try container.decode(Double.self, forKey: .discount)
+        self.promoCode = try container.decodeIfPresent(String.self, forKey: .promoCode)
+        self.date = try container.decode(Date.self, forKey: .date)
     }
     
     var image: URL? {
@@ -30,15 +68,6 @@ struct Order: Equatable, Codable {
     
     static func ==(lhs: Order, rhs: Order) -> Bool {
         lhs.id == rhs.id
-    }
-    
-    func toDictionary() -> [String: Any] {
-        return [
-            "id" : id,
-            "items" : items.map{ $0.toDictionary() },
-            "price" : price,
-            "date" : date
-        ]
     }
     
 }

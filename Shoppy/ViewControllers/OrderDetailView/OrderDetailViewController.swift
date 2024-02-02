@@ -44,7 +44,7 @@ class OrderDetailViewController: UIViewController {
         detailsContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         detailsContainer.layer.borderWidth = 1
         
-        orderPriceLabel.text = "\(order.price)$"
+        orderPriceLabel.text = "\(order.total)$"
         orderDateLabel.text = order.formattedDate
     }
     

@@ -27,7 +27,6 @@ final class HomeViewController: UIViewController {
     var lastContentOffset: CGFloat = 0
     
     let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
-    let categoriesCollectionDataSourceAndDelegate = CategoriesCollectionDelegate()
     var products: [ItemModel] = []
     
     var service: Service?
@@ -40,7 +39,6 @@ final class HomeViewController: UIViewController {
         configureCollectionView()
         setUpProgressView()
         configureCollectionDelegateAndDataSource()
-        configureCategoriesCollection()
         bindToViewModel()
         
         showProgressView()

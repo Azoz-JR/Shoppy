@@ -10,9 +10,6 @@ import UIKit
 protocol HomeControllerPresenter: ScrollViewDelegate {
     func itemSelected(at index: IndexPath)
     func setionSelected(at index: IndexPath)
-}
-
-protocol HomeCategoriesPresenter: AnyObject {
     func categorySelected(at index: IndexPath)
 }
 

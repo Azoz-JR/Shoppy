@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -81,11 +80,17 @@
                                                 <color key="titleColor" systemColor="labelColor"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-bQ-tnH">
-                                            <rect key="frame" x="309" y="6" width="74" height="38.333333333333336"/>
-                                            <color key="tintColor" name="navBarTintColor"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlM-bQ-tnH">
+                                            <rect key="frame" x="313" y="8" width="70" height="34.333333333333336"/>
+                                            <color key="tintColor" systemColor="labelColor"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="See all"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="See all" cornerStyle="capsule">
+                                                <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="0.0">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="strokeColor" systemColor="opaqueSeparatorColor"/>
+                                                </backgroundConfiguration>
+                                                <directionalEdgeInsets key="contentInsets" top="5" leading="10" bottom="5" trailing="10"/>
+                                            </buttonConfiguration>
                                         </button>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CAd-gb-xbc">
                                             <rect key="frame" x="0.0" y="50" width="393" height="130"/>
@@ -160,11 +165,17 @@
                                                 <color key="titleColor" systemColor="labelColor"/>
                                             </state>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-V0-Y53">
-                                            <rect key="frame" x="309" y="6" width="74" height="38.333333333333336"/>
-                                            <color key="tintColor" name="navBarTintColor"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-V0-Y53">
+                                            <rect key="frame" x="313" y="8" width="70" height="34.333333333333336"/>
+                                            <color key="tintColor" systemColor="labelColor"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="See all"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="See all" cornerStyle="capsule">
+                                                <backgroundConfiguration key="background" strokeWidth="1" strokeOutset="0.0">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="strokeColor" systemColor="opaqueSeparatorColor"/>
+                                                </backgroundConfiguration>
+                                                <directionalEdgeInsets key="contentInsets" top="5" leading="10" bottom="5" trailing="10"/>
+                                            </buttonConfiguration>
                                         </button>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="miG-6r-SqC">
                                             <rect key="frame" x="0.0" y="50" width="393" height="130"/>
@@ -247,11 +258,11 @@
     </objects>
     <resources>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
-        <namedColor name="navBarTintColor">
-            <color red="0.0" green="0.6470588235294118" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

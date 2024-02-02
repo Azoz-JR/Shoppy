@@ -23,8 +23,6 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     
     var cartViewModel: CartViewModel
     var cartProducts: [ItemModel] = []
-    var couponText: String = ""
-    var isPromoCodeApplied = false
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
@@ -117,16 +115,14 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Handle text changes here
         if let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) {
-            couponText = newText
-            applyButton.isEnabled = !couponText.isEmpty
+            cartViewModel.couponText = newText
+            applyButton.isEnabled = !cartViewModel.couponText.isEmpty
         }
         
         return true
     }
     
     @objc func checkoutTapped() {
-        
-        
         showProgressView()
         
         Task {
@@ -149,7 +145,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     
     @objc func applyPromoCodeTapped() {
         // Check if there's a promo code already applied
-        if isPromoCodeApplied {
+        if cartViewModel.isPromoCodeApplied {
             removePromoCode()
             return
         }
@@ -158,7 +154,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         
         Task {
             do {
-                try await cartViewModel.applyPromoCode(code: couponText) { [weak self] error in
+                try await cartViewModel.applyPromoCode(code: cartViewModel.couponText) { [weak self] error in
                     self?.hideProgressView()
                     if let error {
                         self?.showError(title: "Error", message: error.localizedDescription)
@@ -168,10 +164,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
                     DispatchQueue.mainAsyncIfNeeded {
                         self?.updateUI()
                         
-                        self?.applyButton.setTitle("Remove", for: .normal)
-                        self?.applyButton.tintColor = .systemRed
-                        self?.couponTextField.isEnabled = false
-                        self?.isPromoCodeApplied = true
+                        self?.showRemoveButton()
                     }
                 }
             } catch {
@@ -182,15 +175,25 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func removePromoCode() {
-        isPromoCodeApplied = false
         couponTextField.text = ""
-        cartViewModel.discountPercentage = 0
+        showApplyButton()
+        updateUI()
+    }
+    
+    func showApplyButton() {
         applyButton.setTitle("Apply", for: .normal)
         applyButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         applyButton.tintColor = .label
         applyButton.isEnabled = false
         couponTextField.isEnabled = true
-        updateUI()
+        cartViewModel.isPromoCodeApplied = false
+    }
+    
+    func showRemoveButton() {
+        applyButton.setTitle("Remove", for: .normal)
+        applyButton.tintColor = .systemRed
+        couponTextField.isEnabled = false
+        cartViewModel.isPromoCodeApplied = true
     }
     
     // MARK: - Keyboard methods

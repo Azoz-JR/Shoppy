@@ -75,17 +75,14 @@ extension UserManager {
     }
     
     func addUserOrder(userId: String, order: Order) async throws {
-        let document = userOrdersCollection(userId: userId).document()
-        let documentId = document.documentID
+        let document = userOrdersCollection(userId: userId).document(order.id)
         
-        let data: [String: Any] = [
-            Order.CodingKeys.id.rawValue: documentId,
-            Order.CodingKeys.items.rawValue: order.items.map {$0.toDictionary()},
-            Order.CodingKeys.price.rawValue: order.price,
-            Order.CodingKeys.date.rawValue: Timestamp()
-        ]
+        try document.setData(from: order, merge: false)
         
-        try await document.setData(data, merge: false)
+        // If the user used a promo code add it
+        if let promoCode = PromoCode(rawValue: order.promoCode ?? "")  {
+            try await updateUsedPromoCodes(userId: userId, codes: [promoCode.rawValue: promoCode.value])
+        }
     }
     
     func removeUserOrder(userId: String, orderId: String) async throws {
@@ -117,11 +114,9 @@ extension UserManager {
     }
     
     func updateUserWishList(userId: String, list: List) async throws {
-        let data: [String: Any] = [
-            "list": list.toDictionary()
-        ]
+        let updatedList = UserWishList(list: list)
         
-        try await userWishListDocument(userId: userId).setData(data)
+        try userWishListDocument(userId: userId).setData(from: updatedList)
     }
     
     func updateUserList(userId: String, list: List) async throws {
@@ -141,17 +136,10 @@ extension UserManager {
     }
     
     func addUserList(userId: String, name: String) async throws {
-        let document = userListsCollection(userId: userId).document()
-        let documentId = document.documentID
+        let list = List(id: UUID().uuidString, name: name, items: [], date: Date())
+        let document = userListsCollection(userId: userId).document(list.id)
         
-        let data: [String: Any] = [
-            List.CodingKeys.id.rawValue: documentId,
-            List.CodingKeys.items.rawValue: [],
-            List.CodingKeys.name.rawValue: name,
-            List.CodingKeys.date.rawValue: Timestamp()
-        ]
-        
-        try await document.setData(data, merge: false)
+        try document.setData(from: list, merge: false)
     }
     
     func removeUserList(userId: String, listId: String) async throws {
@@ -199,17 +187,15 @@ extension UserManager {
     
     private func updateUsedPromoCodes(userId: String, codes: [String: Double]) async throws {
         let data: [String: Any] = [
-            "promos": codes
+            "promos": FieldValue.arrayUnion([codes])
         ]
         
-        try await userUsedPromoCodes(userId: userId).setData(data, merge: false)
+        try await userUsedPromoCodes(userId: userId).updateData(data)
     }
     
     func checkPromoCode(userId: String, code: PromoCode) async throws -> Bool {
         guard var usedPromos = try? await userUsedPromoCodes(userId: userId).getDocument(as: WinterSales.self).promos else {
             // User hasn't used any promo codes before
-            let usedPromos: [String: Double] = [code.rawValue: code.value]
-            try await updateUsedPromoCodes(userId: userId, codes: usedPromos)
             
             return true
         }
@@ -219,10 +205,7 @@ extension UserManager {
             // Promo code already used before
             return false
         } else {
-            // Add the promo code to the used promo codes and store them
-            usedPromos[code.rawValue] = code.value
-            try await updateUsedPromoCodes(userId: userId, codes: usedPromos)
-            
+            // Promo code isn't used before
             return true
         }
     }

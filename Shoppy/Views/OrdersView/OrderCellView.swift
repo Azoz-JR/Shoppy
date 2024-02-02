@@ -26,7 +26,7 @@ class OrderCellView: UITableViewCell {
     }
 
     func configure(with order: Order) {
-        orderPriceLabel.text = "\(order.price)$"
+        orderPriceLabel.text = "\(order.total)$"
         orderDateLabel.text = order.formattedDate
     }
     

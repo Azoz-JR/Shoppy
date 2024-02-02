@@ -23,12 +23,13 @@ class CartViewModel {
         ordersRelay.asObservable()
     }
     
-    var discountPercentage = 0.0
-    
     var currentUserId: String {
         let uid = try? AuthenticationManager.shared.getAuthenticatedUser().uid
         return uid ?? ""
     }
+    
+    var couponText: String = ""
+    var isPromoCodeApplied = false
     
     var subTotal: Double {
         guard !cartProductsRelay.value.isEmpty else {
@@ -51,10 +52,27 @@ class CartViewModel {
         return subTotal * discountPercentage
     }
     
+    var discountPercentage: Double {
+        if isPromoCodeApplied {
+            return PromoCode(rawValue: couponText)?.value ?? 0.0
+        } else {
+            return 0.0
+        }
+    }
+    
+    var promoCode: String? {
+        if isPromoCodeApplied {
+            return couponText
+        } else {
+            return nil
+        }
+    }
+    
     func getCart(completion: (@escaping () -> Void) = {}) {
         Task {
             do {
                 let cart = try await UserManager.shared.getUserCart(userId: currentUserId)
+                
                 await MainActor.run {
                     cartProductsRelay.accept(cart)
                     updateCount()
@@ -67,14 +85,14 @@ class CartViewModel {
     }
     
     func applyPromoCode(code: String, completion: @escaping (PromoCodeError?) -> Void) async throws {
-        try await PromoCodesManager.shared.applyPromoCode(code: code) { [weak self] promoCode, error in
+        try await PromoCodesManager.shared.applyPromoCode(code: code) { promoCode, error in
             if let error {
                 // Wrong Promo code
                 completion(error)
                 return
             }
             
-            self?.discountPercentage = promoCode?.value ?? 0.0
+            // Applied Successfuly
             completion(nil)
         }
     }
@@ -161,8 +179,13 @@ class CartViewModel {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: [])
                 
                 getCart()
-            } catch {
                 
+                await MainActor.run {
+                    isPromoCodeApplied = false
+                    couponText = ""
+                }
+            } catch {
+                print("ERROR Clearing the cart: \(error.localizedDescription)")
             }
         }
     }
@@ -188,62 +211,33 @@ extension CartViewModel {
                     ordersRelay.accept(orders)
                 }
             } catch {
-                print("ERROR CREATING List")
-            }
-        }
-    }
-    
-    func removeOrder(order: Order) {
-        Task {
-            do {
-                try await UserManager.shared.removeUserOrder(userId: currentUserId, orderId: order.id)
-                
-                getOrders()
-            } catch {
-                print("ERROR CREATING List")
+                print("ERROR CREATING Order")
             }
         }
     }
     
     func placeOrder(completion: @escaping () -> Void) async throws {
-        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, price: subTotal, date: Date.now)
+        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, total: total, subTotal: subTotal, discount: discount, promoCode: promoCode, date: Date.now)
         
         Task {
-            try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
-            
-            getOrders()
+            do {
+                try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
+                
+                
+                getOrders()
+                
+                await MainActor.run {
+                    completion()
+                }
+            } catch {
+                print(error.localizedDescription)
+                await MainActor.run {
+                    completion()
+                }
+            }
         }
                 
-        await MainActor.run {
-            completion()
-        }
+        
     }
-    
-//    func placeOrder(order: Order, completion: @escaping (Order) -> Void) async throws {
-//        guard let url = URL(string: "https://reqres.in/api/cupcakes") else {
-//            print("Failed to encode order")
-//            return
-//        }
-//        
-//        var request = URLRequest(url: url)
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//        
-//        do {
-//            let encoded = try JSONEncoder().encode(order)
-//            let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
-//            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
-//            
-//            self.addOrder(order: order)
-//            
-//            await MainActor.run {
-//                completion(decodedOrder)
-//            }
-//                          
-//        } catch {
-//            print(error.localizedDescription)
-//            throw error
-//        }
-//    }
     
 }
