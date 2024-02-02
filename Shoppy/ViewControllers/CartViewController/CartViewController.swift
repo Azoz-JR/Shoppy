@@ -129,6 +129,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             do {
                 try await cartViewModel.placeOrder() { [weak self] in
                     self?.cartViewModel.clearCart()
+                    self?.showApplyButton()
                     self?.hideProgressView()
                     
                     self?.showOrederConfirmationMessage()
@@ -162,9 +163,8 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
                     }
                     
                     DispatchQueue.mainAsyncIfNeeded {
-                        self?.updateUI()
-                        
                         self?.showRemoveButton()
+                        self?.updateUI()
                     }
                 }
             } catch {
@@ -185,6 +185,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         applyButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         applyButton.tintColor = .label
         applyButton.isEnabled = false
+        couponTextField.text = ""
         couponTextField.isEnabled = true
         cartViewModel.isPromoCodeApplied = false
     }
