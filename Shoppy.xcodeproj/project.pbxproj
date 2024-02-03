@@ -94,6 +94,8 @@
 		9737E7402B292F4700735A72 /* CartViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */; };
 		973A01CD2B6C876600CD9092 /* SmallCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973A01CB2B6C876600CD9092 /* SmallCategoryCollectionCell.swift */; };
 		973A01CE2B6C876600CD9092 /* SmallCategoryCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973A01CC2B6C876600CD9092 /* SmallCategoryCollectionCell.xib */; };
+		973A01D52B6E75AF00CD9092 /* OrderCheckoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973A01D32B6E75AF00CD9092 /* OrderCheckoutCell.swift */; };
+		973A01D62B6E75AF00CD9092 /* OrderCheckoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973A01D42B6E75AF00CD9092 /* OrderCheckoutCell.xib */; };
 		973CEA482B2796BD00E0487D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 973CEA472B2796BD00E0487D /* Main.storyboard */; };
 		973CEA4D2B27E48100E0487D /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973CEA4C2B27E48100E0487D /* ProductDetailView.swift */; };
 		973CEA522B28D1D900E0487D /* CartCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973CEA502B28D1D900E0487D /* CartCellView.swift */; };
@@ -315,6 +317,8 @@
 		9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+TableView.swift"; sourceTree = "<group>"; };
 		973A01CB2B6C876600CD9092 /* SmallCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		973A01CC2B6C876600CD9092 /* SmallCategoryCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallCategoryCollectionCell.xib; sourceTree = "<group>"; };
+		973A01D32B6E75AF00CD9092 /* OrderCheckoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckoutCell.swift; sourceTree = "<group>"; };
+		973A01D42B6E75AF00CD9092 /* OrderCheckoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCheckoutCell.xib; sourceTree = "<group>"; };
 		973CEA472B2796BD00E0487D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		973CEA4C2B27E48100E0487D /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		973CEA502B28D1D900E0487D /* CartCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCellView.swift; sourceTree = "<group>"; };
@@ -821,6 +825,8 @@
 				972FAC242B3E52CE0017114A /* OrderDetailViewController.xib */,
 				9728F9112B48397A00E5CEA9 /* OrderItemCell.swift */,
 				9728F9122B48397A00E5CEA9 /* OrderItemCell.xib */,
+				973A01D32B6E75AF00CD9092 /* OrderCheckoutCell.swift */,
+				973A01D42B6E75AF00CD9092 /* OrderCheckoutCell.xib */,
 			);
 			path = OrdersView;
 			sourceTree = "<group>";
@@ -1178,6 +1184,7 @@
 				9728F91A2B4B4D6300E5CEA9 /* ProductsCollectionReusableView.xib in Resources */,
 				972FABDB2B3B806B0017114A /* ProfileView.xib in Resources */,
 				9728F8FE2B480BAC00E5CEA9 /* AmazonEmberDuospace_Bd.ttf in Resources */,
+				973A01D62B6E75AF00CD9092 /* OrderCheckoutCell.xib in Resources */,
 				9728F9062B480BAC00E5CEA9 /* AmazonEmber-Md.ttf in Resources */,
 				9728F8FF2B480BAC00E5CEA9 /* AmazonEmber_Bd.ttf in Resources */,
 				9728F90E2B480BAC00E5CEA9 /* AmazonEmber_HeIt.ttf in Resources */,
@@ -1283,6 +1290,7 @@
 				97D612912B471B01000174FE /* ListsSelectionTableViewDelegate.swift in Sources */,
 				972FAC252B3E52CE0017114A /* OrderDetailViewController.swift in Sources */,
 				97AB17932B4F813400522186 /* SearchViewController+TableView.swift in Sources */,
+				973A01D52B6E75AF00CD9092 /* OrderCheckoutCell.swift in Sources */,
 				97868F482B576CD700BFE24B /* UserViewModel.swift in Sources */,
 				9737E73D2B29237000735A72 /* CartViewController.swift in Sources */,
 				97AB17742B4DC1BD00522186 /* ProfileViewController+ScrollView.swift in Sources */,

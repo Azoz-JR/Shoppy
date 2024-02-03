@@ -38,17 +38,18 @@ class OrderDetailViewController: UIViewController {
 
     func configureOrderDetails() {
         orderTableViewDelegate.checkoutDetails = [
-            "Created at: \(order.date.formatted(date: .abbreviated, time: .shortened))",
-            "Subtotal: \(order.subTotal)$",
-            "Discount: -\(order.discount)$",
-            "Total: \(order.total)$"
+            order.formattedDate,
+            "\(order.subTotal)$",
+            "-\(order.discount)$",
+            "\(order.total)$"
         ]
     }
     
     func configuareTableView() {
         tableView.delegate = orderTableViewDelegate
         tableView.dataSource = orderTableViewDelegate
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 230
         
         orderTableViewDelegate.data = order.items
         orderTableViewDelegate.parentController = self
@@ -58,7 +59,7 @@ class OrderDetailViewController: UIViewController {
     
     func registerCell() {
         tableView.register(OrderItemCell.register(), forCellReuseIdentifier: OrderItemCell.identifier)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(OrderCheckoutCell.register(), forCellReuseIdentifier: OrderCheckoutCell.identifier)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

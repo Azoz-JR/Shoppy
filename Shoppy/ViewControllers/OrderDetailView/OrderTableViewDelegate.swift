@@ -8,11 +8,14 @@
 import UIKit
 
 class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
+    var parentController: ScrollViewDelegate?
+
     
     var checkoutDetails: [String] = []
+    let checkoutTitles = ["Created at:", "Subtotal:", "Discount:", "Total:"]
+    
     var data: [ItemModel] = []
     
-    var parentController: ScrollViewDelegate?
     
     func numberOfSections(in tableView: UITableView) -> Int {
         2
@@ -37,10 +40,14 @@ class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = checkoutDetails[indexPath.row]
-            cell.selectionStyle = .none
-            return cell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: OrderCheckoutCell.identifier, for: indexPath) as? OrderCheckoutCell {
+                let title = checkoutTitles[indexPath.row]
+                let value = checkoutDetails[indexPath.row]
+                
+                cell.configure(title: title, value: value)
+                return cell
+            }
+            fatalError("Unable to dequeue OrderCheckoutCell")
         }
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: OrderItemCell.identifier, for: indexPath) as? OrderItemCell {
@@ -51,6 +58,10 @@ class OrderTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSour
             return cell
         }
         fatalError("Unable to deque ListItemCellView")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
