@@ -12,6 +12,8 @@ class ListItemCellView: UITableViewCell {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var containerView: UIView!
     @IBOutlet var addToCartButton: UIButton!
+    @IBOutlet var productColorLabel: UILabel!
+    @IBOutlet var productSizeLabel: UILabel!
     @IBOutlet var productPriceLabel: UILabel!
     @IBOutlet var productCollectionLabel: UILabel!
     @IBOutlet var productNameLabel: UILabel!
@@ -42,9 +44,12 @@ class ListItemCellView: UITableViewCell {
         productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
             self?.activityIndicator.stopAnimating()
         }
+        
         productNameLabel.text = product.title
         productPriceLabel.text = "$\(product.price)"
         productCollectionLabel.text = "By \(product.vendor)"
+        productColorLabel.text = product.color
+        productSizeLabel.text = product.size
     }
     
     func configureImageView() {

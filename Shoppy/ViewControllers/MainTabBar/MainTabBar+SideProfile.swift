@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
     
     func bindToUser() {
         userViewModel.currentUser.subscribe { [weak self] user in
@@ -26,6 +26,7 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     func configureSideProfile() {
         // Add pan gesture recognizer to the swipeable view
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
 
         
@@ -75,6 +76,11 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
             break
         }
         
+    }
+    
+    // Allow other gestures to work simultaneously
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
     
     func nextPageSwipe() {
