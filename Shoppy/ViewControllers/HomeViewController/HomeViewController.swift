@@ -81,11 +81,12 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func refresh() {
-        Task(priority: .background) {
+        Task {
             await homeViewModel.load()
             
             await MainActor.run {
                 self.hideProgressView()
+                self.refreshControl.endRefreshing()
             }
         }
     }

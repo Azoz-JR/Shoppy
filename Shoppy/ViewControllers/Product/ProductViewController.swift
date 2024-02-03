@@ -142,4 +142,5 @@ final class ProductViewController: UIViewController {
         view.backgroundColor = .clear
         navigationController?.navigationBar.backgroundColor = .clear
     }
+    
 }

@@ -9,9 +9,6 @@ import UIKit
 
 class OrderDetailViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var detailsContainer: UIView!
-    @IBOutlet var orderPriceLabel: UILabel!
-    @IBOutlet var orderDateLabel: UILabel!
     
     let orderTableViewDelegate = OrderTableViewDelegate()
     
@@ -40,17 +37,18 @@ class OrderDetailViewController: UIViewController {
 
 
     func configureOrderDetails() {
-        detailsContainer.layer.cornerRadius = 20
-        detailsContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        detailsContainer.layer.borderWidth = 1
-        
-        orderPriceLabel.text = "\(order.total)$"
-        orderDateLabel.text = order.formattedDate
+        orderTableViewDelegate.checkoutDetails = [
+            "Created at: \(order.date.formatted(date: .abbreviated, time: .shortened))",
+            "Subtotal: \(order.subTotal)$",
+            "Discount: -\(order.discount)$",
+            "Total: \(order.total)$"
+        ]
     }
     
     func configuareTableView() {
         tableView.delegate = orderTableViewDelegate
         tableView.dataSource = orderTableViewDelegate
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         
         orderTableViewDelegate.data = order.items
         orderTableViewDelegate.parentController = self
@@ -60,16 +58,19 @@ class OrderDetailViewController: UIViewController {
     
     func registerCell() {
         tableView.register(OrderItemCell.register(), forCellReuseIdentifier: OrderItemCell.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        showNavBar()
+        navigationController?.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.tabBarController?.tabBar.isHidden = true
+
     }
 
 }

@@ -28,22 +28,22 @@ extension OrderDetailViewController: ScrollViewDelegate {
     }
     
     func hideNavBar() {
-        guard navBarVisible else { return }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.navigationController?.navigationBar.isHidden = true
-        }
-        
-        navBarVisible = false
+//        guard navBarVisible else { return }
+//        
+//        UIView.animate(withDuration: 0.3) {
+//            self.navigationController?.navigationBar.isHidden = true
+//        }
+//        
+//        navBarVisible = false
     }
     
     func showNavBar() {
-        guard !navBarVisible else { return }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.navigationController?.navigationBar.isHidden = false
-        }
-        
-        navBarVisible = true
+//        guard !navBarVisible else { return }
+//        
+//        UIView.animate(withDuration: 0.3) {
+//            self.navigationController?.navigationBar.isHidden = false
+//        }
+//        
+//        navBarVisible = true
     }
 }

@@ -189,8 +189,6 @@
 		97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97B390072B1F845B00EB90EA /* LaunchScreen.storyboard */; };
 		97B390112B1F857000EB90EA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B390102B1F857000EB90EA /* MainTabBarController.swift */; };
 		97B390132B1F92BB00EB90EA /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B390122B1F92BB00EB90EA /* Observable.swift */; };
-		97B441362B59A68B0011C1F8 /* OrderItemsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B441342B59A68B0011C1F8 /* OrderItemsTableCell.swift */; };
-		97B441372B59A68C0011C1F8 /* OrderItemsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B441352B59A68B0011C1F8 /* OrderItemsTableCell.xib */; };
 		97B441392B5AA85B0011C1F8 /* SideProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B441382B5AA85B0011C1F8 /* SideProfile.swift */; };
 		97B4413B2B5AA88F0011C1F8 /* SideProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B4413A2B5AA88E0011C1F8 /* SideProfileView.xib */; };
 		97C489C52B4B523C00D0E9D7 /* HomeCollectionDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C489C42B4B523C00D0E9D7 /* HomeCollectionDataSourceAndDelegate.swift */; };
@@ -406,8 +404,6 @@
 		97B3900A2B1F845B00EB90EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B390102B1F857000EB90EA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		97B390122B1F92BB00EB90EA /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		97B441342B59A68B0011C1F8 /* OrderItemsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemsTableCell.swift; sourceTree = "<group>"; };
-		97B441352B59A68B0011C1F8 /* OrderItemsTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderItemsTableCell.xib; sourceTree = "<group>"; };
 		97B441382B5AA85B0011C1F8 /* SideProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideProfile.swift; sourceTree = "<group>"; };
 		97B4413A2B5AA88E0011C1F8 /* SideProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideProfileView.xib; sourceTree = "<group>"; };
 		97C489C42B4B523C00D0E9D7 /* HomeCollectionDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionDataSourceAndDelegate.swift; sourceTree = "<group>"; };
@@ -825,8 +821,6 @@
 				972FAC242B3E52CE0017114A /* OrderDetailViewController.xib */,
 				9728F9112B48397A00E5CEA9 /* OrderItemCell.swift */,
 				9728F9122B48397A00E5CEA9 /* OrderItemCell.xib */,
-				97B441342B59A68B0011C1F8 /* OrderItemsTableCell.swift */,
-				97B441352B59A68B0011C1F8 /* OrderItemsTableCell.xib */,
 			);
 			path = OrdersView;
 			sourceTree = "<group>";
@@ -1155,7 +1149,6 @@
 				9728F8EA2B480BAC00E5CEA9 /* AmazonEmberCd_Bd.ttf in Resources */,
 				9790F8FB2B3FC0FA00597A50 /* ListsViewController.xib in Resources */,
 				974DF5CE2B34848500786FC2 /* HomeView.xib in Resources */,
-				97B441372B59A68C0011C1F8 /* OrderItemsTableCell.xib in Resources */,
 				97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */,
 				9728F9032B480BAC00E5CEA9 /* AmazonEmberCd_LtIt.ttf in Resources */,
 				9728F9012B480BAC00E5CEA9 /* AmazonEmber_Th.ttf in Resources */,
@@ -1355,7 +1348,6 @@
 				97C489DA2B4C7ED700D0E9D7 /* SearchTableViewCell.swift in Sources */,
 				970EECE02B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift in Sources */,
 				9728F9192B4B4D6300E5CEA9 /* ProductsCollectionReusableView.swift in Sources */,
-				97B441362B59A68B0011C1F8 /* OrderItemsTableCell.swift in Sources */,
 				974DF5DA2B34AB8F00786FC2 /* HomeViewController+ProductsCollection.swift in Sources */,
 				9758B9F62B211BBD00F4E8F4 /* ProfileViewController.swift in Sources */,
 				97068DFC2B6809450019BD0E /* DBUser.swift in Sources */,
