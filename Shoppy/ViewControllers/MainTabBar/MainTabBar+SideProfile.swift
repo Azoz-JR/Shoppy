@@ -40,10 +40,8 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
-        // Check if the current view controller is the root view controller of its navigation controller
-        if let currentViewController = selectedViewController as? UINavigationController,
-           currentViewController.viewControllers.count > 1 {
-            // If it's not the root view controller, prevent the side view from responding to the swipe gesture
+        // Disable the pan gesture if any detail view is active in the tab bar
+        if hasDetailViewController() {
             return
         }
         
@@ -80,7 +78,7 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     
     // Allow other gestures to work simultaneously
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        true
+        return hasDetailViewController()
     }
     
     func nextPageSwipe() {
@@ -141,14 +139,12 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
     
     func hasDetailViewController() -> Bool {
         // Check if any detail view controller is active in the tab bar
-        for viewController in viewControllers ?? [] {
-            if let navController = viewController as? UINavigationController {
-                let topViewController = navController.viewControllers.count
-                print(topViewController)
-                return true
-            }
+        guard let currentViewController = selectedViewController as? UINavigationController,
+              currentViewController.viewControllers.count > 1 else {
+            return false
         }
-        return false
+        
+        return true
     }
     
 
