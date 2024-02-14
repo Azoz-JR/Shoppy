@@ -203,16 +203,11 @@ class CartViewModel {
 
 // MARK: - Orders Methods
 extension CartViewModel {
-    func getOrders() {
-        Task {
-            do {
-                let orders = try await UserManager.shared.getAllUserOrders(userId: currentUserId)
-                await MainActor.run {
-                    ordersRelay.accept(orders)
-                }
-            } catch {
-                print("ERROR CREATING Order")
-            }
+    func getOrders() async throws {
+        let orders = try await UserManager.shared.getAllUserOrders(userId: currentUserId)
+        
+        await MainActor.run {
+            ordersRelay.accept(orders)
         }
     }
     
@@ -224,7 +219,7 @@ extension CartViewModel {
                 try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
                 
                 
-                getOrders()
+                try await getOrders()
                 
                 await MainActor.run {
                     completion()

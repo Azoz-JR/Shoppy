@@ -17,6 +17,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
     var wishListViewModel: WishListViewModel
     private let disposeBag = DisposeBag()
     let listsTableViewDelegate = ListsTableViewDelegate()
+    private var refreshControl = UIRefreshControl()
     
     init(cartViewModel: CartViewModel, listsViewModel: ListsViewModel, wishListViewModel: WishListViewModel) {
         self.cartViewModel = cartViewModel
@@ -35,10 +36,29 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         
         title = "Your Lists"
         
-        listsViewModel.getLists()
+        //Refresh View
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .myGreen
+        tableView.refreshControl = refreshControl
+        
+        refresh()
         bindtoListsViewModel()
         configNavigationBar()
         configuareTableView()
+    }
+    
+    @objc func refresh() {
+        Task {
+            do {
+                try await listsViewModel.getLists()
+                
+                endRefreshing()
+            } catch {
+                    endRefreshing()
+                    show(error: error)
+            }
+        }
+        
     }
     
     func bindtoListsViewModel() {
@@ -98,6 +118,12 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         listsTableViewDelegate.data.remove(at: index.row)
         tableView.deleteRows(at: [index], with: .fade)
         listsViewModel.delete(list: list)
+    }
+    
+    func endRefreshing() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.refreshControl.endRefreshing()
+        }
     }
 
 }

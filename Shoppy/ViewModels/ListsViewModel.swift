@@ -22,20 +22,15 @@ final class ListsViewModel {
     }
     
     
-    func getLists(completion: (@escaping () -> Void) = {}) {
-        Task {
-            do {
-                let lists = try await UserManager.shared.getAllUserLists(userId: currentUserId)
-                await MainActor.run {
-                    listsRelay.accept(lists)
-                    completion()
-                }
-            } catch {
-                print("ERROR Fetching Lists: \(error.localizedDescription)")
-            }
+    func getLists() async throws {
+        let lists = try await UserManager.shared.getAllUserLists(userId: currentUserId)
+        
+        await MainActor.run {
+            listsRelay.accept(lists)
         }
+        
     }
-    
+
     func createList(name: String, completion: @escaping (String) -> Void) {
         guard !contains(name: name) else {
             completion("\(name) list already exists. Try another name")
@@ -46,7 +41,8 @@ final class ListsViewModel {
             do {
                 try await UserManager.shared.addUserList(userId: currentUserId, name: name)
                 completion("\(name) cretaed successfully")
-                getLists()
+                
+                try await getLists()
             } catch {
                 print("ERROR CREATING List")
             }
@@ -58,7 +54,7 @@ final class ListsViewModel {
             do {
                 try await UserManager.shared.removeUserList(userId: currentUserId, listId: list.id)
                 
-                getLists()
+                try await getLists()
             } catch {
                 print("ERROR DELETING List: \(error.localizedDescription)")
             }
@@ -73,7 +69,7 @@ final class ListsViewModel {
             do {
                 try await UserManager.shared.updateUserList(userId: currentUserId, list: list)
                 
-                getLists()
+                try await getLists()
             } catch {
                 print("ERROR Adding an item to a list \(error.localizedDescription)")
             }
@@ -91,7 +87,7 @@ final class ListsViewModel {
                 print(list.name)
                 print(list.id)
                 
-                getLists()
+                try await getLists()
             } catch {
                 print("ERROR removing an item from a list \(error.localizedDescription)")
             }

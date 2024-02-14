@@ -33,10 +33,20 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listsViewModel.getLists()
+        refresh()
         configNavigationBar()
         bindToListsViewModel()
         configuareTableView()
+    }
+    
+    func refresh() {
+        Task {
+            do {
+                try await listsViewModel.getLists()
+            } catch {
+                show(error: error)
+            }
+        }
     }
     
     func configNavigationBar() {

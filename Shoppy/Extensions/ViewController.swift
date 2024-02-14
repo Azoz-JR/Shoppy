@@ -11,7 +11,11 @@ extension UIViewController {
     func show(error: Error) {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        showDetailViewController(alert, sender: self)
+        
+        DispatchQueue.mainAsyncIfNeeded {
+            self.showDetailViewController(alert, sender: self)
+        }
+        
     }
     
     func showError(title: String, message: String) {

@@ -14,17 +14,36 @@ class OrdersViewController: UIViewController, OrdersControllerPresenter {
     let ordersTableViewDelegate = OrdersTableViewDelegate()
     var cartViewModel: CartViewModel?
     let disposeBag = DisposeBag()
+    private var refreshControl = UIRefreshControl()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Your Orders"
+        
+        //Refresh View
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .myGreen
+        tableView.refreshControl = refreshControl
 
         bindToOrders()
         configuareTableView()
         
-        cartViewModel?.getOrders()
+        refresh()
+    }
+    
+    @objc func refresh() {
+        Task {
+            do {
+                try await cartViewModel?.getOrders()
+                
+                endRefreshing()
+            } catch {
+                endRefreshing()
+                show(error: error)
+            }
+        }
     }
     
     func bindToOrders() {
@@ -68,6 +87,12 @@ class OrdersViewController: UIViewController, OrdersControllerPresenter {
         vc.title = "Order Items"
         
         show(vc, sender: self)
+    }
+    
+    func endRefreshing() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.refreshControl.endRefreshing()
+        }
     }
 
 }

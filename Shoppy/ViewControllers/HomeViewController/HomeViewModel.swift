@@ -44,7 +44,6 @@ class HomeViewModel {
                 self.productsSubject.onError(error)
                 isRetryNeeded = true
             }
-            print(error.localizedDescription)
         }
     }
     

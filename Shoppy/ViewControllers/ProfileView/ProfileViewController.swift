@@ -120,9 +120,24 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     }
     
     @objc func refresh() {
-        cartViewModel?.getOrders()
-        listsViewModel?.getLists() { [weak self] in
-            self?.refreshControl.endRefreshing()
+        
+        Task {
+            do {
+                try await cartViewModel?.getOrders()
+                try await listsViewModel?.getLists()
+                
+                endRefreshing()
+                
+            } catch {
+                endRefreshing()
+                show(error: error)
+            }
+        }
+    }
+    
+    func endRefreshing() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.refreshControl.endRefreshing()
         }
     }
     
