@@ -39,6 +39,7 @@
                                 </backgroundConfiguration>
                                 <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
                                 <directionalEdgeInsets key="contentInsets" top="5" leading="10" bottom="5" trailing="10"/>
+                                <color key="baseForegroundColor" systemColor="labelColor"/>
                             </buttonConfiguration>
                         </button>
                     </subviews>
@@ -67,6 +68,9 @@
         </collectionReusableView>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

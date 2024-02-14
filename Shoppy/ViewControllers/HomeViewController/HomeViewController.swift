@@ -82,12 +82,22 @@ final class HomeViewController: UIViewController {
     
     @objc func refresh() {
         Task {
+            checkIfRetryNeeded()
+            
             await homeViewModel.load()
             
             await MainActor.run {
                 self.hideProgressView()
                 self.refreshControl.endRefreshing()
             }
+        }
+    }
+    
+    func checkIfRetryNeeded() {
+        if homeViewModel.isRetryNeeded {
+            homeViewModel.resetBehaviorSubject()
+            
+            bindToViewModel()
         }
     }
     
