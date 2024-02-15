@@ -29,15 +29,16 @@ class ListItemsTableViewDelegate: NSObject, UITableViewDelegate, UITableViewData
                 guard let cartViewModel = self?.cartViewModel else {
                     return
                 }
-                cartViewModel.addProduct(product: item) {
-                    self?.parentController?.showAlert()
+                
+                cartViewModel.addProduct(product: item) { error in
+                    self?.parentController?.showAlert(error: error)
                 }
                 
             }
             
             return cell
         }
-        fatalError("Unable to deque ListItemCellView")
+        fatalError("Unable to dequeue ListItemCellView")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

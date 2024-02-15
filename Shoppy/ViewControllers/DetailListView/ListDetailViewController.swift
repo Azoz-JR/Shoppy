@@ -43,7 +43,12 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
         navigationItem.rightBarButtonItem?.tintColor = .systemRed
     }
     
-    func showAlert() {
+    func showAlert(error: Error?) {
+        if let error {
+            show(error: error)
+            return
+        }
+        
         showAddedSuccessfulyAlert()
     }
     

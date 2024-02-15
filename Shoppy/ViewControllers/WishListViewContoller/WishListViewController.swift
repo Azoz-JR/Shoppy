@@ -57,8 +57,12 @@ class WishListViewController: UIViewController {
     }
     
     @objc func refresh() {
-        viewModel.getWishList() { [weak self] in
+        viewModel.getWishList() { [weak self] error in
             self?.refreshControl?.endRefreshing()
+            
+            if let error {
+                self?.show(error: error)
+            }
         }
         
     }

@@ -20,6 +20,12 @@ extension ProfileViewController {
             self.updateLists()
         }
         .disposed(by: disposeBag)
+        
+        
+        listsViewModel?.error.subscribe(onNext: { [weak self] error in
+            self?.show(error: error)
+        })
+        .disposed(by: disposeBag)
     }
     
     func configureListsCollection() {

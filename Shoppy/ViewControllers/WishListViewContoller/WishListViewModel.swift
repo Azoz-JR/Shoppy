@@ -25,17 +25,17 @@ class WishListViewModel {
     }
     
     
-    func getWishList(completion: (@escaping () -> Void) = {}) {
+    func getWishList(completion: ((Error?) -> Void)? = nil) {
         Task {
             do {
                 let wishList = try await UserManager.shared.getUserWishList(userId: currentUserId)
                 await MainActor.run {
                     wishListRelay.accept(wishList)
-                    completion()
+                    completion?(nil)
                 }
                 
             } catch {
-                print("ERROR CREATING List")
+                completion?(error)
             }
         }
     }

@@ -16,6 +16,11 @@ final class ListsViewModel {
         listsRelay.asObservable()
     }
     
+    private var errorSubject = PublishSubject<Error>()
+    var error: Observable<Error> {
+        errorSubject.asObservable()
+    }
+    
     var currentUserId: String {
         let uid =  try? AuthenticationManager.shared.getAuthenticatedUser().uid
         return uid ?? ""
@@ -44,7 +49,7 @@ final class ListsViewModel {
                 
                 try await getLists()
             } catch {
-                print("ERROR CREATING List")
+                errorSubject.onNext(error)
             }
         }
     }
@@ -56,7 +61,7 @@ final class ListsViewModel {
                 
                 try await getLists()
             } catch {
-                print("ERROR DELETING List: \(error.localizedDescription)")
+                errorSubject.onNext(error)
             }
         }
     }
@@ -71,7 +76,7 @@ final class ListsViewModel {
                 
                 try await getLists()
             } catch {
-                print("ERROR Adding an item to a list \(error.localizedDescription)")
+                errorSubject.onNext(error)
             }
         }
         
@@ -84,12 +89,10 @@ final class ListsViewModel {
             
             do {
                 try await UserManager.shared.updateUserList(userId: currentUserId, list: tempList)
-                print(list.name)
-                print(list.id)
                 
                 try await getLists()
             } catch {
-                print("ERROR removing an item from a list \(error.localizedDescription)")
+                errorSubject.onNext(error)
             }
         }
     }

@@ -77,6 +77,12 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
             }
         }
         .disposed(by: disposeBag)
+        
+        
+        listsViewModel.error.subscribe(onNext: { [weak self] error in
+            self?.show(error: error)
+        })
+        .disposed(by: disposeBag)
     }
     
     @objc func addListTapped() {

@@ -126,7 +126,12 @@ final class ProductViewController: UIViewController {
         product.selectColor(color: selectedColor.accessibilityName)
         product.selectSize(size: productView.selectedSize)
         
-        cartViewModel.addProduct(product: product) { [weak self] in
+        cartViewModel.addProduct(product: product) { [weak self] error in
+            if let error {
+                self?.show(error: error)
+                return
+            }
+            
             self?.showAddedSuccessfulyAlert()
         }
         

@@ -58,7 +58,7 @@ final class ProductsAPI {
     
     private func handleResults(data: Data, response: URLResponse) throws -> [Product] {
         guard let response = response as? HTTPURLResponse,
-            response.statusCode >= 200 && response.statusCode < 300 else {
+              response.statusCode >= 200 && response.statusCode < 300 else {
             throw URLError(.badServerResponse)
         }
         
@@ -69,43 +69,7 @@ final class ProductsAPI {
             let products = results.products
             return products
         } catch {
-            print("ERROR DOWNLOADING PRODUCTS: \(error.localizedDescription)")
             throw error
         }
     }
-    
-//    func loadData(url: URL, completion: @escaping (Result<[Product], Error>) -> Void ) {
-//        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { [weak self] data, response, error in
-//            if let result = self?.handleResults(data: data, response: response, error: error) {
-//                completion(result)
-//            }
-//        }
-//        task.resume()
-//    }
-    
-//    func handleResults(data: Data?, response: URLResponse?, error: Error?) -> Result<[Product], Error> {
-//        if let error = error {
-//            return .failure(error)
-//        }
-//        
-//        guard
-//            let data = data,
-//            let response = response as? HTTPURLResponse,
-//            response.statusCode >= 200 && response.statusCode < 300 else {
-//            return .failure(URLError(.badServerResponse))
-//        }
-//        
-//        do {
-//            let decoder = JSONDecoder()
-//            decoder.dateDecodingStrategy = .iso8601
-//            let results = try decoder.decode(Products.self, from: data)
-//            let products = results.products
-//            return .success(products)
-//        } catch {
-//            print("ERROR DOWNLOADING PRODUCTS: \(error.localizedDescription)")
-//            return .failure(error)
-//        }
-//        
-//    }
-    
 }

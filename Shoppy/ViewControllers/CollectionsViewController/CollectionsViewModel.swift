@@ -25,7 +25,6 @@ class CollectionsViewModel {
             await MainActor.run {
                 self.error.value = error
             }
-            print(error.localizedDescription)
         }
     }
     

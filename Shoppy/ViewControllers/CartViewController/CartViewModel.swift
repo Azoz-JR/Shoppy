@@ -11,10 +11,16 @@ import RxRelay
 
 
 class CartViewModel {
-    var cartProductsRelay = BehaviorRelay<[ItemModel]>(value: [])
+    private let cartProductsRelay = BehaviorRelay<[ItemModel]>(value: [])
     var cartProducts: Observable<[ItemModel]> {
         cartProductsRelay.asObservable()
     }
+    
+    private let errorSubject = PublishSubject<Error>()
+    var error: Observable<Error> {
+        errorSubject.asObservable()
+    }
+    
     
     var cartCount: MyObservable<Int> = MyObservable(0)
     
@@ -68,7 +74,7 @@ class CartViewModel {
         }
     }
     
-    func getCart(completion: (@escaping () -> Void) = {}) {
+    func getCart(completion: (() -> Void)? = nil) {
         Task {
             do {
                 let cart = try await UserManager.shared.getUserCart(userId: currentUserId)
@@ -76,10 +82,11 @@ class CartViewModel {
                 await MainActor.run {
                     cartProductsRelay.accept(cart)
                     updateCount()
-                    completion()
+                    completion?()
                 }
+                
             } catch {
-                print(error.localizedDescription)
+                errorSubject.onNext(error)
             }
         }
     }
@@ -97,18 +104,9 @@ class CartViewModel {
         }
     }
     
-    func addProduct(product: ItemModel, completion: @escaping () -> Void) {
+    func addProduct(product: ItemModel, completion: @escaping (Error?) -> Void) {
         Task {
-            var cart = self.cartProductsRelay.value
-            
-            if !cart.contains(product) {
-                cart.insert(product, at: 0)
-                cart[0].increaseCount()
-            } else {
-                if let index = cart.firstIndex(of: product) {
-                    cart[index].increaseCount()
-                }
-            }
+            var cart = self.insertProduct(product: product)
             
             do {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
@@ -116,30 +114,35 @@ class CartViewModel {
                 getCart()
                 
                 await MainActor.run {
-                    completion()
+                    completion(nil)
                 }
             } catch {
-                print(error.localizedDescription)
                 await MainActor.run {
-                    completion()
+                    completion(error)
                 }
             }
         }
         
     }
     
-    func decreaseProduct(product: ItemModel, completion: @escaping () -> Void) {
-        Task {
-            var cart = self.cartProductsRelay.value
-            
-            if let index =  cart.firstIndex(of: product) {
-                
-                if cart[index].count > 1 {
-                    cart[index].decreaseCount()
-                } else {
-                    cart.remove(at: index)
-                }
+    private func insertProduct(product: ItemModel) -> [ItemModel] {
+        var cart = self.cartProductsRelay.value
+        
+        if !cart.contains(product) {
+            cart.insert(product, at: 0)
+            cart[0].increaseCount()
+        } else {
+            if let index = cart.firstIndex(of: product) {
+                cart[index].increaseCount()
             }
+        }
+        
+        return cart
+    }
+    
+    func decreaseProduct(product: ItemModel, completion: @escaping (Error?) -> Void) {
+        Task {
+            var cart = self.removeProduct(product: product)
             
             do {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
@@ -147,15 +150,29 @@ class CartViewModel {
                 getCart()
                 
                 await MainActor.run {
-                    completion()
+                    completion(nil)
                 }
             } catch {
-                print(error.localizedDescription)
                 await MainActor.run {
-                    completion()
+                    completion(error)
                 }
             }
         }
+    }
+    
+    private func removeProduct(product: ItemModel) -> [ItemModel] {
+        var cart = self.cartProductsRelay.value
+        
+        if let index =  cart.firstIndex(of: product) {
+            
+            if cart[index].count > 1 {
+                cart[index].decreaseCount()
+            } else {
+                cart.remove(at: index)
+            }
+        }
+        
+        return cart
     }
     
     func removeProduct(at index: Int) {
@@ -185,7 +202,7 @@ class CartViewModel {
                     couponText = ""
                 }
             } catch {
-                print("ERROR Clearing the cart: \(error.localizedDescription)")
+                errorSubject.onNext(error)
             }
         }
     }
@@ -211,28 +228,12 @@ extension CartViewModel {
         }
     }
     
-    func placeOrder(completion: @escaping () -> Void) async throws {
+    func placeOrder() async throws {
         let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, total: total, subTotal: subTotal, discount: discount, promoCode: promoCode, date: Date.now)
         
-        Task {
-            do {
-                try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
-                
-                
-                try await getOrders()
-                
-                await MainActor.run {
-                    completion()
-                }
-            } catch {
-                print(error.localizedDescription)
-                await MainActor.run {
-                    completion()
-                }
-            }
-        }
-                
+        try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
         
+        try await getOrders()
     }
     
 }

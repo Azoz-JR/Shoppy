@@ -127,8 +127,8 @@ class AuthenticationViewController: UIViewController {
                 let user = DBUser(auth: result.auth, firstName: tokens.name)
                 try await UserManager.shared.createNewUser(user: user)
             } catch {
-                print(error.localizedDescription)
                 hideProgressView()
+                show(error: error)
             }
         }
     }
@@ -146,8 +146,8 @@ class AuthenticationViewController: UIViewController {
                 
                 hideProgressView()
             } catch {
-                print(error.localizedDescription)
                 hideProgressView()
+                show(error: error)
             }
         }
     }

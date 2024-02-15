@@ -47,7 +47,6 @@ final class UserViewModel {
                 }
                 
             } catch {
-                print("ERROR Uploading profile picture: \(error.localizedDescription)")
                 await MainActor.run {
                     completion(error)
                 }

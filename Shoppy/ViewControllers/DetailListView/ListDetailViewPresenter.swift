@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListDetailViewPresenter {
-    func showAlert()
+    func showAlert(error: Error?)
     func itemSelected(at index: IndexPath)
     func itemDeleted(at index: IndexPath)
 }

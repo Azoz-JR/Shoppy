@@ -140,8 +140,8 @@ class CreateAccountViewController: UIViewController {
                 hideProgressView()
                 dismiss(animated: true)
             } catch {
-                print(error.localizedDescription)
                 hideProgressView()
+                show(error: error)
             }
         }
     }

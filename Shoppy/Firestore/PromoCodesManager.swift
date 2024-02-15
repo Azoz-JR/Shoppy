@@ -35,7 +35,6 @@ class PromoCodesManager {
         
         guard let _ = promos[code], let promoCode = PromoCode(rawValue: code) else {
             // Wrong Promo Code
-            print(promos, code)
             completion(nil, PromoCodeError.wrongPromoCode)
             return
         }

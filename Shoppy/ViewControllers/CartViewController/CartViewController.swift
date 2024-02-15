@@ -110,6 +110,13 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             self.updateUI()
         }
         .disposed(by: disposeBag)
+        
+        
+        cartViewModel.error.subscribe { [weak self] error in
+            self?.show(error: error)
+        }
+        .disposed(by: disposeBag)
+
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -127,18 +134,16 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         
         Task {
             do {
-                try await cartViewModel.placeOrder() { [weak self] in
-                    self?.cartViewModel.clearCart()
-                    self?.showApplyButton()
-                    self?.hideProgressView()
-                    
-                    self?.showOrederConfirmationMessage()
-                }
+                try await cartViewModel.placeOrder()
+                
+                cartViewModel.clearCart()
+                showApplyButton()
+                hideProgressView()
+                showOrederConfirmationMessage()
                 
             } catch {
-                print(error.localizedDescription)
-                showError(title: "Checkout failed", message: error.localizedDescription)
                 hideProgressView()
+                showError(title: "Checkout failed", message: error.localizedDescription)
             }
         }
         
@@ -197,7 +202,30 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         cartViewModel.isPromoCodeApplied = true
     }
     
-    // MARK: - Keyboard methods
+    func showProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.startAnimating()
+            self.view.isUserInteractionEnabled = false
+        }
+        
+    }
+    
+    func hideProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+
+// MARK: - Keyboard methods
+extension CartViewController {
     func configureNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -225,24 +253,4 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    func showProgressView() {
-        DispatchQueue.mainAsyncIfNeeded {
-            self.progressView.startAnimating()
-            self.view.isUserInteractionEnabled = false
-        }
-        
-    }
-    
-    func hideProgressView() {
-        DispatchQueue.mainAsyncIfNeeded {
-            self.progressView.stopAnimating()
-            self.view.isUserInteractionEnabled = true
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
 }
