@@ -202,7 +202,7 @@ extension UserManager {
     }
     
     func checkPromoCode(userId: String, code: PromoCode) async throws -> Bool {
-        guard var usedPromos = try? await userUsedPromoCodes(userId: userId).getDocument(as: WinterSales.self).promos else {
+        guard let usedPromos = try? await userUsedPromoCodes(userId: userId).getDocument(as: WinterSales.self).promos else {
             // User hasn't used any promo codes before
             let usedPromos: [String: Double] = [code.rawValue: code.value]
             try await addUserPromoCode(userId: userId, codes: usedPromos)

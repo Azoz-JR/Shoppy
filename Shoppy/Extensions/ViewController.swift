@@ -42,12 +42,6 @@ extension UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = bool
     }
     
-    func showOrederConfirmationMessage() {
-        let alert = UIAlertController(title: "Thank you!", message: "Your order is submitted successfully!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alert, animated: true)
-    }
-    
     func animateTabTransition(to index: Int) {
         if let tabBarController = self.tabBarController,
            let fromView = tabBarController.selectedViewController?.view,

@@ -185,6 +185,8 @@
 		97AB18272B5575D100522186 /* AuthProviderOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB18262B5575D100522186 /* AuthProviderOption.swift */; };
 		97AB18292B55767600522186 /* GoogleSignInResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB18282B55767600522186 /* GoogleSignInResultModel.swift */; };
 		97AB182B2B55782C00522186 /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB182A2B55782C00522186 /* SignInGoogleHelper.swift */; };
+		97B1C1172B82DB0C002D9F08 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */; };
+		97B1C1182B82DB0C002D9F08 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */; };
 		97B38FFD2B1F845900EB90EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFC2B1F845900EB90EA /* AppDelegate.swift */; };
 		97B38FFF2B1F845900EB90EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */; };
 		97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B390052B1F845B00EB90EA /* Assets.xcassets */; };
@@ -400,6 +402,8 @@
 		97AB18262B5575D100522186 /* AuthProviderOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderOption.swift; sourceTree = "<group>"; };
 		97AB18282B55767600522186 /* GoogleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInResultModel.swift; sourceTree = "<group>"; };
 		97AB182A2B55782C00522186 /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
+		97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
 		97B38FF92B1F845900EB90EA /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B38FFC2B1F845900EB90EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -645,6 +649,8 @@
 				9737E73B2B29237000735A72 /* CartViewController.swift */,
 				97AB177D2B4F224900522186 /* CartViewModel.swift */,
 				9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */,
+				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
+				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
 			);
 			path = CartViewController;
 			sourceTree = "<group>";
@@ -1204,6 +1210,7 @@
 				97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */,
 				97AB17952B4F846200522186 /* CollectionsView.xib in Resources */,
 				97AB17972B4F869200522186 /* CollectionView.xib in Resources */,
+				97B1C1182B82DB0C002D9F08 /* CheckoutViewController.xib in Resources */,
 				97A877912B55B0CF0095F83E /* AuthenticationViewController.xib in Resources */,
 				9728F8F12B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf in Resources */,
 				97068E072B6AB18A0019BD0E /* SalesCellView.xib in Resources */,
@@ -1278,6 +1285,7 @@
 				974DF5E92B350F1300786FC2 /* CollectionViewController+Collection.swift in Sources */,
 				97AB18212B55751500522186 /* AuthenticationManager.swift in Sources */,
 				9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift in Sources */,
+				97B1C1172B82DB0C002D9F08 /* CheckoutViewController.swift in Sources */,
 				97068E0D2B6B12A10019BD0E /* PromoCodesManager.swift in Sources */,
 				974DF5C72B345F5300786FC2 /* ProductsCollectionDataSourceAndDelegate.swift in Sources */,
 				974DF5DF2B34B44700786FC2 /* CollectionsDataSourceAndDelegate.swift in Sources */,
