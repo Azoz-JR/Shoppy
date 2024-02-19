@@ -102,7 +102,7 @@
                             </constraints>
                             <color key="tintColor" name="myGreen"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Checkout">
+                            <buttonConfiguration key="configuration" style="filled" title="Proceed to Buy">
                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </buttonConfiguration>
                         </button>

@@ -106,7 +106,7 @@ class CartViewModel {
     
     func addProduct(product: ItemModel, completion: @escaping (Error?) -> Void) {
         Task {
-            var cart = self.insertProduct(product: product)
+            let cart = self.insertProduct(product: product)
             
             do {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)
@@ -142,7 +142,7 @@ class CartViewModel {
     
     func decreaseProduct(product: ItemModel, completion: @escaping (Error?) -> Void) {
         Task {
-            var cart = self.removeProduct(product: product)
+            let cart = self.removeProduct(product: product)
             
             do {
                 try await UserManager.shared.updateUserCart(userId: currentUserId, cart: cart)

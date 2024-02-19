@@ -67,7 +67,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         refreshControl.tintColor = .myGreen
         tableView.refreshControl = refreshControl
         
-        checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
+        checkoutButton.addTarget(self, action: #selector(proceedTapped), for: .touchUpInside)
         applyButton.addTarget(self, action: #selector(applyPromoCodeTapped), for: .touchUpInside)
         
         updateUI()
@@ -116,6 +116,14 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             self?.show(error: error)
         }
         .disposed(by: disposeBag)
+        
+        cartViewModel.cartCount.addObserver { [weak self] count in
+            guard let count else {
+                return
+            }
+            
+            self?.updateCheckoutButton(count: count)
+        }
 
     }
     
@@ -129,24 +137,9 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @objc func checkoutTapped() {
-        showProgressView()
-        
-        Task {
-            do {
-                try await cartViewModel.placeOrder()
-                
-                cartViewModel.clearCart()
-                showApplyButton()
-                hideProgressView()
-                showOrederConfirmationMessage()
-                
-            } catch {
-                hideProgressView()
-                showError(title: "Checkout failed", message: error.localizedDescription)
-            }
-        }
-        
+    @objc func proceedTapped() {
+        let vc = CheckoutViewController(cartViewModel: cartViewModel)
+        show(vc, sender: self)
     }
     
     @objc func applyPromoCodeTapped() {
@@ -214,6 +207,19 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.mainAsyncIfNeeded {
             self.progressView.stopAnimating()
             self.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    private func updateCheckoutButton(count: Int) {
+        guard cartProducts.isEmpty == false else {
+            checkoutButton.setTitle("Proceed to Buy", for: .normal)
+            return
+        }
+                
+        if count == 1 {
+            checkoutButton.setTitle("Proceed to Buy (1 item)", for: .normal)
+        } else {
+            checkoutButton.setTitle("Proceed to Buy (\(count) items)", for: .normal)
         }
     }
     
