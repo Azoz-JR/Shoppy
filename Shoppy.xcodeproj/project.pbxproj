@@ -187,6 +187,9 @@
 		97AB182B2B55782C00522186 /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AB182A2B55782C00522186 /* SignInGoogleHelper.swift */; };
 		97B1C1172B82DB0C002D9F08 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */; };
 		97B1C1182B82DB0C002D9F08 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */; };
+		97B1C11F2B842CF5002D9F08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1C11E2B842CF5002D9F08 /* Address.swift */; };
+		97B1C1222B8435AB002D9F08 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1C1202B8435AB002D9F08 /* MapViewController.swift */; };
+		97B1C1232B8435AB002D9F08 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B1C1212B8435AB002D9F08 /* MapViewController.xib */; };
 		97B38FFD2B1F845900EB90EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFC2B1F845900EB90EA /* AppDelegate.swift */; };
 		97B38FFF2B1F845900EB90EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */; };
 		97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B390052B1F845B00EB90EA /* Assets.xcassets */; };
@@ -404,6 +407,9 @@
 		97AB182A2B55782C00522186 /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
 		97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
+		97B1C11E2B842CF5002D9F08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		97B1C1202B8435AB002D9F08 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		97B1C1212B8435AB002D9F08 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		97B38FF92B1F845900EB90EA /* Shoppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B38FFC2B1F845900EB90EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97B38FFE2B1F845900EB90EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -595,6 +601,7 @@
 				974DF5DD2B34B42400786FC2 /* CollectionsViewController */,
 				974DF5E52B350D6E00786FC2 /* CategoryViewController */,
 				974DF5E22B34BB7E00786FC2 /* CartViewController */,
+				97B1C11D2B83F4C3002D9F08 /* CheckoutViewController */,
 				97E7A4372B37771D00A1C20E /* WishListViewContoller */,
 				9790F8E02B3F09BB00597A50 /* ProfileView */,
 				972FAC1C2B3E50260017114A /* OrdersViewController */,
@@ -649,8 +656,6 @@
 				9737E73B2B29237000735A72 /* CartViewController.swift */,
 				97AB177D2B4F224900522186 /* CartViewModel.swift */,
 				9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */,
-				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
-				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
 			);
 			path = CartViewController;
 			sourceTree = "<group>";
@@ -675,6 +680,7 @@
 				972FABE02B3C9B680017114A /* List.swift */,
 				97C489DC2B4D89DA00D0E9D7 /* Section.swift */,
 				9788DDEF2B5DE84300CF44A8 /* SideProfileCellType.swift */,
+				97B1C11E2B842CF5002D9F08 /* Address.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -981,6 +987,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		97B1C11D2B83F4C3002D9F08 /* CheckoutViewController */ = {
+			isa = PBXGroup;
+			children = (
+				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
+				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
+				97B1C1202B8435AB002D9F08 /* MapViewController.swift */,
+				97B1C1212B8435AB002D9F08 /* MapViewController.xib */,
+			);
+			path = CheckoutViewController;
+			sourceTree = "<group>";
+		};
 		97B38FF02B1F845900EB90EA = {
 			isa = PBXGroup;
 			children = (
@@ -1141,6 +1158,7 @@
 				9728F8EE2B480BAC00E5CEA9 /* AmazonEmberDisplay_Lt.ttf in Resources */,
 				97AB17882B4F712200522186 /* ListCollectionCell.xib in Resources */,
 				973CEA482B2796BD00E0487D /* Main.storyboard in Resources */,
+				97B1C1232B8435AB002D9F08 /* MapViewController.xib in Resources */,
 				9728F8F92B480BAC00E5CEA9 /* BookerlyLCD_BdIt.ttf in Resources */,
 				97B390092B1F845B00EB90EA /* LaunchScreen.storyboard in Resources */,
 				9728F90A2B480BAC00E5CEA9 /* BookerlyDisplay_Bd.ttf in Resources */,
@@ -1287,6 +1305,7 @@
 				9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift in Sources */,
 				97B1C1172B82DB0C002D9F08 /* CheckoutViewController.swift in Sources */,
 				97068E0D2B6B12A10019BD0E /* PromoCodesManager.swift in Sources */,
+				97B1C11F2B842CF5002D9F08 /* Address.swift in Sources */,
 				974DF5C72B345F5300786FC2 /* ProductsCollectionDataSourceAndDelegate.swift in Sources */,
 				974DF5DF2B34B44700786FC2 /* CollectionsDataSourceAndDelegate.swift in Sources */,
 				9790F8E62B3F109900597A50 /* OrdersCollectionViewDelegate.swift in Sources */,
@@ -1341,6 +1360,7 @@
 				97AB17802B4F297100522186 /* WishListViewModel.swift in Sources */,
 				970EECCE2B310AF5009D53C7 /* ProductVariant.swift in Sources */,
 				97C489D62B4C7DB600D0E9D7 /* SearchViewPresenter.swift in Sources */,
+				97B1C1222B8435AB002D9F08 /* MapViewController.swift in Sources */,
 				9758BA022B23D59000F4E8F4 /* ProductsAPI.swift in Sources */,
 				97B390112B1F857000EB90EA /* MainTabBarController.swift in Sources */,
 				974DF5E72B350ED000786FC2 /* CollectionViewController+SearchBar.swift in Sources */,

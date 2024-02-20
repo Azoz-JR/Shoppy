@@ -96,7 +96,9 @@ class CheckoutViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        print("View tapped!")
+        let vc = MapViewController()
+        
+        show(vc, sender: self)
     }
     
     func setUpProgressView() {
