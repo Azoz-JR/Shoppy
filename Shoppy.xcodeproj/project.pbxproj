@@ -656,6 +656,8 @@
 				9737E73B2B29237000735A72 /* CartViewController.swift */,
 				97AB177D2B4F224900522186 /* CartViewModel.swift */,
 				9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */,
+				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
+				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
 			);
 			path = CartViewController;
 			sourceTree = "<group>";
