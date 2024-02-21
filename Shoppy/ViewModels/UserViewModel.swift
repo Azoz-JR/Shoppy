@@ -5,15 +5,21 @@
 //  Created by Azoz Salah on 17/01/2024.
 //
 
+import RxRelay
 import Foundation
 import RxSwift
 
 
 final class UserViewModel {
     private let userSubject = BehaviorSubject<DBUser?>(value: nil)
+    private let userAddresses = BehaviorRelay<[Address]>(value: [])
     
     var currentUser: Observable<DBUser?> {
         userSubject.asObservable()
+    }
+    
+    var addresses: Observable<[Address]> {
+        userAddresses.asObservable()
     }
     
     init() {
@@ -52,6 +58,12 @@ final class UserViewModel {
                 }
             }
         }
+    }
+    
+    func addAddress(address: Address) {
+        var addresses = userAddresses.value + [address]
+        
+        userAddresses.accept(addresses)
     }
 
 }

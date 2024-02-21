@@ -122,6 +122,12 @@
 		9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9758BA0D2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift */; };
 		9758BA132B24CA7C00F4E8F4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9758BA122B24CA7C00F4E8F4 /* SDWebImage */; };
 		9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9758BA1B2B251EB200F4E8F4 /* ProductViewController.swift */; };
+		976F5C8A2B8518C6008999DC /* AddressesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F5C882B8518C6008999DC /* AddressesSelectionViewController.swift */; };
+		976F5C8B2B8518C6008999DC /* AddressesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */; };
+		976F5C8E2B851C68008999DC /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F5C8C2B851C68008999DC /* AddressTableViewCell.swift */; };
+		976F5C8F2B851C68008999DC /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */; };
+		976F5C972B8530B5008999DC /* EditAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F5C952B8530B5008999DC /* EditAddressViewController.swift */; };
+		976F5C982B8530B5008999DC /* EditAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976F5C962B8530B5008999DC /* EditAddressViewController.xib */; };
 		97868F442B56AB7400BFE24B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97868F422B56AB7400BFE24B /* CreateAccountViewController.swift */; };
 		97868F452B56AB7400BFE24B /* CreateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97868F432B56AB7400BFE24B /* CreateAccountViewController.xib */; };
 		97868F482B576CD700BFE24B /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97868F472B576CD700BFE24B /* UserViewModel.swift */; };
@@ -212,6 +218,9 @@
 		97D612952B473BF7000174FE /* ListItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D612932B473BF7000174FE /* ListItemCellView.xib */; };
 		97D612972B477D5E000174FE /* ListItemsTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612962B477D5E000174FE /* ListItemsTableViewDelegate.swift */; };
 		97D612992B477DFE000174FE /* ListDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D612982B477DFE000174FE /* ListDetailViewPresenter.swift */; };
+		97DF17172B865367000D9EBD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17162B865367000D9EBD /* Location.swift */; };
+		97DF17192B865385000D9EBD /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17182B865385000D9EBD /* Placemark.swift */; };
+		97DF171B2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */; };
 		97E7A4342B37749B00A1C20E /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4332B37749B00A1C20E /* WishListViewController.swift */; };
 		97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E7A4352B3774E700A1C20E /* WishListView.xib */; };
 		97E7A4392B37773C00A1C20E /* WishListViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */; };
@@ -349,6 +358,12 @@
 		9758BA0B2B24AB3400F4E8F4 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		9758BA0D2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAPIServiceAdapter.swift; sourceTree = "<group>"; };
 		9758BA1B2B251EB200F4E8F4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		976F5C882B8518C6008999DC /* AddressesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesSelectionViewController.swift; sourceTree = "<group>"; };
+		976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressesSelectionViewController.xib; sourceTree = "<group>"; };
+		976F5C8C2B851C68008999DC /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
+		976F5C952B8530B5008999DC /* EditAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewController.swift; sourceTree = "<group>"; };
+		976F5C962B8530B5008999DC /* EditAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAddressViewController.xib; sourceTree = "<group>"; };
 		97868F422B56AB7400BFE24B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		97868F432B56AB7400BFE24B /* CreateAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateAccountViewController.xib; sourceTree = "<group>"; };
 		97868F472B576CD700BFE24B /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -434,6 +449,9 @@
 		97D612932B473BF7000174FE /* ListItemCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemCellView.xib; sourceTree = "<group>"; };
 		97D612962B477D5E000174FE /* ListItemsTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemsTableViewDelegate.swift; sourceTree = "<group>"; };
 		97D612982B477DFE000174FE /* ListDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewPresenter.swift; sourceTree = "<group>"; };
+		97DF17162B865367000D9EBD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		97DF17182B865385000D9EBD /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
+		97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressesSelectionViewController+TableView.swift"; sourceTree = "<group>"; };
 		97E7A4332B37749B00A1C20E /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
 		97E7A4352B3774E700A1C20E /* WishListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishListView.xib; sourceTree = "<group>"; };
 		97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WishListViewController+CollectionView.swift"; sourceTree = "<group>"; };
@@ -602,6 +620,7 @@
 				974DF5E52B350D6E00786FC2 /* CategoryViewController */,
 				974DF5E22B34BB7E00786FC2 /* CartViewController */,
 				97B1C11D2B83F4C3002D9F08 /* CheckoutViewController */,
+				976F5C902B852794008999DC /* AddressesViewController */,
 				97E7A4372B37771D00A1C20E /* WishListViewContoller */,
 				9790F8E02B3F09BB00597A50 /* ProfileView */,
 				972FAC1C2B3E50260017114A /* OrdersViewController */,
@@ -656,8 +675,6 @@
 				9737E73B2B29237000735A72 /* CartViewController.swift */,
 				97AB177D2B4F224900522186 /* CartViewModel.swift */,
 				9737E73F2B292F4700735A72 /* CartViewController+TableView.swift */,
-				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
-				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
 			);
 			path = CartViewController;
 			sourceTree = "<group>";
@@ -683,6 +700,8 @@
 				97C489DC2B4D89DA00D0E9D7 /* Section.swift */,
 				9788DDEF2B5DE84300CF44A8 /* SideProfileCellType.swift */,
 				97B1C11E2B842CF5002D9F08 /* Address.swift */,
+				97DF17162B865367000D9EBD /* Location.swift */,
+				97DF17182B865385000D9EBD /* Placemark.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -719,6 +738,20 @@
 				97B390072B1F845B00EB90EA /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		976F5C902B852794008999DC /* AddressesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				976F5C882B8518C6008999DC /* AddressesSelectionViewController.swift */,
+				97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */,
+				976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */,
+				976F5C8C2B851C68008999DC /* AddressTableViewCell.swift */,
+				976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */,
+				976F5C952B8530B5008999DC /* EditAddressViewController.swift */,
+				976F5C962B8530B5008999DC /* EditAddressViewController.xib */,
+			);
+			path = AddressesViewController;
 			sourceTree = "<group>";
 		};
 		97868F462B57540400BFE24B /* Authentication */ = {
@@ -1198,6 +1231,7 @@
 				9728F90B2B480BAC00E5CEA9 /* BookerlyLCD_Lt.ttf in Resources */,
 				9728F9042B480BAC00E5CEA9 /* AmazonEmberCd_Rg.ttf in Resources */,
 				9728F8F72B480BAC00E5CEA9 /* BookerlyDisplay_Rg.ttf in Resources */,
+				976F5C982B8530B5008999DC /* EditAddressViewController.xib in Resources */,
 				9788DDEC2B5DE38A00CF44A8 /* SideProfileCell.xib in Resources */,
 				9728F90F2B480BAC00E5CEA9 /* AmazonEmberCd_Lt.ttf in Resources */,
 				9728F8EC2B480BAC00E5CEA9 /* AmazonEmberDisplay_Md.ttf in Resources */,
@@ -1220,6 +1254,7 @@
 				9728F8EB2B480BAC00E5CEA9 /* AmazonEmberCd_Th.ttf in Resources */,
 				9728F8F52B480BAC00E5CEA9 /* AmazonEmber_LtIt.ttf in Resources */,
 				9790F90D2B40950800597A50 /* ListCell.xib in Resources */,
+				976F5C8B2B8518C6008999DC /* AddressesSelectionViewController.xib in Resources */,
 				97068E0B2B6AC4470019BD0E /* SalesCollectionCellView.xib in Resources */,
 				9728F9002B480BAC00E5CEA9 /* BookerlyLCD_Rg.ttf in Resources */,
 				9728F9102B480BAC00E5CEA9 /* AmazonEmber_BdIt.ttf in Resources */,
@@ -1230,6 +1265,7 @@
 				97B390062B1F845B00EB90EA /* Assets.xcassets in Resources */,
 				97AB17952B4F846200522186 /* CollectionsView.xib in Resources */,
 				97AB17972B4F869200522186 /* CollectionView.xib in Resources */,
+				976F5C8F2B851C68008999DC /* AddressTableViewCell.xib in Resources */,
 				97B1C1182B82DB0C002D9F08 /* CheckoutViewController.xib in Resources */,
 				97A877912B55B0CF0095F83E /* AuthenticationViewController.xib in Resources */,
 				9728F8F12B480BAC00E5CEA9 /* BookerlyLCD_Bd.ttf in Resources */,
@@ -1382,14 +1418,17 @@
 				97AB18272B5575D100522186 /* AuthProviderOption.swift in Sources */,
 				974DF5D42B34A03C00786FC2 /* HomeViewController+SearchController.swift in Sources */,
 				97C489D12B4C7BC800D0E9D7 /* SearchViewController.swift in Sources */,
+				97DF17172B865367000D9EBD /* Location.swift in Sources */,
 				97068E062B6AB18A0019BD0E /* SalesCellView.swift in Sources */,
 				97C489DA2B4C7ED700D0E9D7 /* SearchTableViewCell.swift in Sources */,
 				970EECE02B33ABFF009D53C7 /* CollectionsAPIServiceAdapter.swift in Sources */,
+				976F5C8A2B8518C6008999DC /* AddressesSelectionViewController.swift in Sources */,
 				9728F9192B4B4D6300E5CEA9 /* ProductsCollectionReusableView.swift in Sources */,
 				974DF5DA2B34AB8F00786FC2 /* HomeViewController+ProductsCollection.swift in Sources */,
 				9758B9F62B211BBD00F4E8F4 /* ProfileViewController.swift in Sources */,
 				97068DFC2B6809450019BD0E /* DBUser.swift in Sources */,
 				9790F8F22B3F25A500597A50 /* ProfileViewPresenter.swift in Sources */,
+				976F5C8E2B851C68008999DC /* AddressTableViewCell.swift in Sources */,
 				972FAC1E2B3E50530017114A /* OrdersTableViewDelegate.swift in Sources */,
 				972FABDD2B3B8FB30017114A /* ProfileView.swift in Sources */,
 				9790F9202B41FAAC00597A50 /* CreateListViewController.swift in Sources */,
@@ -1400,13 +1439,16 @@
 				97AB17902B4F7F5200522186 /* ListSelectionViewController+TableView.swift in Sources */,
 				9788DDEE2B5DE7E000CF44A8 /* SideProfileTableViewDelegate.swift in Sources */,
 				9758BA1C2B251EB200F4E8F4 /* ProductViewController.swift in Sources */,
+				97DF171B2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift in Sources */,
 				97EEFAEC2B2E71BD00065A8A /* SmallCategoryCell.swift in Sources */,
 				9788DDF42B5DEC5500CF44A8 /* MainTabBarPresenter.swift in Sources */,
+				976F5C972B8530B5008999DC /* EditAddressViewController.swift in Sources */,
 				970EECD22B31AF6D009D53C7 /* Products.swift in Sources */,
 				9758B9F22B211B9500F4E8F4 /* HomeViewController.swift in Sources */,
 				97AB17762B4ECACD00522186 /* HomeViewModel.swift in Sources */,
 				9788DDE52B5C8C6900CF44A8 /* MainTabBar+SideProfile.swift in Sources */,
 				9728F9162B48AF3800E5CEA9 /* OrderTableViewDelegate.swift in Sources */,
+				97DF17192B865385000D9EBD /* Placemark.swift in Sources */,
 				97C489DD2B4D89DA00D0E9D7 /* Section.swift in Sources */,
 				9790F8E32B3F0A5400597A50 /* OrderCollectionCell.swift in Sources */,
 				97AB17822B4F6FA300522186 /* ProfileViewController+Lists.swift in Sources */,

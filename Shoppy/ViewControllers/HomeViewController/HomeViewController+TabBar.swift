@@ -11,12 +11,10 @@ extension HomeViewController {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         lastContentOffset = scrollView.contentOffset.y
-        print("Last: \(lastContentOffset)")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentContentOffset = scrollView.contentOffset.y + collectionView.contentInset.top
-        print("Current: \(currentContentOffset)")
                 
         // Check if scrolling up or down
         if currentContentOffset > 1 && currentContentOffset > lastContentOffset && tabBarVisible {

@@ -20,10 +20,12 @@ class CheckoutViewController: UIViewController {
     
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     var cartViewModel: CartViewModel
+    var userViewModel: UserViewModel
 
     
-    init(cartViewModel: CartViewModel) {
+    init(cartViewModel: CartViewModel, userViewModel: UserViewModel) {
         self.cartViewModel = cartViewModel
+        self.userViewModel = userViewModel
         
         super.init(nibName: "CheckoutViewController", bundle: nil)
     }
@@ -65,12 +67,6 @@ class CheckoutViewController: UIViewController {
         navigationController?.tabBarController?.tabBar.isHidden = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.tabBarController?.tabBar.isHidden = false
-    }
-    
     @objc func checkoutTapped() {
         showProgressView()
         
@@ -96,7 +92,7 @@ class CheckoutViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        let vc = MapViewController()
+        let vc = AddressesSelectionViewController(userViewModel: userViewModel)
         
         show(vc, sender: self)
     }

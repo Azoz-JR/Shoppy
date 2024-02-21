@@ -125,7 +125,7 @@ final class MainTabBarController: UITabBarController {
     }
     
     func makeCartView() -> CartViewController {
-        let cartVC = CartViewController(cartViewModel: cartViewModel)
+        let cartVC = CartViewController(cartViewModel: cartViewModel, userViewModel: userViewModel)
         cartVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
         cartVC.view.backgroundColor = .secondBackground
         

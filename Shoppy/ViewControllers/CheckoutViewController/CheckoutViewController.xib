@@ -299,14 +299,14 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="o16-AY-sXo"/>
                                             </constraints>
+                                            <color key="tintColor" name="myGreen"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Checkout">
-                                                <backgroundConfiguration key="background" cornerRadius="10" strokeWidth="0.0" strokeOutset="0.0">
+                                                <backgroundConfiguration key="background" cornerRadius="20" strokeWidth="0.0" strokeOutset="0.0">
                                                     <color key="backgroundColor" name="myGreen"/>
                                                 </backgroundConfiguration>
                                                 <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="baseBackgroundColor" name="myGreen"/>
                                             </buttonConfiguration>
                                         </button>
                                     </subviews>

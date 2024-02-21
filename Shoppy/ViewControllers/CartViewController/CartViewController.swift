@@ -22,17 +22,18 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var noItemsLabel: UILabel!
     
     var cartViewModel: CartViewModel
+    var userViewModel: UserViewModel
     var cartProducts: [ItemModel] = []
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
 
     
-    init(cartViewModel: CartViewModel) {
+    init(cartViewModel: CartViewModel, userViewModel: UserViewModel) {
         self.cartViewModel = cartViewModel
+        self.userViewModel = userViewModel
         
         super.init(nibName: "CartView", bundle: nil)
-        self.navigationController?.navigationBar.tintColor = .navBarTint
     }
     
     required init?(coder: NSCoder) {
@@ -138,7 +139,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func proceedTapped() {
-        let vc = CheckoutViewController(cartViewModel: cartViewModel)
+        let vc = CheckoutViewController(cartViewModel: cartViewModel, userViewModel: userViewModel)
         show(vc, sender: self)
     }
     
@@ -221,6 +222,12 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
         } else {
             checkoutButton.setTitle("Proceed to Buy (\(count) items)", for: .normal)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.tabBarController?.tabBar.isHidden = false
     }
     
     deinit {

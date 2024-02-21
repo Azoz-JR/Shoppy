@@ -8,51 +8,26 @@
 import Foundation
 import MapKit
 
-struct Address: Codable {
-    let name: String
-    let phone: String
-    let location: Location
-    let placemark: String
-}
-
-struct Location: Codable {
-    let latitude: Double
-    let longitude: Double
+class Address: Codable {
+    var name: String
+    var phone: String
+    var street: String
+    var building: String
+    var floor: String
+    var area: String
+    var city: String
+    var country: String
+    var location: Location?
     
-    init(clLocation: CLLocationCoordinate2D) {
-        self.latitude = clLocation.latitude
-        self.longitude = clLocation.longitude
-    }
-    
-    var clLocation: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-}
-
-struct Placemark: Codable {
-    let name: String
-    let throughfare: String
-    let locality: String
-    let administrativeArea: String
-    let country: String
-    
-    init(name: String, throughfare: String, locality: String, administrativeArea: String, country: String) {
+    init(name: String = "", phone: String = "", street: String = "", building: String = "", floor: String = "", area: String = "", city: String = "", country: String = "", location: Location? = nil) {
         self.name = name
-        self.throughfare = throughfare
-        self.locality = locality
-        self.administrativeArea = administrativeArea
+        self.phone = phone
+        self.street = street
+        self.building = building
+        self.floor = floor
+        self.area = area
+        self.city = city
         self.country = country
+        self.location = location
     }
-    
-    init(placemark: CLPlacemark) {
-        name = placemark.name ?? ""
-        throughfare = placemark.thoroughfare ?? ""
-        locality = placemark.locality ?? ""
-        administrativeArea = placemark.administrativeArea ?? ""
-        country = placemark.country ?? ""
-    }
-    
-    static let unknown = Placemark(name: "Unknown", throughfare: "", locality: "", administrativeArea: "", country: "")
 }
-
-
