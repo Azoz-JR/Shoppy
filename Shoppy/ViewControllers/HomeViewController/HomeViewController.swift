@@ -47,7 +47,7 @@ final class HomeViewController: UIViewController {
     
     func setUpHomeView() {
         view.backgroundColor = .clear
-        navigationController?.navigationBar.tintColor = .navBarTint
+        //navigationController?.navigationBar.tintColor = .navBarTint
         navigationItem.backButtonDisplayMode = .minimal
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)

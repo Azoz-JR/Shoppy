@@ -37,7 +37,7 @@ extension MainTabBarController: MainTabBarPresenter {
             wishListVC.modalPresentationStyle = .pageSheet
             
             let nav = UINavigationController(rootViewController: wishListVC)
-            nav.navigationBar.tintColor = .navBarTint
+            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
             
         case .orders:
@@ -45,14 +45,14 @@ extension MainTabBarController: MainTabBarPresenter {
             ordersVC.cartViewModel = cartViewModel
             
             let nav = UINavigationController(rootViewController: ordersVC)
-            nav.navigationBar.tintColor = .navBarTint
+            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
                         
         case .lists:
             let listsVC = ListsViewController(cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
             
             let nav = UINavigationController(rootViewController: listsVC)
-            nav.navigationBar.tintColor = .navBarTint
+            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
         }
         

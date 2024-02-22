@@ -24,7 +24,7 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         super.viewDidLoad()
         
         title = "Collections"
-        navigationController?.navigationBar.tintColor = .navBarTint
+        //navigationController?.navigationBar.tintColor = .navBarTint
         configureCollection()
         
         bindToViewModel()

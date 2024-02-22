@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckoutViewController" customModule="Shoppy" customModuleProvider="target">
             <connections>
+                <outlet property="addressDetailLabel" destination="eYC-mU-0sa" id="aGz-iZ-7q3"/>
+                <outlet property="addressNameLabel" destination="Twl-K9-KrQ" id="jnN-kJ-9Nk"/>
                 <outlet property="cashOnDeliveryView" destination="LXE-1h-vyt" id="pnd-NY-QKe"/>
                 <outlet property="cashViewSelectionMark" destination="WPt-0K-zJz" id="Y5T-sn-beP"/>
                 <outlet property="checkoutButton" destination="Gg4-eK-LdX" id="6Tz-gW-3c7"/>
@@ -302,9 +304,6 @@
                                             <color key="tintColor" name="myGreen"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" title="Checkout">
-                                                <backgroundConfiguration key="background" cornerRadius="20" strokeWidth="0.0" strokeOutset="0.0">
-                                                    <color key="backgroundColor" name="myGreen"/>
-                                                </backgroundConfiguration>
                                                 <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
@@ -333,11 +332,13 @@
                                 <constraint firstItem="ami-lT-CUB" firstAttribute="leading" secondItem="R0P-BL-p5P" secondAttribute="leading" id="b3W-fU-CrP"/>
                                 <constraint firstItem="JYu-Nk-IfQ" firstAttribute="leading" secondItem="R0P-BL-p5P" secondAttribute="leading" constant="10" id="dgT-02-eni"/>
                                 <constraint firstItem="Ojj-sn-frN" firstAttribute="width" secondItem="R0P-BL-p5P" secondAttribute="width" multiplier="0.95" id="ojp-VK-x4M"/>
+                                <constraint firstAttribute="trailing" secondItem="q2h-Od-giA" secondAttribute="trailing" id="pC4-6A-Y2N"/>
                                 <constraint firstAttribute="trailing" secondItem="EMG-k1-Z7J" secondAttribute="trailing" constant="10" id="pN6-01-hMi"/>
                                 <constraint firstAttribute="trailing" secondItem="nQc-wb-sqq" secondAttribute="trailing" id="qOV-gz-7Ar"/>
                                 <constraint firstItem="nQc-wb-sqq" firstAttribute="leading" secondItem="R0P-BL-p5P" secondAttribute="leading" id="qnI-ym-cUn"/>
                                 <constraint firstItem="Ojj-sn-frN" firstAttribute="centerX" secondItem="R0P-BL-p5P" secondAttribute="centerX" id="uEv-tm-MzM"/>
                                 <constraint firstItem="LXE-1h-vyt" firstAttribute="width" secondItem="R0P-BL-p5P" secondAttribute="width" multiplier="0.95" id="uM4-27-9FP"/>
+                                <constraint firstItem="q2h-Od-giA" firstAttribute="leading" secondItem="R0P-BL-p5P" secondAttribute="leading" id="xMW-RH-6Cb"/>
                             </constraints>
                         </stackView>
                     </subviews>

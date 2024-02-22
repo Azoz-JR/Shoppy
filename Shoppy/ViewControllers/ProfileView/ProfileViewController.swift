@@ -103,7 +103,7 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
     func configureNavBar() {
         navigationController?.navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.tintColor = .navBarTint
+        //navigationController?.navigationBar.tintColor = .navBarTint
         
         let name = UIButton(type: .system)
         name.setTitle("Shoppy", for: .normal)

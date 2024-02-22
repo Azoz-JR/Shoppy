@@ -8,6 +8,7 @@
 import UIKit
 
 class AddressTableViewCell: UITableViewCell {
+    @IBOutlet var addressSelectionMark: UIView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var streetLabel: UILabel!
     @IBOutlet var buildingNumberLabel: UILabel!
@@ -34,16 +35,26 @@ class AddressTableViewCell: UITableViewCell {
         addressContainer.addBorder(color: .lightGray.withAlphaComponent(0.5), width: 1)
         
         deliverToThisAddressButton.addTarget(self, action: #selector(selectAddressTapped), for: .touchUpInside)
+        deliverToThisAddressButton.round(5)
+        
         editAddressButton.addTarget(self, action: #selector(editAddressTapped), for: .touchUpInside)
     }
     
-    func configure(with address: Address) {
+    func configure(with address: Address, isSelected: Bool) {
         nameLabel.text = address.name
         streetLabel.text  = address.street
         buildingNumberLabel.text = address.building
         areaLabel.text = address.area
         countryLabel.text = address.country
         phoneLabel.text = address.phone
+        
+        if isSelected {
+            addressSelectionMark.select()
+            deliverToThisAddressButton.isEnabled = false
+        } else {
+            addressSelectionMark.deSelect()
+            deliverToThisAddressButton.isEnabled = true
+        }
     }
     
     @objc func selectAddressTapped() {

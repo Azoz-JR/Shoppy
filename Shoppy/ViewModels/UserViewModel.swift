@@ -13,6 +13,7 @@ import RxSwift
 final class UserViewModel {
     private let userSubject = BehaviorSubject<DBUser?>(value: nil)
     private let userAddresses = BehaviorRelay<[Address]>(value: [])
+    private let currentSelectedAddressRelay = BehaviorRelay<Address?>(value: nil)
     
     var currentUser: Observable<DBUser?> {
         userSubject.asObservable()
@@ -20,6 +21,14 @@ final class UserViewModel {
     
     var addresses: Observable<[Address]> {
         userAddresses.asObservable()
+    }
+    
+    var selectedAddress: Observable<Address?> {
+        currentSelectedAddressRelay.asObservable()
+    }
+    
+    var currentSelectedAddress: Address? {
+        currentSelectedAddressRelay.value
     }
     
     init() {
@@ -61,9 +70,14 @@ final class UserViewModel {
     }
     
     func addAddress(address: Address) {
-        var addresses = userAddresses.value + [address]
+        let addresses = userAddresses.value + [address]
         
         userAddresses.accept(addresses)
+        selectAddress(address: address)
+    }
+    
+    func selectAddress(address: Address) {
+        currentSelectedAddressRelay.accept(address)
     }
 
 }

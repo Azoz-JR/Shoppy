@@ -10,6 +10,7 @@ import RxRelay
 import UIKit
 
 class EditAddressViewController: UIViewController {
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var phoneTextField: UITextField!
@@ -22,26 +23,19 @@ class EditAddressViewController: UIViewController {
     @IBOutlet var nearestLandmarkTextField: UITextField!
     @IBOutlet var useAddressButton: UIButton!
     
+    var activeTextField: UITextField?
+    
+    let viewModel: EditAddressViewModel
     var userViewModel: UserViewModel
-    var selectedLocationRelay = BehaviorRelay<Location?>(value: nil)
+    var selectedAddress: Address?
     let disposeBag = DisposeBag()
     
-    var name = ""
-    var phone = ""
-    var location = ""
-    var street = ""
-    var building = ""
-    var floor = ""
-    var area = ""
-    var landmark = ""
     
-    var selectedLocation: Location? {
-        selectedLocationRelay.value
-    }
-    
-    
-    init(userViewModel: UserViewModel) {
+    init(userViewModel: UserViewModel, selectedAddress: Address? = nil) {
         self.userViewModel = userViewModel
+        self.selectedAddress = selectedAddress
+        self.viewModel = EditAddressViewModel(userViewModel: userViewModel)
+        self.viewModel.selectedAddress = selectedAddress
         
         super.init(nibName: "EditAddressViewController", bundle: nil)
     }
@@ -54,7 +48,10 @@ class EditAddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Add an address"
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        configView()
 
         configTextFieldViews()
         setUpNameTextFields()
@@ -66,7 +63,53 @@ class EditAddressViewController: UIViewController {
         setUpLandmarkTextField()
         setUpUseAddressButton()
         setUpAddLocationButton()
+        bindToViewModel()
+    }
+    
+    func configView() {
+        if selectedAddress == nil {
+            title = "Add an address"
+            titleLabel.text = "Enter a new shipping address"
+        } else {
+            title = "Edit your address"
+            titleLabel.text = "Edit your shipping address"
+            setupSelectedAddress()
+        }
+    }
+    
+    func setupSelectedAddress() {
+        guard let selectedAddress else {
+            return
+        }
+        
+        viewModel.setupSelectedAddress()
+        nameTextField.text = selectedAddress.name
+        phoneTextField.text = selectedAddress.phone
+        streetTextField.text = selectedAddress.street
+        buildingTextField.text = selectedAddress.building
+        floorTextField.text = selectedAddress.floor
+        areaTextField.text = selectedAddress.area
+        nearestLandmarkTextField.text = selectedAddress.landmark
+    }
+    
+    func bindToViewModel() {
         setupSelectedLocation()
+        
+        viewModel.error.subscribe(onNext: { [weak self] error in
+            self?.show(error: error)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    func configTextFieldViews() {
+        useAddressButton.round(20)
+        nameTextField.addBorderAndPadding()
+        phoneTextField.addBorderAndPadding()
+        streetTextField.addBorderAndPadding()
+        buildingTextField.addBorderAndPadding()
+        floorTextField.addBorderAndPadding()
+        areaTextField.addBorderAndPadding()
+        nearestLandmarkTextField.addBorderAndPadding()
     }
     
     func setUpNameTextFields() {
@@ -76,7 +119,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.name = text ?? ""
+                self?.viewModel.name = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -88,13 +131,13 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.phone = text ?? ""
+                self?.viewModel.phone = text ?? ""
             }
             .disposed(by: disposeBag)
     }
     
     func setupSelectedLocation() {
-        selectedLocationRelay.asObservable().subscribe(onNext: { [weak self] location in
+        viewModel.selectedLocationRelay.asObservable().subscribe(onNext: { [weak self] location in
             guard let location else {
                 self?.selectedLocationLabel.isHidden = true
                 return
@@ -116,7 +159,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.street = text ?? ""
+                self?.viewModel.street = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -128,7 +171,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.building = text ?? ""
+                self?.viewModel.building = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -140,7 +183,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.floor = text ?? ""
+                self?.viewModel.floor = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -152,7 +195,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.area = text ?? ""
+                self?.viewModel.area = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -164,7 +207,7 @@ class EditAddressViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe { [weak self] text in
-                self?.landmark = text ?? ""
+                self?.viewModel.landmark = text ?? ""
             }
             .disposed(by: disposeBag)
     }
@@ -176,8 +219,8 @@ class EditAddressViewController: UIViewController {
             .bind { [weak self] in
                 let vc = MapViewController()
                 vc.modalPresentationStyle = .pageSheet
-                vc.locationRelay = self?.selectedLocationRelay
-                vc.currentLocation = self?.selectedLocation
+                vc.locationRelay = self?.viewModel.selectedLocationRelay
+                vc.currentLocation = self?.viewModel.selectedLocation
                 
                 self?.show(UINavigationController(rootViewController: vc), sender: self)
             }
@@ -189,50 +232,29 @@ class EditAddressViewController: UIViewController {
             .rx
             .tap
             .bind { [weak self] in
-                guard let self else {
-                    self?.showError(title: "Address error", message: "The address's information isn't enough.")
-                    return
+                self?.viewModel.useAddress {
+                    self?.navigationController?.popViewController(animated: true)
                 }
-                
-                guard isAcceptableAddress(), let placemark = selectedLocation?.placemark else {
-                    self.showError(title: "Address error", message: "The address's information isn't enough.")
-                    
-                    return
-                }
-                
-                let address = Address(name: name, phone: phone, street: street, building: building, floor: floor, area: area, city:  placemark.administrativeArea, country: placemark.country, location: selectedLocation)
-                
-                userViewModel.addAddress(address: address)
-                navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }
     
-    func configTextFieldViews() {
-        useAddressButton.round(20)
-        nameTextField.addBorderAndPadding()
-        phoneTextField.addBorderAndPadding()
-        streetTextField.addBorderAndPadding()
-        buildingTextField.addBorderAndPadding()
-        floorTextField.addBorderAndPadding()
-        areaTextField.addBorderAndPadding()
-        nearestLandmarkTextField.addBorderAndPadding()
-    }
-    
-    func isAcceptableAddress() -> Bool {
-        guard !name.isEmpty, !phone.isEmpty, selectedLocation != nil, !street.isEmpty, !building.isEmpty, !floor.isEmpty else {
-            return false
-        }
-        
-        return true
-    }
+
     
     func updateLocationButton() {
-        if selectedLocation != nil {
+        if viewModel.selectedLocation != nil {
             addLocationButton.setTitle("Edit", for: .normal)
         } else {
             addLocationButton.setTitle("Add location on map", for: .normal)
         }
     }
+    
+    deinit {
+        // Unsubscribe from keyboard notifications
+        NotificationCenter.default.removeObserver(self)
+    }
 
 }
+
+
+

@@ -221,6 +221,9 @@
 		97DF17172B865367000D9EBD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17162B865367000D9EBD /* Location.swift */; };
 		97DF17192B865385000D9EBD /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17182B865385000D9EBD /* Placemark.swift */; };
 		97DF171B2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */; };
+		97DF17202B87765F000D9EBD /* EditAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF171F2B87765F000D9EBD /* EditAddressViewModel.swift */; };
+		97DF17222B878661000D9EBD /* AddressValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17212B878661000D9EBD /* AddressValidationError.swift */; };
+		97DF17242B87C502000D9EBD /* EditAddressViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DF17232B87C502000D9EBD /* EditAddressViewController+Keyboard.swift */; };
 		97E7A4342B37749B00A1C20E /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4332B37749B00A1C20E /* WishListViewController.swift */; };
 		97E7A4362B3774E700A1C20E /* WishListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E7A4352B3774E700A1C20E /* WishListView.xib */; };
 		97E7A4392B37773C00A1C20E /* WishListViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */; };
@@ -452,6 +455,9 @@
 		97DF17162B865367000D9EBD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		97DF17182B865385000D9EBD /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
 		97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressesSelectionViewController+TableView.swift"; sourceTree = "<group>"; };
+		97DF171F2B87765F000D9EBD /* EditAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewModel.swift; sourceTree = "<group>"; };
+		97DF17212B878661000D9EBD /* AddressValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressValidationError.swift; sourceTree = "<group>"; };
+		97DF17232B87C502000D9EBD /* EditAddressViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditAddressViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		97E7A4332B37749B00A1C20E /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
 		97E7A4352B3774E700A1C20E /* WishListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WishListView.xib; sourceTree = "<group>"; };
 		97E7A4382B37773C00A1C20E /* WishListViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WishListViewController+CollectionView.swift"; sourceTree = "<group>"; };
@@ -620,7 +626,9 @@
 				974DF5E52B350D6E00786FC2 /* CategoryViewController */,
 				974DF5E22B34BB7E00786FC2 /* CartViewController */,
 				97B1C11D2B83F4C3002D9F08 /* CheckoutViewController */,
+				97DF171C2B8775DA000D9EBD /* MapViewController */,
 				976F5C902B852794008999DC /* AddressesViewController */,
+				97DF171D2B8775E4000D9EBD /* EditAddresViewController */,
 				97E7A4372B37771D00A1C20E /* WishListViewContoller */,
 				9790F8E02B3F09BB00597A50 /* ProfileView */,
 				972FAC1C2B3E50260017114A /* OrdersViewController */,
@@ -702,6 +710,7 @@
 				97B1C11E2B842CF5002D9F08 /* Address.swift */,
 				97DF17162B865367000D9EBD /* Location.swift */,
 				97DF17182B865385000D9EBD /* Placemark.swift */,
+				97DF17212B878661000D9EBD /* AddressValidationError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -748,8 +757,6 @@
 				976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */,
 				976F5C8C2B851C68008999DC /* AddressTableViewCell.swift */,
 				976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */,
-				976F5C952B8530B5008999DC /* EditAddressViewController.swift */,
-				976F5C962B8530B5008999DC /* EditAddressViewController.xib */,
 			);
 			path = AddressesViewController;
 			sourceTree = "<group>";
@@ -1027,8 +1034,6 @@
 			children = (
 				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
 				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
-				97B1C1202B8435AB002D9F08 /* MapViewController.swift */,
-				97B1C1212B8435AB002D9F08 /* MapViewController.xib */,
 			);
 			path = CheckoutViewController;
 			sourceTree = "<group>";
@@ -1101,6 +1106,26 @@
 				97C489D82B4C7ED700D0E9D7 /* SearchTableViewCell.swift */,
 			);
 			path = SearchView;
+			sourceTree = "<group>";
+		};
+		97DF171C2B8775DA000D9EBD /* MapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				97B1C1202B8435AB002D9F08 /* MapViewController.swift */,
+				97B1C1212B8435AB002D9F08 /* MapViewController.xib */,
+			);
+			path = MapViewController;
+			sourceTree = "<group>";
+		};
+		97DF171D2B8775E4000D9EBD /* EditAddresViewController */ = {
+			isa = PBXGroup;
+			children = (
+				976F5C952B8530B5008999DC /* EditAddressViewController.swift */,
+				97DF17232B87C502000D9EBD /* EditAddressViewController+Keyboard.swift */,
+				976F5C962B8530B5008999DC /* EditAddressViewController.xib */,
+				97DF171F2B87765F000D9EBD /* EditAddressViewModel.swift */,
+			);
+			path = EditAddresViewController;
 			sourceTree = "<group>";
 		};
 		97E7A4372B37771D00A1C20E /* WishListViewContoller */ = {
@@ -1341,6 +1366,7 @@
 				974DF5E92B350F1300786FC2 /* CollectionViewController+Collection.swift in Sources */,
 				97AB18212B55751500522186 /* AuthenticationManager.swift in Sources */,
 				9758BA0E2B24ABBB00F4E8F4 /* ProductsAPIServiceAdapter.swift in Sources */,
+				97DF17202B87765F000D9EBD /* EditAddressViewModel.swift in Sources */,
 				97B1C1172B82DB0C002D9F08 /* CheckoutViewController.swift in Sources */,
 				97068E0D2B6B12A10019BD0E /* PromoCodesManager.swift in Sources */,
 				97B1C11F2B842CF5002D9F08 /* Address.swift in Sources */,
@@ -1348,6 +1374,7 @@
 				974DF5DF2B34B44700786FC2 /* CollectionsDataSourceAndDelegate.swift in Sources */,
 				9790F8E62B3F109900597A50 /* OrdersCollectionViewDelegate.swift in Sources */,
 				9758BA0A2B23F67C00F4E8F4 /* CollectionViewController.swift in Sources */,
+				97DF17222B878661000D9EBD /* AddressValidationError.swift in Sources */,
 				97AB18252B55759400522186 /* AuthDataResultModel.swift in Sources */,
 				972FABE92B3DEA8B0017114A /* ViewController.swift in Sources */,
 				97AB17842B4F702A00522186 /* ProfileViewController+Orders.swift in Sources */,
@@ -1357,6 +1384,7 @@
 				97AB17932B4F813400522186 /* SearchViewController+TableView.swift in Sources */,
 				973A01D52B6E75AF00CD9092 /* OrderCheckoutCell.swift in Sources */,
 				97868F482B576CD700BFE24B /* UserViewModel.swift in Sources */,
+				97DF17242B87C502000D9EBD /* EditAddressViewController+Keyboard.swift in Sources */,
 				9737E73D2B29237000735A72 /* CartViewController.swift in Sources */,
 				97AB17742B4DC1BD00522186 /* ProfileViewController+ScrollView.swift in Sources */,
 				97E7A4392B37773C00A1C20E /* WishListViewController+CollectionView.swift in Sources */,

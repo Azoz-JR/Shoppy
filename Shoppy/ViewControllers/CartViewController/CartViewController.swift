@@ -44,7 +44,7 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Cart"
-        navigationController?.navigationBar.tintColor = .navBarTint
+        //navigationController?.navigationBar.tintColor = .navBarTint
         
         configView()
         bindToViewModel()
@@ -56,7 +56,6 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     }
     
     func configView() {
-        navigationController?.navigationBar.tintColor = .navBarTint
         couponTextField.delegate = self
         applyButton.isEnabled = false
         checkoutContainer.round(20)

@@ -34,7 +34,7 @@ extension UIView {
         self.layer.borderWidth = width
     }
     
-    func selectPaymentMethod() {
+    func select() {
         let radius = min(bounds.width, bounds.height) / 2
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
@@ -59,7 +59,7 @@ extension UIView {
         layer.addSublayer(innerHalfLayer)
     }
     
-    func deselectPaymentMethod() {
+    func deSelect() {
         let radius = min(bounds.width, bounds.height) / 2
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
@@ -70,7 +70,7 @@ extension UIView {
         let outerHalfPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
         outerHalfLayer.path = outerHalfPath.cgPath
         outerHalfLayer.strokeColor = UIColor.lightGray.cgColor
-        outerHalfLayer.fillColor = UIColor.clear.cgColor
+        outerHalfLayer.fillColor = UIColor.white.cgColor
         
         // Add the layers to the view's layer
         layer.addSublayer(outerHalfLayer)

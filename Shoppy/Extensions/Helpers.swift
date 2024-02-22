@@ -40,7 +40,7 @@ extension UITextField {
     
     func addBorderAndPadding() {
         addBorder(color: .lightGray, width: 1.5)
-        round(15)
+        round(5)
         setLeftPaddingPoints(10)
         setRightPaddingPoints(1)
     }

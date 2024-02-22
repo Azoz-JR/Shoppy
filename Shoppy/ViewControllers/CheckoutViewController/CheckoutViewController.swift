@@ -5,10 +5,13 @@
 //  Created by Azoz Salah on 19/02/2024.
 //
 
+import RxSwift
 import UIKit
 
 class CheckoutViewController: UIViewController {
     @IBOutlet var deliverView: UIView!
+    @IBOutlet var addressNameLabel: UILabel!
+    @IBOutlet var addressDetailLabel: UILabel!
     @IBOutlet var deliveryDateLabel: UILabel!
     @IBOutlet var cashOnDeliveryView: UIView!
     @IBOutlet var cashViewSelectionMark: UIView!
@@ -21,6 +24,7 @@ class CheckoutViewController: UIViewController {
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     var cartViewModel: CartViewModel
     var userViewModel: UserViewModel
+    var disposeBag = DisposeBag()
 
     
     init(cartViewModel: CartViewModel, userViewModel: UserViewModel) {
@@ -44,7 +48,7 @@ class CheckoutViewController: UIViewController {
         cashOnDeliveryView.addBorder(color: .lightGray.withAlphaComponent(0.5), width: 1)
         cashOnDeliveryView.round(10)
         
-        cashViewSelectionMark.selectPaymentMethod()
+        cashViewSelectionMark.select()
         
         setupGesture()
         
@@ -53,6 +57,9 @@ class CheckoutViewController: UIViewController {
         configCheckoutView()
         
         checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
+        checkoutButton.round(20)
+        
+        bindToSelectedAddress()
     }
     
     func configCheckoutView() {
@@ -127,6 +134,15 @@ class CheckoutViewController: UIViewController {
         }))
         
         present(alert, animated: true)
+    }
+    
+    func bindToSelectedAddress() {
+        userViewModel.selectedAddress.subscribe(onNext: { [weak self] address in
+            self?.addressNameLabel.text = address?.name
+            self?.addressDetailLabel.text = address?.text
+            self?.checkoutButton.isEnabled = address != nil
+        })
+        .disposed(by: disposeBag)
     }
     
 }

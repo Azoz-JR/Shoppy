@@ -12,8 +12,8 @@ class AddressesSelectionViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var userViewModel: UserViewModel
-    
     var addresses: [Address] = []
+    var selectedAddress: Address?
     var disposeBag = DisposeBag()
     
     
@@ -46,14 +46,21 @@ class AddressesSelectionViewController: UIViewController {
             self?.reloadTableView()
         })
         .disposed(by: disposeBag)
+        
+        userViewModel.selectedAddress.subscribe(onNext: { [weak self] address in
+            self?.selectedAddress = address
+            self?.reloadTableView()
+        })
+        .disposed(by: disposeBag)
     }
     
     func selectAddress(address: Address) {
-        
+        userViewModel.selectAddress(address: address)
     }
     
     func editAddress(address: Address) {
-        
+        let vc = EditAddressViewController(userViewModel: userViewModel, selectedAddress: address)
+        show(vc, sender: self)
     }
     
     @objc func addAddressTapped() {

@@ -92,7 +92,7 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
-        nav.navigationBar.tintColor = .navBarTint
+        //nav.navigationBar.tintColor = .navBarTint
                 
         return nav
     }

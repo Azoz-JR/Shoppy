@@ -28,6 +28,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         title = "Add an address"
         
+        let cancelBarButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelTapped))
+        navigationItem.leftBarButtonItem = cancelBarButton
+        
         setupMapView()
         
         pinView.round(pinView.bounds.width / 2)
@@ -38,6 +41,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         confirmButton.round(10)
         confirmButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
+    }
+    
+    @objc func cancelTapped() {
+        dismiss(animated: true)
     }
     
     func setupMapView() {
