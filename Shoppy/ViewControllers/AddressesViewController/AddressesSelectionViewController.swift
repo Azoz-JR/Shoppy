@@ -32,6 +32,7 @@ class AddressesSelectionViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Select a delivery address"
+        navigationItem.backButtonDisplayMode = .minimal
 
         setupTableView()
         bindToUserViewModel()
@@ -55,7 +56,11 @@ class AddressesSelectionViewController: UIViewController {
     }
     
     func selectAddress(address: Address) {
-        userViewModel.selectAddress(address: address)
+        do {
+            try userViewModel.selectAddress(address: address)
+        } catch {
+            show(error: error)
+        }
     }
     
     func editAddress(address: Address) {

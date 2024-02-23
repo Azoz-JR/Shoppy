@@ -67,7 +67,7 @@ class SideProfile: UIView {
     }
     
     @objc func signOutTapped() {
-        try? AuthenticationManager.shared.signOut()
+        signOutHandler?()
     }
     
     @objc func imagePickerTapped() {

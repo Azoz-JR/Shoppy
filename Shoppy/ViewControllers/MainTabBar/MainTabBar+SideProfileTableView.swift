@@ -35,6 +35,7 @@ extension MainTabBarController: MainTabBarPresenter {
             wishListVC.viewModel = wishListViewModel
             wishListVC.listsViewModel = listsViewModel
             wishListVC.modalPresentationStyle = .pageSheet
+            wishListVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(wishListVC.dismissSheet))
             
             let nav = UINavigationController(rootViewController: wishListVC)
             //nav.navigationBar.tintColor = .navBarTint
@@ -43,6 +44,8 @@ extension MainTabBarController: MainTabBarPresenter {
         case .orders:
             let ordersVC = OrdersViewController()
             ordersVC.cartViewModel = cartViewModel
+            ordersVC.modalPresentationStyle = .pageSheet
+            ordersVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ordersVC.dismissSheet))
             
             let nav = UINavigationController(rootViewController: ordersVC)
             //nav.navigationBar.tintColor = .navBarTint
@@ -50,6 +53,9 @@ extension MainTabBarController: MainTabBarPresenter {
                         
         case .lists:
             let listsVC = ListsViewController(cartViewModel: cartViewModel, listsViewModel: listsViewModel, wishListViewModel: wishListViewModel)
+            listsVC.modalPresentationStyle = .pageSheet
+            listsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(listsVC.dismissSheet))
+
             
             let nav = UINavigationController(rootViewController: listsVC)
             //nav.navigationBar.tintColor = .navBarTint

@@ -43,14 +43,9 @@ final class UserManager {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
     
-    func getCurrentUser() async -> DBUser? {
-        do {
+    func getCurrentUser() async throws -> DBUser? {
             let uid = try AuthenticationManager.shared.getAuthenticatedUser().uid
             return try await userDocument(userId: uid).getDocument(as: DBUser.self)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
     }
     
     func updateUserProfilePicture(userId: String, picture: Data) async throws {
@@ -219,4 +214,39 @@ extension UserManager {
             return true
         }
     }
+}
+    
+    
+// MARK: - Addresses
+extension UserManager {
+    private func userAddressesCollection(userId: String) -> CollectionReference {
+        userDocument(userId: userId).collection("addresses")
+    }
+    
+    private func selectedAddress(userId: String) -> DocumentReference {
+        userDocument(userId: userId).collection("selected_address").document("address")
+    }
+    
+    func createAddress(userId: String, address: Address) throws {
+        let document = userAddressesCollection(userId: userId).document(address.id)
+                
+        try document.setData(from: address, merge: false)
+    }
+    
+    func setSelectedAddress(userId: String, address: Address) throws {
+        try selectedAddress(userId: userId).setData(from: address, merge: false)
+    }
+    
+    func updateAddress(userId: String, address: Address) throws {
+        try userAddressesCollection(userId: userId).document(address.id).setData(from: address)
+    }
+    
+    func getAddresses(userId: String) async throws -> [Address] {
+        try await userAddressesCollection(userId: userId).getDocuments(as: Address.self)
+    }
+    
+    func getSelectedAddress(userId: String) async throws -> Address {
+        try await selectedAddress(userId: userId).getDocument(as: Address.self)
+    }
+    
 }

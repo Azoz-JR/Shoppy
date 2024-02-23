@@ -23,9 +23,9 @@ class EditAddressViewModel {
     var landmark = ""
     
     var selectedLocationRelay = BehaviorRelay<Location?>(value: nil)
-    private var errorSubject = PublishSubject<AddressValidationError>()
+    private var errorSubject = PublishSubject<Error>()
     
-    var error: Observable<AddressValidationError> {
+    var error: Observable<Error> {
         errorSubject.asObservable()
     }
 
@@ -70,9 +70,15 @@ class EditAddressViewModel {
         }
         
         let address = Address(name: name, phone: phone, street: street, building: building, floor: floor, area: area, landmark: landmark, location: selectedLocation)
-
-        userViewModel.addAddress(address: address)
-        completion()
+        
+        do {
+            try userViewModel.addAddress(address: address)
+            
+            completion()
+        } catch {
+            errorSubject.onNext(error)
+        }
+        
     }
     
     private func editAddress(address: Address, completion: @escaping () -> Void) {
@@ -89,8 +95,15 @@ class EditAddressViewModel {
         address.area = area
         address.location = selectedLocation
         
-        userViewModel.selectAddress(address: address)
-        completion()
+        do {
+            try userViewModel.editAddress(address: address)
+            
+            completion()
+        } catch {
+            errorSubject.onNext(error)
+        }
+        
+        
     }
     
     private func checkForEmptyTextFields() throws {
@@ -115,9 +128,7 @@ class EditAddressViewModel {
         if area.isEmpty {
             throw AddressValidationError.areaEmpty
         }
-        if landmark.isEmpty {
-            throw AddressValidationError.landmarkEmpty
-        }
+
     }
     
     private func isUnAcceptableAddress() -> AddressValidationError? {

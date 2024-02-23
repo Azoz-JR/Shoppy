@@ -22,7 +22,7 @@
                         <rect key="frame" x="20" y="10" width="341" height="281"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRE-0J-gop">
-                                <rect key="frame" x="20" y="79.666666666666671" width="30" height="30"/>
+                                <rect key="frame" x="15" y="79.666666666666671" width="30" height="30"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FQc-zf-ojI"/>
@@ -77,32 +77,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="da8-wl-usz">
-                                <rect key="frame" x="15" y="186" width="311" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="58b-Fg-QdW"/>
-                                </constraints>
-                                <color key="tintColor" name="myGreen"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Deliver to this address">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qet-YH-u6A">
-                                <rect key="frame" x="15" y="241" width="311" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="5hQ-f6-Zdb"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Edit Address">
-                                    <backgroundConfiguration key="background" cornerRadius="5" strokeWidth="0.69999999999999996" strokeOutset="0.0">
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <color key="strokeColor" systemColor="separatorColor"/>
-                                    </backgroundConfiguration>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KbB-P2-FR5">
                                 <rect key="frame" x="170" y="72.333333333333329" width="161" height="20"/>
                                 <constraints>
@@ -148,25 +122,51 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZlX-bQ-ut1">
+                                <rect key="frame" x="15" y="186" width="311" height="85"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="da8-wl-usz">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="58b-Fg-QdW"/>
+                                        </constraints>
+                                        <color key="tintColor" name="myGreen"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Deliver to this address">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qet-YH-u6A">
+                                        <rect key="frame" x="0.0" y="55" width="311" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5hQ-f6-Zdb"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Edit Address">
+                                            <backgroundConfiguration key="background" cornerRadius="5" strokeWidth="0.69999999999999996" strokeOutset="0.0">
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="strokeColor" systemColor="separatorColor"/>
+                                            </backgroundConfiguration>
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="5Wp-fR-UWU" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="0ir-64-U6e"/>
-                            <constraint firstItem="da8-wl-usz" firstAttribute="leading" secondItem="ISD-ym-J7u" secondAttribute="leading" constant="15" id="3o7-Oa-ARz"/>
-                            <constraint firstItem="qet-YH-u6A" firstAttribute="top" secondItem="da8-wl-usz" secondAttribute="bottom" constant="15" id="7WM-BE-eIr"/>
+                            <constraint firstItem="5Wp-fR-UWU" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="0ir-64-U6e"/>
+                            <constraint firstAttribute="bottom" secondItem="ZlX-bQ-ut1" secondAttribute="bottom" constant="10" id="0mh-pF-eL5"/>
                             <constraint firstItem="KbB-P2-FR5" firstAttribute="centerY" secondItem="5Wp-fR-UWU" secondAttribute="centerY" id="99K-L2-Nto"/>
-                            <constraint firstItem="qet-YH-u6A" firstAttribute="leading" secondItem="ISD-ym-J7u" secondAttribute="leading" constant="15" id="9xr-kK-QWu"/>
-                            <constraint firstAttribute="trailing" secondItem="da8-wl-usz" secondAttribute="trailing" constant="15" id="A8Y-QP-OW4"/>
                             <constraint firstItem="pZ6-iF-OKC" firstAttribute="top" secondItem="5Wp-fR-UWU" secondAttribute="bottom" constant="5" id="Bf8-VH-djC"/>
                             <constraint firstItem="CBV-xe-zCQ" firstAttribute="centerY" secondItem="fqF-er-rwc" secondAttribute="centerY" id="BmS-6c-IVm"/>
                             <constraint firstItem="fQx-GF-SiZ" firstAttribute="centerY" secondItem="IWM-uD-l7d" secondAttribute="centerY" id="CFc-ai-SCy"/>
-                            <constraint firstAttribute="trailing" secondItem="qet-YH-u6A" secondAttribute="trailing" constant="15" id="DF9-Uy-Rza"/>
                             <constraint firstItem="ajN-lx-dpq" firstAttribute="centerY" secondItem="4lX-zU-sYn" secondAttribute="centerY" id="Dh0-S4-wZ7"/>
                             <constraint firstAttribute="trailing" secondItem="bND-c8-nhM" secondAttribute="trailing" constant="10" id="Gkm-1C-5T5"/>
                             <constraint firstItem="JRE-0J-gop" firstAttribute="centerY" secondItem="pZ6-iF-OKC" secondAttribute="top" constant="-2.5" id="H5u-Xl-ICm"/>
-                            <constraint firstItem="bND-c8-nhM" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="IZb-ON-LQI"/>
-                            <constraint firstItem="pZ6-iF-OKC" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="JRI-p0-jfb"/>
-                            <constraint firstAttribute="bottom" secondItem="qet-YH-u6A" secondAttribute="bottom" constant="10" id="MW1-bV-i8i"/>
+                            <constraint firstItem="bND-c8-nhM" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="IZb-ON-LQI"/>
+                            <constraint firstItem="pZ6-iF-OKC" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="JRI-p0-jfb"/>
                             <constraint firstItem="ajN-lx-dpq" firstAttribute="leading" secondItem="4lX-zU-sYn" secondAttribute="trailing" constant="10" id="Q5l-2k-CyN"/>
                             <constraint firstItem="CBV-xe-zCQ" firstAttribute="leading" secondItem="fqF-er-rwc" secondAttribute="trailing" constant="10" id="SPC-kN-G7M"/>
                             <constraint firstItem="IWM-uD-l7d" firstAttribute="top" secondItem="ajN-lx-dpq" secondAttribute="bottom" constant="5" id="TUU-2i-sG0"/>
@@ -175,17 +175,19 @@
                             <constraint firstItem="5Wp-fR-UWU" firstAttribute="top" secondItem="fqF-er-rwc" secondAttribute="bottom" constant="5" id="V1G-gY-duR"/>
                             <constraint firstAttribute="trailing" secondItem="CBV-xe-zCQ" secondAttribute="trailing" constant="10" id="V4V-qT-7OG"/>
                             <constraint firstItem="bND-c8-nhM" firstAttribute="top" secondItem="ISD-ym-J7u" secondAttribute="top" constant="10" id="VfD-Gu-c32"/>
-                            <constraint firstItem="fqF-er-rwc" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="X3b-ZF-5Du"/>
-                            <constraint firstItem="da8-wl-usz" firstAttribute="top" secondItem="IWM-uD-l7d" secondAttribute="bottom" constant="20" id="Z1V-vA-OLZ"/>
+                            <constraint firstItem="fqF-er-rwc" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="X3b-ZF-5Du"/>
                             <constraint firstAttribute="trailing" secondItem="fQx-GF-SiZ" secondAttribute="trailing" constant="10" id="cI6-5s-PQa"/>
                             <constraint firstItem="8Qh-S7-8NI" firstAttribute="centerY" secondItem="pZ6-iF-OKC" secondAttribute="centerY" id="dmy-hZ-6uW"/>
                             <constraint firstItem="8Qh-S7-8NI" firstAttribute="leading" secondItem="pZ6-iF-OKC" secondAttribute="trailing" constant="10" id="dz5-8r-rw8"/>
-                            <constraint firstItem="IWM-uD-l7d" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="e3F-0O-LbQ"/>
+                            <constraint firstItem="IWM-uD-l7d" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="e3F-0O-LbQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ZlX-bQ-ut1" secondAttribute="trailing" constant="15" id="fe9-kS-5IL"/>
                             <constraint firstItem="4lX-zU-sYn" firstAttribute="top" secondItem="pZ6-iF-OKC" secondAttribute="bottom" constant="5" id="iGS-Ti-ucE"/>
                             <constraint firstItem="fqF-er-rwc" firstAttribute="top" secondItem="bND-c8-nhM" secondAttribute="bottom" constant="5" id="j09-x2-w9A"/>
-                            <constraint firstItem="JRE-0J-gop" firstAttribute="leading" secondItem="ISD-ym-J7u" secondAttribute="leading" constant="20" id="jXe-6S-Srd"/>
+                            <constraint firstItem="JRE-0J-gop" firstAttribute="leading" secondItem="ISD-ym-J7u" secondAttribute="leading" constant="15" id="jXe-6S-Srd"/>
                             <constraint firstItem="KbB-P2-FR5" firstAttribute="leading" secondItem="5Wp-fR-UWU" secondAttribute="trailing" constant="10" id="nqe-JX-tLw"/>
-                            <constraint firstItem="4lX-zU-sYn" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="10" id="x6q-Rp-def"/>
+                            <constraint firstItem="ZlX-bQ-ut1" firstAttribute="leading" secondItem="ISD-ym-J7u" secondAttribute="leading" constant="15" id="o3D-XW-Wh1"/>
+                            <constraint firstItem="4lX-zU-sYn" firstAttribute="leading" secondItem="JRE-0J-gop" secondAttribute="trailing" constant="15" id="x6q-Rp-def"/>
+                            <constraint firstItem="ZlX-bQ-ut1" firstAttribute="top" secondItem="IWM-uD-l7d" secondAttribute="bottom" constant="20" id="y6X-Zk-2oW"/>
                             <constraint firstItem="fQx-GF-SiZ" firstAttribute="leading" secondItem="IWM-uD-l7d" secondAttribute="trailing" constant="5" id="yrs-Gq-ksf"/>
                             <constraint firstAttribute="trailing" secondItem="ajN-lx-dpq" secondAttribute="trailing" constant="10" id="zUC-fD-zFK"/>
                         </constraints>
@@ -223,7 +225,7 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="separatorColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -123,8 +123,8 @@ final class ProfileViewController: UIViewController, ProfileViewPresenter {
         
         Task {
             do {
-                try await cartViewModel?.getOrders()
                 try await listsViewModel?.getLists()
+                try await cartViewModel?.getOrders()
                 
                 endRefreshing()
                 

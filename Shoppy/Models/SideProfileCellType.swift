@@ -29,9 +29,9 @@ enum SideProfileCellType: CaseIterable {
         case .wishList:
             UIImage(systemName: "heart.fill")
         case .orders:
-            UIImage(systemName: "list.bullet.clipboard")
+            UIImage(systemName: "dollarsign.square.fill")
         case .lists:
-            UIImage(systemName: "line.3.horizontal")
+            UIImage(systemName: "list.bullet.clipboard.fill")
         }
     }
 }

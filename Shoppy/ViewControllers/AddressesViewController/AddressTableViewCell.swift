@@ -50,10 +50,10 @@ class AddressTableViewCell: UITableViewCell {
         
         if isSelected {
             addressSelectionMark.select()
-            deliverToThisAddressButton.isEnabled = false
+            deliverToThisAddressButton.isHidden = true
         } else {
             addressSelectionMark.deSelect()
-            deliverToThisAddressButton.isEnabled = true
+            deliverToThisAddressButton.isHidden = false
         }
     }
     

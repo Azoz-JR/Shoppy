@@ -42,9 +42,8 @@ class CheckoutViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Select a Payment method"
-        
-        navigationController?.navigationBar.applyShadow(cornerRadius: 5)
-        
+        navigationItem.backButtonDisplayMode = .minimal
+                
         cashOnDeliveryView.addBorder(color: .lightGray.withAlphaComponent(0.5), width: 1)
         cashOnDeliveryView.round(10)
         
@@ -138,6 +137,7 @@ class CheckoutViewController: UIViewController {
     
     func bindToSelectedAddress() {
         userViewModel.selectedAddress.subscribe(onNext: { [weak self] address in
+            self?.cartViewModel.selectedAddress = address
             self?.addressNameLabel.text = address?.name
             self?.addressDetailLabel.text = address?.text
             self?.checkoutButton.isEnabled = address != nil

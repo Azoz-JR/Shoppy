@@ -41,7 +41,7 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        tabBar.tintColor = .selectedTab
+        tabBar.tintColor = .label
                 
         bindToCartViewModel()
         bindToUser()
@@ -99,7 +99,8 @@ final class MainTabBarController: UITabBarController {
     
     func makeHomeView() -> HomeViewController {
         let homeVC = HomeViewController()
-        homeVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
+        homeVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
+        homeVC.navigationItem.backButtonDisplayMode = .minimal
         
         let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
         homeVC.service = api
@@ -114,7 +115,9 @@ final class MainTabBarController: UITabBarController {
     func makeCollectionsView() -> CollectionsViewController {
         let collectionsVC = CollectionsViewController()
         collectionsVC.view.backgroundColor = .systemBackground
-        collectionsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
+        collectionsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
+        collectionsVC.navigationItem.backButtonDisplayMode = .minimal
+        
         let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
         collectionsVC.service = api
         collectionsVC.cartViewModel = cartViewModel
@@ -126,15 +129,18 @@ final class MainTabBarController: UITabBarController {
     
     func makeCartView() -> CartViewController {
         let cartVC = CartViewController(cartViewModel: cartViewModel, userViewModel: userViewModel)
-        cartVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
+        cartVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
         cartVC.view.backgroundColor = .secondBackground
+        cartVC.navigationItem.backButtonDisplayMode = .minimal
         
         return cartVC
     }
     
     func makeProfileView() -> ProfileViewController {
         let profileVC = ProfileViewController()
-        profileVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
+        profileVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
+        profileVC.navigationItem.backButtonDisplayMode = .minimal
+        
         profileVC.cartViewModel = cartViewModel
         profileVC.listsViewModel = listsViewModel
         profileVC.wishListViewModel = wishListViewModel
@@ -145,7 +151,9 @@ final class MainTabBarController: UITabBarController {
     
     func makeWishListView() -> WishListViewController {
         let wishListVC = WishListViewController()
-        wishListVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showProfile))
+        wishListVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
+        wishListVC.navigationItem.backButtonDisplayMode = .minimal
+        
         wishListVC.cartViewModel = cartViewModel
         wishListVC.viewModel = wishListViewModel
         wishListVC.listsViewModel = listsViewModel

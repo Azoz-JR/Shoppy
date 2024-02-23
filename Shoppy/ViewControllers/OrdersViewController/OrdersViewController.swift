@@ -21,6 +21,7 @@ class OrdersViewController: UIViewController, OrdersControllerPresenter {
         super.viewDidLoad()
         
         title = "Your Orders"
+        navigationItem.backButtonDisplayMode = .minimal
         
         //Refresh View
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)

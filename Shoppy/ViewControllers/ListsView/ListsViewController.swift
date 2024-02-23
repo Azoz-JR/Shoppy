@@ -35,6 +35,7 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         super.viewDidLoad()
         
         title = "Your Lists"
+        navigationItem.backButtonDisplayMode = .minimal
         
         //Refresh View
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)

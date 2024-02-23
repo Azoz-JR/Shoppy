@@ -41,6 +41,7 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
         title = list.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteList))
         navigationItem.rightBarButtonItem?.tintColor = .systemRed
+        navigationItem.backButtonDisplayMode = .minimal
     }
     
     func showAlert(error: Error?) {

@@ -37,6 +37,10 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
         sideProfileView.imagePickerHandler = { [weak self] in
             self?.configureImagePicker()
         }
+        
+        sideProfileView.signOutHandler = { [weak self] in
+            self?.showSignOutAlert()
+        }
     }
     
     @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -145,6 +149,17 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
         }
         
         return true
+    }
+    
+    func showSignOutAlert() {
+        let alert = UIAlertController(title: "Sign out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { _ in
+            try? AuthenticationManager.shared.signOut()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true)
     }
     
 

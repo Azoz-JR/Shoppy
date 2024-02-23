@@ -19,6 +19,18 @@ class Address: Codable, Equatable {
     var landmark: String?
     var location: Location?
     
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case phone
+        case street
+        case building
+        case floor
+        case area
+        case landmark
+        case location
+    }
+    
     init(name: String = "", phone: String = "", street: String = "", building: String = "", floor: String = "", area: String = "", landmark: String? = nil, location: Location? = nil) {
         self.name = name
         self.phone = phone
@@ -30,8 +42,35 @@ class Address: Codable, Equatable {
         self.location = location
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.name, forKey: .name)
+        try container.encode(self.phone, forKey: .phone)
+        try container.encode(self.street, forKey: .street)
+        try container.encode(self.building, forKey: .building)
+        try container.encode(self.floor, forKey: .floor)
+        try container.encode(self.area, forKey: .area)
+        try container.encodeIfPresent(self.landmark, forKey: .landmark)
+        try container.encodeIfPresent(self.location, forKey: .location)
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.phone = try container.decode(String.self, forKey: .phone)
+        self.street = try container.decode(String.self, forKey: .street)
+        self.building = try container.decode(String.self, forKey: .building)
+        self.floor = try container.decode(String.self, forKey: .floor)
+        self.area = try container.decode(String.self, forKey: .area)
+        self.landmark = try container.decodeIfPresent(String.self, forKey: .landmark)
+        self.location = try container.decodeIfPresent(Location.self, forKey: .location)
+    }
+    
+    
     var text: String {
-        var finalText = ""
+        let finalText = ""
         var strings = [String]()
         
         if !building.isEmpty {

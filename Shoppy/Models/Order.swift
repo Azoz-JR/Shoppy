@@ -15,8 +15,9 @@ struct Order: Equatable, Codable {
     let discount: Double
     let promoCode: String?
     let date: Date
+    let address: Address
     
-    init(id: String, items: [ItemModel], total: Double, subTotal: Double, discount: Double = 0.0, promoCode: String? = nil, date: Date) {
+    init(id: String, items: [ItemModel], total: Double, subTotal: Double, discount: Double = 0.0, promoCode: String? = nil, date: Date, address: Address) {
         self.id = id
         self.items = items
         self.total = total
@@ -24,6 +25,7 @@ struct Order: Equatable, Codable {
         self.discount = discount
         self.promoCode = promoCode
         self.date = date
+        self.address = address
     }
     
     enum CodingKeys: String, CodingKey {
@@ -34,6 +36,7 @@ struct Order: Equatable, Codable {
         case discount
         case promoCode = "promo_code"
         case date
+        case address
     }
     
     func encode(to encoder: Encoder) throws {
@@ -45,6 +48,7 @@ struct Order: Equatable, Codable {
         try container.encode(self.discount, forKey: .discount)
         try container.encodeIfPresent(self.promoCode, forKey: .promoCode)
         try container.encode(self.date, forKey: .date)
+        try container.encode(self.address, forKey: .address)
     }
     
     init(from decoder: Decoder) throws {
@@ -56,6 +60,7 @@ struct Order: Equatable, Codable {
         self.discount = try container.decode(Double.self, forKey: .discount)
         self.promoCode = try container.decodeIfPresent(String.self, forKey: .promoCode)
         self.date = try container.decode(Date.self, forKey: .date)
+        self.address = try container.decode(Address.self, forKey: .address)
     }
     
     var image: URL? {

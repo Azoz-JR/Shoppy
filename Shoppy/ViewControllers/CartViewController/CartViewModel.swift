@@ -23,6 +23,7 @@ class CartViewModel {
     
     
     var cartCount: MyObservable<Int> = MyObservable(0)
+    var selectedAddress: Address?
     
     private var ordersRelay = BehaviorRelay<[Order]>(value: [])
     var orders: Observable<[Order]> {
@@ -229,7 +230,11 @@ extension CartViewModel {
     }
     
     func placeOrder() async throws {
-        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, total: total, subTotal: subTotal, discount: discount, promoCode: promoCode, date: Date.now)
+        guard let selectedAddress else {
+            return
+        }
+        
+        let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, total: total, subTotal: subTotal, discount: discount, promoCode: promoCode, date: Date.now, address: selectedAddress)
         
         try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
         

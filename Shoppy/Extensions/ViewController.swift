@@ -103,6 +103,10 @@ extension UIViewController {
         present(vc, animated: true)
     }
     
+    @objc func dismissSheet() {
+        self.dismiss(animated: true)
+    }
+    
     var tabBarHeight: CGFloat {
         self.navigationController?.tabBarController?.tabBar.frame.height ?? 0
     }

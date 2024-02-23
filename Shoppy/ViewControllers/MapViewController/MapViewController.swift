@@ -28,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         title = "Add an address"
         
-        let cancelBarButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelTapped))
-        navigationItem.leftBarButtonItem = cancelBarButton
+        let doneBarButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = doneBarButton
         
         setupMapView()
         
