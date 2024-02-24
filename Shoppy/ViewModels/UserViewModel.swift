@@ -43,7 +43,7 @@ final class UserViewModel {
                 let currentUser = try await UserManager.shared.getCurrentUser()
                 userSubject.onNext(currentUser)
                 
-                try getUserAddresses()
+                try await getUserAddresses()
             } catch {
                 throw error
             }
@@ -76,95 +76,75 @@ final class UserViewModel {
         }
     }
     
-    func getUserAddresses() throws {
-        Task {
-            do {
-                guard let currentUserId else {
-                    return
-                }
-                
-                let selectedAddress = try await UserManager.shared.getSelectedAddress(userId: currentUserId)
-                let addresses = try await UserManager.shared.getAddresses(userId: currentUserId)
-                
-                await MainActor.run {
-                    currentSelectedAddressRelay.accept(selectedAddress)
-                    userAddresses.accept(addresses)
-                }
-                
-            } catch {
-                throw error
-            }
+    func getUserAddresses() async throws {
+        guard let currentUserId else {
+            return
+        }
+        
+        let selectedAddress = try await UserManager.shared.getSelectedAddress(userId: currentUserId)
+        let addresses = try await UserManager.shared.getAddresses(userId: currentUserId)
+        
+        await MainActor.run {
+            currentSelectedAddressRelay.accept(selectedAddress)
+            userAddresses.accept(addresses)
         }
     }
     
     func getSelectedAddress() throws {
         Task {
-            do {
-                guard let currentUserId else {
-                    return
-                }
-                                
-                let selectedAddress = try await UserManager.shared.getSelectedAddress(userId: currentUserId)
-                
-                await MainActor.run {
-                    currentSelectedAddressRelay.accept(selectedAddress)
-                }
-                
-            } catch {
-                throw error
-            }
-        }
-    }
-    
-    func addAddress(address: Address) throws {
-        Task {
             guard let currentUserId else {
                 return
             }
             
-            do {
-                try UserManager.shared.createAddress(userId: currentUserId, address: address)
-                try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
-                
-                try getUserAddresses()
-            } catch {
-                throw error
+            let selectedAddress = try await UserManager.shared.getSelectedAddress(userId: currentUserId)
+            
+            await MainActor.run {
+                currentSelectedAddressRelay.accept(selectedAddress)
             }
+        }
+    }
+    
+    func addAddress(address: Address) async throws {
+        guard let currentUserId else {
+            return
         }
         
+        try UserManager.shared.createAddress(userId: currentUserId, address: address)
+        try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
+        
+        try await getUserAddresses()
     }
     
-    func selectAddress(address: Address) throws {
-        Task {
-            guard let currentUserId else {
-                return
-            }
-            
-            do {
-                try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
-                
-                try getUserAddresses()
-            } catch {
-                throw error
-            }
+    func selectAddress(address: Address) async throws {
+        guard let currentUserId else {
+            return
         }
+        
+        try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
+        
+        try await getUserAddresses()
     }
     
-    func editAddress(address: Address) throws {
-        Task {
-            guard let currentUserId else {
-                return
-            }
-            
-            do {
-                try UserManager.shared.updateAddress(userId: currentUserId, address: address)
-                try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
-                
-                try getUserAddresses()
-            } catch {
-                throw error
-            }
+    func editAddress(address: Address) async throws {
+        guard let currentUserId else {
+            return
         }
+            
+        try UserManager.shared.updateAddress(userId: currentUserId, address: address)
+        try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
+        
+        try await getUserAddresses()
+
+    }
+    
+    func deleteAddress(address: Address) async throws {
+        guard let currentUserId else {
+            return
+        }
+        
+        try await UserManager.shared.deleteAddress(userId: currentUserId, address: address)
+        
+        try await getUserAddresses()
     }
 
 }

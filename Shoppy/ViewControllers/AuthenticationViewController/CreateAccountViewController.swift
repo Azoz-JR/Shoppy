@@ -120,7 +120,7 @@ class CreateAccountViewController: UIViewController {
             .tap
             .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
             .bind { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+                self?.popViewController()
             }
             .disposed(by: disposeBag)
     }

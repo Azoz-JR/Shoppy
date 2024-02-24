@@ -29,6 +29,7 @@ class EditAddressViewController: UIViewController {
     var userViewModel: UserViewModel
     var selectedAddress: Address?
     let disposeBag = DisposeBag()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     
     init(userViewModel: UserViewModel, selectedAddress: Address? = nil) {
@@ -48,11 +49,11 @@ class EditAddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         configView()
-
+        setUpProgressView()
+        setupNotifications()
+        bindToViewModel()
+        
         configTextFieldViews()
         setUpNameTextFields()
         setUpPhoneTextField()
@@ -63,7 +64,6 @@ class EditAddressViewController: UIViewController {
         setUpLandmarkTextField()
         setUpUseAddressButton()
         setUpAddLocationButton()
-        bindToViewModel()
     }
     
     func configView() {
@@ -77,12 +77,16 @@ class EditAddressViewController: UIViewController {
         }
     }
     
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     func setupSelectedAddress() {
         guard let selectedAddress else {
             return
         }
         
-        viewModel.setupSelectedAddress()
         nameTextField.text = selectedAddress.name
         phoneTextField.text = selectedAddress.phone
         streetTextField.text = selectedAddress.street
@@ -90,54 +94,33 @@ class EditAddressViewController: UIViewController {
         floorTextField.text = selectedAddress.floor
         areaTextField.text = selectedAddress.area
         nearestLandmarkTextField.text = selectedAddress.landmark
+        viewModel.selectedLocationRelay.accept(selectedAddress.location)
     }
     
     func bindToViewModel() {
         setupSelectedLocation()
         
         viewModel.error.subscribe(onNext: { [weak self] error in
-            self?.show(error: error)
+            self?.showError(title: "Insufficient Address", message: error)
+        })
+        .disposed(by: disposeBag)
+        
+        viewModel.isLoading
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] isLoading in
+            if isLoading {
+                self?.showProgressView()
+            } else {
+                self?.hideProgressView()
+            }
         })
         .disposed(by: disposeBag)
     }
     
-    func configTextFieldViews() {
-        useAddressButton.round(20)
-        nameTextField.addBorderAndPadding()
-        phoneTextField.addBorderAndPadding()
-        streetTextField.addBorderAndPadding()
-        buildingTextField.addBorderAndPadding()
-        floorTextField.addBorderAndPadding()
-        areaTextField.addBorderAndPadding()
-        nearestLandmarkTextField.addBorderAndPadding()
-    }
-    
-    func setUpNameTextFields() {
-        nameTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.name = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func setUpPhoneTextField() {
-        phoneTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.phone = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
     func setupSelectedLocation() {
-        viewModel.selectedLocationRelay.asObservable().subscribe(onNext: { [weak self] location in
+        viewModel.selectedLocationRelay.asObservable()
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] location in
             guard let location else {
                 self?.selectedLocationLabel.isHidden = true
                 return
@@ -150,66 +133,6 @@ class EditAddressViewController: UIViewController {
         )
         .disposed(by: disposeBag)
         
-    }
-    
-    func setUpStreetTextField() {
-        streetTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.street = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func setUpBuildingTextField() {
-        buildingTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.building = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func setUpFloorTextField() {
-        floorTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.floor = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func setUpAreaTextField() {
-        areaTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.area = text ?? ""
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func setUpLandmarkTextField() {
-        nearestLandmarkTextField
-            .rx
-            .text
-            .observe(on: MainScheduler.asyncInstance)
-            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-            .subscribe { [weak self] text in
-                self?.viewModel.landmark = text ?? ""
-            }
-            .disposed(by: disposeBag)
     }
     
     func setUpAddLocationButton() {
@@ -233,13 +156,11 @@ class EditAddressViewController: UIViewController {
             .tap
             .bind { [weak self] in
                 self?.viewModel.useAddress {
-                    self?.navigationController?.popViewController(animated: true)
+                    self?.popViewController()
                 }
             }
             .disposed(by: disposeBag)
     }
-    
-
     
     func updateLocationButton() {
         if viewModel.selectedLocation != nil {
@@ -249,12 +170,31 @@ class EditAddressViewController: UIViewController {
         }
     }
     
+    func setUpProgressView() {
+        view.addSubview(progressView)
+        progressView.center = view.center
+        progressView.isHidden = true
+        
+    }
+    
+    func showProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.startAnimating()
+            self.view.isUserInteractionEnabled = false
+        }
+        
+    }
+    
+    func hideProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+        }
+    }
+    
     deinit {
         // Unsubscribe from keyboard notifications
         NotificationCenter.default.removeObserver(self)
     }
-
+    
 }
-
-
-

@@ -1,22 +1,13 @@
 //
-//  Collection.swift
+//  SmartCollection.swift
 //  Shoppy
 //
-//  Created by Azoz Salah on 20/12/2023.
+//  Created by Azoz Salah on 24/02/2024.
 //
 
 import Foundation
 
-// MARK: - Collections
-struct Collections: Codable {
-    let smartCollections: [SmartCollection]
 
-    enum CodingKeys: String, CodingKey {
-        case smartCollections = "smart_collections"
-    }
-}
-
-// MARK: - SmartCollection
 struct SmartCollection: Codable {
     let id: Int
     let title: String

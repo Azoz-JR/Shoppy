@@ -40,10 +40,39 @@ extension AddressesSelectionViewController: UITableViewDelegate, UITableViewData
         fatalError("Unable to dequeue AddressTableViewCell")
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+                
+        let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
+            
+            self?.deleteAddress(at: indexPath)
+        }
+        
+        delete.image = UIImage(systemName: "trash.fill")
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+        return swipeActions
+    }
+    
     func reloadTableView() {
         DispatchQueue.mainAsyncIfNeeded {
             UIView.transition(with: self.tableView, duration: 0.3, options: .transitionCrossDissolve) {
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func deleteAddress(at index: IndexPath) {
+        showProgressView()
+        
+        Task {
+            do {
+                let address = addresses[index.row]
+                try await userViewModel.deleteAddress(address: address)
+                
+                hideProgressView()
+            } catch {
+                hideProgressView()
+                show(error: error)
             }
         }
     }

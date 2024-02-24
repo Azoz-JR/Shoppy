@@ -21,6 +21,10 @@ class CartViewModel {
         errorSubject.asObservable()
     }
     
+    private let checkoutDoneSubject = PublishSubject<Bool>()
+    var checkoutDone: Observable<Bool> {
+        checkoutDoneSubject.asObservable()
+    }
     
     var cartCount: MyObservable<Int> = MyObservable(0)
     var selectedAddress: Address?
@@ -237,6 +241,8 @@ extension CartViewModel {
         let order = Order(id: UUID().uuidString, items: cartProductsRelay.value, total: total, subTotal: subTotal, discount: discount, promoCode: promoCode, date: Date.now, address: selectedAddress)
         
         try await UserManager.shared.addUserOrder(userId: currentUserId, order: order)
+        
+        checkoutDoneSubject.onNext(true)
         
         try await getOrders()
     }

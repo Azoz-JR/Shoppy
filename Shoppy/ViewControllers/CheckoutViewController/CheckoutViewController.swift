@@ -56,7 +56,9 @@ class CheckoutViewController: UIViewController {
         configCheckoutView()
         
         checkoutButton.addTarget(self, action: #selector(checkoutTapped), for: .touchUpInside)
-        checkoutButton.round(20)
+        checkoutButton.round(5)
+        
+        setUpProgressView()
         
         bindToSelectedAddress()
     }
@@ -65,6 +67,7 @@ class CheckoutViewController: UIViewController {
         subtotalLabel.text = "\(cartViewModel.subTotal)$"
         discountLabel.text = "-\(cartViewModel.discount)"
         totalLabel.text = "\(cartViewModel.total)$"
+        deliveryDateLabel.text = Date().formatted(.dateTime.weekday(.wide).month(.abbreviated).day(.defaultDigits))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +132,7 @@ class CheckoutViewController: UIViewController {
         let alert = UIAlertController(title: "Thank you!", message: "Your order is submitted successfully!", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.popViewController()
         }))
         
         present(alert, animated: true)
@@ -138,9 +141,9 @@ class CheckoutViewController: UIViewController {
     func bindToSelectedAddress() {
         userViewModel.selectedAddress.subscribe(onNext: { [weak self] address in
             self?.cartViewModel.selectedAddress = address
-            self?.addressNameLabel.text = address?.name
+            self?.addressNameLabel.text = address?.name ?? "Tap to select an address"
             self?.addressDetailLabel.text = address?.text
-            self?.checkoutButton.isEnabled = address != nil
+            //self?.checkoutButton.isEnabled = address != nil
         })
         .disposed(by: disposeBag)
     }

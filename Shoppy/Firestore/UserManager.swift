@@ -249,4 +249,19 @@ extension UserManager {
         try await selectedAddress(userId: userId).getDocument(as: Address.self)
     }
     
+    func deleteAddress(userId: String, address: Address) async throws {
+        try await userAddressesCollection(userId: userId).document(address.id).delete()
+        
+        // Check if the deleted address was the current selected Address
+        let currentSelectedAddress = try await getSelectedAddress(userId: userId)
+        
+        if currentSelectedAddress == address {
+            if let newSelectedAddress = try await getAddresses(userId: userId).first {
+                try setSelectedAddress(userId: userId, address: newSelectedAddress)
+            } else {
+                try await selectedAddress(userId: userId).delete()
+            }
+        }
+    }
+    
 }

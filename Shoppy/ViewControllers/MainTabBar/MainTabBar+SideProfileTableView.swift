@@ -38,7 +38,6 @@ extension MainTabBarController: MainTabBarPresenter {
             wishListVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(wishListVC.dismissSheet))
             
             let nav = UINavigationController(rootViewController: wishListVC)
-            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
             
         case .orders:
@@ -48,7 +47,6 @@ extension MainTabBarController: MainTabBarPresenter {
             ordersVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ordersVC.dismissSheet))
             
             let nav = UINavigationController(rootViewController: ordersVC)
-            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
                         
         case .lists:
@@ -58,7 +56,6 @@ extension MainTabBarController: MainTabBarPresenter {
 
             
             let nav = UINavigationController(rootViewController: listsVC)
-            //nav.navigationBar.tintColor = .navBarTint
             show(nav, sender: self)
         }
         

@@ -27,7 +27,6 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     let disposeBag = DisposeBag()
     private var refreshControl = UIRefreshControl()
     let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-
     
     init(cartViewModel: CartViewModel, userViewModel: UserViewModel) {
         self.cartViewModel = cartViewModel
@@ -44,7 +43,6 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Cart"
-        //navigationController?.navigationBar.tintColor = .navBarTint
         
         configView()
         bindToViewModel()
@@ -124,6 +122,15 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
             
             self?.updateCheckoutButton(count: count)
         }
+        
+        cartViewModel.checkoutDone.subscribe(onNext: { [weak self] isDone in
+            if isDone {
+                DispatchQueue.mainAsyncIfNeeded {
+                    self?.removePromoCode()
+                }
+            }
+        })
+        .disposed(by: disposeBag)
 
     }
     
