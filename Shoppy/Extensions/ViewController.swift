@@ -8,6 +8,12 @@
 import UIKit
 
 extension UIViewController {
+    func popViewController() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     func show(error: Error) {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))

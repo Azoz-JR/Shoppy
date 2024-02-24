@@ -43,7 +43,7 @@ final class UserViewModel {
                 let currentUser = try await UserManager.shared.getCurrentUser()
                 userSubject.onNext(currentUser)
                 
-                try getUserAddresses()
+                try await getUserAddresses()
             } catch {
                 throw error
             }
@@ -76,7 +76,7 @@ final class UserViewModel {
         }
     }
     
-    func getUserAddresses() throws {
+    func getUserAddresses() async throws {
         Task {
             do {
                 guard let currentUserId else {
@@ -116,7 +116,7 @@ final class UserViewModel {
         }
     }
     
-    func addAddress(address: Address) throws {
+    func addAddress(address: Address) async throws {
         Task {
             guard let currentUserId else {
                 return
@@ -126,7 +126,7 @@ final class UserViewModel {
                 try UserManager.shared.createAddress(userId: currentUserId, address: address)
                 try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
                 
-                try getUserAddresses()
+                try await getUserAddresses()
             } catch {
                 throw error
             }
@@ -134,7 +134,7 @@ final class UserViewModel {
         
     }
     
-    func selectAddress(address: Address) throws {
+    func selectAddress(address: Address) async throws {
         Task {
             guard let currentUserId else {
                 return
@@ -143,14 +143,14 @@ final class UserViewModel {
             do {
                 try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
                 
-                try getUserAddresses()
+                try await getUserAddresses()
             } catch {
                 throw error
             }
         }
     }
     
-    func editAddress(address: Address) throws {
+    func editAddress(address: Address) async throws {
         Task {
             guard let currentUserId else {
                 return
@@ -160,7 +160,7 @@ final class UserViewModel {
                 try UserManager.shared.updateAddress(userId: currentUserId, address: address)
                 try UserManager.shared.setSelectedAddress(userId: currentUserId, address: address)
                 
-                try getUserAddresses()
+                try await getUserAddresses()
             } catch {
                 throw error
             }

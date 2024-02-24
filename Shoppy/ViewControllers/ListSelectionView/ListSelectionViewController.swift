@@ -52,7 +52,6 @@ class ListSelectionViewController: UIViewController, ListsControllerPresenter {
     func configNavigationBar() {
         title = "Your Lists"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped))
-        //navigationItem.rightBarButtonItem?.tintColor = .selectedTab
         
         view.backgroundColor = .clear
     }

@@ -23,9 +23,14 @@ class EditAddressViewModel {
     var landmark = ""
     
     var selectedLocationRelay = BehaviorRelay<Location?>(value: nil)
-    private var errorSubject = PublishSubject<Error>()
+    private var errorSubject = PublishSubject<String>()
+    private let loadingRelay = BehaviorRelay<Bool>(value: false)
     
-    var error: Observable<Error> {
+    var isLoading: Observable<Bool> {
+        loadingRelay.asObservable()
+    }
+    
+    var error: Observable<String> {
         errorSubject.asObservable()
     }
 
@@ -36,21 +41,6 @@ class EditAddressViewModel {
     
     init(userViewModel: UserViewModel) {
         self.userViewModel = userViewModel
-    }
-    
-    
-    func setupSelectedAddress() {
-        if let selectedAddress {
-            name = selectedAddress.name
-            phone = selectedAddress.phone
-            location = selectedAddress.location?.placemark?.text ?? ""
-            street = selectedAddress.street
-            building = selectedAddress.building
-            floor = selectedAddress.floor
-            area = selectedAddress.area
-            landmark = selectedAddress.landmark ?? ""
-            selectedLocationRelay.accept(selectedAddress.location)
-        }
     }
     
     func useAddress(completion: @escaping () -> Void) {
@@ -65,25 +55,34 @@ class EditAddressViewModel {
     
     private func createAddress(completion: @escaping () -> Void) {
         if let error = isUnAcceptableAddress() {
-            errorSubject.onNext(error)
+            errorSubject.onNext(error.errorDescription)
             return
         }
         
         let address = Address(name: name, phone: phone, street: street, building: building, floor: floor, area: area, landmark: landmark, location: selectedLocation)
         
-        do {
-            try userViewModel.addAddress(address: address)
-            
-            completion()
-        } catch {
-            errorSubject.onNext(error)
+        Task {
+            do {
+                loadingRelay.accept(true)
+                
+                try await userViewModel.addAddress(address: address)
+                
+                loadingRelay.accept(false)
+                completion()
+            } catch {
+                loadingRelay.accept(false)
+                errorSubject.onNext(error.localizedDescription)
+            }
         }
         
     }
     
     private func editAddress(address: Address, completion: @escaping () -> Void) {
+        loadingRelay.accept(true)
+        
         if let error = isUnAcceptableAddress() {
-            errorSubject.onNext(error)
+            loadingRelay.accept(false)
+            errorSubject.onNext(error.errorDescription)
             return
         }
         
@@ -95,12 +94,16 @@ class EditAddressViewModel {
         address.area = area
         address.location = selectedLocation
         
-        do {
-            try userViewModel.editAddress(address: address)
-            
-            completion()
-        } catch {
-            errorSubject.onNext(error)
+        Task {
+            do {
+                try await userViewModel.editAddress(address: address)
+                
+                loadingRelay.accept(false)
+                completion()
+            } catch {
+                loadingRelay.accept(false)
+                errorSubject.onNext(error.localizedDescription)
+            }
         }
         
         

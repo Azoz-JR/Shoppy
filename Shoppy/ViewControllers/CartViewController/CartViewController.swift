@@ -44,7 +44,6 @@ final class CartViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Cart"
-        //navigationController?.navigationBar.tintColor = .navBarTint
         
         configView()
         bindToViewModel()

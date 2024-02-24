@@ -63,7 +63,7 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
             }
             
             self?.listsViewModel.delete(list: list)
-            self?.navigationController?.popViewController(animated: true)
+            self?.popViewController()
         }))
         
         present(alert, animated: true)

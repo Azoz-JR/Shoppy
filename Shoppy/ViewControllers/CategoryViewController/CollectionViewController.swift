@@ -30,7 +30,6 @@ final class CollectionViewController: UIViewController {
         super.viewDidLoad()
         
         contentView.backgroundColor = .systemBackground
-        //navigationController?.navigationBar.tintColor = .navBarTint
         navigationItem.backButtonDisplayMode = .minimal
         
         viewModel.service = service

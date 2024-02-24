@@ -41,7 +41,6 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        tabBar.tintColor = .label
                 
         bindToCartViewModel()
         bindToUser()
@@ -92,7 +91,6 @@ final class MainTabBarController: UITabBarController {
         nav.tabBarItem.tag = tag
         nav.tabBarItem.title = title
         nav.tabBarItem.badgeColor = .red
-        //nav.navigationBar.tintColor = .navBarTint
                 
         return nav
     }

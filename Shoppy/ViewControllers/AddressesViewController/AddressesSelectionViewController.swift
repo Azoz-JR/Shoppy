@@ -10,11 +10,13 @@ import UIKit
 
 class AddressesSelectionViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noAddressesView: UIView!
     
     var userViewModel: UserViewModel
     var addresses: [Address] = []
     var selectedAddress: Address?
     var disposeBag = DisposeBag()
+    let progressView = ProgressView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     
     init(userViewModel: UserViewModel) {
@@ -35,6 +37,7 @@ class AddressesSelectionViewController: UIViewController {
         navigationItem.backButtonDisplayMode = .minimal
 
         setupTableView()
+        setUpProgressView()
         bindToUserViewModel()
         
         let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAddressTapped))
@@ -45,6 +48,7 @@ class AddressesSelectionViewController: UIViewController {
         userViewModel.addresses.subscribe(onNext: { [weak self] addresses in
             self?.addresses = addresses
             self?.reloadTableView()
+            self?.noAddressesView.isHidden = !addresses.isEmpty
         })
         .disposed(by: disposeBag)
         
@@ -56,10 +60,16 @@ class AddressesSelectionViewController: UIViewController {
     }
     
     func selectAddress(address: Address) {
-        do {
-            try userViewModel.selectAddress(address: address)
-        } catch {
-            show(error: error)
+        showProgressView()
+        Task {
+            do {
+                try await userViewModel.selectAddress(address: address)
+                
+                hideProgressView()
+            } catch {
+                hideProgressView()
+                show(error: error)
+            }
         }
     }
     
@@ -71,6 +81,29 @@ class AddressesSelectionViewController: UIViewController {
     @objc func addAddressTapped() {
         let vc = EditAddressViewController(userViewModel: userViewModel)
         show(vc, sender: self)
+    }
+    
+    func setUpProgressView() {
+        view.addSubview(progressView)
+        progressView.center = view.center
+        progressView.isHidden = true
+        
+    }
+    
+    func showProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.isHidden = false
+            self.progressView.startAnimating()
+            self.view.isUserInteractionEnabled = false
+        }
+        
+    }
+    
+    func hideProgressView() {
+        DispatchQueue.mainAsyncIfNeeded {
+            self.progressView.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+        }
     }
 
 }
