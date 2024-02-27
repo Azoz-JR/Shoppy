@@ -34,11 +34,13 @@ Shoppy is an e-commerce iOS application that allows users to shop online, browse
 - Xcode 15.0+
 
 
+
 ## Installation
 
-- Clone the repository 'git clone [https://github.com/Azoz-JR/iOSDev/tree/main/SwiftUI/MessengerApp]'
+- Clone the repository 'git clone [https://github.com/Azoz-JR/Shoppy.git]'
 - Open the project in Xcode
 - Build and run the app on your iOS device or simulator
+
 
 
 ## Third-Party dependencies
