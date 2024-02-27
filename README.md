@@ -28,7 +28,41 @@ Shoppy is an e-commerce iOS application that allows users to shop online, browse
 - Products API: Shopify
 
 
-## Quick overview
+## Requirements
+
+- iOS 16.0+
+- Xcode 15.0+
+
+
+## Installation
+
+- Clone the repository 'git clone [https://github.com/Azoz-JR/iOSDev/tree/main/SwiftUI/MessengerApp]'
+- Open the project in Xcode
+- Build and run the app on your iOS device or simulator
+
+
+## Third-Party dependencies
+
+#### RxSwift
+
+You can use [CocoaPods](http://cocoapods.org/) to install `RxSwift` by adding it to your `Podfile`:
+
+```ruby
+platform :ios, '9.0'
+use_frameworks!
+pod 'RxSwift', '6.6.0'
+pod 'RxCocoa', '6.6.0'
+```
+
+#### SDWebImage
+You can use Swift Package Manager (SPM) to install [`SDWebImage`](https://github.com/SDWebImage/SDWebImage?tab=readme-ov-file#installation-with-swift-package-manager-xcode-11)
+
+#### Firebase
+You can use Swift Package Manager (SPM) to install [`Firebase`](https://firebase.google.com/docs/ios/installation-methods)
+
+
+
+## Quick Overview
 
 ### Authentication:
 <p align="center">
@@ -78,3 +112,8 @@ Shoppy is an e-commerce iOS application that allows users to shop online, browse
   <img src="https://github.com/Azoz-JR/Shoppy/assets/77539943/71324e90-e611-43b3-b47a-288bc56bf262" width="300" height="600" />
   <img src="https://github.com/Azoz-JR/Shoppy/assets/77539943/9a33269c-53a8-43b1-9e7d-cbe57ddf2f37" width="300" height="600" />
 </p>
+
+
+## Meta
+
+Abdelaziz Salah – [@AzozSalah6](https://twitter.com/AzozSalah6) – azozsalah19@gmail.com
