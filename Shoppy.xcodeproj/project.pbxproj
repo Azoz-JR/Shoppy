@@ -527,6 +527,9 @@
 		970EECD92B338D78009D53C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				972FABDE2B3C9A9F0017114A /* Order.swift */,
+				972FABE02B3C9B680017114A /* List.swift */,
+				9788DDEF2B5DE84300CF44A8 /* SideProfileCellType.swift */,
 				970EECC92B310715009D53C7 /* Product.swift */,
 				970EECD12B31AF6D009D53C7 /* Products.swift */,
 				970EECD32B31AF8A009D53C7 /* ProductOption.swift */,
@@ -539,8 +542,43 @@
 				975AAE3C2B8A242300634B23 /* ColorOption.swift */,
 				975AAE3E2B8A243900634B23 /* Vendor.swift */,
 				975AAE402B8A245C00634B23 /* SalesURLs.swift */,
+				970EECCF2B310D4F009D53C7 /* ItemModel.swift */,
+				97C489DC2B4D89DA00D0E9D7 /* Section.swift */,
 			);
 			path = Products;
+			sourceTree = "<group>";
+		};
+		97284BB72B8F5F9600F6C1A4 /* CheckoutView */ = {
+			isa = PBXGroup;
+			children = (
+				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
+			);
+			path = CheckoutView;
+			sourceTree = "<group>";
+		};
+		97284BB82B8F5FAE00F6C1A4 /* AddressesSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */,
+				976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */,
+			);
+			path = AddressesSelectionView;
+			sourceTree = "<group>";
+		};
+		97284BB92B8F5FF400F6C1A4 /* EditAddressView */ = {
+			isa = PBXGroup;
+			children = (
+				976F5C962B8530B5008999DC /* EditAddressViewController.xib */,
+			);
+			path = EditAddressView;
+			sourceTree = "<group>";
+		};
+		97284BBA2B8F600E00F6C1A4 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				97B1C1212B8435AB002D9F08 /* MapViewController.xib */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		9728F8C22B480BAC00E5CEA9 /* MyFonts */ = {
@@ -720,11 +758,6 @@
 			children = (
 				975AAE432B8A24F800634B23 /* Collections */,
 				970EECD92B338D78009D53C7 /* Products */,
-				970EECCF2B310D4F009D53C7 /* ItemModel.swift */,
-				972FABDE2B3C9A9F0017114A /* Order.swift */,
-				972FABE02B3C9B680017114A /* List.swift */,
-				97C489DC2B4D89DA00D0E9D7 /* Section.swift */,
-				9788DDEF2B5DE84300CF44A8 /* SideProfileCellType.swift */,
 				975AAE422B8A249100634B23 /* Address */,
 			);
 			path = Models;
@@ -744,21 +777,25 @@
 		9758BA1A2B25132100F4E8F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9788DDE82B5CAE1400CF44A8 /* SideProfile */,
-				97AB18182B534CBE00522186 /* ProgressView */,
 				9790F8E92B3F232B00597A50 /* HomeView */,
 				9790F8EA2B3F233D00597A50 /* CollectionsView */,
 				9790F8EB2B3F237600597A50 /* CartView */,
 				9790F8F02B3F24B600597A50 /* WishListView */,
+				9790F8ED2B3F244900597A50 /* ProfileView */,
+				9788DDE82B5CAE1400CF44A8 /* SideProfile */,
+				97284BB72B8F5F9600F6C1A4 /* CheckoutView */,
+				97284BB82B8F5FAE00F6C1A4 /* AddressesSelectionView */,
+				97284BB92B8F5FF400F6C1A4 /* EditAddressView */,
+				97284BBA2B8F600E00F6C1A4 /* MapView */,
 				9790F8EF2B3F24A200597A50 /* Product */,
 				9790F8EC2B3F241900597A50 /* PrdouctDetailVIew */,
-				9790F8ED2B3F244900597A50 /* ProfileView */,
 				9790F8EE2B3F248300597A50 /* OrdersView */,
 				9790F9132B41DDB900597A50 /* ListSelectionView */,
 				97C489D72B4C7EA100D0E9D7 /* SearchView */,
 				9790F8F72B3FC07600597A50 /* ListsView */,
 				97AB17912B4F802B00522186 /* CreateListView */,
 				97868F462B57540400BFE24B /* Authentication */,
+				97AB18182B534CBE00522186 /* ProgressView */,
 				97B390072B1F845B00EB90EA /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -789,9 +826,7 @@
 			children = (
 				976F5C882B8518C6008999DC /* AddressesSelectionViewController.swift */,
 				97DF171A2B8666C8000D9EBD /* AddressesSelectionViewController+TableView.swift */,
-				976F5C892B8518C6008999DC /* AddressesSelectionViewController.xib */,
 				976F5C8C2B851C68008999DC /* AddressTableViewCell.swift */,
-				976F5C8D2B851C68008999DC /* AddressTableViewCell.xib */,
 			);
 			path = AddressesViewController;
 			sourceTree = "<group>";
@@ -1068,7 +1103,6 @@
 			isa = PBXGroup;
 			children = (
 				97B1C1152B82DB0C002D9F08 /* CheckoutViewController.swift */,
-				97B1C1162B82DB0C002D9F08 /* CheckoutViewController.xib */,
 			);
 			path = CheckoutViewController;
 			sourceTree = "<group>";
@@ -1146,7 +1180,6 @@
 			isa = PBXGroup;
 			children = (
 				97B1C1202B8435AB002D9F08 /* MapViewController.swift */,
-				97B1C1212B8435AB002D9F08 /* MapViewController.xib */,
 			);
 			path = MapViewController;
 			sourceTree = "<group>";
@@ -1157,7 +1190,6 @@
 				976F5C952B8530B5008999DC /* EditAddressViewController.swift */,
 				975AAE482B8A343600634B23 /* EditAddressViewController+TextFields.swift */,
 				97DF17232B87C502000D9EBD /* EditAddressViewController+Keyboard.swift */,
-				976F5C962B8530B5008999DC /* EditAddressViewController.xib */,
 				97DF171F2B87765F000D9EBD /* EditAddressViewModel.swift */,
 			);
 			path = EditAddresViewController;
