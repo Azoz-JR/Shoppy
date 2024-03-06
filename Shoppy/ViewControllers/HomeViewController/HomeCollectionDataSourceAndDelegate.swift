@@ -13,7 +13,7 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
     var categories: [Category] = Category.allCases
     weak var parentController: HomeControllerPresenter?
     var wishListViewModel: WishListViewModel?
-
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return data.count
@@ -27,7 +27,61 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
         
         // Products Sections
         let count = data[section].items.count
-        return  count > 2 ? 2 : count
+        return  (count > 2) ? 2 : count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // CATEGORIES SECTION
+        if indexPath.section == 0 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallCategoryCollectionCell.identifier, for: indexPath) as? SmallCategoryCollectionCell {
+                
+                cell.parentController = parentController
+                
+                return cell
+            } else {
+                fatalError("Unable to dequeue SmallCategoryCollectionCell")
+            }
+        }
+        
+        // SALES SECTION
+        if indexPath.section == 1 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SalesCellView.identifier, for: indexPath) as? SalesCellView {
+                
+                cell.configure(with: salesURLs)
+                
+                return cell
+            } else {
+                fatalError("Unable to dequeue SalesCellView")
+            }
+        }
+        
+        // PRODUCTS SECTIONS
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell {
+            
+            let product = data[indexPath.section].items[indexPath.row]
+            cell.configure(with: product)
+            cell.liked = wishListViewModel?.isLiked(product: product) ?? false
+            
+            cell.likeButtonHandler = { [weak self] in
+                guard let wishListViewModel = self?.wishListViewModel else {
+                    return
+                }
+                
+                wishListViewModel.likeProduct(product: product)
+            }
+            
+            return cell
+        } else {
+            fatalError("Unable to dequeue ProductCell")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // PRODUCTS SECTIONS ONLY
+        if indexPath.section > 1 {
+            parentController?.itemSelected(at: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -85,53 +139,6 @@ final class HomeCollectionDataSourceAndDelegate: NSObject, UICollectionViewDataS
             fatalError("Unable to dequeue ProductsCollectionReusableView")
         }
         fatalError("There's no elementKindSectionHeader")
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallCategoryCollectionCell.identifier, for: indexPath) as? SmallCategoryCollectionCell {
-                
-                cell.parentController = parentController
-
-                return cell
-            }
-        }
-        
-        if indexPath.section == 1 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SalesCellView.identifier, for: indexPath) as? SalesCellView {
-                
-                cell.configure(with: salesURLs)
-
-                return cell
-            }
-        }
-        
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell {
-            
-            let product = data[indexPath.section].items[indexPath.row]
-            cell.configure(with: product)
-            cell.liked = wishListViewModel?.isLiked(product: product) ?? false
-            
-            cell.likeButtonHandler = { [weak self] in
-                guard let wishListViewModel = self?.wishListViewModel else {
-                    return
-                }
-                
-                wishListViewModel.likeProduct(product: product)
-            }
-            
-            return cell
-        }
-        fatalError("Unable to dequeue ProductCell")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section < 2 {
-            return
-        }
-        
-        parentController?.itemSelected(at: indexPath)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

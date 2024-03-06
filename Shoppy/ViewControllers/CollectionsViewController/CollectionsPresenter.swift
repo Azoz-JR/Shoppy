@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CollectionsPresenter {
-    func categorySelected(at index: IndexPath)
+    func collectionSelected(at index: IndexPath)
 }

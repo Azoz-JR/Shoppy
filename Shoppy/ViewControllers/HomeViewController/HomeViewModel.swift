@@ -10,15 +10,20 @@ import RxSwift
 
 
 class HomeViewModel {
-    var service: Service = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
-    private var productsSubject = PublishSubject<[ItemModel]>()
     var sections: [Section] = []
+    var service: Service = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
     
-    var isRetryNeeded = false
-    
+    private var productsSubject = PublishSubject<[ItemModel]>()
+    private let errorSubject = PublishSubject<Error>()
+        
     var productsObservable: Observable<[ItemModel]> {
         return productsSubject.asObservable()
     }
+    
+    var error: Observable<Error> {
+        errorSubject.asObservable()
+    }
+    
     
     func load() async {
         do {            
@@ -41,15 +46,9 @@ class HomeViewModel {
             
         } catch {
             await MainActor.run {
-                self.productsSubject.onError(error)
-                isRetryNeeded = true
+                errorSubject.onNext(error)
             }
         }
-    }
-    
-    func resetBehaviorSubject() {
-        productsSubject = PublishSubject<[ItemModel]>()
-        isRetryNeeded = false
     }
     
 }

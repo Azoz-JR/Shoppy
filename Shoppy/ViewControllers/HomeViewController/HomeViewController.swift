@@ -29,15 +29,14 @@ final class HomeViewController: UIViewController {
     let collectionDataSourceAndDelegate = HomeCollectionDataSourceAndDelegate()
     var products: [ItemModel] = []
     
-    var service: Service?
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         setUpHomeView()
+        setUpProgressView()
         configureSearchBar()
         configureCollectionView()
-        setUpProgressView()
         configureCollectionDelegateAndDataSource()
         bindToViewModel()
         
@@ -70,19 +69,17 @@ final class HomeViewController: UIViewController {
                 self.products = products
                 self.collectionDataSourceAndDelegate.data = self.homeViewModel.sections
                 self.reloadCollectionView()
-                self.refreshControl.endRefreshing()
-                
-            } onError: { [weak self] error in
-                self?.show(error: error)
-                self?.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
+        
+        homeViewModel.error.subscribe(onNext: { [weak self] error in
+            self?.show(error: error)
+        })
+        .disposed(by: disposeBag)
     }
     
     @objc func refresh() {
         Task {
-            checkIfRetryNeeded()
-            
             await homeViewModel.load()
             
             await MainActor.run {
@@ -92,20 +89,14 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    func checkIfRetryNeeded() {
-        if homeViewModel.isRetryNeeded {
-            homeViewModel.resetBehaviorSubject()
-            
-            bindToViewModel()
-        }
+    func showProgressView() {
+        progressView.startAnimating()
+        view.isUserInteractionEnabled = false
     }
     
-    func reloadCollectionView() {
-        DispatchQueue.main.async {
-            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
-                self.collectionView.reloadData()
-            }
-        }
+    func hideProgressView() {
+        progressView.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,16 +110,6 @@ final class HomeViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         showTabBar()
-    }
-    
-    func showProgressView() {
-        progressView.startAnimating()
-        view.isUserInteractionEnabled = false
-    }
-    
-    func hideProgressView() {
-        progressView.stopAnimating()
-        view.isUserInteractionEnabled = true
     }
     
 }

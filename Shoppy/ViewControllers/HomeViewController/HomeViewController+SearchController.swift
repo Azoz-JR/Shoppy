@@ -24,7 +24,7 @@ extension HomeViewController: UISearchBarDelegate {
         let searchVC = SearchViewController()
         searchVC.cartViewModel = cartViewModel
         searchVC.listsViewModel = listsViewModel
-        searchVC.service = service
+        searchVC.service = homeViewModel.service
         searchVC.result = products
         searchVC.wishListViewModel = wishListViewModel
         searchVC.searchBar.becomeFirstResponder()

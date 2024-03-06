@@ -26,7 +26,7 @@ final class CollectionsDataSourceAndDelegate: NSObject, UICollectionViewDelegate
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        parentController?.categorySelected(at: indexPath)
+        parentController?.collectionSelected(at: indexPath)
     }
 }
 

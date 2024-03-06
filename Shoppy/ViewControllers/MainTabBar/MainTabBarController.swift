@@ -100,9 +100,6 @@ final class MainTabBarController: UITabBarController {
         homeVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
         homeVC.navigationItem.backButtonDisplayMode = .minimal
         
-        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared)
-        homeVC.service = api
-        
         homeVC.cartViewModel = cartViewModel
         homeVC.listsViewModel = listsViewModel
         homeVC.wishListViewModel = wishListViewModel
@@ -116,8 +113,6 @@ final class MainTabBarController: UITabBarController {
         collectionsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: self, action: #selector(showProfile))
         collectionsVC.navigationItem.backButtonDisplayMode = .minimal
         
-        let api = CollectionsAPIServiceAdapter(api: CollectionsAPI.shared)
-        collectionsVC.service = api
         collectionsVC.cartViewModel = cartViewModel
         collectionsVC.listsViewModel = listsViewModel
         collectionsVC.wishListViewModel = wishListViewModel

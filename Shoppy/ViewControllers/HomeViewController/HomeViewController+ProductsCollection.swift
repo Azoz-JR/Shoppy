@@ -43,10 +43,15 @@ extension HomeViewController: HomeControllerPresenter {
         vc.section = section
         vc.title = section.title
         
-//        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared, category: collection.title)
-//        vc.service = api
-        
         show(vc, sender: self)
+    }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async {
+            UIView.transition(with: self.collectionView, duration: 0.3, options: .transitionCrossDissolve) {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
 }

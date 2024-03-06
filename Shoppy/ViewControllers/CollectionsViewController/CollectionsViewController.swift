@@ -14,20 +14,18 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
     var cartViewModel: CartViewModel?
     var listsViewModel: ListsViewModel?
     var wishListViewModel: WishListViewModel?
-    var service: Service?
     
     let collectionDataSourceAndDelegate = CollectionsDataSourceAndDelegate()
-    private var collections: [ItemModel] = []
+    var collections: [ItemModel] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Collections"
+        
         configureCollection()
-        
         bindToViewModel()
-        
         refresh()
     }
     
@@ -51,34 +49,12 @@ final class CollectionsViewController: UIViewController, CollectionsPresenter {
         }
     }
     
-    func configureCollection() {
-        collectionView.register(CollectionCell.register(), forCellWithReuseIdentifier: CollectionCell.identifier)
-        
-        collectionView.delegate = collectionDataSourceAndDelegate
-        collectionView.dataSource = collectionDataSourceAndDelegate
-        
-        collectionDataSourceAndDelegate.parentController = self
-    }
+
     
     func refresh() {
         Task {
             await viewModel.load()
         }
-    }
-    
-    func categorySelected(at index: IndexPath) {
-        let vc = CollectionViewController()
-        vc.cartViewModel = cartViewModel
-        vc.listsViewModel = listsViewModel
-        vc.wishListViewModel = wishListViewModel
-        let collection = collections[index.row]
-        vc.collection = collection
-        vc.title = collection.title
-        
-        let api = ProductsAPIServiceAdapter(api: ProductsAPI.shared, category: collection.title)
-        vc.service = api
-        
-        show(vc, sender: self)
     }
     
     func reloadCollection() {
