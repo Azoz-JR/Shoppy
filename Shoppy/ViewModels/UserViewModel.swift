@@ -10,30 +10,32 @@ import Foundation
 import RxSwift
 
 
-final class UserViewModel {
+actor UserViewModel {
     private let userSubject = BehaviorSubject<DBUser?>(value: nil)
     private let userAddresses = BehaviorRelay<[Address]>(value: [])
     private let currentSelectedAddressRelay = BehaviorRelay<Address?>(value: nil)
     
-    var currentUser: Observable<DBUser?> {
+    nonisolated var currentUser: Observable<DBUser?> {
         userSubject.asObservable()
     }
     
-    var currentUserId: String? {
+    nonisolated var currentUserId: String? {
         try? userSubject.value()?.userId
     }
     
-    var addresses: Observable<[Address]> {
+    nonisolated var addresses: Observable<[Address]> {
         userAddresses.asObservable()
     }
     
-    var selectedAddress: Observable<Address?> {
+    nonisolated var selectedAddress: Observable<Address?> {
         currentSelectedAddressRelay.asObservable()
     }
     
     
     init() {
-        try? getCurrentUser()
+        Task {
+            try await getCurrentUser()
+        }
     }
     
     

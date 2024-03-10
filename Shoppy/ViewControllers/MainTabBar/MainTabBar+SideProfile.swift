@@ -122,11 +122,13 @@ extension MainTabBarController: UIImagePickerControllerDelegate, UINavigationCon
             return
         }
         
-        userViewModel.uploadImage(image: jpegData) { [weak self] error in
-            self?.sideProfileView.hideProgressView()
-            
-            if let error {
-                self?.show(error: error)
+        Task {
+            await userViewModel.uploadImage(image: jpegData) { [weak self] error in
+                self?.sideProfileView.hideProgressView()
+                
+                if let error {
+                    self?.show(error: error)
+                }
             }
         }
     }
