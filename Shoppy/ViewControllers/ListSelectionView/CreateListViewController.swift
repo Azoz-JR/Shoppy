@@ -29,10 +29,11 @@ class CreateListViewController: UIViewController, UITextFieldDelegate {
         }
         textField.resignFirstResponder()
         
-        listsViewModel?.createList(name: text) { [weak self] result in
-            self?.showAlert(title: result, dismiss: true)
+        Task {
+            await listsViewModel?.createList(name: text) { [weak self] result in
+                self?.showAlert(title: result, dismiss: true)
+            }
         }
-        
     }
     
     // MARK: - TextField Method

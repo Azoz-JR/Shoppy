@@ -62,8 +62,10 @@ class ListDetailViewController: UIViewController, ListDetailViewPresenter {
                 return
             }
             
-            self?.listsViewModel.delete(list: list)
-            self?.popViewController()
+            Task {
+                await self?.listsViewModel.delete(list: list)
+                self?.popViewController()
+            }
         }))
         
         present(alert, animated: true)

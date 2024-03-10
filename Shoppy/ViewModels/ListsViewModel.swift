@@ -10,14 +10,14 @@ import RxSwift
 import RxRelay
 
 
-final class ListsViewModel {
-    private var listsRelay = BehaviorRelay<[List]>(value: [])
-    var lists: Observable<[List]> {
+actor ListsViewModel {
+    private let listsRelay = BehaviorRelay<[List]>(value: [])
+    nonisolated var lists: Observable<[List]> {
         listsRelay.asObservable()
     }
     
-    private var errorSubject = PublishSubject<Error>()
-    var error: Observable<Error> {
+    private let errorSubject = PublishSubject<Error>()
+    nonisolated var error: Observable<Error> {
         errorSubject.asObservable()
     }
     

@@ -26,8 +26,10 @@ extension ListSelectionViewController {
             return
         }
         
-        listsViewModel.add(item: item, at: index)
-        showAlert(title: "Item added succesfully to \(lists[index].name)", dismiss: true)
+        Task {
+            await listsViewModel.add(item: item, at: index)
+            showAlert(title: "Item added succesfully to \(lists[index].name)", dismiss: true)
+        }
     }
     
     func reloadTableView() {

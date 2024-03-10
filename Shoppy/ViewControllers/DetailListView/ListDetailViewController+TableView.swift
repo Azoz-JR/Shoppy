@@ -38,7 +38,10 @@ extension ListDetailViewController {
         tableView.deleteRows(at: [index], with: .fade)
         
         let item = list.items[index.row]
-        listsViewModel.remove(item: item, at: list)
+        
+        Task {
+            await listsViewModel.remove(item: item, at: list)
+        }
     }
     
     func showDeleteItemAlert(index: IndexPath) {

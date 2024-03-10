@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -164,6 +165,7 @@
                 <outlet property="activityIndicator" destination="Ll6-kq-wq7" id="qRo-KZ-HSa"/>
                 <outlet property="addToCartButton" destination="Zvj-kp-XTB" id="zIU-a8-Ccb"/>
                 <outlet property="containerView" destination="VMT-JH-UdI" id="qd7-5q-sVQ"/>
+                <outlet property="imageContainerView" destination="BSc-jY-aL6" id="NMy-9z-1AG"/>
                 <outlet property="productCollectionLabel" destination="GwU-FM-QC6" id="FtT-jL-yLP"/>
                 <outlet property="productColorLabel" destination="Ar9-hK-BBD" id="ZXW-Fn-kRA"/>
                 <outlet property="productImageView" destination="wHM-a5-bjb" id="NvG-3Q-x99"/>

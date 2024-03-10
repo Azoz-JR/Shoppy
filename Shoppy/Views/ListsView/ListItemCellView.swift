@@ -17,6 +17,7 @@ class ListItemCellView: UITableViewCell {
     @IBOutlet var productPriceLabel: UILabel!
     @IBOutlet var productCollectionLabel: UILabel!
     @IBOutlet var productNameLabel: UILabel!
+    @IBOutlet var imageContainerView: UIView!
     @IBOutlet var productImageView: UIImageView!
     
     static let identifier = "ListItemCell"
@@ -32,31 +33,31 @@ class ListItemCellView: UITableViewCell {
         containerView.round()
         containerView.addBorder(color: .lightGray.withAlphaComponent(0.2), width: 1)
         
-        configureImageView()
-        
         addToCartButton.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)
         
         activityIndicator.startAnimating()
     }
     
     func configure(with product: ItemModel) {
-        let url = product.image
-        productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
-            self?.activityIndicator.stopAnimating()
-        }
-        
         productNameLabel.text = product.title
         productPriceLabel.text = "$\(product.price)"
         productCollectionLabel.text = "By \(product.vendor)"
         productColorLabel.text = product.color
         productSizeLabel.text = product.size
+        configureImageView()
+        
+        let url = product.image
+        productImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
+            self?.activityIndicator.stopAnimating()
+        }
     }
     
     func configureImageView() {
         let borderLayer = CALayer()
         borderLayer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
-        borderLayer.frame = CGRect(x: productImageView.bounds.maxX - 1, y: productImageView.bounds.minY, width: 1, height: productImageView.bounds.height)
-        productImageView.layer.addSublayer(borderLayer)
+        borderLayer.frame = CGRect(x: imageContainerView.bounds.maxX - 1, y: imageContainerView.bounds.minY, width: 1, height: imageContainerView.bounds.height)
+        
+        containerView.layer.addSublayer(borderLayer)
     }
 
     @objc func addToCartTapped() {

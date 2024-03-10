@@ -124,7 +124,10 @@ class ListsViewController: UIViewController, ListsControllerPresenter {
         
         listsTableViewDelegate.data.remove(at: index.row)
         tableView.deleteRows(at: [index], with: .fade)
-        listsViewModel.delete(list: list)
+        
+        Task {
+            await listsViewModel.delete(list: list)
+        }
     }
     
     func endRefreshing() {
