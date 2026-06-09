@@ -44,8 +44,6 @@ extension UITextField {
         setLeftPaddingPoints(10)
         setRightPaddingPoints(1)
     }
-    
-    
 }
 
 extension String {
